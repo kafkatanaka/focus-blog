@@ -1,0 +1,19 @@
+---
+interface Props {
+  slot?: string;
+  format?: string;
+}
+
+const { slot = 'auto', format = 'auto' } = Astro.props;
+---
+
+<ins
+  class="adsbygoogle block"
+  data-ad-client="ca-pub-YOUR_ID"
+  data-ad-slot={slot}
+  data-ad-format={format}
+  data-full-width-responsive="true"
+></ins>
+<script is:inline>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>

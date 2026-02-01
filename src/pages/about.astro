@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="About The Focus Dividend — a blog on focus, attention, and intentional living."
+>
+  <Header />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">About</h1>
+    <div class="mt-8 prose prose-gray max-w-none prose-p:leading-relaxed">
+      <p>
+        The Focus Dividend is a reading-focused blog about attention, focus, and intentional living.
+        We keep design minimal so you can focus on the words.
+      </p>
+      <p>
+        New articles are published when there’s something worth saying. You can subscribe via
+        <a href="/rss.xml" class="text-gray-900 underline hover:no-underline">RSS</a>.
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5);
+---
+
+<BaseLayout
+  title="The Focus Dividend"
+  description="Readings on focus, attention, and intentional living. Minimal design, maximum clarity."
+>
+  <Header />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <section class="mb-12">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        The Focus Dividend
+      </h1>
+      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+        Readings on focus, attention, and intentional living. Minimal design, maximum clarity.
+      </p>
+    </section>
+    <section>
+      <h2 class="text-xl font-semibold text-gray-900 mb-6">Latest posts</h2>
+      <ul class="space-y-6">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.slug}`} class="group block">
+              <h3 class="text-lg font-medium text-gray-900 group-hover:text-gray-700">
+                {post.data.title}
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">{post.data.description}</p>
+              <time class="mt-1 block text-xs text-gray-400" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </a>
+          </li>
+        ))}
+      </ul>
+      {posts.length > 0 && (
+        <p class="mt-8">
+          <a href="/blog" class="text-gray-900 font-medium underline hover:no-underline">View all posts →</a>
+        </p>
+      )}
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

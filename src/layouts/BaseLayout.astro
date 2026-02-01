@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: URL;
+  ogImage?: string;
+}
+
+const { title, description, canonicalURL, ogImage } = Astro.props;
+const site = Astro.site ?? new URL('https://focus.matomeyo.me');
+const url = canonicalURL ?? Astro.url;
+const fullURL = new URL(url.pathname, site);
+const image = ogImage; // optional: add public/og-default.png and use new URL('/og-default.png', site).href as default
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | The Focus Dividend</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={fullURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={fullURL} />
+    {image && <meta property="og:image" content={image} />}
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Google AdSense (replace ca-pub-YOUR_ID with your publisher ID) -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ID"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body class="bg-white text-gray-900 font-serif antialiased">
+    <slot />
+  </body>
+</html>
