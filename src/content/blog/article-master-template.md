@@ -4,9 +4,9 @@ description: "[DESCRIPTION - 120-160 chars describing the core value proposition
 pubDate: 2025-02-01T00:00:00Z
 category: focus  # focus | work | money | habits | wellness | tools
 tags:
-  - symptom-tag
-  - method-tag
-  - attribute-tag
+  - "symptom-tag"    # burnout, distraction, procrastination, overwhelm, decision-fatigue
+  - "method-tag"     # deep-work, time-blocking, attention-management, essentialism, automation
+  - "attribute-tag"  # remote-work, knowledge-worker, adhd, freelance, startup
 draft: true
 ---
 
