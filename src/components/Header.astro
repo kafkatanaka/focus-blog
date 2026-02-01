@@ -10,26 +10,34 @@ const currentPath = Astro.url.pathname;
     <ul class="flex gap-6 text-sm">
       <li>
         <a
-          href="/"
-          class:list={[currentPath === '/' && 'text-gray-900 font-medium', currentPath !== '/' && 'text-gray-600 hover:text-gray-900']}
+          href="/focus"
+          class:list={[currentPath === '/focus' && 'text-gray-900 font-medium', currentPath !== '/focus' && 'text-gray-600 hover:text-gray-900']}
         >
-          Home
+          Focus
         </a>
       </li>
       <li>
         <a
-          href="/blog"
-          class:list={[currentPath.startsWith('/blog') && 'text-gray-900 font-medium', !currentPath.startsWith('/blog') && 'text-gray-600 hover:text-gray-900']}
+          href="/work"
+          class:list={[currentPath === '/work' && 'text-gray-900 font-medium', currentPath !== '/work' && 'text-gray-600 hover:text-gray-900']}
         >
-          Blog
+          Work
         </a>
       </li>
       <li>
         <a
-          href="/about"
-          class:list={[currentPath === '/about' && 'text-gray-900 font-medium', currentPath !== '/about' && 'text-gray-600 hover:text-gray-900']}
+          href="/money"
+          class:list={[currentPath === '/money' && 'text-gray-900 font-medium', currentPath !== '/money' && 'text-gray-600 hover:text-gray-900']}
         >
-          About
+          Money
+        </a>
+      </li>
+      <li>
+        <a
+          href="/habits"
+          class:list={[currentPath === '/habits' && 'text-gray-900 font-medium', currentPath !== '/habits' && 'text-gray-600 hover:text-gray-900']}
+        >
+          Habits
         </a>
       </li>
     </ul>

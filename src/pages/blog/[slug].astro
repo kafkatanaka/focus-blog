@@ -21,7 +21,9 @@ const canonicalURL = new URL(`/blog/${entry.slug}`, site);
   description={entry.data.description}
   pubDate={entry.data.pubDate}
   updatedDate={entry.data.updatedDate}
+  category={entry.data.category}
   tags={entry.data.tags}
+  ads={entry.data.ads}
   canonicalURL={canonicalURL}
 >
   <Content />

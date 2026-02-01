@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES, CATEGORY_TITLES, CATEGORY_DESCRIPTIONS } from '../lib/categories';
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((category) => ({
+    params: { category },
+  }));
+}
+
+const { category } = Astro.params;
+if (!category || !CATEGORIES.includes(category as (typeof CATEGORIES)[number])) {
+  return Astro.redirect('/');
+}
+
+const allPosts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft && p.data.category === category)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title={CATEGORY_TITLES[category]}
+  description={CATEGORY_DESCRIPTIONS[category]}
+>
+  <Header />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      {CATEGORY_TITLES[category]}
+    </h1>
+    <p class="mt-2 text-gray-600">
+      {CATEGORY_DESCRIPTIONS[category]}
+    </p>
+    <ul class="mt-10 space-y-8">
+      {allPosts.length > 0 ? (
+        allPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.slug}`} class="group block">
+              <h2 class="text-xl font-medium text-gray-900 group-hover:text-gray-700">
+                {post.data.title}
+              </h2>
+              <p class="mt-2 text-gray-600">{post.data.description}</p>
+              <time class="mt-2 block text-sm text-gray-500" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </a>
+          </li>
+        ))
+      ) : (
+        <li class="text-gray-500 py-8">
+          No posts in this category yet. Check back soon.
+        </li>
+      )}
+    </ul>
+  </main>
+  <Footer />
+</BaseLayout>
