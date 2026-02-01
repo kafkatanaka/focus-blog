@@ -35,9 +35,26 @@ const allPosts = (await getCollection('blog'))
     </p>
     <ul class="mt-10 space-y-8">
       {allPosts.length > 0 ? (
-        allPosts.map((post) => (
+        allPosts.map((post) => {
+          const thumbPath = post.data.thumbnail
+            ? `/images/thumbnails/${post.data.thumbnail}`
+            : `/images/thumbnails/${post.slug}.webp`;
+          return (
           <li>
             <a href={`/blog/${post.slug}`} class="group block">
+              <div class="flex gap-4 sm:gap-6">
+                <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
+                  <img
+                    src={thumbPath}
+                    alt=""
+                    class="w-full h-full object-cover"
+                    width="96"
+                    height="96"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+                  />
+                </div>
+                <div class="min-w-0 flex-1">
               <h2 class="text-xl font-medium text-gray-900 group-hover:text-gray-700">
                 {post.data.title}
               </h2>
@@ -45,9 +62,12 @@ const allPosts = (await getCollection('blog'))
               <time class="mt-2 block text-sm text-gray-500" datetime={post.data.pubDate.toISOString()}>
                 {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </time>
+                </div>
+              </div>
             </a>
           </li>
-        ))
+          );
+        })
       ) : (
         <li class="text-gray-500 py-8">
           No posts in this category yet. Check back soon.

@@ -29,9 +29,26 @@ const posts = tagFromUrl
         : 'All articles on focus, attention, and intentional living.'}
     </p>
     <ul class="mt-10 space-y-8">
-      {posts.map((post) => (
+      {posts.map((post) => {
+        const thumbPath = post.data.thumbnail
+          ? `/images/thumbnails/${post.data.thumbnail}`
+          : `/images/thumbnails/${post.slug}.webp`;
+        return (
         <li>
           <a href={`/blog/${post.slug}`} class="group block">
+            <div class="flex gap-4 sm:gap-6">
+              <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
+                <img
+                  src={thumbPath}
+                  alt=""
+                  class="w-full h-full object-cover"
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+                />
+              </div>
+              <div class="min-w-0 flex-1">
             <h2 class="text-xl font-medium text-gray-900 group-hover:text-gray-700">
               {post.data.title}
             </h2>
@@ -51,9 +68,12 @@ const posts = tagFromUrl
                 </>
               )}
             </div>
+              </div>
+            </div>
           </a>
         </li>
-      ))}
+        );
+      })}
     </ul>
   </main>
   <Footer />

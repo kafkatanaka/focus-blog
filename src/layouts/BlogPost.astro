@@ -14,9 +14,11 @@ interface Props {
   ads?: boolean;
   canonicalURL?: URL;
   ogImage?: string;
+  /** サムネイル画像のパス（例: /images/thumbnails/slug.webp）。指定時のみタイトル直下に表示 */
+  thumbnailPath?: string;
 }
 
-const { title, description, pubDate, updatedDate, category, tags = [], ads = true, canonicalURL, ogImage } = Astro.props;
+const { title, description, pubDate, updatedDate, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath } = Astro.props;
 
 const publishedDate = new Date(pubDate);
 ---
@@ -27,6 +29,18 @@ const publishedDate = new Date(pubDate);
     <article>
       <header class="mb-8">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{title}</h1>
+        {thumbnailPath && (
+          <img
+            src={thumbnailPath}
+            alt=""
+            class="mt-4 w-full rounded-lg object-cover aspect-[1200/630] max-h-[320px]"
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+          />
+        )}
         <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
           <time datetime={publishedDate.toISOString()}>
             {publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}

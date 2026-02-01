@@ -13,6 +13,8 @@ const blogCollection = defineCollection({
     tags: z.array(z.string()).optional(),
     ads: z.boolean().default(true),
     draft: z.boolean().default(false),
+    /** サムネイル画像ファイル名（例: "my-post.webp"）。省略時は /images/thumbnails/{slug}.webp を使用 */
+    thumbnail: z.string().optional(),
   }),
 });
 

@@ -14,6 +14,11 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const site = Astro.site ?? new URL('https://focus.matomeyo.me');
 const canonicalURL = new URL(`/blog/${entry.slug}`, site);
+
+const thumbnailPath = entry.data.thumbnail
+  ? `/images/thumbnails/${entry.data.thumbnail}`
+  : `/images/thumbnails/${entry.slug}.webp`;
+const ogImage = new URL(thumbnailPath, site).href;
 ---
 
 <BlogPost
@@ -25,6 +30,8 @@ const canonicalURL = new URL(`/blog/${entry.slug}`, site);
   tags={entry.data.tags}
   ads={entry.data.ads}
   canonicalURL={canonicalURL}
+  ogImage={ogImage}
+  thumbnailPath={thumbnailPath}
 >
   <Content />
 </BlogPost>
