@@ -37,6 +37,15 @@ const image = ogImage; // optional: add public/og-default.png and use new URL('/
       crossorigin="anonymous"
     ></script>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BMSV5WCPCM"></script>
+    <script define:vars={{ gtagId: 'G-BMSV5WCPCM' }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtagId);
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
