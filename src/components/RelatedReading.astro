@@ -1,0 +1,40 @@
+---
+import type { RelatedPostItem } from '../lib/related-posts';
+
+interface Props {
+  posts: RelatedPostItem[];
+}
+
+const { posts } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <aside class="mt-12 border-t border-gray-200 pt-8" aria-label="Related reading">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Related reading</h2>
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+      {posts.map((post) => (
+        <li>
+          <a
+            href={`/blog/${post.slug}`}
+            class="group block rounded-lg overflow-hidden border border-gray-200 bg-gray-50 transition-colors hover:border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+          >
+            <div class="aspect-[16/10] w-full overflow-hidden bg-gray-200">
+              <img
+                src={post.thumbnailPath}
+                alt=""
+                width={320}
+                height={200}
+                class="h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+              />
+            </div>
+            <p class="p-3 text-sm font-medium text-gray-900 line-clamp-2 group-hover:text-gray-700">
+              {post.title}
+            </p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}

@@ -1,16 +1,26 @@
 ---
 import BlogPost from '../../layouts/BlogPost.astro';
 import { getCollection } from 'astro:content';
+import { getRelatedPosts } from '../../lib/related-posts';
+import { relatedMap } from '../../data/related-map';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  return posts.map((entry) => {
+    const relatedPosts = getRelatedPosts(
+      entry.slug,
+      entry.data.tags ?? [],
+      posts,
+      relatedMap
+    );
+    return {
+      params: { slug: entry.slug },
+      props: { entry, relatedPosts },
+    };
+  });
 }
 
-const { entry } = Astro.props;
+const { entry, relatedPosts } = Astro.props;
 const { Content } = await entry.render();
 const site = Astro.site ?? new URL('https://focus.matomeyo.me');
 const canonicalURL = new URL(`/blog/${entry.slug}`, site);
@@ -32,6 +42,7 @@ const ogImage = new URL(thumbnailPath, site).href;
   canonicalURL={canonicalURL}
   ogImage={ogImage}
   thumbnailPath={thumbnailPath}
+  relatedPosts={relatedPosts}
 >
   <Content />
 </BlogPost>

@@ -3,6 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AdSense from '../components/AdSense.astro';
+import RelatedReading from '../components/RelatedReading.astro';
+import type { RelatedPostItem } from '../lib/related-posts';
 
 interface Props {
   title: string;
@@ -16,9 +18,11 @@ interface Props {
   ogImage?: string;
   /** サムネイル画像のパス（例: /images/thumbnails/slug.webp）。指定時のみタイトル直下に表示 */
   thumbnailPath?: string;
+  /** 関連記事（slug + title + thumbnailPath）。未指定または空の場合は表示しない */
+  relatedPosts?: RelatedPostItem[];
 }
 
-const { title, description, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath } = Astro.props;
+const { title, description, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath, relatedPosts = [] } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage}>
@@ -73,6 +77,8 @@ const { title, description, category, tags = [], ads = true, canonicalURL, ogIma
           </div>
         </footer>
       )}
+
+      <RelatedReading posts={relatedPosts} />
     </article>
   </main>
   <Footer />
