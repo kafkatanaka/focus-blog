@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { getTagDescription, formatTagSlug } from '../../lib/tags';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const tagSet = new Set<string>();
+  for (const post of posts) {
+    for (const tag of post.data.tags ?? []) {
+      tagSet.add(tag);
+    }
+  }
+  return Array.from(tagSet).map((tag) => ({
+    params: { tag },
+  }));
+}
+
+const { tag } = Astro.params;
+if (!tag) return Astro.redirect('/');
+
+const allPosts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft && p.data.tags?.includes(tag))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const title = formatTagSlug(tag);
+const description = getTagDescription(tag);
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      {title}
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      {description}
+    </p>
+    <ul class="mt-10 space-y-8">
+      {allPosts.length > 0 ? (
+        allPosts.map((post) => {
+          const thumbPath = post.data.thumbnail
+            ? `/images/thumbnails/${post.data.thumbnail}`
+            : `/images/thumbnails/${post.slug}.webp`;
+          return (
+            <li>
+              <a href={`/blog/${post.slug}`} class="group block">
+                <div class="flex gap-4 sm:gap-6">
+                  <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
+                    <img
+                      src={thumbPath}
+                      alt=""
+                      class="w-full h-full object-cover"
+                      width="96"
+                      height="96"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+                    />
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <h2 class="text-xl font-medium text-gray-900 group-hover:text-gray-700">
+                      {post.data.title}
+                    </h2>
+                    <p class="mt-2 text-gray-600">{post.data.description}</p>
+                    {post.data.tags && post.data.tags.length > 0 && (
+                      <div class="mt-2 flex flex-wrap gap-2 text-sm text-gray-500">
+                        {post.data.tags.map((t) => (
+                          <a
+                            href={`/tag/${encodeURIComponent(t)}`}
+                            class="rounded bg-gray-100 px-2 py-0.5 text-gray-700 hover:bg-gray-200"
+                          >
+                            {t}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </a>
+            </li>
+          );
+        })
+      ) : (
+        <li class="text-gray-500 py-8">
+          No posts with this tag yet. Check back soon.
+        </li>
+      )}
+    </ul>
+  </main>
+  <Footer />
+</BaseLayout>

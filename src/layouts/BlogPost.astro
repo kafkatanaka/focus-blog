@@ -7,7 +7,7 @@ import AdSense from '../components/AdSense.astro';
 interface Props {
   title: string;
   description: string;
-  pubDate: Date;
+  pubDate?: Date;
   updatedDate?: Date;
   category?: string;
   tags?: string[];
@@ -18,9 +18,7 @@ interface Props {
   thumbnailPath?: string;
 }
 
-const { title, description, pubDate, updatedDate, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath } = Astro.props;
-
-const publishedDate = new Date(pubDate);
+const { title, description, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage}>
@@ -41,22 +39,16 @@ const publishedDate = new Date(pubDate);
             onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
           />
         )}
+        {category && (
         <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-          <time datetime={publishedDate.toISOString()}>
-            {publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </time>
-          {updatedDate && (
-            <span> · Updated {new Date(updatedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          )}
-          {category && (
-            <a
-              href={`/${category}`}
-              class="rounded bg-gray-100 px-2 py-1 text-gray-700 transition-colors hover:bg-gray-200 capitalize"
-            >
-              {category}
-            </a>
-          )}
+          <a
+            href={`/${category}`}
+            class="rounded bg-gray-100 px-2 py-1 text-gray-700 transition-colors hover:bg-gray-200 capitalize"
+          >
+            {category}
+          </a>
         </div>
+        )}
       </header>
 
       {ads && <AdSense slot="4412571347" format="auto" />}
@@ -72,7 +64,7 @@ const publishedDate = new Date(pubDate);
           <div class="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <a
-                href={`/blog?tag=${encodeURIComponent(tag)}`}
+                href={`/tag/${encodeURIComponent(tag)}`}
                 class="rounded bg-gray-100 px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-gray-200"
               >
                 #{tag}

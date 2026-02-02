@@ -1,0 +1,205 @@
+---
+const modalId = 'search-modal';
+---
+
+<div
+  id={modalId}
+  class="fixed inset-0 z-50 hidden overflow-y-auto"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Search articles"
+>
+  <div
+    class="fixed inset-0 bg-black/40 transition-opacity"
+    data-search-backdrop
+  ></div>
+  <div class="flex min-h-full items-start justify-center p-4 pt-20">
+    <div
+      class="relative w-full max-w-xl transform rounded-lg bg-white shadow-xl transition-all"
+      data-search-panel
+    >
+      <div class="p-4">
+        <div class="relative">
+          <svg
+            class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          <input
+            type="search"
+            data-search-input
+            class="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-gray-900 placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400"
+            placeholder="Search articles by keyword..."
+            autocomplete="off"
+            enterkeyhint="search"
+          />
+          <button
+            type="button"
+            data-search-close
+            class="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+            aria-label="Close search"
+          >
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div data-search-results class="mt-4 max-h-[60vh] overflow-y-auto">
+          <div data-search-empty class="hidden py-8 text-center text-gray-500 text-sm">
+            Type to search articles by title, description, or tags.
+          </div>
+          <div data-search-loading class="hidden py-8 text-center text-gray-500 text-sm">
+            Loading...
+          </div>
+          <div data-search-no-results class="hidden py-8 text-center text-gray-500 text-sm">
+            No articles found. Try a different keyword.
+          </div>
+          <ul data-search-list class="space-y-2"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('search-modal');
+  const backdrop = modal?.querySelector('[data-search-backdrop]');
+  const panel = modal?.querySelector('[data-search-panel]');
+  const input = modal?.querySelector('[data-search-input]') as HTMLInputElement | null;
+  const closeBtn = modal?.querySelector('[data-search-close]');
+  const listEl = modal?.querySelector('[data-search-list]');
+  const emptyState = modal?.querySelector('[data-search-empty]');
+  const loadingState = modal?.querySelector('[data-search-loading]');
+  const noResultsState = modal?.querySelector('[data-search-no-results]');
+
+  type SearchEntry = {
+    slug: string;
+    title: string;
+    description: string;
+    tags: string[];
+    category: string | null;
+  };
+
+  let index: SearchEntry[] = [];
+  let loaded = false;
+
+  function showState(
+    showEmpty: boolean,
+    showLoading: boolean,
+    showNoResults: boolean,
+    showList: boolean
+  ) {
+    emptyState?.classList.toggle('hidden', !showEmpty);
+    loadingState?.classList.toggle('hidden', !showLoading);
+    noResultsState?.classList.toggle('hidden', !showNoResults);
+    listEl?.classList.toggle('hidden', !showList);
+  }
+
+  function openModal() {
+    if (!modal || !input) return;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    input.value = '';
+    input.focus();
+
+    if (!loaded) {
+      showState(false, true, false, false);
+      fetch('/search-index.json')
+        .then((r) => r.json())
+        .then((data: SearchEntry[]) => {
+          index = data;
+          loaded = true;
+          showState(true, false, false, false);
+        })
+        .catch(() => {
+          showState(false, false, true, false);
+        });
+    } else {
+      filterResults('');
+    }
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function filterResults(query: string) {
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      if (listEl) listEl.innerHTML = '';
+      showState(true, false, false, false);
+      return;
+    }
+    showState(false, false, false, true);
+
+    const words = q.split(/\s+/).filter(Boolean);
+    const matches = index.filter((entry) => {
+      const title = entry.title.toLowerCase();
+      const desc = (entry.description ?? '').toLowerCase();
+      const tags = (entry.tags ?? []).join(' ').toLowerCase();
+      const searchable = `${title} ${desc} ${tags}`;
+      return words.every((w) => searchable.includes(w));
+    });
+
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    if (matches.length === 0) {
+      showState(false, false, true, false);
+      return;
+    }
+
+    const thumbBase = '/images/thumbnails';
+    matches.slice(0, 20).forEach((entry) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <a href="/blog/${entry.slug}" class="flex gap-3 rounded-lg p-3 hover:bg-gray-50 group">
+          <div class="h-12 w-12 shrink-0 overflow-hidden rounded bg-gray-100">
+            <img src="${thumbBase}/${entry.slug}.webp" alt="" class="h-full w-full object-cover" onerror="this.src='/images/thumbnails/placeholder.webp'" />
+          </div>
+          <div class="min-w-0 flex-1">
+            <h3 class="font-medium text-gray-900 group-hover:text-gray-700">${escapeHtml(entry.title)}</h3>
+            <p class="mt-0.5 line-clamp-2 text-sm text-gray-500">${escapeHtml(entry.description)}</p>
+            ${entry.tags?.length ? `<div class="mt-1 flex flex-wrap gap-1 text-xs text-gray-400">${entry.tags.map((t) => `<span>${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+          </div>
+        </a>
+      `;
+      listEl.appendChild(li);
+    });
+  }
+
+  function escapeHtml(s: string) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') closeModal();
+  }
+
+  backdrop?.addEventListener('click', closeModal);
+  closeBtn?.addEventListener('click', closeModal);
+  input?.addEventListener('input', (e) => filterResults((e.target as HTMLInputElement).value));
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown', handleKeydown);
+
+  window.openSearchModal = openModal;
+</script>
