@@ -1,6 +1,6 @@
 ---
-title: "You Can't Plan When You Don't Know What's Coming"
-description: "Why financial uncertainty paralyzes decisions - and how to make choices that work across multiple possible futures instead of one perfect plan."
+title: "How Uncertainty Makes Money Decisions Harder"
+description: "When you don't know what the future holds, every financial choice feels risky. Why uncertainty is the real problem, not the decision itself."
 pubDate: 2025-02-01T00:00:00Z
 category: money
 tags:
@@ -11,106 +11,105 @@ draft: false
 ads: true
 ---
 
-Should you save aggressively or invest in your business? Pay down debt or build emergency savings? Take the higher-paying job or the one with more flexibility?
+Should you save aggressively or invest in your business? Buy the house or keep renting? Take the steady job or the risky opportunity? You have spreadsheets, advice from five sources, and no idea what's right because you don't know what your life will look like in two years.
 
-The answer is "it depends." And that's the problem.
-
-**Financial advice assumes a predictable future where you can optimize for one outcome - but real life is uncertain, and trying to make the perfect decision when you can't see what's coming leads to paralysis and regret.**
+The problem isn't the decision. It's that you're making irreversible choices with incomplete information about a future you can't predict. Every option could be wrong.
 
 ## The Problem
 
-You know you should make good financial decisions. But every choice requires predicting a future you can't actually see. Should you save six months of expenses? That depends on whether you'll lose your job, get sick, or face an emergency - all unknowable.
+Financial decisions would be straightforward if the future were knowable. You'd calculate the optimal choice based on what happens next and execute accordingly. But the future isn't knowable. You don't know if your income will increase or crater. You don't know if you'll want kids, need to care for aging parents, or decide to change careers entirely. You don't know if the economy will boom or collapse, if your industry will thrive or contract, if the skills you're investing in will remain valuable.
 
-Should you invest aggressively or conservatively? That depends on whether the market will crash, whether you'll need the money sooner than planned, whether your risk tolerance will change when real losses hit. You won't know until it happens.
+This uncertainty transforms every financial decision into a bet on a future you can't see. Should you save for a down payment when you don't know if you'll want to stay in this city? Should you invest in retirement when you might need that money for something else? Should you keep the emergency fund liquid when you might never have an emergency, and the opportunity cost is real returns?
 
-Should you take on debt for an opportunity? That depends on whether the opportunity pays off, whether your income stays stable, whether interest rates change. The decision requires confidence about variables you can't control.
+The paralysis is rational. You're being asked to make commitments—often expensive, difficult-to-reverse commitments—based on assumptions about future circumstances that could easily prove wrong. The safe choice is to wait until you have more information. But waiting is itself a choice with consequences. The house gets more expensive. The investment opportunity passes. The career pivot becomes harder. Uncertainty doesn't pause while you gather data.
 
-So you research. You run scenarios. You try to reduce uncertainty through better information. But the fundamental problem remains: the future is unknowable, and the right decision in one possible future is the wrong decision in another. You can't optimize for all possibilities simultaneously.
-
-This creates decision paralysis. You can't commit to a path because you can see how it could go wrong. You can't pull the trigger on investments because what if the market crashes? You can't quit your job because what if freelancing doesn't work? What if, what if, what if.
-
-Or you make a choice and immediately second-guess it. You chose to save instead of invest, and the market goes up - now you're haunted by the returns you missed. You chose to invest instead of save, and an emergency hits - now you're scrambling and regretting the choice. Every decision feels wrong in hindsight because you're judging it against the one future that actually happened, not against all the futures it could have prepared you for.
+What makes it worse is that everyone else seems certain. Financial advice assumes you know your goals, your timeline, your constraints. Plan for retirement. Save for a house. Invest in yourself. All of this requires believing you know what future-you will want and need. When you don't have that clarity, the advice feels inapplicable. You're not failing to execute a clear plan—you have no idea what plan to execute.
 
 ### Why this happens to freelancers
 
-Research suggests that uncertainty creates cognitive load because your brain has to simulate multiple futures simultaneously and weigh decisions across all of them. When outcomes are predictable, decision-making is straightforward. When they're not, every choice becomes exponentially more complex.
+Freelance income is uncertainty materialized. Research suggests that people underestimate how psychologically taxing income variability is—it's not just that you make less in some months, it's that you never know which months will be which, making every financial decision feel provisional.
 
-For freelancers and self-employed workers, uncertainty is baked into the financial structure of your life. You don't know what you'll earn next month. You don't know if current clients will continue. You don't know when the next dry spell will hit or how long it will last.
+Many people find that irregular income prevents long-term planning entirely. You can't commit to a fixed expense when you don't know if next month will be a $3,000 month or a $12,000 month. You can't decide how much to save when you don't know what "normal" income looks like. Every financial decision requires building in buffers for uncertainty, which makes everything more expensive and less efficient.
 
-Many people find that this uncertainty makes even simple financial decisions feel overwhelming. Should you upgrade your equipment? Depends on whether work continues. Should you turn down a project to take vacation? Depends on whether other work comes in. Should you save or reinvest in your business? Depends on growth trajectory you can't predict.
+The lack of structural stability compounds the problem. Freelancers don't have employer benefits, predictable raises, or clear career trajectories. You're building everything yourself, which means every decision about money is also a decision about business strategy, career direction, and risk tolerance. Should you spend money on the course that might increase your rates? Should you turn down the reliable client to free up time for the potentially bigger opportunity? Every choice is a bet on an uncertain future with no safety net.
 
-The standard financial advice - save X percent, invest in index funds, plan for retirement - assumes stable income and predictable expenses. For freelancers, both are variable. Following conventional wisdom feels like applying the wrong formula to your actual situation.
-
-The psychological toll is significant. You're making consequential financial decisions without the information you need to make them confidently. Every choice carries weight because there's no institution backing you up, no guaranteed paycheck if you guess wrong. The uncertainty creates chronic low-level stress that makes every financial decision harder than it should be.
+Freelance life also makes it impossible to separate financial uncertainty from life uncertainty. When your income depends on your choices, every life decision—where to live, whether to have kids, how much risk to take—has direct financial implications. You can't make the life decision first and then handle the money. The decisions are entangled, each one depending on unknowable answers to the other.
 
 ## What Most People Try
 
-The first response is usually to try to reduce uncertainty through better planning. You create detailed budgets, run multiple scenarios, build complex spreadsheets that model different possibilities. The hope is that enough analysis will reveal the right answer.
+The instinct is to gather more information. Research all the options. Run the scenarios. Consult experts. Build detailed spreadsheets that model different futures. The hope is that enough analysis will reveal the right answer. Instead, more information usually reveals more uncertainty—more variables you hadn't considered, more ways the decision could go wrong, more experts who disagree.
 
-This rarely works because the uncertainty you're trying to eliminate is real. No amount of spreadsheet modeling can predict whether you'll get sick, whether a client will ghost you, whether the economy will crash. You're trying to solve an information problem that can't be solved - the future is genuinely unknowable.
+Some people try to hedge every bet. They split the difference, allocate some to each option, diversify everything. This feels prudent but often means committing fully to nothing. You save a little, invest a little, spend a little—and end up without enough conviction in any direction to actually benefit from the choice. The hedge protects you from being completely wrong but also prevents you from being meaningfully right.
 
-Some people try to cover all bases simultaneously. They save aggressively while also investing aggressively while also paying down debt while also investing in their business. This creates financial strain because you can't actually maximize in all directions at once. You spread yourself thin trying to be prepared for every possibility.
+Others defer all major financial decisions until the uncertainty resolves. They keep everything liquid, maintain maximum flexibility, avoid commitments. This works until you realize the uncertainty never fully resolves—it just transforms into different uncertainty. You waited to buy a house until you were sure about the city, and now you're sure about the city but uncertain about interest rates. There's always a reason to wait.
 
-Others swing between extremes based on recent experience. After a financial scare, they over-save and miss opportunities. After a period of stability, they over-invest and leave themselves vulnerable. They're optimizing for the last thing that happened rather than for the range of things that could happen.
+Many people make decisions based on worst-case scenarios. They optimize for the bad outcome—save aggressively in case income drops, avoid debt in case they lose their job, maintain huge buffers in case everything goes wrong. This creates safety but at the cost of opportunity. You're living a constrained life to prepare for a disaster that might never happen.
 
-The anxiety-driven version is to make the most conservative choice always. Maximize savings, minimize risk, avoid any decision that could go wrong. This feels safe but creates its own problems - opportunity cost, inflation erosion, and a life constrained by worst-case thinking.
+Some try to eliminate uncertainty through control. They build multiple income streams, develop rare skills, create elaborate backup plans. This is admirable but exhausting. You're trying to bulletproof yourself against an unknowable future, which requires constant vigilance and preemptive action. The attempt to control uncertainty becomes its own source of stress.
 
-Some people cope by not deciding at all. They let money sit in checking accounts because any active choice feels risky. They delay important decisions waiting for more certainty that never comes. The indecision is itself a decision, just an unconscious one.
-
-The hustle culture response is to "bet on yourself" - take big risks, invest aggressively in growth, assume everything will work out. This works when it works, but when it doesn't, the consequences can be devastating. You're gambling that one possible future is the one that happens.
-
-None of these approaches solve the fundamental problem: you're trying to make decisions that optimize for one outcome when multiple outcomes are possible. The uncertainty doesn't go away through more planning, more saving, more risk-taking, or more avoidance. It's a feature of reality, not a bug you can fix.
+The common pattern: treating uncertainty as a problem to be solved rather than a condition to be managed. You can't solve uncertainty. You can only learn to make decisions despite it.
 
 ## What Actually Helps
 
-### 1. Build optionality instead of optimizing for one future
+### 1. Separate reversible from irreversible decisions
 
-Stop trying to make the perfect choice for an unknowable future. Instead, make choices that work reasonably well across multiple possible futures. This is called building optionality - creating flexibility rather than commitment to one path.
+Not all financial decisions carry the same weight. Many people find that distinguishing between reversible and irreversible choices reduces decision paralysis. Research suggests that people treat all decisions as equally weighty, which dramatically increases cognitive load and anxiety.
 
-In practice, this means choosing financial strategies that don't lock you into one scenario. Instead of asking "what's the best investment if the market goes up?" ask "what position lets me benefit if things go well and survive if they don't?"
+Reversible decisions: which subscription service to try, whether to spend money on a course, whether to take on a new client. These can be undone. If you're wrong, you can change course. The cost of being wrong is real but limited. These decisions should be made quickly with less deliberation—gather minimal information, make a call, adjust if needed.
 
-For savings versus investing: instead of all-or-nothing, build enough liquid savings to handle likely disruptions, then invest the rest. The savings buy you time and flexibility. The investments give you growth potential. Neither is optimal if you knew the future, but both together work in multiple futures.
+Irreversible decisions: buying a house, having kids, moving countries, changing careers. These create long-term commitments that are difficult or impossible to undo. These warrant serious consideration, multiple perspectives, and tolerance for some decision paralysis. Being slower here is appropriate.
 
-For debt decisions: instead of "should I pay this off or invest?" ask "what debt level lets me sleep at night while still having money to deploy for opportunities?" The answer is probably not zero debt and not maximum debt, but something in between that preserves options.
+The mistake is treating reversible decisions like irreversible ones. You spend weeks agonizing over whether to buy the $500 course because you might waste the money—but $500 on a course is reversible. If it's not valuable, you stop, you've learned something, you're out $500. That's not nothing, but it's not life-altering. Save your decision-making energy for the actual irreversible choices.
 
-Many people find it helpful to think in terms of "regret minimization" - not what's optimal in the best case, but what you can live with in multiple cases. The choice that you won't deeply regret regardless of which future unfolds is usually better than the choice that's perfect in one scenario and disastrous in others.
+Ask yourself: if this goes wrong, can I undo it? If yes, decide faster. If no, take your time. This alone eliminates enormous amounts of unnecessary deliberation over decisions that don't warrant it.
 
-This requires letting go of maximization. You're not trying to make the most money or save the most or invest the most. You're trying to position yourself well across a range of outcomes. This feels like settling for "good enough," but it's actually more sophisticated - you're designing for uncertainty rather than pretending certainty exists.
+### 2. Optimize for information gain, not perfect outcomes
 
-Start practicing this now: Take a financial decision you're stuck on. Instead of trying to predict which choice is right, list three plausible futures and ask which choice you could live with in all three. That's probably your answer.
+When the future is uncertain, the value of a decision isn't just the direct outcome—it's what you learn that helps with future decisions. Many people find that reframing choices as experiments rather than commitments makes them easier to make.
 
-### 2. Use decision rules that account for what you don't know
+You can't know if freelancing full-time will work for you until you try it. You can't know if you'll like the city until you live there. You can't know if the business idea is viable until you test it. The uncertainty is irreducible through analysis. The only way to resolve it is through action that generates information.
 
-Instead of making each financial decision from scratch under uncertainty, create rules that explicitly account for incomplete information. These rules won't be optimal, but they'll be consistent and reduce decision fatigue.
+This means making some financial decisions specifically for their learning value, not because you're confident in the outcome. Take the smaller bet that teaches you something: try the side project before quitting your job, rent in the neighborhood before buying, hire the contractor for one small project before committing to the renovation. These cost money but reduce uncertainty for the bigger decisions that follow.
 
-For example, a simple rule might be: "I keep three months of expenses liquid always, regardless of what else I'm doing with money." This rule acknowledges you don't know when you'll need cash, so you maintain a buffer. It's not optimized for any specific scenario - it's designed to handle a range of scenarios.
+The question shifts from "is this the right choice?" to "will this choice teach me something valuable regardless of outcome?" A failed experiment that clarifies what you don't want is valuable. A successful one that confirms a direction is valuable. The only failure is the choice that teaches you nothing because you never actually committed enough to learn.
 
-Another rule might be: "I only take on debt for investments that could pay for themselves even if other income drops." This rule protects you from overleveraging based on optimistic assumptions about the future. It builds in margin for being wrong.
+This also means building information-gathering into your financial plan. Maybe you allocate some money specifically to testing hypotheses: can I generate income from this skill? Do I actually like the lifestyle this expense enables? Does this investment strategy work for my psychology? You're spending money to reduce future uncertainty, which is a legitimate use of resources.
 
-Research suggests that simple decision rules often outperform complex optimization in uncertain environments. The rules create consistency and prevent you from swinging between extremes based on temporary circumstances or emotions.
+### 3. Set decision triggers instead of making decisions
 
-The key is making rules that reflect your actual tolerance for different types of risk and uncertainty. Not what you think you should tolerate, but what you actually can handle psychologically. If market volatility makes you anxious enough to lose sleep, that's real information about your risk tolerance, regardless of what optimal portfolio theory says.
+When you don't know enough to decide, don't decide yet—but also don't leave the decision open-ended. Research suggests that decision fatigue comes not from making decisions but from having unmade decisions consuming mental energy. You can reduce this by pre-committing to decision triggers.
 
-Many people find it helpful to have rules for different categories: how much to keep liquid, how much to invest, when to take on debt, when to spend on yourself, how much to save for taxes. The rules aren't perfect for every situation, but they're good enough for most situations and they eliminate constant re-decision.
+Many people find that setting conditions for when to decide eliminates ongoing anxiety. Not "should I buy a house?" which creates endless deliberation, but "I'll decide about buying a house when [X income for Y consecutive months / when I've lived in this city for Z years / when interest rates hit W%]." The decision is deferred, but you're not carrying it anymore—you know when it will be made.
 
-The rules can evolve as your situation changes, but they should be stable enough that you're not questioning them daily. Make the rule once, when you're thinking clearly, then trust it during moments of uncertainty when your judgment might be clouded by fear or excitement.
+This works for both actions and rules. "I'll increase spending when my emergency fund hits six months of expenses." "I'll invest in the business when I have three months of runway saved." "I'll quit freelancing if income drops below $X for two consecutive months." These are predetermined responses to future conditions. When the condition triggers, you don't deliberate—you execute.
 
-### 3. Focus on increasing your resilience, not predicting outcomes
+The trigger needs to be based on observable facts, not feelings. Not "when I feel ready" but "when my savings hit $50,000." Not "when the market looks good" but "when the S&P 500 drops 20%." Feelings are subject to endless reconsideration. Facts trigger action.
 
-You can't control which future happens, but you can increase your ability to handle multiple futures. This shifts focus from trying to predict to building capacity to adapt.
+This also creates permission to not think about the decision until the trigger. Someone asks if you're going to buy a house: "I'll consider that when I've been in this job for a year." The answer is clear, the decision is deferred, the mental energy is preserved. You've created structure around the uncertainty rather than trying to eliminate it.
 
-Resilience in financial terms means: having skills that transfer across different scenarios, maintaining relationships that could help in different circumstances, avoiding commitments that lock you into one path, and building buffers that buy you time to respond to changes.
+### 4. Build buffers instead of predicting needs
 
-For example, instead of trying to predict whether to specialize or generalize in your work, develop both - a core specialization that pays well now and adjacent skills that create options if that market shifts. You're not predicting which will matter; you're ensuring both possibilities are covered.
+You don't know what you'll need in the future, but you know you'll need something. Many people find that building general-purpose financial slack is more effective than trying to predict and prepare for specific scenarios.
 
-Instead of trying to predict your exact retirement needs, build streams of income that aren't all dependent on one thing. Employment income, side income, investment income - diversification not for optimization but for resilience. If one stream fails, others continue.
+The emergency fund is the classic example: you don't know which emergency, just that emergencies happen. The buffer protects you from a category of unknowns without requiring you to predict the specific unknown. This principle extends to other areas: flexible savings that aren't earmarked for specific goals, time that isn't fully scheduled, skills that apply across contexts.
 
-Many people find that building financial resilience reduces anxiety about uncertainty. When you know you can adapt to different scenarios, you stop needing to predict which scenario will happen. The uncertainty is still there, but it's less threatening because you're more capable of handling it.
+Research suggests that optionality has value even when you can't price it precisely. The ability to say no to bad opportunities, to wait for good ones, to pivot when circumstances change—this is worth real money even though you can't put it in a spreadsheet. The buffer is what creates optionality.
 
-This also means regularly stress-testing your financial position. Not to scare yourself, but to identify vulnerabilities. What breaks if your income drops 50 percent? What happens if you have a major unexpected expense? Knowing your weak points lets you shore them up before they're tested for real.
+The practical application: instead of trying to save the "right amount" for specific goals, aim for building general financial resilience. This might look like: enough savings that you could handle three months without income (regardless of cause), enough margin in your monthly budget that you're not operating at capacity, enough career capital that you could change directions if needed.
 
-The cultural narrative is that financial success comes from making the right predictions - picking the right stocks, the right career moves, the right investments. But research suggests it more often comes from being able to adapt when predictions fail. Resilience beats optimization when the future is uncertain.
+The buffer won't protect you from every possible future, but it makes you robust to many futures. You're not predicting which bad thing will happen—you're building capacity to handle bad things in general. This is achievable in a way that preparing for specific unknowns isn't.
+
+### 5. Accept that every choice forecloses other choices
+
+The hardest part of deciding under uncertainty is accepting opportunity cost. Every dollar you save is a dollar you didn't invest. Every dollar you spend is a dollar you didn't save. Every career path you pursue is a path you didn't take. This is always true, but uncertainty makes it feel more acute because you don't know which choice would have been better.
+
+Many people find that acknowledging loss explicitly makes decisions easier, not harder. You're not trying to make the perfect choice that maximizes everything—you're making a choice that optimizes for what matters most to you right now, while accepting that it means sacrificing other possibilities.
+
+"I'm buying the house, which means I'm choosing stability over flexibility. I'm giving up the ability to move easily. That's the trade." "I'm staying freelance, which means I'm choosing autonomy over security. I'm accepting income variability as the cost of control." When you name what you're sacrificing, the decision becomes clearer—you're not failing to have everything, you're consciously choosing one thing over another.
+
+This also means giving yourself permission to make different choices later if circumstances change. The decision you make today is based on what you know today. Future-you, with different information and different circumstances, might make a different choice. That doesn't mean today's choice was wrong—it means the situation evolved. Financial decisions aren't permanent character statements. They're provisional bets that you can revise as you learn more.
 
 ## The Takeaway
 
-Financial decisions feel impossible when the future is unknowable because you're trying to optimize for one outcome when multiple outcomes are possible. Stop trying to make perfect choices. Instead, build optionality that works across multiple futures, create decision rules that explicitly account for uncertainty, and focus on increasing your resilience rather than predicting outcomes. The goal isn't the right decision - it's a decision you can work with regardless of which future unfolds.
+Uncertainty makes financial decisions harder not because you lack information or discipline, but because you're being asked to commit resources to an unknowable future. You can't eliminate this uncertainty through better planning or more research. What you can do is distinguish reversible from irreversible choices, optimize for learning instead of perfect outcomes, set clear decision triggers, build general-purpose buffers, and accept that every choice means foreclosing others. The goal isn't certainty—it's learning to act decisively despite uncertainty, then adjusting as you learn more.
+
