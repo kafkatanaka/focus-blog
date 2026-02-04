@@ -2,7 +2,7 @@
 title: "How to Recover From Career Burnout Without Quitting"
 description: "You're exhausted, cynical, and nothing feels meaningful anymore. Learn to rebuild your energy and engagement without blowing up your career."
 pubDate: 2025-02-01T00:00:00Z
-category: wellness
+category: work
 tags:
   - burnout
   - essentialism
