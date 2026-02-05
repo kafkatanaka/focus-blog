@@ -28,7 +28,7 @@ function parseTags(content) {
 }
 
 // 固定ページ（trailingSlash: 'never' に合わせる）
-const urls = ["/", "/about"];
+const urls = ["/", "/about", "/articles"];
 
 for (const cat of CATEGORIES) {
   urls.push(`/${cat}`);
@@ -36,6 +36,7 @@ for (const cat of CATEGORIES) {
 
 // ブログ記事 + タグ収集
 const tagSet = new Set();
+const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles'];
 if (fs.existsSync(BLOG_DIR)) {
   const files = fs.readdirSync(BLOG_DIR);
   for (const file of files) {
@@ -44,7 +45,10 @@ if (fs.existsSync(BLOG_DIR)) {
     const content = fs.readFileSync(fullPath, "utf-8");
     if (content.includes("draft: true")) continue;
     const slug = file.replace(/\.md$/, "");
-    urls.push(`/blog/${slug}`);
+    // Exclude reserved slugs
+    if (!reservedSlugs.includes(slug)) {
+      urls.push(`/${slug}`);
+    }
     for (const tag of parseTags(content)) tagSet.add(tag);
   }
 } else {

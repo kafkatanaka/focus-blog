@@ -41,7 +41,7 @@ const allPosts = (await getCollection('blog'))
             : `/images/thumbnails/${post.slug}.webp`;
           return (
           <li>
-            <a href={`/blog/${post.slug}`} class="group block">
+            <a href={`/${post.slug}`} class="group block">
               <div class="flex gap-4 sm:gap-6">
                 <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
                   <img

@@ -165,7 +165,7 @@ const modalId = 'search-modal';
     matches.slice(0, 20).forEach((entry) => {
       const li = document.createElement('li');
       li.innerHTML = `
-        <a href="/blog/${entry.slug}" class="flex gap-3 rounded-lg p-3 hover:bg-gray-50 group">
+        <a href="/${entry.slug}" class="flex gap-3 rounded-lg p-3 hover:bg-gray-50 group">
           <div class="h-12 w-12 shrink-0 overflow-hidden rounded bg-gray-100">
             <img src="${thumbBase}/${entry.slug}.webp" alt="" class="h-full w-full object-cover" onerror="this.src='/images/thumbnails/placeholder.webp'" />
           </div>

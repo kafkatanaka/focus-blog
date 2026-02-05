@@ -1,29 +1,33 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
+import BlogPost from '../layouts/BlogPost.astro';
 import { getCollection } from 'astro:content';
-import { getRelatedPosts } from '../../lib/related-posts';
-import { relatedMap } from '../../data/related-map';
+import { getRelatedPosts } from '../lib/related-posts';
+import { relatedMap } from '../data/related-map';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map((entry) => {
-    const relatedPosts = getRelatedPosts(
-      entry.slug,
-      entry.data.tags ?? [],
-      posts,
-      relatedMap
-    );
-    return {
-      params: { slug: entry.slug },
-      props: { entry, relatedPosts },
-    };
-  });
+  // Exclude category pages from slug routing
+  const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles'];
+  return posts
+    .filter((entry) => !reservedSlugs.includes(entry.slug))
+    .map((entry) => {
+      const relatedPosts = getRelatedPosts(
+        entry.slug,
+        entry.data.tags ?? [],
+        posts,
+        relatedMap
+      );
+      return {
+        params: { slug: entry.slug },
+        props: { entry, relatedPosts },
+      };
+    });
 }
 
 const { entry, relatedPosts } = Astro.props;
 const { Content } = await entry.render();
 const site = Astro.site ?? new URL('https://focus.matomeyo.me');
-const canonicalURL = new URL(`/blog/${entry.slug}`, site);
+const canonicalURL = new URL(`/${entry.slug}`, site);
 
 const thumbnailPath = entry.data.thumbnail
   ? `/images/thumbnails/${entry.data.thumbnail}`

@@ -15,7 +15,7 @@ const { posts } = Astro.props;
       {posts.map((post) => (
         <li>
           <a
-            href={`/blog/${post.slug}`}
+            href={`/${post.slug}`}
             class="group block rounded-lg overflow-hidden border border-gray-200 bg-gray-50 transition-colors hover:border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
           >
             <div class="aspect-[16/10] w-full overflow-hidden bg-gray-200">
