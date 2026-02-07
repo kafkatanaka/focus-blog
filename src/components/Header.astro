@@ -12,6 +12,14 @@ const currentPath = Astro.url.pathname;
     <ul class="flex gap-6 text-sm">
       <li>
         <a
+          href="/framework"
+          class:list={[currentPath === '/framework' && 'text-gray-900 font-medium', currentPath !== '/framework' && 'text-gray-600 hover:text-gray-900']}
+        >
+          Framework
+        </a>
+      </li>
+      <li>
+        <a
           href="/focus"
           class:list={[currentPath === '/focus' && 'text-gray-900 font-medium', currentPath !== '/focus' && 'text-gray-600 hover:text-gray-900']}
         >

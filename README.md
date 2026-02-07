@@ -106,6 +106,39 @@ Cloudflare で Proxied にしていれば、SSL 証明書は自動で発行・�
 
 ---
 
+## Finalize before deploy (pillar full content)
+
+Framework と Focus は全文済み。Work も全文反映済み。Money と Habits を元 MD で上書きする場合:
+
+**1. 元 MD の置き場所**
+
+Downloads にある 4 つの MD を **`src/content/pillar-sources/`** に移動またはコピーする。ファイル名はそのまま。
+
+- `src/content/pillar-sources/attention-management-guide.md`（Focus）
+- `src/content/pillar-sources/sustainable-productivity-guide.md`（Work）
+- `src/content/pillar-sources/intentional-money-guide.md`（Money）
+- `src/content/pillar-sources/behavior-design-guide.md`（Habits）
+
+**2. リンク修正 + frontmatter 付きで MDX を生成**
+
+```bash
+# Money と Habits だけ上書きする場合
+node scripts/pillar-link-fix.mjs src/content/pillar-sources/intentional-money-guide.md src/pages/money/intentional-money-guide.mdx --frontmatter
+node scripts/pillar-link-fix.mjs src/content/pillar-sources/behavior-design-guide.md src/pages/habits/behavior-design-guide.mdx --frontmatter
+
+# 3 本（Work / Money / Habits）まとめて生成する場合
+node scripts/write-pillars.mjs
+```
+
+**3. ビルド & サイトマップ**
+
+```bash
+npm run build
+node scripts/generate-sitemap.mjs
+```
+
+その後、commit → push でデプロイ。
+
 ## Deploy (Cloudflare Pages)
 
 1. GitHub にリポジトリを push

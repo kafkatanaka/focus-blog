@@ -28,15 +28,21 @@ function parseTags(content) {
 }
 
 // 固定ページ（trailingSlash: 'never' に合わせる）
-const urls = ["/", "/about", "/articles"];
+const urls = ["/", "/framework", "/articles"];
 
 for (const cat of CATEGORIES) {
   urls.push(`/${cat}`);
 }
 
+// Pillar pages (Phase 0)
+urls.push("/focus/attention-management-guide");
+urls.push("/work/sustainable-productivity-guide");
+urls.push("/money/intentional-money-guide");
+urls.push("/habits/behavior-design-guide");
+
 // ブログ記事 + タグ収集
 const tagSet = new Set();
-const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles'];
+const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles', 'framework'];
 if (fs.existsSync(BLOG_DIR)) {
   const files = fs.readdirSync(BLOG_DIR);
   for (const file of files) {

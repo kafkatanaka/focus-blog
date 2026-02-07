@@ -7,7 +7,7 @@ import { relatedMap } from '../data/related-map';
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   // Exclude category pages from slug routing
-  const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles'];
+  const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles', 'framework'];
   return posts
     .filter((entry) => !reservedSlugs.includes(entry.slug))
     .map((entry) => {

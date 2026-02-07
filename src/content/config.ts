@@ -18,6 +18,13 @@ const blogCollection = defineCollection({
   }),
 });
 
+/** ピラー元 MD（スクリプト用）。ビルドでは使わないが、Astro の auto-collection 警告を消すため定義 */
+const pillarSourcesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({}).catchall(z.unknown()),
+});
+
 export const collections = {
   blog: blogCollection,
+  'pillar-sources': pillarSourcesCollection,
 };

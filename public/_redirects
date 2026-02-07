@@ -1,4 +1,7 @@
 # Redirect old blog URLs to new structure
 /blog/*  /:splat  301
 
+# About → Framework (Phase 0)
+/about   /framework  301
+
 /sitemap.xml  /sitemap.xml  200

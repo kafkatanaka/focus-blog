@@ -4,7 +4,7 @@
     <loc>https://focus.matomeyo.me/</loc>
   </url>
   <url>
-    <loc>https://focus.matomeyo.me/about</loc>
+    <loc>https://focus.matomeyo.me/framework</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/articles</loc>
@@ -20,6 +20,18 @@
   </url>
   <url>
     <loc>https://focus.matomeyo.me/habits</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/focus/attention-management-guide</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/work/sustainable-productivity-guide</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/money/intentional-money-guide</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/habits/behavior-design-guide</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/abstract-money-goals</loc>
@@ -43,10 +55,19 @@
     <loc>https://focus.matomeyo.me/best-behavior-change-books</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/best-career-books-knowledge-workers</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/best-evening-routine-ideas</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/best-focus-apps-ranked-expanded</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/best-focus-apps-ranked</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/best-focus-attention-books-beginners</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/best-investment-books-beginners</loc>
@@ -154,6 +175,9 @@
     <loc>https://focus.matomeyo.me/creative-work-focus</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/credit-card-strategies</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/credit-scores-matter-more</loc>
   </url>
   <url>
@@ -193,6 +217,9 @@
     <loc>https://focus.matomeyo.me/exercise-timing-mental-clarity</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/expense-tracking-apps</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/feeling-rich-being-secure</loc>
   </url>
   <url>
@@ -208,6 +235,9 @@
     <loc>https://focus.matomeyo.me/financial-anxiety-shapes-decisions</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/financial-confidence</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/financial-education-not-taught-schools</loc>
   </url>
   <url>
@@ -221,6 +251,9 @@
   </url>
   <url>
     <loc>https://focus.matomeyo.me/financial-independence-looks-different</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/financial-margin</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/financial-overthinking-cost</loc>
@@ -439,13 +472,22 @@
     <loc>https://focus.matomeyo.me/imposter-syndrome-high-achievers</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/industry-risk-rewards</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/introvert-extrovert-habits</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/investment-platforms-beginners</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/invisible-career-rules</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/invisible-labor-managing-expectations</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/irregular-expenses</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/irregular-income-stress</loc>
@@ -469,6 +511,9 @@
     <loc>https://focus.matomeyo.me/light-affects-concentration</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/linkedin-strategies-guide</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/long-term-habits-boring</loc>
   </url>
   <url>
@@ -481,10 +526,16 @@
     <loc>https://focus.matomeyo.me/manage-upward-effectively</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/meditation-apps-comparison</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/minimum-focus-meaningful-work</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/money-attention-problems</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/money-career-transitions</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/money-decision-fatigue</loc>
@@ -520,13 +571,22 @@
     <loc>https://focus.matomeyo.me/morning-evening-focus</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/morning-routine-apps-comparison</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/morning-routines</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/multiple-income-streams</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/navigate-office-politics</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/negative-habits-power</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/negotiate-bills-subscriptions</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/negotiate-salary-without-feeling-pushy</loc>
@@ -577,7 +637,13 @@
     <loc>https://focus.matomeyo.me/productivity-tools-destroy-focus</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/professional-development-courses-guide</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/progress-versus-movement</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/promotion-emptiness</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/protect-attention-daily-design</loc>
@@ -595,6 +661,9 @@
     <loc>https://focus.matomeyo.me/recognize-time-to-leave-job</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/recover-financial-mistakes</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/recover-focus-after-interruptions</loc>
   </url>
   <url>
@@ -604,10 +673,19 @@
     <loc>https://focus.matomeyo.me/recover-from-career-burnout</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/reduce-financial-stress</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/reduce-habit-friction</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/remote-vs-office-habits</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/remote-work-reality</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/resist-habit-systems</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/rest-and-focus</loc>
@@ -622,7 +700,13 @@
     <loc>https://focus.matomeyo.me/rituals-vs-habits</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/sabbatical-depth</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/sabbatical-strategies</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/save-without-deprivation</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/scarcity-thinking-affects-spending</loc>
@@ -637,7 +721,16 @@
     <loc>https://focus.matomeyo.me/side-hustles-dont-always-make-sense</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/side-projects-career</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/silence-to-think</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/sleep-focus-relationship</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/sleep-tracking-apps-comparison</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/small-habits-dont-work</loc>
@@ -655,10 +748,16 @@
     <loc>https://focus.matomeyo.me/smart-people-stuck-at-work</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/smart-people-stuck</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/social-media-focus-impact</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/social-pressure-affects-concentration</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/solo-project-management-tools-guide</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/stability-vs-growth-tradeoff</loc>
@@ -718,7 +817,19 @@
     <loc>https://focus.matomeyo.me/uncertainty-money-decisions</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/video-call-fatigue</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/visibility-over-impact</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/walking-meetings</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/water-tracking-apps-comparison</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/wealth-average-income</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/wfh-tools-article</loc>
@@ -784,7 +895,13 @@
     <loc>https://focus.matomeyo.me/why-habit-advice-doesnt-fit</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/why-habit-challenges-fail</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/why-habit-change-feels-personal</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-habit-replacement-works</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/why-habit-streaks-are-overrated</loc>
@@ -796,6 +913,15 @@
     <loc>https://focus.matomeyo.me/why-hard-work-doesnt-guarantee-growth</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/why-identity-based-habits-feel-different</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-implementation-intentions-work</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-keystone-habits-matter-most</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/why-learning-doesnt-help-career</loc>
   </url>
   <url>
@@ -803,6 +929,9 @@
   </url>
   <url>
     <loc>https://focus.matomeyo.me/why-more-income-doesnt-create-safety</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-morning-routines-work-for-some-not-everyone</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/why-motivation-fails-before-focus</loc>
@@ -814,13 +943,31 @@
     <loc>https://focus.matomeyo.me/why-paper-and-pen-beat-productivity-apps</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/why-perfectionism-destroys-habit-consistency</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/why-promotions-often-go-to-the-wrong-people</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-rewards-dont-always-reinforce-habits</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/why-saving-feels-harder</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/why-single-tasking-is-so-hard-to-learn</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/why-smart-people-feel-stuck</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-social-accountability-helps-some-people</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-some-habits-need-daily-practice-others-dont</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/why-some-music-helps-focus-and-some-destroys-it</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/why-tracking-habits-backfires</loc>
@@ -836,6 +983,9 @@
   </url>
   <url>
     <loc>https://focus.matomeyo.me/why-your-job-feels-harder-than-it-should</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/windfalls-bonuses</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/work-expands-mental-space</loc>
@@ -886,6 +1036,12 @@
     <loc>https://focus.matomeyo.me/tag/beginner</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/tag/career-books</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/tag/intermediate</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/tag/tools</loc>
   </url>
   <url>
@@ -898,13 +1054,13 @@
     <loc>https://focus.matomeyo.me/tag/focus-apps</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/tag/productivity-books</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/tag/investing-books</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/tag/finance-books</loc>
-  </url>
-  <url>
-    <loc>https://focus.matomeyo.me/tag/productivity-books</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/tag/remote-work</loc>
@@ -928,10 +1084,16 @@
     <loc>https://focus.matomeyo.me/tag/automation</loc>
   </url>
   <url>
+    <loc>https://focus.matomeyo.me/tag/content-creation</loc>
+  </url>
+  <url>
     <loc>https://focus.matomeyo.me/tag/note-taking-tools</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/tag/knowledge-management</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/tag/solo-creator</loc>
   </url>
   <url>
     <loc>https://focus.matomeyo.me/tag/habit</loc>
@@ -944,5 +1106,8 @@
   </url>
   <url>
     <loc>https://focus.matomeyo.me/tag/time-tracking-tools</loc>
+  </url>
+  <url>
+    <loc>https://focus.matomeyo.me/tag/habit-formation</loc>
   </url>
 </urlset>
