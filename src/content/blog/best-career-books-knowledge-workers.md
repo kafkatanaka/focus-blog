@@ -1,3 +1,4 @@
+---
 title: "The Best Career Books for Knowledge Workers Ranked"
 description: "5 career books that actually help knowledge workers navigate modern work, build skills, and advance strategically—tested advice that works in 2025."
 pubDate: 2025-02-01T00:00:00Z
@@ -8,7 +9,6 @@ tags:
   - intermediate
 draft: false
 ads: true
-affiliateDisclosure: true
 ---
 
 Most career books promise transformation but deliver generic advice you've heard before: "network more," "be proactive," "find your passion." After reading 30+ career books over a decade working in tech and consulting, I've found only a handful that fundamentally changed how I approach knowledge work. These five books gave me frameworks I still use daily, helped me double my salary in four years, and taught me to navigate office politics without becoming political.
