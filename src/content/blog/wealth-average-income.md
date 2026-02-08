@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've read the wealth-building advice. Invest early, live below your means, compound your returns. It all makes sense in theory. But the examples always feature people with high incomes, inheritance, or lucky breaks. You're earning an average salary, and the math feels impossible.
 

@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Your car needs new tires. Your insurance premium is due. You need to buy holiday gifts. None of these are surprises—they happen every year—but they still hit your budget like emergencies. You scramble to cover them, use your emergency fund, or put them on a credit card, promising yourself you'll plan better next time.
 

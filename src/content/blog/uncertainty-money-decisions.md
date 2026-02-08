@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Should you save aggressively or invest in your business? Buy the house or keep renting? Take the steady job or the risky opportunity? You have spreadsheets, advice from five sources, and no idea what's right because you don't know what your life will look like in two years.
 

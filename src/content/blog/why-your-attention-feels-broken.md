@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You sit down to work. Within minutes, you've checked your phone twice, opened three browser tabs, and convinced yourself you need to "research" something that has nothing to do with your actual task. It's not laziness. It's that your attention system is fighting an unwinnable war.
 

@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Your colleague interrupts you in every meeting. Another takes credit for your ideas. A third creates chaos by missing deadlines and expecting everyone else to clean up the mess. You can't avoid these people—they're on your team, and you need to work with them to get anything done.
 

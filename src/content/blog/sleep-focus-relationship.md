@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You slept five hours last night. You're tired, but you have work to do, so you load up on coffee and sit down to focus. You read the same paragraph three times without absorbing it. Simple decisions feel impossibly complex. Tasks that normally take 20 minutes stretch to an hour. You tell yourself you just need to concentrate harder, but harder concentration doesn't come. Your attention keeps drifting, thoughts keep fragmenting, and by afternoon you've accomplished almost nothing despite being "productive" for eight hours.
 
@@ -118,3 +118,5 @@ The underlying principle is removing friction from good sleep habits while addin
 ## The Takeaway
 
 Sleep deprivation doesn't just make you tired—it impairs the prefrontal cortex systems essential for sustained attention, working memory, and cognitive control, making focused work neurologically impossible regardless of willpower. You can't compensate with coffee, efficiency techniques, or weekend catch-up sleep. The solution requires treating sleep as your primary productivity tool: consistently getting seven to nine hours through non-negotiable scheduling, recognizing when you're impaired and adjusting work expectations accordingly, and designing your environment to make adequate sleep the default rather than something requiring constant discipline. One night of good sleep produces better work than three nights of sleep-deprived hustle. Protect your sleep, and your focus protects itself.
+
+For how sleep affects career and investment decisions, see [How Sleep Quality Affects Your Career and Investments](/sleep-quality-career-investments).

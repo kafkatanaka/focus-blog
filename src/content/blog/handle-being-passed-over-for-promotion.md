@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've been doing everything right. Working hard, delivering results, going above and beyond. You've been told you're doing great. You thought the promotion was obvious.
 
@@ -102,6 +102,8 @@ The point is to use this moment of forced reflection to get honest about what yo
 Ask yourself: If I got promoted tomorrow, would I actually be happy here in two years? What am I optimizing for—title, money, learning, autonomy, impact, work-life balance? Can I get that here, or do I need to look elsewhere?
 
 If you realize you want to stay and make it work, you can focus on the specific path to advancement with clear eyes about what you're signing up for. If you realize you want to leave, you can start planning your exit strategically rather than quitting in anger or staying in resentment.
+
+**Further reading:** For building career capital and knowing when to stay or leave, [*So Good They Can't Ignore You*](https://www.amazon.com/dp/1592407936?tag=focusdividend-22&linkCode=as2&linkId=handle-being-passed-over-so-good-they-cant-ignore-you) by Cal Newport is a useful read.
 
 ## The Takeaway
 

@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You're earning a reasonable income, but money still causes constant anxiety. You check your bank account multiple times daily. Every purchase triggers mental calculations. You worry about unexpected expenses even when nothing's immediately wrong. The standard advice—earn more money—doesn't address the actual problem: your relationship with money creates stress regardless of the amount.
 
@@ -159,5 +159,5 @@ Next month, open your buffer account and begin funding it, even if you start wit
 
 The goal isn't eliminating all financial stress—some stress is appropriate and motivating. The goal is eliminating the chronic, unproductive anxiety that drains energy without leading to better financial outcomes. That's the stress these systems address, and for most knowledge workers, that's the stress that makes money feel harder than it needs to be.
 
-Financial calm isn't about having perfect finances or unlimited money. It's about having systems that work reliably enough that you can trust them and focus your attention elsewhere. That trust is built through consistent system operation, not through constant vigilance. These five strategies build that trust systematically, reducing stress without requiring income increases or financial expertise.
+Financial calm isn't about having perfect finances or unlimited money. It's about having systems that work reliably enough that you can trust them and focus your attention elsewhere. That trust is built through consistent system operation, not through constant vigilance. These five strategies build that trust systematically, reducing stress without requiring income increases or financial expertise. For how sleep and checking habits affect money stress, see [Why Sleep-Deprived Investors Make Worse Financial Decisions](/sleep-deprived-investors-financial-decisions) and [The Attention Cost of Obsessive Portfolio Checking](/attention-cost-portfolio-checking).
 

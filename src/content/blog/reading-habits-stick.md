@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You have seventeen unread books on your nightstand. You bought them excited to read them. You started three of them. You finished none. Every night you mean to read, and every night you end up scrolling your phone instead. Reading feels like something you used to do, back when you had time and attention span.
 
@@ -80,6 +80,8 @@ For others, it's reading something easier first—an article, a newsletter, a fe
 Many people find that momentum switching also works with location changes. Sitting in the same place where you usually scroll makes reading harder—your brain expects scrolling in that context. Moving to a different chair, different room, or different location entirely can disrupt the association. Your brain isn't fighting the established pattern of "this is where I scroll"; it's open to new behavior in a new context.
 
 The key is accepting that starting is always going to require some kind of bridge. You're not building the willpower to start reading from a dead stop. You're building small on-ramps that make starting feel easier than not starting.
+
+**Further reading:** For making time and protecting focus so reading can stick, [*Make Time*](https://www.amazon.com/dp/0525572422?tag=focusdividend-22&linkCode=as2&linkId=reading-habits-stick-make-time) by Jake Knapp and John Zeratsky is a practical read.
 
 ## The Takeaway
 

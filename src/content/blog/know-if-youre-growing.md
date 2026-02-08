@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've been in your role for three years. You're better at it than when you started. You know the systems, the people, the unwritten rules. You're efficient.
 
@@ -108,6 +108,8 @@ The key is that you're adding something to the world rather than just keeping ex
 Here's the test: if you left your role tomorrow, what would disappear? If the answer is "nothing—someone else would just do what I do," that suggests you're primarily doing maintenance work. If the answer includes specific things you've created, relationships you've built, or improvements you've made that wouldn't have happened without you, that's evidence of creation.
 
 Start deliberately building something, even if it's small. A tool that solves a problem. A document that captures knowledge. A relationship that creates new opportunities. A process that makes work easier. These don't need to be grand innovations—just things that add value and didn't exist before you made them.
+
+**Further reading:** For designing your path deliberately and prototyping careers, [*Designing Your Life*](https://www.amazon.com/dp/1101875321?tag=focusdividend-22&linkCode=as2&linkId=know-if-youre-growing-designing-your-life) by Bill Burnett and Dave Evans is a practical read.
 
 ## The Takeaway
 

@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've been chasing financial security for years. First it was having $10k saved. Then $50k. Then six months of expenses. Then a year. Each milestone felt like it would be the one that made you feel secure.
 
@@ -109,5 +109,5 @@ These rules need to match your actual financial situation—someone living paych
 
 ## The Takeaway
 
-Financial calm doesn't come from hitting a specific savings number or income level—it comes from systems that function without constant attention, clearly defined thresholds for what's enough, and decision rules that eliminate the need to evaluate every purchase. You're not achieving security through accumulation. You're achieving calm through systematization. The goal isn't to have so much money you never worry—it's to have systems so reliable you don't need to monitor constantly. Automate what matters, define your enough points, create decision rules. Then the mental space money currently occupies can be used for literally anything else.
+Financial calm doesn't come from hitting a specific savings number or income level—it comes from systems that function without constant attention, clearly defined thresholds for what's enough, and decision rules that eliminate the need to evaluate every purchase. You're not achieving security through accumulation. You're achieving calm through systematization. The goal isn't to have so much money you never worry—it's to have systems so reliable you don't need to monitor constantly. Automate what matters, define your enough points, create decision rules. Then the mental space money currently occupies can be used for literally anything else. For how this applies to investing, see [The Attention Cost of Obsessive Portfolio Checking](/attention-cost-portfolio-checking) and the [Intentional Money Guide](/money/intentional-money-guide).
 

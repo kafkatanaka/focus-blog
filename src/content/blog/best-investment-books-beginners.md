@@ -12,7 +12,7 @@ ads: true
 affiliateDisclosure: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Most people who try to learn investing from books quit within three chapters. Not because investing is impossibly hard, but because most investment books are either impenetrably academic or dangerously oversimplified. After reading them, you still don't know what to actually do with your money.
 

@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You forgot to pay the electric bill. Again. Not because you don't have the money—you do. Not because you're irresponsible—you're managing complex projects at work. You forgot because it slipped through the cracks of your fractured attention, along with the insurance renewal, the subscription you meant to cancel, and the reimbursement you never submitted.
 
@@ -101,5 +101,5 @@ The goal is a financial life that operates correctly on autopilot, requiring you
 
 ## The Takeaway
 
-Financial struggles often trace back to attention struggles. You don't need more willpower or better budgeting—you need systems that work with your actual attentional capacity, not against it. Automate decisions, consolidate inputs, separate thinking from doing, and design for depleted states. Your finances won't fix your attention, but fixing your attention architecture will fix a lot of your financial problems.
+Financial struggles often trace back to attention struggles. You don't need more willpower or better budgeting—you need systems that work with your actual attentional capacity, not against it. Automate decisions, consolidate inputs, separate thinking from doing, and design for depleted states. Your finances won't fix your attention, but fixing your attention architecture will fix a lot of your financial problems. For a concrete example, see [The Attention Cost of Obsessive Portfolio Checking](/attention-cost-portfolio-checking)—checking less often often improves returns.
 

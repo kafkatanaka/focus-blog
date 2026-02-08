@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've tried saving money before. You cut out coffee, stopped eating out, eliminated every small pleasure. For three weeks, you felt virtuous. Then you cracked, spent more than you saved during your restriction period, and ended up worse off than when you started. The problem wasn't your willpower—it was treating saving as deprivation.
 

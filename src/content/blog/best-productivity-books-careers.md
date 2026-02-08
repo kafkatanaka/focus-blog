@@ -12,7 +12,7 @@ ads: true
 affiliateDisclosure: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Most productivity books teach you to do more things faster. You finish feeling motivated, buy a new planner, and return to your old habits within two weeks. The problem: they treat productivity as a tactics problem when it's actually a thinking problem.
 

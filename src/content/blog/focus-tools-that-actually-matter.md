@@ -12,7 +12,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've downloaded the browser extension that blocks distracting websites. You've tried the Pomodoro timer app with ambient forest sounds. You've experimented with the AI-powered focus assistant that promises to organize your entire digital life. And yet, three hours into your workday, you're still refreshing Twitter while a focus timer runs in the background and "productivity music" plays through your headphones.
 

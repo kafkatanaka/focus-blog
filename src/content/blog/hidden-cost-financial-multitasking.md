@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You open your banking app to transfer money for rent. While it loads, you check your investment portfolio. Down 2% today. You open another tab to research whether you should rebalance. Your phone buzzes—a bill is due tomorrow. You switch to pay it, but first you want to compare your current savings rate with high-yield alternatives.
 
@@ -121,4 +121,4 @@ The goal is controlling when you engage with financial information rather than l
 
 Financial multitasking feels productive but produces the opposite. Every time you switch between checking balances, paying bills, researching options, and making plans, you're degrading the quality of each activity while increasing the total time spent.
 
-The solution isn't doing financial tasks faster. It's doing them separately, in focused batches that match the type of thinking required. Monitoring gets its own time. Action gets its own time. Research gets its own time. Each becomes dramatically more effective when protected from the others.
+The solution isn't doing financial tasks faster. It's doing them separately, in focused batches that match the type of thinking required. Monitoring gets its own time. Action gets its own time. Research gets its own time. Each becomes dramatically more effective when protected from the others. For the specific cost of obsessive portfolio checking, see [The Attention Cost of Obsessive Portfolio Checking](/attention-cost-portfolio-checking).

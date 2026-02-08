@@ -12,7 +12,7 @@ ads: true
 affiliateDisclosure: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Most behavior change books give you a burst of motivation that fades in two weeks. You read about someone who lost 100 pounds or built a million-dollar business, feel inspired, make dramatic resolutions, fail by Thursday, and feel worse about yourself than before you started.
 

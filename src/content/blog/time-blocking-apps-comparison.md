@@ -12,7 +12,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've read about time-blocking. You've seen the productivity gurus swear by it. You've even tried blocking out your calendar manually. But within two days, your carefully planned blocks are shattered by a surprise meeting, an urgent Slack message, or the realization that you grossly underestimated how long anything takes.
 

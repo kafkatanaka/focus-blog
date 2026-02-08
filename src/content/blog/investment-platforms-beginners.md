@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You're not investing because you're waiting to "understand the market" or "save up enough money." But professional investors started with the same knowledge you have now—zero—and the minimum account balance at most platforms is $0. The difference between someone with $47,000 in investments after five years and someone with $0 isn't knowledge or capital. It's starting.
 
@@ -479,9 +479,11 @@ If you want to speculate with individual stocks, limit it to 5-10% of your portf
 
 **Pre-retirees (50+, approaching retirement)**: Vanguard for low-cost index funds in increasingly conservative allocations, or Schwab for broader service including income planning. You're shifting from growth (stocks) to stability (bonds) and need platforms with strong fixed-income offerings. Vanguard's bond funds are industry-leading cheap. Schwab's advisors can provide retirement income planning for 0.30% fee if you have $500,000+.
 
+**Further reading:** For a straightforward investing framework that pairs well with any platform, [*The Simple Path to Wealth*](https://www.amazon.com/dp/1533667926?tag=focusdividend-22&linkCode=as2&linkId=investment-platforms-beginners-simple-path) by JL Collins is a classic.
+
 ## The Takeaway
 
-The platform you choose matters far less than the fact that you start investing consistently with a reasonable strategy. Someone using "suboptimal" Betterment at 0.25% fees who invests $500 monthly for 30 years will have $580,000 (assuming 7% returns). Someone using "optimal" Vanguard at 0.03% fees who never starts because they're overwhelmed by decisions will have $0.
+The platform you choose matters far less than the fact that you start investing consistently with a reasonable strategy. Someone using "suboptimal" Betterment at 0.25% fees who invests $500 monthly for 30 years will have $580,000 (assuming 7% returns). Someone using "optimal" Vanguard at 0.03% fees who never starts because they're overwhelmed by decisions will have $0. For why checking less often improves returns, see [The Attention Cost of Obsessive Portfolio Checking](/attention-cost-portfolio-checking); for the case for index funds over stock picking, see [Index Funds vs Stock Picking: The Cognitive Load Comparison](/index-funds-vs-stocks-cognitive-load).
 
 Start with whatever platform removes the barriers preventing you from investing. If that's Betterment's automation, fine—you'll earn 6.75% instead of 7% after fees, but 6.75% is infinitely better than 0%. If that's Fidelity's zero-fee FZROX fund, great—you're capturing the full market return. If that's Robinhood because the interface doesn't intimidate you, acceptable—just buy VTI and resist the temptation to trade individual stocks.
 

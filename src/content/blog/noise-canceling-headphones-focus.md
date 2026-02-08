@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You put on your noise-canceling headphones, start your work playlist, and expect to sink into deep focus. Instead, you notice the pressure in your ears, get distracted by the faint hum of the ANC, or find yourself more aware of every small sound that leaks through. The headphones cost $300, but your focus feels the same—or worse.
 

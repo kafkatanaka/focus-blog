@@ -48,29 +48,60 @@ Phase 1 改訂版: Amazon 先行実装。どの記事にどの書籍・ツール
 
 ---
 
-## Week 2 残り作業
+---
 
-- [ ] 書籍系3記事の既存 Amazon リンク確認・linkId/UTM 付与
-- [ ] UTM 設計ドキュメント確認（`docs/UTM-AFFILIATE-PARAMS.md`）
-- [ ] トラッキングスプレッドシート作成（列は `docs/AFFILIATE-TRACKING-TEMPLATE.md` 参照）
+## Phase 1 完了状況（2026年2月）
+
+| 項目 | 状態 |
+|------|------|
+| 開示ページ・フッター・サイトマップ | ✅ 完了 |
+| 開示文 49記事 + スタイル（小さい・グレー） | ✅ 完了 |
+| 書籍系6記事の Amazon リンク | ✅ 完了（best-career-books 含む） |
+| ツール系2記事（headphones, desk-setup） | ✅ 完了 |
+| ハウツー5記事の推奨書籍（wealth-average-income 等） | ✅ 完了 |
+| UTM 設計・トラッキングテンプレート | ✅ 完了 |
+| laptop-stands / blue-light / desk-lamps 記事 | 該当スラグなし → 対象外 |
 
 ---
 
-## Week 3 実装
+## Phase 1 残タスク（任意）
 
-- [ ] 開示文: Tier 2 前半16記事
-- [ ] ツール系2記事: headphones, desk-setup（standing desks）
-- [ ] ハウツー5記事: 上表から1–2冊ずつ推奨書籍追加
+- [x] **ハウツー4記事に書籍リンク追加**（2026年2月完了）  
+  - `handle-being-passed-over-for-promotion`：*So Good They Can't Ignore You*（Cal Newport）  
+  - `know-if-youre-growing`：*Designing Your Life*（Bill Burnett & Dave Evans）  
+  - `investment-platforms-beginners`：*The Simple Path to Wealth*（JL Collins）  
+  - `reading-habits-stick`：*Make Time*（Jake Knapp & John Zeratsky）  
+- [ ] **QA（推奨）**  
+  - 全 Amazon リンクのクリック動作確認  
+  - 開示文の表示・一貫性確認  
+  - モバイル表示確認  
+- [x] **Amazon Associates 申請**（申請済み）
 
 ---
 
-## Week 4 実装
+## Week 2 残り作業（完了済み）
 
-- [ ] 開示文: Tier 2 後半17記事（全50記事完了）
-- [ ] 書籍系2記事: behavior-change, focus books
-- [ ] ツール系3記事: laptop-stands, blue-light-glasses, desk-lamps（該当スラグがあれば）
-- [ ] ハウツー5記事: 残りの書籍推奨
-- [ ] QA: 全 Amazon リンク動作・開示一貫性・モバイル表示
+- [x] 書籍系3記事の既存 Amazon リンク確認・linkId/UTM 付与
+- [x] UTM 設計ドキュメント確認（`docs/UTM-AFFILIATE-PARAMS.md`）
+- [x] トラッキングスプレッドシート作成（列は `docs/AFFILIATE-TRACKING-TEMPLATE.md` 参照）
+
+---
+
+## Week 3 実装（完了済み）
+
+- [x] 開示文: Tier 2 前半16記事
+- [x] ツール系2記事: headphones, desk-setup（standing desks）
+- [x] ハウツー5記事: 上表から1–2冊ずつ推奨書籍追加
+
+---
+
+## Week 4 実装（完了済み）
+
+- [x] 開示文: Tier 2 後半17記事（全49記事に開示＋スタイル）
+- [x] 書籍系2記事: behavior-change, focus books
+- [x] ツール系3記事: 該当スラグなしのためスキップ
+- [x] ハウツー5記事: 推奨書籍追加（上記「残タスク」の4記事は任意）
+- [ ] QA: 全 Amazon リンク動作・開示一貫性・モバイル表示（推奨）
 
 ---
 

@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You're standing in the grocery store, holding two jars of pasta sauce. One costs $3.99. The other costs $5.49. They're basically the same, but you spend two minutes analyzing the price-per-ounce, reading ingredients, calculating whether the extra $1.50 is worth it.
 

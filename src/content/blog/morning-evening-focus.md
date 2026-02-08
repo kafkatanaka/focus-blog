@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You've been told your whole life that successful people wake up at 5am. That the early bird gets the worm. That morning routines are the key to productivity. So you set your alarm earlier, drag yourself out of bed, and try to do your most important work before breakfast. Your brain feels like mud. By the time you actually feel alert—around 11am or 2pm or even 8pm—your "productive hours" are supposedly over.
 
@@ -117,4 +117,4 @@ The hardest case is when your chronotype is severely mismatched with your role. 
 
 ## The Takeaway
 
-Your brain has peak performance hours determined by genetics, not discipline. Fighting your chronotype doesn't make you more productive—it makes you perpetually tired and underperforming. The solution isn't to train yourself to focus at the "right" time; it's to identify when you actually think best and build your schedule around those hours. Track your real energy patterns for two weeks, protect your peak hours for deep work, and match task difficulty to your natural cognitive curve. You'll accomplish more while feeling less exhausted—not because you're working harder, but because you're finally working with your biology instead of against it.
+Your brain has peak performance hours determined by genetics, not discipline. Fighting your chronotype doesn't make you more productive—it makes you perpetually tired and underperforming. The solution isn't to train yourself to focus at the "right" time; it's to identify when you actually think best and build your schedule around those hours. Track your real energy patterns for two weeks, protect your peak hours for deep work, and match task difficulty to your natural cognitive curve. You'll accomplish more while feeling less exhausted—not because you're working harder, but because you're finally working with your biology instead of against it. For how sleep and peak hours affect career and investment decisions, see [How Sleep Quality Affects Your Career and Investments](/sleep-quality-career-investments).

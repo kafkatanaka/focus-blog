@@ -12,7 +12,7 @@ ads: true
 affiliateDisclosure: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 After watching my ability to concentrate erode over five years of constant notifications and context-switching, I finally understood: this wasn't a personal failure. Our attention has been systematically hijacked by an ecosystem designed to fragment it. Reading these books helped me rebuild what I'd lost—the ability to think deeply, work meaningfully, and actually finish what I start.
 

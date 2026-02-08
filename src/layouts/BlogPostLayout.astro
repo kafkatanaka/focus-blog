@@ -30,6 +30,19 @@ const { Content } = Astro.props;
     <div class="prose prose-lg max-w-none">
       <Content />
     </div>
+    <style is:global>
+      .prose .affiliate-disclosure {
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+      .prose .affiliate-disclosure a {
+        color: #4b5563;
+        text-decoration: underline;
+      }
+      .prose .affiliate-disclosure a:hover {
+        color: #374151;
+      }
+    </style>
 
     <!-- Bottom Ad -->
     <AdSense slot="bottom" />

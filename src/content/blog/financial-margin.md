@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Your income is solid. You're not irresponsible with money. Yet somehow, every unexpected expense feels like a crisis. A car repair, a medical bill, even a friend's wedding creates financial stress that ripples through your life for weeks. You're not broke, but you have no margin for error.
 

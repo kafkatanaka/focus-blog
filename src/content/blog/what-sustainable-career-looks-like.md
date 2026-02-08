@@ -11,7 +11,7 @@ draft: false
 ads: true
 ---
 
-*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 You're productive, respected, and advancing in your career. You're also exhausted, resentful, and starting to wonder how long you can keep this pace. Everyone says you're doing great. You feel like you're slowly breaking down. You tell yourself it'll get easier once you reach the next level, but you suspect that's not true.
 
