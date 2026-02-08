@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You're standing in the grocery store, holding two jars of pasta sauce. One costs $3.99. The other costs $5.49. They're basically the same, but you spend two minutes analyzing the price-per-ounce, reading ingredients, calculating whether the extra $1.50 is worth it.
 
 Meanwhile, you're paying $180/month for subscriptions you barely use and didn't think twice about renewing.

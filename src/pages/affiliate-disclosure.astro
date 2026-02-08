@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Affiliate Disclosure"
+  description="The Focus Dividend participates in affiliate programs. We may earn a commission when you click or purchase through our links. Full disclosure and how we choose partners."
+>
+  <Header />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <article class="prose prose-lg max-w-none">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Affiliate Disclosure
+      </h1>
+      <p class="mt-4 text-gray-600 leading-relaxed">
+        The Focus Dividend may earn a commission when you click on links or make a purchase through our site. This comes at no extra cost to you and helps us keep the site running.
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-gray-900">Programs We Participate In</h2>
+      <ul class="mt-2 list-disc pl-6 space-y-1 text-gray-600">
+        <li>
+          <strong>ShareASale (AWIN)</strong> — We are a participant in the ShareASale/AWIN affiliate program. Our ShareASale publisher ID is <strong>2763518</strong>. When you click a merchant link on our site (e.g., YNAB, Betterment, Truebill/Rocket Money), we may earn a commission if you sign up or make a qualifying purchase.
+        </li>
+        <li>
+          <strong>Amazon Associates</strong> — We participate in the Amazon Services LLC Associates Program. As an Amazon Associate we earn from qualifying purchases made through our links to Amazon and affiliated sites.
+        </li>
+        <li>
+          <strong>Personal Capital / Empower</strong> — We may use affiliate links to Personal Capital (now Empower) and similar financial tools. We only recommend services we believe are useful for our readers.
+        </li>
+      </ul>
+
+      <h2 class="mt-8 text-xl font-semibold text-gray-900">How We Use Affiliate Links</h2>
+      <p class="mt-2 text-gray-600 leading-relaxed">
+        We only link to products and services that fit the topic of the article and that we believe can genuinely help you. We do not recommend something solely for commission. When we compare apps, books, or tools, our rankings and opinions are our own.
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-gray-900">Your Privacy</h2>
+      <p class="mt-2 text-gray-600 leading-relaxed">
+        Clicking an affiliate link may set a cookie or send referral data to the merchant so they can attribute the sale. The merchant’s privacy policy applies to any data they collect when you visit their site.
+      </p>
+
+      <p class="mt-8 text-sm text-gray-500">
+        Last updated: February 2026. If you have questions about this disclosure, you can reach us through the contact information on the site.
+      </p>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

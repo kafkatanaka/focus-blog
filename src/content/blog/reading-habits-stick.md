@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You have seventeen unread books on your nightstand. You bought them excited to read them. You started three of them. You finished none. Every night you mean to read, and every night you end up scrolling your phone instead. Reading feels like something you used to do, back when you had time and attention span.
 
 The books aren't the problem. Your brain has been trained to expect constant stimulation, and reading can't compete with the internet. You need to rebuild the capacity for sustained attention before any reading habit will stick.

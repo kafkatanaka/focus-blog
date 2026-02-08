@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You finish a productive day and feel good about yourself. You have an unproductive day and feel worthless. Your mood tracks your output like a graph, and rest feels like evidence that you're not trying hard enough.
 
 You haven't built a work ethic. You've built a self-worth dependency on productivity that will eventually break you.
@@ -132,6 +134,8 @@ Many people find this exercise uncomfortable because the answers reveal how much
 Research suggests that values clarification exercises—explicitly articulating what matters to you—can motivate behavior change by highlighting the gap between current behavior and desired values. The question isn't whether you can let go of output-worth, but whether you can afford not to.
 
 Write this out: "If I genuinely believed my worth was independent of my output, I would..." List at least ten specific behaviors or choices. Then ask: what's preventing me from making even one of these choices right now? Usually the answer is: only the belief itself. The belief is protecting you from nothing and costing you everything.
+
+**Further reading:** For a deeper reframe on time and worth, [*Four Thousand Weeks*](https://www.amazon.com/dp/0374159122?tag=focusdividend-22&linkCode=as2&linkId=stop-measuring-worth-by-output-four-thousand-weeks) by Oliver Burkeman is worth reading.
 
 ## The Takeaway
 

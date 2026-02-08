@@ -12,6 +12,8 @@ ads: true
 affiliateDisclosure: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 Most behavior change books give you a burst of motivation that fades in two weeks. You read about someone who lost 100 pounds or built a million-dollar business, feel inspired, make dramatic resolutions, fail by Thursday, and feel worse about yourself than before you started.
 
 Books that create lasting change don't rely on motivation—they teach you how human behavior actually works. They explain why willpower fails, how context shapes decisions, and how to design environments where good behavior is inevitable. After reading them, you don't need inspiration. You have systems.
@@ -65,7 +67,7 @@ Start with **Atomic Habits** if you want a complete system for building any habi
 
 ## The Rankings: Books That Actually Create Lasting Change
 
-### 1. **[Atomic Habits](https://www.amazon.co.jp/dp/0735211299/?tag=focusdividend-22)** by James Clear
+### 1. **[Atomic Habits](https://www.amazon.com/dp/0735211299/?tag=focusdividend-22)** by James Clear
 
 ![Atomic Habits book cover](/images/books/best-behavior-change-books-book-1.webp)
 
@@ -119,7 +121,7 @@ Also, some behaviors don't fit the habit model. One-time decisions (taking a new
 
 **Follow-up reading**: After this, read **Tiny Habits** by BJ Fogg for an alternative approach, or **The Power of Habit** by Charles Duhigg for deeper neuroscience on how habits form in the brain.
 
-### 2. **[The Power of Habit](https://www.amazon.co.jp/dp/0812981609/?tag=focusdividend-22)** by Charles Duhigg
+### 2. **[The Power of Habit](https://www.amazon.com/dp/0812981609/?tag=focusdividend-22)** by Charles Duhigg
 
 ![The Power of Habit book cover](/images/books/best-behavior-change-books-book-2.webp)
 
@@ -171,7 +173,7 @@ Also, some habits don't have clear rewards. Depression-driven behaviors (lying i
 
 **Follow-up reading**: After this, read **Atomic Habits** for a more tactical system, or **Hooked** by Nir Eyal for how companies use habit loops to create product addiction.
 
-### 3. **[Tiny Habits](https://www.amazon.co.jp/dp/0358003326/?tag=focusdividend-22)** by BJ Fogg
+### 3. **[Tiny Habits](https://www.amazon.com/dp/0358003326/?tag=focusdividend-22)** by BJ Fogg
 
 ![Tiny Habits book cover](/images/books/best-behavior-change-books-book-3.webp)
 
@@ -226,7 +228,7 @@ Also, some goals genuinely require scale from the start. Training for a marathon
 
 **Follow-up reading**: After this, read **Atomic Habits** for scaling up tiny habits into significant behavior change, or **Hooked** by Nir Eyal for understanding how habit-forming products use Fogg's model.
 
-### 4. **[Thinking, Fast and Slow](https://www.amazon.co.jp/dp/0374533555/?tag=focusdividend-22)** by Daniel Kahneman
+### 4. **[Thinking, Fast and Slow](https://www.amazon.com/dp/0374533555/?tag=focusdividend-22)** by Daniel Kahneman
 
 ![Thinking, Fast and Slow book cover](/images/books/best-behavior-change-books-book-4.webp)
 
@@ -278,7 +280,7 @@ Also, the book is depressing if you read it wrong. You'll finish thinking "I'm h
 
 **Follow-up reading**: After this, read **Nudge** by Richard Thaler and Cass Sunstein for how to apply behavioral economics to decision-making, or **Predictably Irrational** by Dan Ariely for more accessible coverage of similar topics.
 
-### 5. **[Switch](https://www.amazon.co.jp/dp/0385528752/?tag=focusdividend-22)** by Chip Heath and Dan Heath
+### 5. **[Switch](https://www.amazon.com/dp/0385528752/?tag=focusdividend-22)** by Chip Heath and Dan Heath
 
 ![Switch book cover](/images/books/best-behavior-change-books-book-5.webp)
 
@@ -339,7 +341,7 @@ Also, some changes genuinely require Rider control—learning complex skills, ma
 
 ## Honorable Mentions Worth Your Time
 
-### [The Willpower Instinct](https://www.amazon.co.jp/dp/1583335080/?tag=focusdividend-22) by Kelly McGonigal
+### [The Willpower Instinct](https://www.amazon.com/dp/1583335080/?tag=focusdividend-22) by Kelly McGonigal
 
 ![The Willpower Instinct book cover](/images/books/best-behavior-change-books-book-6.webp)
 
@@ -349,7 +351,7 @@ Also, some changes genuinely require Rider control—learning complex skills, ma
 
 **Best for**: People who need willpower tactics for specific situations (resisting cravings, staying focused during work, avoiding impulse purchases) rather than building habits.
 
-### [Hooked](https://www.amazon.co.jp/dp/1591847788/?tag=focusdividend-22) by Nir Eyal
+### [Hooked](https://www.amazon.com/dp/1591847788/?tag=focusdividend-22) by Nir Eyal
 
 ![Hooked book cover](/images/books/best-behavior-change-books-book-7.webp)
 
@@ -359,7 +361,7 @@ Also, some changes genuinely require Rider control—learning complex skills, ma
 
 **Best for**: People struggling with tech addiction or anyone interested in behavioral design and product psychology.
 
-### [Mindset](https://www.amazon.co.jp/dp/0345472322/?tag=focusdividend-22) by Carol Dweck
+### [Mindset](https://www.amazon.com/dp/0345472322/?tag=focusdividend-22) by Carol Dweck
 
 ![Mindset book cover](/images/books/best-behavior-change-books-book-8.webp)
 

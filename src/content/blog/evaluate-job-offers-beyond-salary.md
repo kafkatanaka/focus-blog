@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You have two job offers. One pays 20% more. The other has better culture and learning opportunities. Everyone tells you to take the money.
 
 So you do. And six months in, you realize you've made a mistake. The higher salary isn't worth the terrible manager, the bureaucratic environment, or the work that doesn't develop skills you care about.

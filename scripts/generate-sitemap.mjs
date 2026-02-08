@@ -28,7 +28,7 @@ function parseTags(content) {
 }
 
 // 固定ページ（trailingSlash: 'never' に合わせる）
-const urls = ["/", "/framework", "/articles"];
+const urls = ["/", "/framework", "/articles", "/affiliate-disclosure"];
 
 for (const cat of CATEGORIES) {
   urls.push(`/${cat}`);

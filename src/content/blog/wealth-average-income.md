@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You've read the wealth-building advice. Invest early, live below your means, compound your returns. It all makes sense in theory. But the examples always feature people with high incomes, inheritance, or lucky breaks. You're earning an average salary, and the math feels impossible.
 
 Building wealth on an average income isn't about finding shortcuts or getting lucky. It's about understanding that time and consistency beat income level almost every time.
@@ -126,6 +128,8 @@ The other reason to embrace boring repetition is that excitement usually means r
 A practical way to handle the boredom: review your investments once per quarter, confirm contributions are happening automatically, maybe rebalance once yearly, then ignore them. Don't check them daily or weekly. Don't react to market movements. Just let the boring, repetitive process work. The less you interact with your wealth-building system, the better it usually performs.
 
 The psychological challenge is that boring feels like you're not doing enough, not being smart enough, missing opportunities. But this feeling is usually wrong. The average-income workers who build substantial wealth are almost always the ones who picked a boring, consistent strategy and stuck with it for decades, not the ones who tried to find clever shortcuts.
+
+**Further reading:** For a no-nonsense framework that matches this approach, many readers find [*The Simple Path to Wealth*](https://www.amazon.com/dp/1533667926?tag=focusdividend-22&linkCode=as2&linkId=wealth-average-income-simple-path) by JL Collins useful.
 
 ## The Takeaway
 

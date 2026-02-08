@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You sit down to work. Within minutes, you've checked your phone twice, opened three browser tabs, and convinced yourself you need to "research" something that has nothing to do with your actual task. It's not laziness. It's that your attention system is fighting an unwinnable war.
 
 **The problem isn't your willpower—it's that you're trying to use industrial-age focus strategies in an attention-economy world.**

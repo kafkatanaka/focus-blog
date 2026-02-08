@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You accepted the job that paid 20% more than the other offer. Six months later, you'd gladly take a 20% pay cut to get out.
 
 The money looked good on paper. But you didn't account for what it costs to spend 40+ hours a week in an environment that makes you miserable.

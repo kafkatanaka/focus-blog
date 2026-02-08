@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You finish a day where nothing particularly hard happened. No major crises, no impossible deadlines, no conflicts. Just normal meetings and tasks. But you're completely drained.
 
 You look at what you actually accomplished and think: why am I so tired? This shouldn't be that hard.

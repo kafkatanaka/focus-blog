@@ -12,6 +12,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 Your desk setup is either helping you concentrate or sabotaging you every fifteen minutes. There's no neutral ground here.
 
 The difference between a setup that supports deep work and one that fragments your attention comes down to three things: sensory management, cognitive offloading, and transition friction. Get these right, and you can work for hours without willpower battles. Get them wrong, and you'll check your phone every time you hit a hard problem.
@@ -59,6 +61,8 @@ The standing desk + treadmill combination has gotten popular lately. Walking whi
 The cost ranges include desk, monitor(s), chair, and basic peripherals but not the computer itself. The "focus impact" rating assumes you're doing generative thinking work, not monitoring or reference-heavy tasks.
 
 What matters most isn't the specific gear but how the setup manages your attention. A $500 setup intentionally designed for concentration will outperform a $5,000 setup that's accidentally optimized for distraction. The key is matching the environmental design to your actual cognitive needs, not to productivity theater.
+
+Monitor lights and laptop stands that support focus—like the [BenQ ScreenBar](https://www.amazon.com/dp/B07L9GQ1QN?tag=focusdividend-22&linkCode=as2&linkId=desk-setup-concentration-screenbar)—are also available on Amazon if you prefer to shop there.
 
 ## The Rankings: What Actually Works
 

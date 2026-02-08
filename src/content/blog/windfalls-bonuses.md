@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You get a bonus, tax refund, inheritance, or unexpected payment. For a moment, you feel financially secure. Then the money disappears into your regular spending, and three months later you can't remember what you did with it. You know you should have used it "better," but you're not sure what better even means.
 
 Windfalls aren't just about the money. They're rare opportunities to make disproportionate progress on financial goals that normally take years.

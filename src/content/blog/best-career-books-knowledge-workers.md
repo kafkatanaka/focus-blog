@@ -62,7 +62,7 @@ If you're early career questioning "follow your passion" advice, start with "So 
 
 ## The Rankings: Books That Actually Help Knowledge Workers
 
-### 1. **[So Good They Can't Ignore You](https://www.amazon.co.jp/dp/1455509124/?tag=focusdividend-22)** by Cal Newport
+### 1. **[So Good They Can't Ignore You](https://www.amazon.com/dp/1455509124/?tag=focusdividend-22)** by Cal Newport
 
 ![So Good They Can't Ignore You book cover](/images/books/best-career-books-knowledge-workers-book-1.webp)
 
@@ -92,7 +92,7 @@ If you're early career questioning "follow your passion" advice, start with "So 
 
 **Follow-up reading**: After this, read "Deep Work" (also by Newport) to learn how to actually build those rare skills through focused practice, or "The Effective Executive" for strategic decision-making once you have career capital.
 
-### 2. **[Deep Work](https://www.amazon.co.jp/dp/1455586692/?tag=focusdividend-22)** by Cal Newport
+### 2. **[Deep Work](https://www.amazon.com/dp/1455586692/?tag=focusdividend-22)** by Cal Newport
 
 ![Deep Work book cover](/images/books/best-career-books-knowledge-workers-book-2.webp)
 
@@ -122,7 +122,7 @@ If you're early career questioning "follow your passion" advice, start with "So 
 
 **Follow-up reading**: After this, read "Make Time" by Knapp and Zeratsky for more flexible tactics that work in team environments, or "Indistractable" by Nir Eyal for managing external and internal distractions.
 
-### 3. **[The Effective Executive](https://www.amazon.co.jp/dp/0060833459/?tag=focusdividend-22)** by Peter Drucker
+### 3. **[The Effective Executive](https://www.amazon.com/dp/0060833459/?tag=focusdividend-22)** by Peter Drucker
 
 ![The Effective Executive book cover](/images/books/best-career-books-knowledge-workers-book-3.webp)
 
@@ -152,7 +152,7 @@ If you're early career questioning "follow your passion" advice, start with "So 
 
 **Follow-up reading**: After this, read "High Output Management" by Andy Grove for more tactical management advice, or "The First 90 Days" by Michael Watkins for navigating transitions and new roles.
 
-### 4. **[The Alliance](https://www.amazon.co.jp/dp/1625275773/?tag=focusdividend-22)** by Reid Hoffman, Ben Casnocha, and Chris Yeh
+### 4. **[The Alliance](https://www.amazon.com/dp/1625275773/?tag=focusdividend-22)** by Reid Hoffman, Ben Casnocha, and Chris Yeh
 
 ![The Alliance book cover](/images/books/best-career-books-knowledge-workers-book-4.webp)
 
@@ -182,7 +182,7 @@ If you're early career questioning "follow your passion" advice, start with "So 
 
 **Follow-up reading**: After this, read "The Startup of You" (also by Hoffman and Casnocha) for more on managing your career like a startup, or "Designing Your Life" by Burnett and Evans for frameworks on choosing between career paths.
 
-### 5. **[Range](https://www.amazon.co.jp/dp/0735214484/?tag=focusdividend-22)** by David Epstein
+### 5. **[Range](https://www.amazon.com/dp/0735214484/?tag=focusdividend-22)** by David Epstein
 
 ![Range book cover](/images/books/best-career-books-knowledge-workers-book-5.webp)
 
@@ -214,19 +214,19 @@ If you're early career questioning "follow your passion" advice, start with "So 
 
 ## Honorable Mentions Worth Your Time
 
-### [The Startup of You](https://www.amazon.co.jp/dp/0307888908/?tag=focusdividend-22) by Reid Hoffman and Ben Casnocha
+### [The Startup of You](https://www.amazon.com/dp/0307888908/?tag=focusdividend-22) by Reid Hoffman and Ben Casnocha
 
 ![The Startup of You book cover](/images/books/best-career-books-knowledge-workers-book-6.webp)
 
 This didn't make the top five because it overlaps significantly with "The Alliance" and is more tactical than strategic. However, if you want concrete advice on network building, taking intelligent risks, and adapting to change, this is excellent. Hoffman argues you should manage your career like a startup: always in beta, building network relationships as assets, and taking small risks to create opportunities. The ABZ planning framework (Plan A is your current path, Plan B is your pivot if A doesn't work, Plan Z is your fallback) is useful for navigating career uncertainty. I used the networking chapter's advice to build genuine professional relationships (not transactional networking) which led directly to my last two job opportunities. Worth reading after "The Alliance" if you want implementation tactics.
 
-### [The Effective Manager](https://www.amazon.co.jp/dp/1119244609/?tag=focusdividend-22) by Mark Horstman
+### [The Effective Manager](https://www.amazon.com/dp/1119244609/?tag=focusdividend-22) by Mark Horstman
 
 ![The Effective Manager book cover](/images/books/best-career-books-knowledge-workers-book-7.webp)
 
 This is the best tactical management book for knowledge workers transitioning into management. It didn't make the main list because it's specifically for managers, not all knowledge workers. But if you're managing people or about to, this book provides clear, actionable frameworks: the one-on-one structure, how to give feedback, how to delegate, and how to coach performance. Horstman is extremely prescriptive (do exactly this, say exactly these words) which some find limiting but I found helpful when I had no idea what managers actually do. The weekly one-on-one format (30 minutes: 10 for their agenda, 10 for your agenda, 10 for growth/coaching) transformed my management effectiveness. Read this before you become a manager or within your first six months of managing.
 
-### [Atomic Habits](https://www.amazon.co.jp/dp/0735211299/?tag=focusdividend-22) by James Clear
+### [Atomic Habits](https://www.amazon.com/dp/0735211299/?tag=focusdividend-22) by James Clear
 
 ![Atomic Habits book cover](/images/books/best-career-books-knowledge-workers-book-8.webp)
 

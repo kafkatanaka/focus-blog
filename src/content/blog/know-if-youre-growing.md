@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You've been in your role for three years. You're better at it than when you started. You know the systems, the people, the unwritten rules. You're efficient.
 
 But when you're honest with yourself, you're not sure you're actually growing. You're just faster at doing the same things. You haven't learned anything fundamentally new in months. You could probably do this job in your sleep.

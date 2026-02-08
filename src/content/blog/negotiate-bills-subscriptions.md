@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You're paying $180 monthly for internet, $150 for your phone plan, and $50 for insurance you barely understand. You know these prices are probably negotiable, but the thought of calling customer service, waiting on hold, and arguing with representatives feels exhausting. So you keep paying.
 
 Most recurring bills are negotiable, and the companies expect negotiation. By not asking, you're leaving hundreds or thousands of dollars on the table annually.

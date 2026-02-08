@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You download the budgeting app everyone recommends. You spend an evening categorizing expenses, setting limits, planning your spending. It feels good—organized, responsible, adult.
 
 Two weeks later, you're $200 over in "dining out" and you've stopped logging transactions because it's annoying and you already know you failed.

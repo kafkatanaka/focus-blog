@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You walked into your performance review expecting "meets expectations" and walked out with "needs improvement." Your manager listed concerns you didn't see coming. Now you're sitting at your desk, replaying the conversation, feeling a mix of shame, confusion, and anger.
 
 A bad review isn't the end of your career—but how you respond to it determines whether it's a turning point or a downward spiral.
@@ -92,6 +94,8 @@ Ask for incremental feedback. Don't wait three months to find out if your improv
 Be patient with the process but not passive. Rebuilding credibility takes time. Your manager's perception won't shift overnight, especially if they've observed concerning patterns over months. But patience doesn't mean passivity—it means consistently demonstrating change while accepting that trust is rebuilt gradually.
 
 Celebrate small wins privately. When you handle something better than you would have before, acknowledge it. Improvement is hard work, and you need to notice progress even when others haven't yet. This isn't about lowering standards—it's about sustaining motivation through a difficult period.
+
+**Further reading:** For giving and receiving feedback more effectively, [*Radical Candor*](https://www.amazon.com/dp/1250235375?tag=focusdividend-22&linkCode=as2&linkId=recover-from-bad-performance-review-radical-candor) by Kim Scott is a practical read.
 
 ## The Takeaway
 

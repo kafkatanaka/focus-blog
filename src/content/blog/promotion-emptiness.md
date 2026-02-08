@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You finally got the promotion. The title you wanted. The raise you worked toward. You smile, accept congratulations, update LinkedIn.
 
 Then, alone with your thoughts, you feel... nothing. Or worse, a quiet sense of dread.

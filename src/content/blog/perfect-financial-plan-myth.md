@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You've been researching investment strategies for six months. You've read articles comparing index funds, analyzed expense ratios, debated tax-advantaged accounts, and calculated optimal asset allocations. You know a lot about investing now. But you haven't actually invested a single dollar because you're not sure you've found the perfect approach yet.
 
 **Waiting for the perfect financial plan guarantees you'll never start building wealth. Good enough executed beats perfect planned every single time.**

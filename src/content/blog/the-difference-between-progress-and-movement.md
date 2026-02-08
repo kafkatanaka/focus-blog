@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You had a full day. Back-to-back tasks, a cleared inbox, three things checked off the list. You're tired in the way that feels good — the kind of tired that comes from actually doing stuff.
 
 But here's the thing. If someone asked you tonight, "Are you closer to where you want to be than you were this morning?" — you might not be able to answer yes.

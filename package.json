@@ -8,7 +8,8 @@
     "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "export-titles": "node scripts/export-article-titles.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",

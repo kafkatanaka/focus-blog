@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You got the job offer. The number is lower than you hoped but higher than you currently make. Your brain immediately starts rationalizing: "It's a good company. I should just be grateful. Negotiating might make them rescind the offer."
 
 You accept, and three months later you learn your colleague in the same role makes 20% more because they asked.
@@ -94,6 +96,8 @@ Prepare for silence. After you make your counteroffer, stop talking. The first p
 Have a walk-away number before the conversation. Know the minimum you'll accept and be genuinely prepared to decline offers below it. This isn't about posturing—it's about honoring your own boundaries. When you know your floor, you negotiate with more confidence because you're not desperate.
 
 Remember that most negotiation happens over email, not in real-time conversation. This is actually an advantage. You can draft, revise, and refine your response. You can consult notes or get input from others. You don't have to respond immediately. Use this asynchronous format to your advantage by being thoughtful and precise.
+
+**Further reading:** For negotiation tactics that work in real conversations, [*Never Split the Difference*](https://www.amazon.com/dp/0062407805?tag=focusdividend-22&linkCode=as2&linkId=negotiate-salary-never-split-the-difference) by Chris Voss is highly recommended.
 
 ## The Takeaway
 

@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You've read about the perfect morning routine: wake at 5am, meditate, journal, exercise, eat a healthy breakfast, review your goals. You've downloaded an app to track it all. You followed the routine for exactly three days before hitting snooze became easier than opening the app.
 
 The problem isn't your willpower. It's that most morning routine apps are designed by people who've never struggled with mornings. They assume you just need a checklist when what you actually need is a system that works when you're groggy, running late, or didn't sleep well.
@@ -432,6 +434,8 @@ After 30 days of actual execution, you'll have data about what works and what do
 - **Parents**: Use Routinery's timeline to see what you can actually fit before kids wake up. Many parents wake 30-60 minutes before kids for personal time—the timeline shows whether this is realistic or fantasy. Also accept that routines will be interrupted, so build flexibility into your expectations.
 
 - **People with ADHD**: Use visual apps (Routinery, Structured) to make time concrete instead of abstract. Set up your environment the night before so morning routine execution requires minimal decisions. Consider whether afternoon or evening routines work better if mornings are too chaotic for consistent structure.
+
+**Further reading:** If you prefer a book-first approach to morning routines, [*The Miracle Morning*](https://www.amazon.com/dp/0979019710?tag=focusdividend-22&linkCode=as2&linkId=morning-routine-apps-comparison-miracle-morning) by Hal Elrod is a popular starting point.
 
 ## The Takeaway
 

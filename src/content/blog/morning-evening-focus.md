@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You've been told your whole life that successful people wake up at 5am. That the early bird gets the worm. That morning routines are the key to productivity. So you set your alarm earlier, drag yourself out of bed, and try to do your most important work before breakfast. Your brain feels like mud. By the time you actually feel alert—around 11am or 2pm or even 8pm—your "productive hours" are supposedly over.
 
 **The problem isn't your discipline. It's that you're fighting your biology, and biology always wins.**

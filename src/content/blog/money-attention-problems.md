@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You forgot to pay the electric bill. Again. Not because you don't have the money—you do. Not because you're irresponsible—you're managing complex projects at work. You forgot because it slipped through the cracks of your fractured attention, along with the insurance renewal, the subscription you meant to cancel, and the reimbursement you never submitted.
 
 Your financial problems aren't about money. They're about the forty browser tabs open in your brain, and the bill notification that arrived during a meeting and disappeared into the void.

@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 You've been doing everything right. Working hard, delivering results, going above and beyond. You've been told you're doing great. You thought the promotion was obvious.
 
 Then they give it to someone else. Maybe someone less experienced. Maybe someone who just joined. Maybe someone whose work you know isn't as good as yours.

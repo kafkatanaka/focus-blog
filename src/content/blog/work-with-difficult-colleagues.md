@@ -11,6 +11,8 @@ draft: false
 ads: true
 ---
 
+*Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our [Affiliate Disclosure](/affiliate-disclosure/) for details.*
+
 Your colleague interrupts you in every meeting. Another takes credit for your ideas. A third creates chaos by missing deadlines and expecting everyone else to clean up the mess. You can't avoid these people—they're on your team, and you need to work with them to get anything done.
 
 The hardest part of most jobs isn't the work—it's the people who make the work harder than it needs to be.
