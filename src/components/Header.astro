@@ -1,67 +1,71 @@
 ---
 import SearchModal from './SearchModal.astro';
 const currentPath = Astro.url.pathname;
+
+const NAV_TABS = [
+  { href: '/framework', label: 'Framework' },
+  { href: '/focus', label: 'Focus' },
+  { href: '/work', label: 'Work' },
+  { href: '/money', label: 'Money' },
+  { href: '/habits', label: 'Habits' },
+] as const;
 ---
 
-<header class="border-b border-gray-200 bg-white">
-  <nav class="mx-auto flex max-w-readable items-center justify-between px-4 py-4 sm:px-6" aria-label="Main navigation">
-    <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700">
-      The Focus Dividend
-    </a>
-    <div class="flex items-center gap-6">
-    <ul class="flex gap-6 text-sm">
-      <li>
-        <a
-          href="/framework"
-          class:list={[currentPath === '/framework' && 'text-gray-900 font-medium', currentPath !== '/framework' && 'text-gray-600 hover:text-gray-900']}
-        >
-          Framework
-        </a>
-      </li>
-      <li>
-        <a
-          href="/focus"
-          class:list={[currentPath === '/focus' && 'text-gray-900 font-medium', currentPath !== '/focus' && 'text-gray-600 hover:text-gray-900']}
-        >
-          Focus
-        </a>
-      </li>
-      <li>
-        <a
-          href="/work"
-          class:list={[currentPath === '/work' && 'text-gray-900 font-medium', currentPath !== '/work' && 'text-gray-600 hover:text-gray-900']}
-        >
-          Work
-        </a>
-      </li>
-      <li>
-        <a
-          href="/money"
-          class:list={[currentPath === '/money' && 'text-gray-900 font-medium', currentPath !== '/money' && 'text-gray-600 hover:text-gray-900']}
-        >
-          Money
-        </a>
-      </li>
-      <li>
-        <a
-          href="/habits"
-          class:list={[currentPath === '/habits' && 'text-gray-900 font-medium', currentPath !== '/habits' && 'text-gray-600 hover:text-gray-900']}
-        >
-          Habits
-        </a>
-      </li>
-    </ul>
-    <button
-      type="button"
-      onclick="window.openSearchModal?.()"
-      class="rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-      aria-label="Search articles"
-    >
-      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
-    </button>
+<div class="sticky top-0 z-40 bg-white border-b border-gray-200">
+  <header class="bg-white">
+    <nav class="mx-auto flex max-w-readable items-center justify-between px-4 py-4 sm:px-6" aria-label="Main navigation">
+      <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700">
+        The Focus Dividend
+      </a>
+      <button
+        type="button"
+        onclick="window.openSearchModal?.()"
+        class="rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+        aria-label="Search articles"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- カテゴリ横スクロールタブ -->
+  <nav class="border-t border-gray-100 bg-gray-50/80" aria-label="Category navigation">
+    <div class="overflow-x-auto scrollbar-none scroll-smooth" tabindex="0">
+      <ul class="mx-auto flex min-w-0 max-w-readable items-center gap-1 px-4 py-2 sm:px-6 sm:gap-2" style="width: max-content;">
+        {NAV_TABS.map((tab) => {
+          const isActive = currentPath === tab.href || (tab.href !== '/framework' && currentPath.startsWith(tab.href + '/'));
+          return (
+            <li class="shrink-0">
+              <a
+                href={tab.href}
+                class:list={[
+                  'inline-block rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors',
+                  isActive
+                    ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-200'
+                    : 'text-gray-600 hover:bg-white/60 hover:text-gray-900'
+                ]}
+              >
+                {tab.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   </nav>
-</header>
+</div>
 <SearchModal />
+
+<style>
+  .scrollbar-none {
+    -webkit-overflow-scrolling: touch;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+</style>
