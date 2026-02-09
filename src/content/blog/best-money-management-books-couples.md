@@ -218,7 +218,7 @@ Also, Bach is relentlessly optimistic. He assumes your relationship is fundament
 
 **Follow-up reading:** After this, read **The Automatic Millionaire** (Bach's solo book) for deeper automation strategies, or **Your Money or Your Life** for a less consumption-focused approach to wealth building.
 
-### 4. **[Thriving in Love and Money](https://www.amazon.com/dp/1496438175?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-thriving-love)** by Shaunti Feldhahn and Jeff Feldhahn
+### 4. **[Thriving in Love and Money](https://www.amazon.com/dp/076423255X?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-thriving-love)** by Shaunti Feldhahn and Jeff Feldhahn
 
 ![Thriving in Love and Money book cover](/images/books/best-money-management-books-couples-book-4.webp)
 
@@ -338,7 +338,7 @@ The case studies are particularly illuminating—real couples navigating career/
 
 **Best for:** Couples facing major life transitions where money is one factor among many (career changes, relocation, kids, going back to school). Or therapists, counselors, and financial advisors working with couples who want to understand the research behind money and relationships.
 
-### [Financially Fearless](https://www.amazon.com/dp/1101984678?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-financially-fearless) by Alexa von Tobel
+### [Financially Fearless](https://www.amazon.com/dp/0385347618?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-financially-fearless) by Alexa von Tobel
 
 ![Financially Fearless book cover](/images/books/best-money-management-books-couples-book-7.webp)
 
