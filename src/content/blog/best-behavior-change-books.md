@@ -121,7 +121,7 @@ Also, some behaviors don't fit the habit model. One-time decisions (taking a new
 
 **Follow-up reading**: After this, read **Tiny Habits** by BJ Fogg for an alternative approach, or **The Power of Habit** by Charles Duhigg for deeper neuroscience on how habits form in the brain.
 
-### 2. **[The Power of Habit](https://www.amazon.com/dp/0812981609/?tag=focusdividend-22)** by Charles Duhigg
+### 2. **[The Power of Habit](https://www.amazon.com/Power-Habit-What-Life-Business/dp/081298160X?tag=focusdividend-22)** by Charles Duhigg
 
 ![The Power of Habit book cover](/images/books/best-behavior-change-books-book-2.webp)
 

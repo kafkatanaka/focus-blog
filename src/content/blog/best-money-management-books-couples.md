@@ -68,7 +68,7 @@ Start with **The 5 Money Personalities** if you're constantly fighting and need 
 
 ## The Rankings: Books That Actually Help Couples
 
-### 1. **[The 5 Money Personalities](https://www.amazon.com/dp/140020143X?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-5-money-personalities)** by Scott and Bethany Palmer
+### 1. **[The 5 Money Personalities](https://www.amazon.com/Money-Personalities-Speaking-Same-Language/dp/0849964784?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-5-money-personalities)** by Scott and Bethany Palmer
 
 ![The 5 Money Personalities book cover](/images/books/best-money-management-books-couples-book-1.webp)
 

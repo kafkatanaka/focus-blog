@@ -57,9 +57,28 @@ const { title, description, category, tags = [], ads = true, canonicalURL, ogIma
 
       {ads && <AdSense slot="4412571347" format="auto" />}
 
-      <div class="prose prose-lg prose-gray max-w-none prose-headings:font-serif prose-p:leading-relaxed prose-a:text-gray-900 prose-a:underline hover:prose-a:no-underline">
+      <div class="prose prose-lg prose-gray max-w-none prose-headings:font-serif prose-p:leading-relaxed prose-a:text-gray-900 prose-a:underline hover:prose-a:no-underline article-content">
         <slot />
       </div>
+
+      <style>
+        /* 書籍カバー画像: モバイルはコンテンツ幅の80%、デスクトップは程よい大きさに制限 */
+        .article-content :global(img[src*="/images/books/"]) {
+          display: block;
+          width: 80%;
+          max-width: 80%;
+          height: auto;
+          margin-left: auto;
+          margin-right: auto;
+          border-radius: 0.375rem;
+        }
+        @media (min-width: 640px) {
+          .article-content :global(img[src*="/images/books/"]) {
+            max-width: 320px;
+            width: auto;
+          }
+        }
+      </style>
 
       {ads && <AdSense slot="4412571347" format="auto" />}
 

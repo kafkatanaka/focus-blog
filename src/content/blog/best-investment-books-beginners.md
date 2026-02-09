@@ -293,7 +293,7 @@ Also, the path to financial independence requires a high savings rate (often 50%
 
 ## Honorable Mentions Worth Your Time
 
-### [The Four Pillars of Investing](https://www.amazon.com/dp/1264258399?tag=focusdividend-22&linkCode=as2&linkId=best-investment-books-beginners-four-pillars) by William Bernstein
+### [The Four Pillars of Investing](https://www.amazon.com/Four-Pillars-Investing-Second-Portfolio/dp/1264715919?tag=focusdividend-22&linkCode=as2&linkId=best-investment-books-beginners-four-pillars) by William Bernstein
 
 ![The Four Pillars of Investing book cover](/images/books/best-investment-books-beginners-book-6.webp)
 
