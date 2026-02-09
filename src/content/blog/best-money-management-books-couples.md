@@ -62,9 +62,9 @@ The book should also be readable for both partners. If it's too technical, the l
 | **The 5 Money Personalities** | Understanding your differences | Beginner | 224 pages | Know your money type, honor your partner's |
 | **Smart Couples Finish Rich** | Building wealth together systematically | Beginner | 320 pages | Automate everything, align on dreams |
 | **Thriving in Love and Money** | Faith-based communication framework | Beginner | 256 pages | Surface money fears, build new patterns |
-| **The Money Queen's Guide** | Women leading household finances | Beginner | 272 pages | Take control even if partner resists |
+| **Financial Intimacy for Couples** | When one partner is disengaged | Beginner | 240 pages | Build financial teamwork through vulnerability |
 
-**Start with *Money for Couples*** if you want a modern, psychology-based approach that lets you spend extravagantly on what you love. Then read *The 5 Money Personalities* if you're constantly fighting and need to understand why. Save *Thriving in Love and Money* if you're religious and want faith-integrated advice, or *The Money Queen's Guide* if one partner (usually the woman) is trying to engage a reluctant spouse.
+**Start with *Money for Couples*** if you want a modern, psychology-based approach that lets you spend extravagantly on what you love. Then read *The 5 Money Personalities* if you're constantly fighting and need to understand why. Save *Thriving in Love and Money* if you're religious and want faith-integrated advice, or *Financial Intimacy for Couples* if one partner is reluctant to engage in financial discussions.
 
 ## The Rankings: Books That Actually Help Couples
 
@@ -270,81 +270,77 @@ Also, the research is based on surveys, not longitudinal studies. The Feldhahns 
 
 **Follow-up reading**: After this, read **The 5 Love Languages** by Gary Chapman for broader relationship communication (he has a money-specific version too), or **Financial Peace** by Dave Ramsey for faith-based tactical advice.
 
-### 5. **[The Money Queen's Guide](https://www.amazon.com/dp/1989603688?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-money-queen)** by Charise Nguyen Hughes
+### 5. **[Financial Intimacy for Couples](https://www.amazon.com/dp/B0DLLH6G5Z?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-financial-intimacy)** by Adam H. Kol
 
-![The Money Queen's Guide book cover](/images/books/best-money-management-books-couples-book-5.webp)
+![Financial Intimacy for Couples book cover](/images/books/best-money-management-books-couples-book-5.webp)
 
-**Published**: 2020 | **Pages**: 272 | **Difficulty**: Beginner
+**Published:** 2024 | **Pages:** 240 | **Difficulty:** Beginner
 
-**What it teaches**: How women can take control of household finances even when their partner is disengaged, resistant, or controlling. Hughes addresses the reality that in many heterosexual relationships, men historically controlled money and women are reclaiming that power. The book is unapologetically feminist and practical.
+**What it teaches:** How to transform financial conversations into opportunities for building trust, connection, and teamwork when one or both partners feel overwhelmed, disconnected, or reluctant to engage with money. Adam Kol, a Certified Financial Therapist, Certified Mediator, and Tax Attorney, provides a compassionate guide for couples to understand each other's financial mindset, align goals, and create financial intimacy—even when starting from a place of conflict or avoidance.
 
-**Why it works for couples**: It's written for the partner (usually the woman) who wants to be involved in finances but faces resistance—either because the other partner won't share information, or because they've been excluded by design or default. Hughes doesn't assume you're in an equal partnership. She gives you strategies for taking control when your partner won't collaborate.
+**Why it works for couples:** Unlike books that assume both partners are equally engaged, this book acknowledges that many couples struggle with mismatched levels of financial interest or involvement. Kol's background as a mediator shows in his approach—he teaches you to build bridges, not ultimatums. The book treats financial disengagement as a symptom of deeper issues (fear, shame, different money histories) rather than a character flaw, and provides concrete strategies for gradually building partnership.
 
-**Key concepts you'll learn**:
+**Key concepts you'll learn:**
 
-- **The Financial Participation Spectrum**: Hughes maps couples from "fully transparent and equal" to "one partner has total control, the other has no access." Most couples fall somewhere in the middle—you know rough numbers but not details, or you handle bills but not investments, or you make money but your partner controls it. Hughes says wherever you are on the spectrum, you can move toward more involvement. The book gives specific tactics for each stage.
+**Financial Intimacy:** Kol defines financial intimacy as the ability to be open, honest, and vulnerable about money with your partner. This isn't just about sharing account balances—it's about sharing the fears, assumptions, and emotional baggage you bring to financial decisions. Just as emotional intimacy requires vulnerability, financial intimacy requires admitting when you're scared about retirement, embarrassed about debt, or conflicted about spending. The book teaches you to create safety for these conversations so both partners can show up authentically.
 
-- **The Information Gathering Phase**: If your partner controls finances and won't share information, start collecting it yourself. Photograph tax returns when they're on the desk. Note account balances when statements arrive. Access online banking (if you're legally entitled—i.e., it's a joint account). Create a spreadsheet of what you know: accounts, approximate balances, debts, assets. You can't negotiate or plan without information. Hughes is pragmatic—she's not suggesting deception, but she acknowledges that some partners withhold information as control, and you're entitled to know about your own finances.
+**Money Stories and Money Beliefs:** Everyone has a "money story"—the narrative you internalized growing up about what money means, how it should be used, and what it says about you. Maybe your story is "money creates security" because you watched your parents struggle. Maybe it's "money is meant to be enjoyed" because deprivation felt punishing. Kol helps couples surface their individual money stories, understand how they differ, and write a new shared story that honors both perspectives. When your partner understands your money story, their behavior makes sense instead of seeming irrational.
 
-- **The Gradual Takeover**: You don't need your partner's permission to manage money if it's legally yours (joint accounts, jointly owned assets). Start small. "I'll handle the utilities this month." Then the credit cards. Then investments. Hughes gives scripts for each conversation. If your partner resists, she teaches responses: "I'm not saying you're bad with money. I'm saying I need to be involved for my own peace of mind." Over time, you build competence and confidence. If your partner continues blocking you, that's a relationship problem, not a money problem.
+**The Saver/Spender Dynamic:** One of the most common couple conflicts is the saver married to a spender. Kol explains that this isn't actually about the numbers—savers feel anxious without a cushion and interpret spending as threatening their security, while spenders experience restriction as deprivation and interpret saving as denying today's joy. Both positions are emotionally valid. The book teaches specific communication strategies for this dynamic: savers learn to articulate the fear driving their need to save (not just label spending as "irresponsible"), and spenders learn to explain what they get from spending beyond the items themselves (connection, joy, control). Understanding the emotional need makes compromise possible.
 
-**The most valuable chapter**: 
+**Building Financial Conversations:** Kol provides a structured framework for financial discussions that reduces conflict. First, set the stage—pick a neutral time (not during a crisis or after a purchase), eliminate distractions, and agree on ground rules (no attacking, no defensiveness, just listening). Second, each partner shares their perspective using "I" statements: "I feel anxious when our savings drop below $10K" instead of "You spend too much." Third, identify the underlying need: security, autonomy, fairness, connection. Fourth, brainstorm solutions that address both partners' needs. The process turns fights into problem-solving sessions.
 
-Chapter 6, "Money Conversations That Don't End in Fights," provides word-for-word scripts for common conflicts. "I want to see our retirement accounts" (partner responds: "You don't understand this stuff, I handle it"). Hughes gives you: "I appreciate that you've been managing it. And I need to understand it too. Can we review it together this Saturday?" If they refuse: "This is jointly owned. I'm entitled to know. If you won't share, that's a serious problem we need to address." The scripts balance assertiveness with relationship preservation.
+**The most valuable chapter:**
 
-**Practical application**: 
+The chapter on "Overcoming Financial Anxiety, Shame, and Past Money Wounds" addresses the emotional barriers that keep couples from engaging with money together. Kol explains that financial avoidance is usually driven by shame (debt, past mistakes, feeling incompetent) or anxiety (fear of conflict, fear of scarcity, fear of being controlled). He provides exercises to help each partner identify and share their specific fears, then teaches your partner how to respond supportively. For example, if you're avoiding money talks because of shame about credit card debt, Kol scripts the conversation: "I need to tell you something I've been hiding because I'm embarrassed..." Your partner learns to listen without judgment and respond with "Thank you for trusting me with this. Let's figure it out together."
 
-If you're the disengaged partner: Start by identifying what you don't know. List all accounts you think exist (checking, savings, retirement, debts). Then verify—ask your partner to show you statements, or access accounts online if you're authorized.
+**Practical application:**
 
-Create a household net worth statement: assets (house equity, retirement accounts, savings) minus debts (mortgage, credit cards, loans). Update quarterly. This single document gives you financial literacy fast.
+**Week 1:** Each partner independently writes answers to: "What did I learn about money growing up? What do I believe about money? What am I afraid of when it comes to money?" This exercise surfaces your money story. Don't share yet—just write honestly for yourself.
 
-If your partner resists: use Hughes' scripts. Set a deadline. "I need to see our full financial picture by the end of this month. If you're not willing to share, we need to talk about why." Be prepared for the answer to be control, shame, or hiding something problematic.
+**Week 2:** Share your money stories with each other. Set aside 60 minutes, no interruptions. Partner A reads their answers for 20 minutes while Partner B listens without interrupting or defending. Then Partner B shares for 20 minutes. Then 20 minutes to discuss: "Now that I understand your money story, what do you need from me?" This conversation is often emotional—expect it. Kol provides language for if it gets derailed.
 
-If you're the engaged partner with a reluctant spouse: Use Hughes' strategies in reverse. Instead of consolidating control, create transparency. Share login credentials. Schedule monthly review meetings. Teach your partner what you know instead of gatekeeping expertise.
+**Week 3:** Identify your money personalities (Saver, Spender, Risk Taker, Security Seeker, Avoider). Discuss how your combination creates conflict. "I'm a Saver/Security Seeker and you're a Spender/Risk Taker. No wonder we fight about investing—I want guaranteed returns and you want growth potential." Understanding the mismatch helps you separate personality from judgment.
 
-**What beginners struggle with in this book**: 
+**Week 4:** Have your first structured financial meeting using Kol's framework. Agenda: review current finances (no judgment), identify one small shared goal (not "save for retirement"—too big—try "save $500 for emergency fund this month"), and assign action items. The goal is to practice the process, not solve everything at once.
 
-Hughes writes primarily for women in heterosexual relationships where the man has traditionally controlled money. If you're in a same-sex relationship, or a heterosexual relationship where the woman already controls finances, you'll need to mentally adapt the advice. The dynamics she describes (male control, female exclusion) don't universally apply.
+**Month 2-3:** Weekly 30-minute money check-ins. Review spending, upcoming bills, progress toward goals. Use the communication framework: share perspectives using "I" statements, identify underlying needs, problem-solve together. Over time, these check-ins become routine and less emotionally charged.
 
-Also, the book assumes the relationship is worth saving. If your partner is financially abusive (controlling money to limit your autonomy, hiding assets before divorce, sabotaging your career), Hughes' gradual approach might be too slow. You might need a lawyer, not a book.
+**What beginners struggle with in this book:**
 
-**Best read when**: 
+The book is heavily focused on communication and emotional work. If you're looking for specific tactical advice—how to set up a budget, which investment accounts to use, debt payoff strategies—this book is light on those details. It assumes you can handle tactics once you've addressed the emotional and relational barriers. Some couples want the tactics first, the psychology second. This book prioritizes psychology.
 
-You're the less financially-involved partner and want to change that, but your spouse resists. Or you've been financially excluded (intentionally or by default) and need confidence to step in. Or you're engaged to someone who won't discuss finances and you want to address it before marriage.
+Also, Kol's approach requires both partners to engage in vulnerable conversations about fear, shame, and past wounds. If your partner absolutely refuses to participate in this kind of emotional work, the book's exercises won't work. It requires mutual willingness, even if one partner is more reluctant than the other.
 
-**Real limitation**: 
+**Best read when:**
 
-The title and framing are gendered ("Money Queen," women empowerment messaging), which can alienate male readers or make the book feel less relevant for non-traditional couples. The advice itself is universal—financial literacy and partnership matter regardless of gender—but the packaging assumes a female reader reclaiming power from male control.
+One partner is financially disengaged (doesn't track spending, avoids money talks, defers all decisions to you) and you want to change that dynamic without creating resentment. Or you've tried tactical money books and still fight—the budgets are fine but the emotional dynamic is broken. Or one partner has financial shame or anxiety that prevents open discussion (debt, past bankruptcy, fear of being controlled). Or you recognize that your money fights are really about deeper issues (trust, fairness, childhood wounds) but don't know how to surface them.
 
-Also, Hughes is a financial advisor, so the book occasionally feels like a pitch for hiring an advisor. She's upfront about this, but some chapters end with "and this is where a professional can help," which feels self-serving even when true.
+**Real limitation:**
 
-**Follow-up reading**: After this, read **Women & Money** by Suze Orman for broader women's financial empowerment, or **The Feminist Financial Handbook** by Brynne Conroy for structural analysis of gendered money dynamics.
+Published in late 2024, so there are limited long-term reviews yet. Kol's framework is based on his 8+ years of work as a couples financial coach and draws on established principles from financial therapy and mediation, but the book itself is new. Early adopters report that the vulnerability exercises are powerful but emotionally difficult—expect tears, expect defensiveness, expect it to feel uncomfortable before it feels better.
+
+Also, the book assumes you're in a basically healthy relationship. If there's financial abuse (one partner controlling money to limit the other's autonomy, hiding assets, sabotaging earning), active addiction, or severe communication breakdown, this book won't fix it. Therapy or legal intervention first, then financial partnership later.
+
+**Follow-up reading:** After this, read *Money for Couples* for the tactical financial system now that you've addressed communication barriers. Or *Hold Me Tight* by Sue Johnson for broader relationship work using Emotionally Focused Therapy principles.
 
 ## Honorable Mentions Worth Your Time
 
-### [For Love and Money](https://www.amazon.com/dp/0143136739?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-for-love-money) by Myra Strober and Abby Davisson
-
-![For Love and Money book cover](/images/books/best-money-management-books-couples-book-6.webp)
-
-**Why it didn't make top 5**: More academic than practical. Strober is a Stanford economist who studied couple's decision-making for decades. The research is fascinating (how couples negotiate housework, childcare, career sacrifices, spending) but doesn't translate into clear action steps. You'll finish understanding couple dynamics better but unsure what to do Monday morning.
-
-**Why it's still valuable**: Best book for understanding the emotional economics of relationships—why fights about money are often fights about fairness, power, and appreciation. If you're interested in the "why" behind couple financial conflict, this is the deepest analysis available. The chapter on decision-making processes (consensus vs. accommodation vs. de facto) is eye-opening.
-
-**Best for**: Couples who want to understand the research behind money and relationships. Or therapists, counselors, and financial advisors working with couples.
-
 ### [Money and Love](https://www.amazon.com/dp/0593536347?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-money-love) by Myra Strober and Abby Davisson
 
-![Money and Love book cover](/images/books/best-money-management-books-couples-book-7.webp)
+![Money and Love book cover](/images/books/best-money-management-books-couples-book-6.webp)
 
-**Why it didn't make top 5**: This is Strober's follow-up, more practical than **For Love and Money** but still heavily focused on academic frameworks. The 5C framework (Clarify, Communicate, Consider a Broader Range of Choices, Check In, Explore Likely Consequences) is useful, but feels over-engineered for most couples who just need to agree on a budget.
+**Why it didn't make top 5:** The academic framework is valuable but doesn't translate into the clear action steps most couples need. Strober is a Stanford economist who studied couple's decision-making for decades. The research is fascinating (how couples negotiate housework, childcare, career sacrifices, spending) but can feel abstract when you just need to agree on a budget Monday morning.
 
-**Why it's still valuable**: Excellent for major life decisions that are partially financial—should we have kids, should someone quit their job, should we move for one partner's career. The 5C framework works better for big decisions than daily money management. The case studies (real couples navigating career/family tradeoffs) are illuminating.
+**Why it's still valuable:** Best book for understanding the emotional economics of relationships—why fights about money are often fights about fairness, power, and appreciation. The 5C framework (Clarify, Communicate, Consider a Broader Range of Choices, Check In, Explore Likely Consequences) is excellent for major life decisions where money is one factor among many. Should we have kids? Should someone quit their job? Should we move for one partner's career? The 5C framework helps couples navigate these crossroads systematically.
 
-**Best for**: Couples facing major life transitions where money is one factor among many (career changes, relocation, kids, going back to school).
+The case studies are particularly illuminating—real couples navigating career/family tradeoffs, with detailed analysis of their decision-making processes and outcomes. You'll finish understanding couple dynamics better and having better tools for the big decisions, even if daily money management requires a more tactical book.
+
+**Best for:** Couples facing major life transitions where money is one factor among many (career changes, relocation, kids, going back to school). Or therapists, counselors, and financial advisors working with couples who want to understand the research behind money and relationships.
 
 ### [Financially Fearless](https://www.amazon.com/dp/1101984678?tag=focusdividend-22&linkCode=as2&linkId=best-money-management-books-couples-financially-fearless) by Alexa von Tobel
 
-![Financially Fearless book cover](/images/books/best-money-management-books-couples-book-8.webp)
+![Financially Fearless book cover](/images/books/best-money-management-books-couples-book-7.webp)
 
 **Why it didn't make top 5**: Not specifically for couples, though it has a couples chapter. Von Tobel's book is about building a complete financial plan in your 20s-30s, with couples treated as one component. If you want couple-specific advice, other books go deeper. If you want overall financial planning that includes couples, this works.
 
@@ -376,7 +372,7 @@ Also, Hughes is a financial advisor, so the book occasionally feels like a pitch
 
 **Finally:** *Smart Couples Finish Rich* - Gives you advanced automation tactics. Now that you understand each other and have a basic system, optimize the infrastructure.
 
-Save *Thriving in Love and Money* if you're Christian and need deeper emotional work. Save *The Money Queen's Guide* if one partner is disengaged and you need specific strategies for that dynamic.
+Save *Thriving in Love and Money* if you're Christian and need deeper emotional work. Save *Financial Intimacy for Couples* if one partner is disengaged or if emotional barriers (shame, anxiety, avoidance) are preventing productive money conversations.
 
 ### Reading strategies that actually work
 
@@ -421,9 +417,9 @@ Read the book first so you're educated consumers. Then hire an advisor for 2-3 s
 | Want to spend guilt-free while building wealth | *Money for Couples* | Conscious Spending Plan eliminates restriction |
 | Fighting about money regularly | *The 5 Money Personalities* | Understand why before trying to fix how |
 | Engaged, haven't merged finances yet | *Money for Couples* | Modern system before bad habits form |
-| One partner disengaged/resistant | *The Money Queen's Guide* | Strategies for unequal partnership |
+| One partner disengaged/resistant | *Financial Intimacy for Couples* | Build financial teamwork through vulnerability |
 | Christian, want faith-integrated advice | *Thriving in Love and Money* | Explicit biblical framework |
-| Facing major decision (house, kids, career) | *For Love and Money* | 5C framework for big choices |
+| Facing major decision (house, kids, career) | *Money and Love* | 5C framework for big choices |
 | Income disparity causing tension | *Money for Couples* | Addresses proportional contribution clearly |
 | Already wealthy, need couple dynamics help | *The 5 Money Personalities* | Money personality matters more than tactics at high income |
 | Spender married to Saver | *Money for Couples* + *The 5 Money Personalities* | Understand differences, build system that honors both |
@@ -436,11 +432,11 @@ Both reading is ideal—you're equally informed and can reference the same frame
 
 **Q: What if my partner refuses to read any money books or discuss finances?**
 
-This is a relationship problem, not a money problem. Someone who completely refuses to engage in household finances is either checked out of the relationship, dealing with shame/fear they can't articulate, or using control as power. Start with **The Money Queen's Guide**—it gives you strategies for gradual involvement even when your partner resists. But also consider couples therapy. Total refusal to discuss money is a red flag.
+This is a relationship problem, not a money problem. Someone who completely refuses to engage in household finances is either checked out of the relationship, dealing with shame/fear they can't articulate, or using control as power. Start with *Financial Intimacy for Couples*—it gives you strategies for understanding and addressing the emotional barriers that create avoidance. But also consider couples therapy. Total refusal to discuss money is a red flag.
 
 **Q: Do these books work for unmarried couples or same-sex couples?**
 
-Most books use "spouse" language and assume marriage, but the advice applies to committed partnerships regardless of marital or legal status. **The Money Queen's Guide** is most heteronormative (assumes male partner controls, female partner reclaims). **The 5 Money Personalities** and **Money for Couples** are essentially gender-neutral. **Thriving in Love and Money** is Christian and may or may not align with your theology on marriage.
+Most books use "spouse" language and assume marriage, but the advice applies to committed partnerships regardless of marital or legal status. *Financial Intimacy for Couples*, *The 5 Money Personalities*, and *Money for Couples* are essentially gender-neutral. *Thriving in Love and Money* is Christian and may or may not align with your theology on marriage.
 
 **Q: Which book is best if we're already doing okay financially but want to improve communication?**
 
@@ -486,13 +482,13 @@ If one specific book didn't resonate, try another. Sethi's Rich Life framework m
 
 - **Follow-up resource**: If you're Christian, join a Financial Peace University class or similar faith-based financial program. If not, read *Money for Couples* for additional communication frameworks.
 
-### If you read The Money Queen's Guide:
+### If you read Financial Intimacy for Couples:
 
-- **Immediate next step**: Create a household net worth statement. List all assets (retirement, savings, home equity) and debts (mortgage, credit cards, loans). If your partner controls finances, request this information directly.
+- **Immediate next step:** Each partner independently writes answers to: "What did I learn about money growing up? What am I afraid of when it comes to money?" Set aside time to share these money stories without judgment.
 
-- **Within 30 days**: Increase your involvement by one level. If you currently know nothing, start paying one bill monthly. If you pay bills, start reviewing investment statements. If you're fully excluded, use Hughes' scripts to request access.
+- **Within 30 days:** Implement weekly 30-minute money check-ins using Kol's communication framework. Start small—just review spending and one shared goal. Practice using "I" statements and identifying underlying needs.
 
-- **Follow-up resource**: If your partner continues blocking you, consider individual therapy or consult a lawyer. Total financial exclusion in a marriage can be financial abuse.
+- **Follow-up resource:** Read *Money for Couples* for the tactical financial system now that you've addressed emotional barriers, or consider working with a Certified Financial Therapist if deeper issues persist.
 
 ## Who This Reading List Is (and Isn't) For
 
@@ -516,7 +512,7 @@ If one specific book didn't resonate, try another. Sethi's Rich Life framework m
 
 - **Spender married to Saver**: Start with **The 5 Money Personalities**. Your core conflict is temperament, not tactics. Understand each other first.
 
-- **One partner excluded/disengaged**: Start with **The Money Queen's Guide**. You need strategies for unequal partnership before you can build equal partnership.
+- **One partner excluded/disengaged**: Start with *Financial Intimacy for Couples*. You need to understand and address the emotional barriers (shame, fear, avoidance) before you can build equal partnership.
 
 - **Christian couples**: Start with **Thriving in Love and Money**. The biblical framework will resonate and the research is solid.
 
@@ -524,7 +520,7 @@ If one specific book didn't resonate, try another. Sethi's Rich Life framework m
 
 If you only read one book, read **Money for Couples**. It's modern, psychology-based, and addresses the root cause of conflict (different Money Types and invisible scripts) while providing a clear tactical system (the Conscious Spending Plan). Most couples don't need better budgets—they need better communication and permission to spend on what they love. Sethi provides both.
 
-If you read all five, go in this order: *Money for Couples* → *The 5 Money Personalities* → *Smart Couples Finish Rich* → *Thriving in Love and Money* (if Christian) or *The Money Queen's Guide* (if one partner is disengaged). You'll build your Rich Life vision, understand your differences, optimize automation, and address deeper emotional or relational dynamics.
+If you read all five, go in this order: *Money for Couples* → *The 5 Money Personalities* → *Smart Couples Finish Rich* → *Thriving in Love and Money* (if Christian) or *Financial Intimacy for Couples* (if one partner is disengaged or emotional barriers exist). You'll build your Rich Life vision, understand your differences, optimize automation, and address deeper emotional or relational dynamics.
 
 The most important mindset shift: couples don't fight about money. They fight about what money represents—security, freedom, love, control, fairness, power. The number in your bank account is just a proxy for those deeper needs. These books teach you to identify the real conflict, say it out loud, and negotiate solutions that honor both partners. Everything else is spreadsheets.
 
