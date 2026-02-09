@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
+import { rehypeBookCoverClass } from './src/lib/rehype-book-cover-class.ts';
 
 export default defineConfig({
   site: 'https://focus.matomeyo.me',
@@ -13,6 +14,7 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-light',
     },
+    rehypePlugins: [rehypeBookCoverClass],
   },
   vite: {
     build: {
