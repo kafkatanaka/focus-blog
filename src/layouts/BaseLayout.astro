@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { title, description, canonicalURL, ogImage } = Astro.props;
-const site = Astro.site ?? new URL('https://focus.matomeyo.me');
+const site = Astro.site ?? new URL('https://focus-dividend.com');
 const url = canonicalURL ?? Astro.url;
 const fullURL = new URL(url.pathname, site);
 const image = ogImage; // optional: add public/og-default.png and use new URL('/og-default.png', site).href as default

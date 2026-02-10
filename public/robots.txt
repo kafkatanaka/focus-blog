@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://focus.matomeyo.me/sitemap.xml
+Sitemap: https://focus-dividend.com/sitemap.xml

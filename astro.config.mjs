@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import { rehypeBookCoverClass } from './src/lib/rehype-book-cover-class.ts';
 
 export default defineConfig({
-  site: 'https://focus.matomeyo.me',
+  site: 'https://focus-dividend.com',
   trailingSlash: 'never', // canonical を末尾スラッシュなしに統一
   integrations: [
     mdx(),

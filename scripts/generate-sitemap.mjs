@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 // プロジェクトルートを scripts/ から確定（CI / ローカル同一）
 const ROOT = path.resolve(__dirname, "..");
 
-const SITE = "https://focus.matomeyo.me";
+const SITE = "https://focus-dividend.com";
 
 const BLOG_DIR = path.join(ROOT, "src", "content", "blog");
 const PUBLIC_DIR = path.join(ROOT, "public");

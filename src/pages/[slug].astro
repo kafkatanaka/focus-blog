@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 
 const { entry, relatedPosts } = Astro.props;
 const { Content } = await entry.render();
-const site = Astro.site ?? new URL('https://focus.matomeyo.me');
+const site = Astro.site ?? new URL('https://focus-dividend.com');
 const canonicalURL = new URL(`/${entry.slug}`, site);
 
 const thumbnailPath = entry.data.thumbnail
