@@ -9,9 +9,14 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const site = Astro.site ?? new URL('https://focus-dividend.com');
+// 記事と同じ命名規則: パスの最後のセグメントをスラッグとして {slug}.webp を参照
+const pathSegments = Astro.url.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+const slug = pathSegments[pathSegments.length - 1] ?? 'framework';
+const ogImage = new URL(`/images/thumbnails/${slug}.webp`, site).href;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} ogImage={ogImage}>
   <Header />
   <main class="mx-auto max-w-readable px-4 py-12 sm:px-6 prose prose-gray max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-ul:my-6 prose-li:my-1 prose-a:text-gray-700 prose-a:underline hover:prose-a:text-gray-900">
     <slot />
