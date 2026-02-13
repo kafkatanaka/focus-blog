@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Focus With Background Noise You Can't Control"
 description: "Step-by-step guide to maintaining concentration in noisy environments. Includes noise type adaptation and auditory attention training protocols."
 pubDate: 2025-02-01T00:00:00Z
@@ -15,8 +12,6 @@ tags:
   - adhd
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK
