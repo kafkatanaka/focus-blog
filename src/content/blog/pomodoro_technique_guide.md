@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Use the Pomodoro Technique Effectively"
 description: "Step-by-step guide to Pomodoro that survives real work conditions. Includes interruption protocols and focus type matching strategies."
 pubDate: 2025-02-01T00:00:00Z
@@ -16,8 +13,6 @@ tags:
   - knowledge-worker
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

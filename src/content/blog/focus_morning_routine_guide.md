@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Create a Morning Routine That Protects Focus"
 description: "Step-by-step guide to morning systems that preserve cognitive capacity. Includes attention cost analysis and distraction-proofing protocols."
 pubDate: 2025-02-01T00:00:00Z
@@ -16,8 +13,6 @@ tags:
   - knowledge-worker
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

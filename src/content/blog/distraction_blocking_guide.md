@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Block Distractions Without Feeling Restricted"
 description: "Step-by-step guide to distraction management that feels like support, not punishment. Includes autonomy-preserving protocols and rebellion-proof systems."
 pubDate: 2025-02-01T00:00:00Z
@@ -16,8 +13,6 @@ tags:
   - knowledge-worker
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

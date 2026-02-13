@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Build Consistency Without Tracking"
 description: "Step-by-step guide to sustainable habits through environmental design and identity anchoring. Includes systems for tracking-averse personalities."
 pubDate: 2025-02-01T00:00:00Z
@@ -15,8 +12,6 @@ tags:
   - adhd
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

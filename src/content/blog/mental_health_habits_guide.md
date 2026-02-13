@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Create Habits That Support Mental Health"
 description: "Step-by-step guide to building sustainable mental health practices. Includes low-energy adaptations and recovery protocols for when systems break."
 pubDate: 2025-02-01T00:00:00Z
@@ -15,8 +12,6 @@ tags:
   - adhd
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

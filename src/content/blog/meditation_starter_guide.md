@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Start Meditating (And Not Quit After 3 Days)"
 description: "Step-by-step guide to meditation that survives initial discomfort. Includes realistic expectations and practice formats for restless brains."
 pubDate: 2025-02-01T00:00:00Z
@@ -14,8 +11,6 @@ tags:
   - adhd
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

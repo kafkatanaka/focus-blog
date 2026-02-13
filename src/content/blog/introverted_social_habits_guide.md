@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Build Social Habits When You're Introverted"
 description: "Step-by-step guide to sustainable social connection without draining your battery. Includes energy-preserving strategies and recharge protocols."
 pubDate: 2025-02-01T00:00:00Z
@@ -15,8 +12,6 @@ tags:
   - adhd
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK

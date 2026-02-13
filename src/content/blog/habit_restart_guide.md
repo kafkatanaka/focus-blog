@@ -1,7 +1,4 @@
-# HOW-TO GUIDE ARTICLE
-
-## FRONTMATTER
-```yaml
+---
 title: "How to Restart Habits After Falling Off"
 description: "Step-by-step guide to rebuilding habits after they collapse. Includes failure autopsy framework and relapse prevention protocols."
 pubDate: 2025-02-01T00:00:00Z
@@ -15,8 +12,6 @@ tags:
   - adhd
 draft: false
 ads: true
-```
-
 ---
 
 ## HOOK
