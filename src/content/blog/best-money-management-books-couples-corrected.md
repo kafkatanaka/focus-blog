@@ -1,4 +1,17 @@
-# Best Money Management Books for Couples in 2025
+---
+title: "Best Money Management Books for Couples in 2025"
+description: "Money books that actually help couples talk about finances—not just budget spreadsheets. Frameworks for shared goals, conflict, and communication."
+pubDate: 2025-02-01T00:00:00Z
+category: money
+tags:
+  - decision-fatigue
+  - essentialism
+  - knowledge-worker
+draft: false
+ads: true
+---
+
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 Most couples fight about money not because they disagree on the numbers, but because they've never learned to talk about what the numbers mean. One person sees a $200 dinner as celebrating love; the other sees it as $200 not going toward the house down payment. Both are right. Both feel unheard.
 

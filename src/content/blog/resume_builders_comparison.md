@@ -1,8 +1,17 @@
-# The Best Resume Builders Tested: Canva vs. Novoresume vs. Zety
+---
+title: "The Best Resume Builders Tested: Canva vs. Novoresume vs. Zety"
+description: "Resume builders compared for ATS pass rates and real job outcomes—not just pretty templates. Canva, Novoresume, Zety, and more tested."
+pubDate: 2025-02-01T00:00:00Z
+category: work
+tags:
+  - overwhelm
+  - essentialism
+  - knowledge-worker
+draft: false
+ads: true
+---
 
-**Category:** Work / Career  
-**Tags:** tools, job-search, resume, career-development, productivity-tools  
-**Word Count:** ~5,400 words
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 ---
 

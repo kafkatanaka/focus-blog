@@ -7,6 +7,7 @@ import {
   ATTRIBUTE_TAGS,
   ARTICLE_RULES,
 } from '../../lib/article-rules';
+import { GITHUB_REPO } from '../../lib/github-publish';
 ---
 
 <BaseLayout
@@ -14,216 +15,300 @@ import {
   description="Internal article upload tool for The Focus Dividend."
   noindex={true}
 >
-
   <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-    <header class="mb-8 border-b border-gray-200 pb-6">
+    <header class="mb-6 border-b border-gray-200 pb-6">
       <p class="text-sm font-medium uppercase tracking-wide text-gray-500">Internal</p>
-      <h1 class="mt-1 text-3xl font-bold text-gray-900">Article Upload</h1>
+      <h1 class="mt-1 text-3xl font-bold text-gray-900">Content Admin</h1>
       <p class="mt-2 max-w-2xl text-gray-600">
-        Compose frontmatter and Markdown body, then download the <code class="text-sm">.md</code> file
-        and place it in <code class="text-sm">src/content/blog/</code>. Generation rules are based on
-        analysis of 416 published articles.
+        Upload articles and manage the keyword pool. Publish directly to GitHub
+        (<code class="text-sm">{GITHUB_REPO.owner}/{GITHUB_REPO.repo}</code>) — Cloudflare Pages
+        deploys automatically on push to <code class="text-sm">{GITHUB_REPO.branch}</code>.
       </p>
     </header>
 
-    <div class="grid gap-8 lg:grid-cols-2">
-      <section aria-label="Article form" class="space-y-5">
-        <div>
-          <label for="archetype" class="block text-sm font-medium text-gray-700">Archetype</label>
-          <select id="archetype" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
-            <option value="guide">Guide (1,600–2,800 words)</option>
-            <option value="comparison">Comparison (4,000–8,000 words)</option>
-          </select>
-        </div>
+    <section class="mb-8 rounded-lg border border-gray-200 bg-gray-50 p-4">
+      <h2 class="text-sm font-semibold text-gray-900">GitHub connection</h2>
+      <p class="mt-1 text-xs text-gray-600">
+        Create a <a href="https://github.com/settings/tokens" class="underline" target="_blank" rel="noopener">Personal Access Token</a>
+        with <code>repo</code> scope. Stored in this browser only (localStorage).
+      </p>
+      <div class="mt-3 flex flex-wrap gap-3">
+        <input
+          id="github-token"
+          type="password"
+          placeholder="ghp_..."
+          class="min-w-[240px] flex-1 rounded-md border border-gray-300 px-3 py-2 font-mono text-sm"
+        />
+        <button type="button" id="btn-save-token" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+          Save token
+        </button>
+        <button type="button" id="btn-clear-token" class="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-white">
+          Clear
+        </button>
+      </div>
+      <p id="github-status" class="mt-2 text-xs text-gray-500"></p>
+    </section>
 
-        <div>
-          <label for="title" class="block text-sm font-medium text-gray-700">
-            Title <span id="title-count" class="font-normal text-gray-400"></span>
-          </label>
-          <input
-            id="title"
-            type="text"
-            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
-            placeholder="Attention Management Beats Time Management"
-          />
-          <p id="title-hint" class="mt-1 text-xs text-gray-500"></p>
-        </div>
+    <nav class="mb-6 flex gap-2 border-b border-gray-200">
+      <button type="button" data-tab="upload" class="tab-btn border-b-2 border-gray-900 px-4 py-2 text-sm font-medium text-gray-900">
+        Article upload
+      </button>
+      <button type="button" data-tab="pool" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+        Content pool
+      </button>
+    </nav>
 
-        <div>
-          <label for="slug" class="block text-sm font-medium text-gray-700">Slug (filename)</label>
-          <input
-            id="slug"
-            type="text"
-            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm"
-            placeholder="attention-management-beats-time-management"
-          />
-        </div>
-
-        <div>
-          <label for="description" class="block text-sm font-medium text-gray-700">
-            Description <span id="desc-count" class="font-normal text-gray-400"></span>
-          </label>
-          <textarea
-            id="description"
-            rows="2"
-            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
-            placeholder="Meta description, 120–160 characters"
-          ></textarea>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2">
+    <!-- Article upload tab -->
+    <div id="tab-upload" class="tab-panel">
+      <div class="grid gap-8 lg:grid-cols-2">
+        <section aria-label="Article form" class="space-y-5">
           <div>
-            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-            <select id="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
-              {CATEGORIES.map((c) => (
-                <option value={c}>{c}</option>
-              ))}
+            <label for="archetype" class="block text-sm font-medium text-gray-700">Archetype</label>
+            <select id="archetype" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              <option value="guide">Guide (1,600–2,800 words)</option>
+              <option value="comparison">Comparison (4,000–8,000 words)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="title" class="block text-sm font-medium text-gray-700">
+              Title <span id="title-count" class="font-normal text-gray-400"></span>
+            </label>
+            <input id="title" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+            <p id="title-hint" class="mt-1 text-xs text-gray-500"></p>
+          </div>
+
+          <div>
+            <label for="slug" class="block text-sm font-medium text-gray-700">Slug (filename)</label>
+            <input id="slug" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm" />
+          </div>
+
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700">
+              Description <span id="desc-count" class="font-normal text-gray-400"></span>
+            </label>
+            <textarea id="description" rows="2" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm"></textarea>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+              <select id="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+                {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="pubDate" class="block text-sm font-medium text-gray-700">pubDate (UTC)</label>
+              <input id="pubDate" type="date" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+            </div>
+          </div>
+
+          <fieldset>
+            <legend class="text-sm font-medium text-gray-700">Tags (3 — one per group)</legend>
+            <div class="mt-2 grid gap-3 sm:grid-cols-3">
+              <div>
+                <label for="tag-symptom" class="text-xs text-gray-500">Symptom</label>
+                <select id="tag-symptom" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                  <option value="">—</option>
+                  {SYMPTOM_TAGS.map((t) => <option value={t}>{t}</option>)}
+                </select>
+              </div>
+              <div>
+                <label for="tag-method" class="text-xs text-gray-500">Method</label>
+                <select id="tag-method" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                  <option value="">—</option>
+                  {METHOD_TAGS.map((t) => <option value={t}>{t}</option>)}
+                </select>
+              </div>
+              <div>
+                <label for="tag-attribute" class="text-xs text-gray-500">Attribute</label>
+                <select id="tag-attribute" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                  <option value="">—</option>
+                  {ATTRIBUTE_TAGS.map((t) => <option value={t}>{t}</option>)}
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="flex flex-wrap gap-4">
+            <label class="flex items-center gap-2 text-sm text-gray-700">
+              <input id="draft" type="checkbox" class="rounded border-gray-300" />
+              draft: true
+            </label>
+            <label class="flex items-center gap-2 text-sm text-gray-700">
+              <input id="ads" type="checkbox" checked class="rounded border-gray-300" />
+              ads: true
+            </label>
+            <label class="flex items-center gap-2 text-sm text-gray-700">
+              <input id="affiliate" type="checkbox" class="rounded border-gray-300" />
+              Affiliate disclosure
+            </label>
+          </div>
+
+          <div>
+            <label for="body" class="block text-sm font-medium text-gray-700">
+              Body (Markdown) <span id="word-count" class="font-normal text-gray-400"></span>
+            </label>
+            <textarea id="body" rows="16" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm leading-relaxed"></textarea>
+            <p id="body-hint" class="mt-1 text-xs text-gray-500"></p>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <button type="button" id="btn-publish" class="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800">
+              Publish to GitHub
+            </button>
+            <button type="button" id="btn-download" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+              Download .md
+            </button>
+            <button type="button" id="btn-copy" class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+              Copy
+            </button>
+            <button type="button" id="btn-template" class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+              Insert outline
+            </button>
+          </div>
+
+          <ul id="validation" class="space-y-1 text-sm"></ul>
+          <p id="publish-status" class="text-sm"></p>
+        </section>
+
+        <section aria-label="Preview">
+          <div class="sticky top-4">
+            <h2 class="text-sm font-medium text-gray-700">Preview</h2>
+            <pre id="preview" class="mt-2 max-h-[calc(100vh-8rem)] overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4 text-xs leading-relaxed text-gray-800"></pre>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Content pool tab -->
+    <div id="tab-pool" class="tab-panel hidden">
+      <div class="mb-6 rounded-lg border border-gray-200 p-4">
+        <h2 class="text-sm font-semibold text-gray-900">Add topic to pool</h2>
+        <p class="mt-1 text-xs text-gray-600">Demand-driven ideas for future articles (GSC / GA4 / manual).</p>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="pool-title" class="text-xs text-gray-500">Proposed title (H1)</label>
+            <input id="pool-title" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label for="pool-keyword" class="text-xs text-gray-500">Primary keyword</label>
+            <input id="pool-keyword" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label for="pool-source" class="text-xs text-gray-500">Source</label>
+            <select id="pool-source" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              <option value="manual">manual</option>
+              <option value="gsc">gsc</option>
+              <option value="ga4">ga4</option>
+              <option value="competitor-gap">competitor-gap</option>
             </select>
           </div>
           <div>
-            <label for="pubDate" class="block text-sm font-medium text-gray-700">pubDate (UTC)</label>
-            <input id="pubDate" type="date" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+            <label for="pool-category" class="text-xs text-gray-500">Category</label>
+            <select id="pool-category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div>
+            <label for="pool-archetype" class="text-xs text-gray-500">Archetype</label>
+            <select id="pool-archetype" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              <option value="guide">guide</option>
+              <option value="comparison">comparison</option>
+            </select>
+          </div>
+          <div>
+            <label for="pool-gsc-query" class="text-xs text-gray-500">GSC query (optional)</label>
+            <input id="pool-gsc-query" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label for="pool-impressions" class="text-xs text-gray-500">GSC impressions</label>
+            <input id="pool-impressions" type="number" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="pool-hypothesis" class="text-xs text-gray-500">Hypothesis</label>
+            <textarea id="pool-hypothesis" rows="2" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" placeholder="Why this article should win this query"></textarea>
           </div>
         </div>
-
-        <fieldset>
-          <legend class="text-sm font-medium text-gray-700">Tags (pick 3 — one per group)</legend>
-          <div class="mt-2 grid gap-3 sm:grid-cols-3">
-            <div>
-              <label for="tag-symptom" class="text-xs text-gray-500">Symptom</label>
-              <select id="tag-symptom" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
-                <option value="">—</option>
-                {SYMPTOM_TAGS.map((t) => (
-                  <option value={t}>{t}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label for="tag-method" class="text-xs text-gray-500">Method</label>
-              <select id="tag-method" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
-                <option value="">—</option>
-                {METHOD_TAGS.map((t) => (
-                  <option value={t}>{t}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label for="tag-attribute" class="text-xs text-gray-500">Attribute</label>
-              <select id="tag-attribute" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
-                <option value="">—</option>
-                {ATTRIBUTE_TAGS.map((t) => (
-                  <option value={t}>{t}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </fieldset>
-
-        <div class="flex flex-wrap gap-4">
-          <label class="flex items-center gap-2 text-sm text-gray-700">
-            <input id="draft" type="checkbox" class="rounded border-gray-300" />
-            draft: true
-          </label>
-          <label class="flex items-center gap-2 text-sm text-gray-700">
-            <input id="ads" type="checkbox" checked class="rounded border-gray-300" />
-            ads: true
-          </label>
-          <label class="flex items-center gap-2 text-sm text-gray-700">
-            <input id="affiliate" type="checkbox" class="rounded border-gray-300" />
-            Affiliate disclosure (comparison)
-          </label>
-        </div>
-
-        <div>
-          <label for="body" class="block text-sm font-medium text-gray-700">
-            Body (Markdown) <span id="word-count" class="font-normal text-gray-400"></span>
-          </label>
-          <textarea
-            id="body"
-            rows="18"
-            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm leading-relaxed"
-            placeholder="Hook paragraphs (no H1)...
-
-## The Problem
-..."
-          ></textarea>
-          <p id="body-hint" class="mt-1 text-xs text-gray-500"></p>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <button
-            type="button"
-            id="btn-download"
-            class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
-          >
-            Download .md
+        <div class="mt-4 flex gap-3">
+          <button type="button" id="btn-pool-add" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+            Add to pool
           </button>
-          <button
-            type="button"
-            id="btn-copy"
-            class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            Copy Markdown
+          <button type="button" id="btn-pool-save" class="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800">
+            Save pool to GitHub
           </button>
-          <button
-            type="button"
-            id="btn-template"
-            class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            Insert guide outline
+          <button type="button" id="btn-pool-load" class="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+            Reload from GitHub
           </button>
         </div>
+        <p id="pool-status" class="mt-2 text-xs text-gray-500"></p>
+      </div>
 
-        <ul id="validation" class="space-y-1 text-sm"></ul>
-      </section>
-
-      <section aria-label="Preview">
-        <div class="sticky top-4">
-          <h2 class="text-sm font-medium text-gray-700">Preview</h2>
-          <pre
-            id="preview"
-            class="mt-2 max-h-[calc(100vh-8rem)] overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4 text-xs leading-relaxed text-gray-800"
-          ></pre>
-        </div>
-      </section>
+      <div class="overflow-x-auto rounded-lg border border-gray-200">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+            <tr>
+              <th class="px-3 py-2">Status</th>
+              <th class="px-3 py-2">Title</th>
+              <th class="px-3 py-2">Keyword</th>
+              <th class="px-3 py-2">Source</th>
+              <th class="px-3 py-2">Cat</th>
+              <th class="px-3 py-2"></th>
+            </tr>
+          </thead>
+          <tbody id="pool-table"></tbody>
+        </table>
+      </div>
     </div>
   </main>
 </BaseLayout>
 
-<script define:vars={{ rules: ARTICLE_RULES, categories: CATEGORIES }}>
+<script define:vars={{ rules: ARTICLE_RULES }}>
+  import {
+    GITHUB_TOKEN_KEY,
+    GITHUB_REPO,
+    getRepoFile,
+    putRepoFile,
+  } from '../../lib/github-publish';
+
   const $ = (id) => document.getElementById(id);
+  const POOL_PATH = 'data/content-pool.json';
+  const ARTICLE_DIR = 'src/content/blog';
+
+  let poolData = { updatedAt: new Date().toISOString(), items: [] };
+  let poolSha = undefined;
 
   const fields = [
     'archetype', 'title', 'slug', 'description', 'category', 'pubDate',
     'tag-symptom', 'tag-method', 'tag-attribute', 'draft', 'ads', 'affiliate', 'body',
   ];
 
+  function getToken() {
+    return localStorage.getItem(GITHUB_TOKEN_KEY) ?? '';
+  }
+
+  function setGithubStatus(msg, isError = false) {
+    const el = $('github-status');
+    if (el) {
+      el.textContent = msg;
+      el.className = `mt-2 text-xs ${isError ? 'text-red-600' : 'text-gray-500'}`;
+    }
+  }
+
   function slugify(title) {
-    return title
-      .toLowerCase()
-      .replace(/['']/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 80);
+    return title.toLowerCase().replace(/['']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
   }
 
   function countWords(text) {
-    return text
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/```[\s\S]*?```/g, ' ')
-      .split(/\s+/)
-      .filter((w) => w.length > 0).length;
+    return text.replace(/<[^>]+>/g, ' ').replace(/```[\s\S]*?```/g, ' ').split(/\s+/).filter((w) => w.length > 0).length;
   }
 
   function firstOfMonthIso(dateStr) {
     const d = dateStr ? new Date(dateStr + 'T00:00:00Z') : new Date();
-    const y = d.getUTCFullYear();
-    const m = String(d.getUTCMonth() + 1).padStart(2, '0');
-    return `${y}-${m}-01T00:00:00Z`;
+    return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-01T00:00:00Z`;
   }
 
-  const AFFILIATE =
-    '<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>';
+  const AFFILIATE = '<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>';
 
   const GUIDE_OUTLINE = `You've tried the obvious fixes. They worked for a week, then life happened.
 
@@ -263,11 +348,7 @@ import {
     const title = $('title').value.trim();
     const description = $('description').value.trim();
     const category = $('category').value;
-    const tags = [
-      $('tag-symptom').value,
-      $('tag-method').value,
-      $('tag-attribute').value,
-    ].filter(Boolean);
+    const tags = [$('tag-symptom').value, $('tag-method').value, $('tag-attribute').value].filter(Boolean);
     const draft = $('draft').checked;
     const ads = $('ads').checked;
     const body = $('body').value.trim();
@@ -296,109 +377,234 @@ import {
     const description = $('description').value.trim();
     const body = $('body').value.trim();
     const archetype = $('archetype').value;
-    const tags = [
-      $('tag-symptom').value,
-      $('tag-method').value,
-      $('tag-attribute').value,
-    ].filter(Boolean);
+    const tags = [$('tag-symptom').value, $('tag-method').value, $('tag-attribute').value].filter(Boolean);
     const words = countWords(body);
     const h2 = (body.match(/^##\s+/gm) || []).length;
     const issues = [];
     const ok = [];
 
-    if (title.length < rules.title.min || title.length > rules.title.max) {
-      issues.push(`Title: ${title.length} chars (target ${rules.title.min}–${rules.title.max})`);
-    } else ok.push(`Title length OK (${title.length})`);
-
-    if (description.length < rules.description.min || description.length > rules.description.max) {
-      issues.push(`Description: ${description.length} chars (target ${rules.description.min}–${rules.description.max})`);
-    } else ok.push(`Description length OK (${description.length})`);
-
-    if (tags.length !== 3) issues.push(`Tags: ${tags.length}/3 selected`);
-    else ok.push('Tags: 3/3');
-
-    if (body.startsWith('# ')) issues.push('Body contains H1 — remove it (title is frontmatter)');
-    if (!body.trim() || body.trim().startsWith('##')) {
-      issues.push('Missing hook before first ## heading');
-    } else ok.push('Hook before first H2');
-
+    if (title.length < rules.title.min || title.length > rules.title.max) issues.push(`Title: ${title.length} chars`);
+    else ok.push(`Title OK (${title.length})`);
+    if (description.length < rules.description.min || description.length > rules.description.max) issues.push(`Description: ${description.length} chars`);
+    else ok.push(`Description OK (${description.length})`);
+    if (tags.length !== 3) issues.push(`Tags: ${tags.length}/3`);
+    else ok.push('Tags 3/3');
+    if (body.startsWith('# ')) issues.push('Remove H1 from body');
+    if (!body.trim() || body.trim().startsWith('##')) issues.push('Add hook before first ##');
+    else ok.push('Hook OK');
     const wc = archetype === 'comparison' ? rules.comparisonWordCount : rules.guideWordCount;
-    if (words < wc.min || words > wc.max) {
-      issues.push(`Word count: ${words} (target ${wc.min}–${wc.max} for ${archetype})`);
-    } else ok.push(`Word count OK (${words})`);
+    if (words < wc.min || words > wc.max) issues.push(`Words: ${words} (target ${wc.min}–${wc.max})`);
+    else ok.push(`Words OK (${words})`);
+    if (!body.includes('## The Takeaway')) issues.push('Missing ## The Takeaway');
+    else ok.push('Has Takeaway');
 
-    if (!body.includes('## The Takeaway')) issues.push('Missing ## The Takeaway section');
-    else ok.push('Has ## The Takeaway');
-
-    const list = $('validation');
-    list.innerHTML = [
+    $('validation').innerHTML = [
       ...issues.map((m) => `<li class="text-amber-700">⚠ ${m}</li>`),
       ...ok.map((m) => `<li class="text-green-700">✓ ${m}</li>`),
     ].join('');
-
-    $('title-count').textContent = `(${title.length} / ${rules.title.max})`;
-    $('desc-count').textContent = `(${description.length} / ${rules.description.max})`;
+    $('title-count').textContent = `(${title.length}/${rules.title.max})`;
+    $('desc-count').textContent = `(${description.length}/${rules.description.max})`;
     $('word-count').textContent = `(${words} words, ${h2} H2)`;
-    $('title-hint').textContent =
-      title.length >= rules.title.min && title.length <= rules.title.max
-        ? 'H1 is rendered from this field — do not add # in body'
-        : `Recommended: ${rules.title.min}–${rules.title.max} characters`;
-    $('body-hint').textContent =
-      archetype === 'comparison'
-        ? 'Comparison articles: include affiliate disclosure + 8–14 H2 sections'
-        : 'Guide articles: 4 core H2s (Problem → What Most People Try → What Actually Helps → Takeaway)';
-
     $('preview').textContent = buildMarkdown();
     return issues.length === 0;
   }
 
   function update() {
-    const title = $('title').value;
     const slugField = $('slug');
-    if (!slugField.dataset.manual) {
-      slugField.value = slugify(title);
-    }
+    if (!slugField.dataset.manual) slugField.value = slugify($('title').value);
     validate();
   }
 
+  async function publishArticle() {
+    const token = getToken();
+    if (!token) { setGithubStatus('Save a GitHub token first', true); return; }
+    const slug = $('slug').value.trim();
+    if (!slug) { $('publish-status').textContent = 'Slug is required'; return; }
+
+    const btn = $('btn-publish');
+    btn.disabled = true;
+    $('publish-status').textContent = 'Publishing…';
+    $('publish-status').className = 'text-sm text-gray-600';
+
+    try {
+      const path = `${ARTICLE_DIR}/${slug}.md`;
+      const content = buildMarkdown();
+      const title = $('title').value.trim();
+      await putRepoFile(path, content, `Add article: ${title}`, token);
+      $('publish-status').textContent = `Published → ${path}. Cloudflare will deploy shortly.`;
+      $('publish-status').className = 'text-sm text-green-700';
+    } catch (err) {
+      $('publish-status').textContent = `Error: ${err.message}`;
+      $('publish-status').className = 'text-sm text-red-600';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function renderPoolTable() {
+    const tbody = $('pool-table');
+    if (!poolData.items.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="px-3 py-4 text-gray-500">No items in pool</td></tr>';
+      return;
+    }
+    tbody.innerHTML = poolData.items.map((item, i) => `
+      <tr class="border-t border-gray-100">
+        <td class="px-3 py-2"><span class="rounded bg-gray-100 px-2 py-0.5 text-xs">${item.status}</span></td>
+        <td class="px-3 py-2 font-medium">${item.title}</td>
+        <td class="px-3 py-2 text-gray-600">${item.primaryKeyword}</td>
+        <td class="px-3 py-2 text-gray-600">${item.source ?? '—'}</td>
+        <td class="px-3 py-2 text-gray-600">${item.category}</td>
+        <td class="px-3 py-2">
+          <button type="button" data-pool-use="${i}" class="text-xs text-blue-600 hover:underline">Use</button>
+          <button type="button" data-pool-queue="${i}" class="ml-2 text-xs text-gray-600 hover:underline">Queue</button>
+          <button type="button" data-pool-del="${i}" class="ml-2 text-xs text-red-600 hover:underline">Del</button>
+        </td>
+      </tr>
+    `).join('');
+
+    tbody.querySelectorAll('[data-pool-use]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = poolData.items[Number(btn.dataset.poolUse)];
+        $('title').value = item.title;
+        $('description').value = item.hypothesis?.slice(0, 160) ?? '';
+        $('category').value = item.category;
+        $('archetype').value = item.archetype;
+        document.querySelector('[data-tab="upload"]')?.click();
+        update();
+      });
+    });
+    tbody.querySelectorAll('[data-pool-queue]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        poolData.items[Number(btn.dataset.poolQueue)].status = 'queued';
+        renderPoolTable();
+      });
+    });
+    tbody.querySelectorAll('[data-pool-del]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        poolData.items.splice(Number(btn.dataset.poolDel), 1);
+        renderPoolTable();
+      });
+    });
+  }
+
+  async function loadPool() {
+    const token = getToken();
+    if (!token) { $('pool-status').textContent = 'Save GitHub token to load pool'; return; }
+    $('pool-status').textContent = 'Loading…';
+    try {
+      const file = await getRepoFile(POOL_PATH, token);
+      poolData = JSON.parse(file.content);
+      poolSha = file.sha;
+      renderPoolTable();
+      $('pool-status').textContent = `Loaded ${poolData.items.length} items`;
+    } catch (err) {
+      $('pool-status').textContent = `Load failed: ${err.message}`;
+    }
+  }
+
+  async function savePool() {
+    const token = getToken();
+    if (!token) { $('pool-status').textContent = 'Save GitHub token first'; return; }
+    poolData.updatedAt = new Date().toISOString();
+    const content = JSON.stringify(poolData, null, 2) + '\n';
+    $('pool-status').textContent = 'Saving…';
+    try {
+      const res = await putRepoFile(POOL_PATH, content, 'Update content pool', token, poolSha);
+      poolSha = res.content?.sha;
+      // Mirror to public for static read
+      await putRepoFile('public/data/content-pool.json', content, 'Sync content pool to public', token).catch(() => {});
+      $('pool-status').textContent = 'Pool saved to GitHub';
+    } catch (err) {
+      $('pool-status').textContent = `Save failed: ${err.message}`;
+    }
+  }
+
+  function addPoolItem() {
+    const title = $('pool-title').value.trim();
+    const keyword = $('pool-keyword').value.trim();
+    if (!title || !keyword) { $('pool-status').textContent = 'Title and keyword required'; return; }
+    const impressions = Number($('pool-impressions').value);
+    const gscQuery = $('pool-gsc-query').value.trim();
+    poolData.items.push({
+      id: slugify(keyword) + '-' + Date.now(),
+      title,
+      primaryKeyword: keyword,
+      category: $('pool-category').value,
+      archetype: $('pool-archetype').value,
+      status: 'idea',
+      source: $('pool-source').value,
+      hypothesis: $('pool-hypothesis').value.trim(),
+      ...(gscQuery ? { demand: { gscQuery, gscImpressions: impressions || undefined } } : {}),
+      createdAt: new Date().toISOString(),
+    });
+    $('pool-title').value = '';
+    $('pool-keyword').value = '';
+    $('pool-hypothesis').value = '';
+    $('pool-gsc-query').value = '';
+    $('pool-impressions').value = '';
+    renderPoolTable();
+    $('pool-status').textContent = 'Added locally — click Save pool to GitHub';
+  }
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach((b) => {
+        b.classList.remove('border-gray-900', 'text-gray-900');
+        b.classList.add('border-transparent', 'text-gray-500');
+      });
+      btn.classList.add('border-gray-900', 'text-gray-900');
+      btn.classList.remove('border-transparent', 'text-gray-500');
+      document.querySelectorAll('.tab-panel').forEach((p) => p.classList.add('hidden'));
+      $(`tab-${btn.dataset.tab}`)?.classList.remove('hidden');
+      if (btn.dataset.tab === 'pool') loadPool();
+    });
+  });
+
+  // GitHub token
+  const saved = getToken();
+  if (saved) {
+    $('github-token').value = saved;
+    setGithubStatus('Token loaded from localStorage');
+  }
+
+  $('btn-save-token')?.addEventListener('click', () => {
+    const token = $('github-token').value.trim();
+    if (!token) return;
+    localStorage.setItem(GITHUB_TOKEN_KEY, token);
+    setGithubStatus('Token saved');
+    loadPool();
+  });
+
+  $('btn-clear-token')?.addEventListener('click', () => {
+    localStorage.removeItem(GITHUB_TOKEN_KEY);
+    $('github-token').value = '';
+    setGithubStatus('Token cleared');
+  });
+
   fields.forEach((id) => {
-    const el = $(id);
-    el?.addEventListener('input', update);
-    el?.addEventListener('change', update);
+    $(id)?.addEventListener('input', update);
+    $(id)?.addEventListener('change', update);
   });
 
-  $('slug')?.addEventListener('input', () => {
-    $('slug').dataset.manual = '1';
-    validate();
-  });
-
-  $('btn-template')?.addEventListener('click', () => {
-    if (!$('body').value.trim()) $('body').value = GUIDE_OUTLINE;
-    update();
-  });
-
-  $('btn-copy')?.addEventListener('click', async () => {
-    await navigator.clipboard.writeText(buildMarkdown());
-    $('btn-copy').textContent = 'Copied!';
-    setTimeout(() => { $('btn-copy').textContent = 'Copy Markdown'; }, 1500);
-  });
-
+  $('slug')?.addEventListener('input', () => { $('slug').dataset.manual = '1'; validate(); });
+  $('btn-template')?.addEventListener('click', () => { if (!$('body').value.trim()) $('body').value = GUIDE_OUTLINE; update(); });
+  $('btn-copy')?.addEventListener('click', async () => { await navigator.clipboard.writeText(buildMarkdown()); });
   $('btn-download')?.addEventListener('click', () => {
     const slug = $('slug').value.trim() || 'article';
-    const blob = new Blob([buildMarkdown()], { type: 'text/markdown' });
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    a.href = URL.createObjectURL(new Blob([buildMarkdown()], { type: 'text/markdown' }));
     a.download = `${slug}.md`;
     a.click();
-    URL.revokeObjectURL(a.href);
   });
-
-  $('archetype')?.addEventListener('change', () => {
-    if ($('archetype').value === 'comparison') $('affiliate').checked = true;
-    update();
-  });
+  $('btn-publish')?.addEventListener('click', publishArticle);
+  $('archetype')?.addEventListener('change', () => { if ($('archetype').value === 'comparison') $('affiliate').checked = true; update(); });
+  $('btn-pool-add')?.addEventListener('click', addPoolItem);
+  $('btn-pool-save')?.addEventListener('click', savePool);
+  $('btn-pool-load')?.addEventListener('click', loadPool);
 
   const today = new Date();
   $('pubDate').value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`;
   update();
+  renderPoolTable();
 </script>

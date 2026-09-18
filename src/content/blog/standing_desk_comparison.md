@@ -1,8 +1,17 @@
-# Standing Desk Converters vs. Full Desks: Cost-Benefit Analysis
+---
+title: "Standing Desk Converters vs. Full Desks: Cost-Benefit Analysis"
+description: "Converter or full standing desk? After 14 months testing both, here is the cost-per-hour math on what actually gets used for deep work."
+pubDate: 2025-02-01T00:00:00Z
+category: work
+tags:
+  - overwhelm
+  - deep-work
+  - remote-work
+draft: false
+ads: true
+---
 
-**Category:** Work / Focus  
-**Tags:** tools, productivity-tools, ergonomics, remote-work, health  
-**Word Count:** ~5,200 words
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 ---
 

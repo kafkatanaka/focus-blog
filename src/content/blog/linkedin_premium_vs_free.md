@@ -1,8 +1,17 @@
-# LinkedIn Premium vs. Free: Is It Worth It for Job Seekers?
+---
+title: "LinkedIn Premium vs. Free: Is It Worth It for Job Seekers?"
+description: "LinkedIn Premium promises more visibility and interviews—but does it deliver? Eight months of testing across two job searches, with real outcomes."
+pubDate: 2025-02-01T00:00:00Z
+category: work
+tags:
+  - overwhelm
+  - essentialism
+  - knowledge-worker
+draft: false
+ads: true
+---
 
-**Category:** Work / Career  
-**Tags:** tools, job-search, career-development, networking, professional-development  
-**Word Count:** ~5,300 words
+<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>
 
 ---
 
