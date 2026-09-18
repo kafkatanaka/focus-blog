@@ -1,0 +1,355 @@
+{
+  "generatedAt": "2026-09-18T22:37:44.622Z",
+  "totals": {
+    "all": 417,
+    "published": 416,
+    "drafts": 1
+  },
+  "titleLength": {
+    "min": 0,
+    "max": 81,
+    "avg": 44.6,
+    "p25": 40,
+    "p50": 44,
+    "p75": 50
+  },
+  "descriptionLength": {
+    "min": 0,
+    "max": 193,
+    "avg": 139.9,
+    "p25": 133,
+    "p50": 141,
+    "p75": 150,
+    "inRange120to160": 356
+  },
+  "wordCount": {
+    "min": 1244,
+    "max": 14660,
+    "avg": 3711,
+    "p25": 1654,
+    "p50": 2214,
+    "p75": 5813
+  },
+  "h2Count": {
+    "min": 4,
+    "max": 14,
+    "avg": 6,
+    "p50": 4
+  },
+  "h3Count": {
+    "min": 4,
+    "max": 51,
+    "avg": 8.1,
+    "p50": 4
+  },
+  "tagCount": {
+    "distribution": {
+      "0": 28,
+      "1": 0,
+      "2": 0,
+      "3": 312,
+      "4": 33,
+      "5": 30,
+      "6": 10
+    },
+    "mostCommon": [
+      {
+        "tag": "knowledge-worker",
+        "count": 234
+      },
+      {
+        "tag": "essentialism",
+        "count": 134
+      },
+      {
+        "tag": "overwhelm",
+        "count": 107
+      },
+      {
+        "tag": "decision-fatigue",
+        "count": 96
+      },
+      {
+        "tag": "attention-management",
+        "count": 86
+      },
+      {
+        "tag": "burnout",
+        "count": 72
+      },
+      {
+        "tag": "remote-work",
+        "count": 71
+      },
+      {
+        "tag": "distraction",
+        "count": 68
+      },
+      {
+        "tag": "deep-work",
+        "count": 59
+      },
+      {
+        "tag": "tools",
+        "count": 44
+      },
+      {
+        "tag": "procrastination",
+        "count": 39
+      },
+      {
+        "tag": "freelance",
+        "count": 35
+      },
+      {
+        "tag": "automation",
+        "count": 35
+      },
+      {
+        "tag": "time-blocking",
+        "count": 32
+      },
+      {
+        "tag": "adhd",
+        "count": 29
+      },
+      {
+        "tag": "productivity-tools",
+        "count": 22
+      },
+      {
+        "tag": "focus-apps",
+        "count": 11
+      },
+      {
+        "tag": "startup",
+        "count": 8
+      },
+      {
+        "tag": "habit-formation",
+        "count": 8
+      },
+      {
+        "tag": "habit-building",
+        "count": 7
+      },
+      {
+        "tag": "books",
+        "count": 7
+      },
+      {
+        "tag": "beginner",
+        "count": 6
+      },
+      {
+        "tag": "career-strategy",
+        "count": 4
+      },
+      {
+        "tag": "investing",
+        "count": 4
+      },
+      {
+        "tag": "wellness",
+        "count": 4
+      },
+      {
+        "tag": "health",
+        "count": 4
+      },
+      {
+        "tag": "low-income",
+        "count": 4
+      },
+      {
+        "tag": "negotiation",
+        "count": 3
+      },
+      {
+        "tag": "job-search",
+        "count": 3
+      },
+      {
+        "tag": "career",
+        "count": 3
+      }
+    ]
+  },
+  "categories": {
+    "money": 96,
+    "none": 9,
+    "focus": 111,
+    "work": 108,
+    "habits": 92
+  },
+  "affiliateDisclosure": {
+    "with": 55,
+    "without": 361
+  },
+  "hookBeforeFirstH2": {
+    "with": 407,
+    "without": 9
+  },
+  "topH2Headings": [
+    {
+      "heading": "the takeaway",
+      "count": 404
+    },
+    {
+      "heading": "what most people try",
+      "count": 314
+    },
+    {
+      "heading": "what actually helps",
+      "count": 290
+    },
+    {
+      "heading": "the problem",
+      "count": 287
+    },
+    {
+      "heading": "what you'll need",
+      "count": 60
+    },
+    {
+      "heading": "the step-by-step process",
+      "count": 60
+    },
+    {
+      "heading": "real-world examples",
+      "count": 60
+    },
+    {
+      "heading": "common problems and fixes",
+      "count": 60
+    },
+    {
+      "heading": "the minimal viable version",
+      "count": 60
+    },
+    {
+      "heading": "advanced optimizations",
+      "count": 60
+    },
+    {
+      "heading": "what to do when it stops working",
+      "count": 60
+    },
+    {
+      "heading": "tools and resources",
+      "count": 60
+    },
+    {
+      "heading": "frequently asked questions",
+      "count": 34
+    },
+    {
+      "heading": "quick comparison",
+      "count": 33
+    },
+    {
+      "heading": "situational recommendations",
+      "count": 33
+    },
+    {
+      "heading": "why this choice matters",
+      "count": 27
+    },
+    {
+      "heading": "how i tested these",
+      "count": 26
+    },
+    {
+      "heading": "quick comparison table",
+      "count": 26
+    },
+    {
+      "heading": "common questions",
+      "count": 26
+    },
+    {
+      "heading": "the problem this solves",
+      "count": 26
+    },
+    {
+      "heading": "troubleshooting common issues",
+      "count": 26
+    },
+    {
+      "heading": "who this is (and isn't) for",
+      "count": 26
+    },
+    {
+      "heading": "the rankings",
+      "count": 25
+    },
+    {
+      "heading": "the rankings: what actually works",
+      "count": 25
+    },
+    {
+      "heading": "free alternatives worth trying",
+      "count": 25
+    },
+    {
+      "heading": "head-to-head comparisons",
+      "count": 23
+    },
+    {
+      "heading": "how to combine tools for maximum effect",
+      "count": 21
+    },
+    {
+      "heading": "update log",
+      "count": 19
+    },
+    {
+      "heading": "free alternatives that actually work",
+      "count": 18
+    },
+    {
+      "heading": "decision framework",
+      "count": 15
+    },
+    {
+      "heading": "the tools i rejected (and why)",
+      "count": 13
+    },
+    {
+      "heading": "feature-by-feature breakdown",
+      "count": 11
+    },
+    {
+      "heading": "hook",
+      "count": 9
+    },
+    {
+      "heading": "how this list works",
+      "count": 7
+    },
+    {
+      "heading": "honorable mentions worth your time",
+      "count": 7
+    },
+    {
+      "heading": "books to skip (and why)",
+      "count": 7
+    },
+    {
+      "heading": "how to read these books effectively",
+      "count": 7
+    },
+    {
+      "heading": "pairing books with other resources",
+      "count": 7
+    },
+    {
+      "heading": "what to do after reading",
+      "count": 7
+    },
+    {
+      "heading": "who this reading list is (and isn't) for",
+      "count": 7
+    }
+  ]
+}

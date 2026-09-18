@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "generatedFrom": "416 published articles in src/content/blog/",
+  "analysisFile": "data/article-analysis.json",
+  "site": {
+    "name": "The Focus Dividend",
+    "url": "https://focus-dividend.com",
+    "language": "en",
+    "audience": "knowledge workers"
+  },
+  "frontmatter": {
+    "required": ["title", "description", "pubDate", "category", "tags"],
+    "optional": ["updatedDate", "draft", "ads", "thumbnail"],
+    "title": {
+      "minChars": 35,
+      "maxChars": 60,
+      "medianChars": 44,
+      "format": "Sentence case or title case. Primary keyword near the start. No clickbait."
+    },
+    "description": {
+      "minChars": 120,
+      "maxChars": 160,
+      "medianChars": 141,
+      "format": "Meta description. Benefit-led. Ends with a hook or promise."
+    },
+    "pubDate": {
+      "format": "ISO 8601 UTC",
+      "example": "2026-09-01T00:00:00Z",
+      "rule": "Use the 1st of the publishing month at 00:00:00Z"
+    },
+    "category": {
+      "allowed": ["focus", "work", "money", "habits"],
+      "distribution": { "focus": 111, "work": 108, "money": 96, "habits": 92 }
+    },
+    "tags": {
+      "count": 3,
+      "taxonomy": {
+        "symptom": ["burnout", "distraction", "procrastination", "overwhelm", "decision-fatigue"],
+        "method": ["deep-work", "time-blocking", "attention-management", "essentialism", "automation"],
+        "attribute": ["remote-work", "knowledge-worker", "adhd", "freelance", "startup"]
+      },
+      "rule": "Pick exactly one tag from each taxonomy group when possible"
+    },
+    "draft": { "default": false },
+    "ads": { "default": true },
+    "thumbnail": {
+      "optional": true,
+      "defaultPath": "/images/thumbnails/{slug}.webp"
+    }
+  },
+  "structure": {
+    "h1": {
+      "source": "frontmatter title",
+      "note": "Do NOT add # heading in markdown body. Layout renders H1 from title."
+    },
+    "hook": {
+      "required": true,
+      "placement": "Before first ## heading",
+      "paragraphs": "2-3",
+      "includesBoldClaim": true,
+      "coverage": "98% of published articles"
+    },
+    "archetypes": {
+      "guide": {
+        "wordCount": { "min": 1600, "max": 2800, "median": 2214 },
+        "h2Count": { "min": 4, "max": 6, "median": 4 },
+        "sections": [
+          "## The Problem",
+          "### Why this happens to knowledge workers",
+          "## What Most People Try",
+          "## What Actually Helps",
+          "### 1. [First strategy]",
+          "### 2. [Second strategy]",
+          "### 3. [Third strategy]",
+          "## The Takeaway"
+        ]
+      },
+      "comparison": {
+        "wordCount": { "min": 4000, "max": 8000, "median": 5813 },
+        "h2Count": { "min": 8, "max": 14 },
+        "sections": [
+          "## The Problem This Solves",
+          "### Why knowledge workers struggle with this",
+          "## What Most People Try",
+          "## Quick Comparison",
+          "## The Rankings",
+          "## Head-to-Head Comparisons",
+          "## Situational Recommendations",
+          "## Free Alternatives Worth Trying",
+          "## The Takeaway"
+        ],
+        "affiliateDisclosure": true
+      }
+    }
+  },
+  "voice": {
+    "tone": ["conversational", "direct", "evidence-based", "empathetic"],
+    "patterns": [
+      "Most advice tells you X. But...",
+      "You're not lazy. You're...",
+      "Research suggests...",
+      "Many people find..."
+    ],
+    "avoid": [
+      "Medical diagnosis or prescription",
+      "Absolute claims without nuance",
+      "Generic AI filler phrases",
+      "H1 in body markdown"
+    ]
+  }
+}

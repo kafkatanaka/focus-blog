@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  CATEGORIES,
+  SYMPTOM_TAGS,
+  METHOD_TAGS,
+  ATTRIBUTE_TAGS,
+  ARTICLE_RULES,
+} from '../../lib/article-rules';
+---
+
+<BaseLayout
+  title="Article Upload"
+  description="Internal article upload tool for The Focus Dividend."
+  noindex={true}
+>
+
+  <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+    <header class="mb-8 border-b border-gray-200 pb-6">
+      <p class="text-sm font-medium uppercase tracking-wide text-gray-500">Internal</p>
+      <h1 class="mt-1 text-3xl font-bold text-gray-900">Article Upload</h1>
+      <p class="mt-2 max-w-2xl text-gray-600">
+        Compose frontmatter and Markdown body, then download the <code class="text-sm">.md</code> file
+        and place it in <code class="text-sm">src/content/blog/</code>. Generation rules are based on
+        analysis of 416 published articles.
+      </p>
+    </header>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+      <section aria-label="Article form" class="space-y-5">
+        <div>
+          <label for="archetype" class="block text-sm font-medium text-gray-700">Archetype</label>
+          <select id="archetype" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+            <option value="guide">Guide (1,600–2,800 words)</option>
+            <option value="comparison">Comparison (4,000–8,000 words)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="title" class="block text-sm font-medium text-gray-700">
+            Title <span id="title-count" class="font-normal text-gray-400"></span>
+          </label>
+          <input
+            id="title"
+            type="text"
+            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+            placeholder="Attention Management Beats Time Management"
+          />
+          <p id="title-hint" class="mt-1 text-xs text-gray-500"></p>
+        </div>
+
+        <div>
+          <label for="slug" class="block text-sm font-medium text-gray-700">Slug (filename)</label>
+          <input
+            id="slug"
+            type="text"
+            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm"
+            placeholder="attention-management-beats-time-management"
+          />
+        </div>
+
+        <div>
+          <label for="description" class="block text-sm font-medium text-gray-700">
+            Description <span id="desc-count" class="font-normal text-gray-400"></span>
+          </label>
+          <textarea
+            id="description"
+            rows="2"
+            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            placeholder="Meta description, 120–160 characters"
+          ></textarea>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+            <select id="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              {CATEGORIES.map((c) => (
+                <option value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label for="pubDate" class="block text-sm font-medium text-gray-700">pubDate (UTC)</label>
+            <input id="pubDate" type="date" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+        </div>
+
+        <fieldset>
+          <legend class="text-sm font-medium text-gray-700">Tags (pick 3 — one per group)</legend>
+          <div class="mt-2 grid gap-3 sm:grid-cols-3">
+            <div>
+              <label for="tag-symptom" class="text-xs text-gray-500">Symptom</label>
+              <select id="tag-symptom" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                <option value="">—</option>
+                {SYMPTOM_TAGS.map((t) => (
+                  <option value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label for="tag-method" class="text-xs text-gray-500">Method</label>
+              <select id="tag-method" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                <option value="">—</option>
+                {METHOD_TAGS.map((t) => (
+                  <option value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label for="tag-attribute" class="text-xs text-gray-500">Attribute</label>
+              <select id="tag-attribute" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                <option value="">—</option>
+                {ATTRIBUTE_TAGS.map((t) => (
+                  <option value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="flex flex-wrap gap-4">
+          <label class="flex items-center gap-2 text-sm text-gray-700">
+            <input id="draft" type="checkbox" class="rounded border-gray-300" />
+            draft: true
+          </label>
+          <label class="flex items-center gap-2 text-sm text-gray-700">
+            <input id="ads" type="checkbox" checked class="rounded border-gray-300" />
+            ads: true
+          </label>
+          <label class="flex items-center gap-2 text-sm text-gray-700">
+            <input id="affiliate" type="checkbox" class="rounded border-gray-300" />
+            Affiliate disclosure (comparison)
+          </label>
+        </div>
+
+        <div>
+          <label for="body" class="block text-sm font-medium text-gray-700">
+            Body (Markdown) <span id="word-count" class="font-normal text-gray-400"></span>
+          </label>
+          <textarea
+            id="body"
+            rows="18"
+            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm leading-relaxed"
+            placeholder="Hook paragraphs (no H1)...
+
+## The Problem
+..."
+          ></textarea>
+          <p id="body-hint" class="mt-1 text-xs text-gray-500"></p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button
+            type="button"
+            id="btn-download"
+            class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          >
+            Download .md
+          </button>
+          <button
+            type="button"
+            id="btn-copy"
+            class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Copy Markdown
+          </button>
+          <button
+            type="button"
+            id="btn-template"
+            class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Insert guide outline
+          </button>
+        </div>
+
+        <ul id="validation" class="space-y-1 text-sm"></ul>
+      </section>
+
+      <section aria-label="Preview">
+        <div class="sticky top-4">
+          <h2 class="text-sm font-medium text-gray-700">Preview</h2>
+          <pre
+            id="preview"
+            class="mt-2 max-h-[calc(100vh-8rem)] overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4 text-xs leading-relaxed text-gray-800"
+          ></pre>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<script define:vars={{ rules: ARTICLE_RULES, categories: CATEGORIES }}>
+  const $ = (id) => document.getElementById(id);
+
+  const fields = [
+    'archetype', 'title', 'slug', 'description', 'category', 'pubDate',
+    'tag-symptom', 'tag-method', 'tag-attribute', 'draft', 'ads', 'affiliate', 'body',
+  ];
+
+  function slugify(title) {
+    return title
+      .toLowerCase()
+      .replace(/['']/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80);
+  }
+
+  function countWords(text) {
+    return text
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/```[\s\S]*?```/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length > 0).length;
+  }
+
+  function firstOfMonthIso(dateStr) {
+    const d = dateStr ? new Date(dateStr + 'T00:00:00Z') : new Date();
+    const y = d.getUTCFullYear();
+    const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+    return `${y}-${m}-01T00:00:00Z`;
+  }
+
+  const AFFILIATE =
+    '<p class="affiliate-disclosure"><em>Disclosure: This post may contain affiliate links. We may earn a commission if you make a purchase through our links—at no extra cost to you. See our <a href="/affiliate-disclosure/">Affiliate Disclosure</a> for details.</em></p>';
+
+  const GUIDE_OUTLINE = `You've tried the obvious fixes. They worked for a week, then life happened.
+
+**The problem isn't willpower—it's [reframe the core issue].**
+
+## The Problem
+
+[Describe the reader's struggle in 150–250 words.]
+
+### Why this happens to knowledge workers
+
+[Explain the mechanism in 150–200 words.]
+
+## What Most People Try
+
+[Common but ineffective approaches, 300–400 words.]
+
+## What Actually Helps
+
+### 1. [First strategy]
+
+[200–250 words.]
+
+### 2. [Second strategy]
+
+[200–250 words.]
+
+### 3. [Third strategy]
+
+[200–250 words.]
+
+## The Takeaway
+
+[2–3 sentences. Reframe + one actionable next step.]`;
+
+  function buildMarkdown() {
+    const title = $('title').value.trim();
+    const description = $('description').value.trim();
+    const category = $('category').value;
+    const tags = [
+      $('tag-symptom').value,
+      $('tag-method').value,
+      $('tag-attribute').value,
+    ].filter(Boolean);
+    const draft = $('draft').checked;
+    const ads = $('ads').checked;
+    const body = $('body').value.trim();
+    const pubDate = firstOfMonthIso($('pubDate').value);
+    const affiliate = $('affiliate').checked;
+
+    const fm = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      `description: "${description.replace(/"/g, '\\"')}"`,
+      `pubDate: ${pubDate}`,
+      `category: ${category}`,
+      'tags:',
+      ...tags.map((t) => `  - ${t}`),
+      draft ? 'draft: true' : 'draft: false',
+      ads ? 'ads: true' : 'ads: false',
+      '---',
+    ].join('\n');
+
+    const disclosure = affiliate ? `${AFFILIATE}\n\n` : '';
+    return `${fm}\n\n${disclosure}${body}\n`;
+  }
+
+  function validate() {
+    const title = $('title').value.trim();
+    const description = $('description').value.trim();
+    const body = $('body').value.trim();
+    const archetype = $('archetype').value;
+    const tags = [
+      $('tag-symptom').value,
+      $('tag-method').value,
+      $('tag-attribute').value,
+    ].filter(Boolean);
+    const words = countWords(body);
+    const h2 = (body.match(/^##\s+/gm) || []).length;
+    const issues = [];
+    const ok = [];
+
+    if (title.length < rules.title.min || title.length > rules.title.max) {
+      issues.push(`Title: ${title.length} chars (target ${rules.title.min}–${rules.title.max})`);
+    } else ok.push(`Title length OK (${title.length})`);
+
+    if (description.length < rules.description.min || description.length > rules.description.max) {
+      issues.push(`Description: ${description.length} chars (target ${rules.description.min}–${rules.description.max})`);
+    } else ok.push(`Description length OK (${description.length})`);
+
+    if (tags.length !== 3) issues.push(`Tags: ${tags.length}/3 selected`);
+    else ok.push('Tags: 3/3');
+
+    if (body.startsWith('# ')) issues.push('Body contains H1 — remove it (title is frontmatter)');
+    if (!body.trim() || body.trim().startsWith('##')) {
+      issues.push('Missing hook before first ## heading');
+    } else ok.push('Hook before first H2');
+
+    const wc = archetype === 'comparison' ? rules.comparisonWordCount : rules.guideWordCount;
+    if (words < wc.min || words > wc.max) {
+      issues.push(`Word count: ${words} (target ${wc.min}–${wc.max} for ${archetype})`);
+    } else ok.push(`Word count OK (${words})`);
+
+    if (!body.includes('## The Takeaway')) issues.push('Missing ## The Takeaway section');
+    else ok.push('Has ## The Takeaway');
+
+    const list = $('validation');
+    list.innerHTML = [
+      ...issues.map((m) => `<li class="text-amber-700">⚠ ${m}</li>`),
+      ...ok.map((m) => `<li class="text-green-700">✓ ${m}</li>`),
+    ].join('');
+
+    $('title-count').textContent = `(${title.length} / ${rules.title.max})`;
+    $('desc-count').textContent = `(${description.length} / ${rules.description.max})`;
+    $('word-count').textContent = `(${words} words, ${h2} H2)`;
+    $('title-hint').textContent =
+      title.length >= rules.title.min && title.length <= rules.title.max
+        ? 'H1 is rendered from this field — do not add # in body'
+        : `Recommended: ${rules.title.min}–${rules.title.max} characters`;
+    $('body-hint').textContent =
+      archetype === 'comparison'
+        ? 'Comparison articles: include affiliate disclosure + 8–14 H2 sections'
+        : 'Guide articles: 4 core H2s (Problem → What Most People Try → What Actually Helps → Takeaway)';
+
+    $('preview').textContent = buildMarkdown();
+    return issues.length === 0;
+  }
+
+  function update() {
+    const title = $('title').value;
+    const slugField = $('slug');
+    if (!slugField.dataset.manual) {
+      slugField.value = slugify(title);
+    }
+    validate();
+  }
+
+  fields.forEach((id) => {
+    const el = $(id);
+    el?.addEventListener('input', update);
+    el?.addEventListener('change', update);
+  });
+
+  $('slug')?.addEventListener('input', () => {
+    $('slug').dataset.manual = '1';
+    validate();
+  });
+
+  $('btn-template')?.addEventListener('click', () => {
+    if (!$('body').value.trim()) $('body').value = GUIDE_OUTLINE;
+    update();
+  });
+
+  $('btn-copy')?.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(buildMarkdown());
+    $('btn-copy').textContent = 'Copied!';
+    setTimeout(() => { $('btn-copy').textContent = 'Copy Markdown'; }, 1500);
+  });
+
+  $('btn-download')?.addEventListener('click', () => {
+    const slug = $('slug').value.trim() || 'article';
+    const blob = new Blob([buildMarkdown()], { type: 'text/markdown' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${slug}.md`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  $('archetype')?.addEventListener('change', () => {
+    if ($('archetype').value === 'comparison') $('affiliate').checked = true;
+    update();
+  });
+
+  const today = new Date();
+  $('pubDate').value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`;
+  update();
+</script>
