@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContentPool",
+  "description": "Keyword/title pool for demand-driven article planning (GA4 + GSC)",
+  "type": "object",
+  "properties": {
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "primaryKeyword", "category", "archetype", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string", "description": "Proposed article title (H1)" },
+          "primaryKeyword": { "type": "string" },
+          "secondaryKeywords": { "type": "array", "items": { "type": "string" } },
+          "category": { "enum": ["focus", "work", "money", "habits"] },
+          "archetype": { "enum": ["guide", "comparison"] },
+          "status": {
+            "enum": ["idea", "queued", "writing", "published", "measuring", "rewrite", "rejected"]
+          },
+          "source": {
+            "type": "string",
+            "description": "gsc | ga4 | manual | competitor-gap"
+          },
+          "demand": {
+            "type": "object",
+            "properties": {
+              "gscImpressions": { "type": "number" },
+              "gscPosition": { "type": "number" },
+              "gscCtr": { "type": "number" },
+              "gscQuery": { "type": "string" }
+            }
+          },
+          "hypothesis": { "type": "string" },
+          "kpiTargets": {
+            "type": "object",
+            "properties": {
+              "position90d": { "type": "number" },
+              "impressions90d": { "type": "number" },
+              "ctr90d": { "type": "number" }
+            }
+          },
+          "publishedSlug": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "publishedAt": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}

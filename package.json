@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "export-titles": "node scripts/export-article-titles.mjs"
+    "export-titles": "node scripts/export-article-titles.mjs",
+    "analyze-articles": "node scripts/analyze-articles.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
