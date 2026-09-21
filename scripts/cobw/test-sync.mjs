@@ -56,6 +56,31 @@ assert.equal(state.ideas.cobw_001.articleStatus, 'published');
 state = syncCobwRegistry(state, registry, '2026-09-22T02:00:00Z');
 assert.equal(Object.keys(state.ideas).length, 30, 'second sync must not duplicate rows');
 
+let pruneState = syncCobwRegistry(emptySyncState(), registry);
+pruneState = {
+  ...pruneState,
+  ideas: {
+    ...pruneState.ideas,
+    cobw_legacy_dev: {
+      cobwId: 'cobw_legacy_dev',
+      sourceTitle: 'Dev only',
+      sourceCategory: 'money',
+      sourcePremise: '',
+      youtubeStatus: 'not_started',
+      youtubeUrl: null,
+      youtubeVideoId: null,
+      articleStatus: 'not_created',
+      articleSlug: null,
+      articleUrl: null,
+      articleTitle: null,
+      seoTitle: null,
+      lastSyncedAt: null,
+    },
+  },
+};
+pruneState = syncCobwRegistry(pruneState, registry);
+assert.equal(pruneState.ideas.cobw_legacy_dev, undefined, 'prune dev-only ids not in registry');
+
 let webhookState = emptySyncState();
 webhookState = applyVideoPublishedWebhook(webhookState, {
   cobw_id: 'cobw_099',

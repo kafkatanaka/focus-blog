@@ -2,7 +2,10 @@
 
 ## Architecture
 
-- **Source of truth:** [kafkatanaka/at_her_cafe](https://github.com/kafkatanaka/at_her_cafe) — `data/cobw-ideas.yaml`
+- **Source of truth:** [kafkatanaka/at_her_cafe](https://github.com/kafkatanaka/at_her_cafe) — `data/cobw-ideas.yaml`  
+  (Wave 1: `config/cobw-opportunity-map/inventory.csv` → bootstrap; runtime pipeline remains Supabase `topics` — see at_her_cafe `docs/COBW-REGISTRY.md`)
+- **Stable IDs:** `cobw_opp_###` (from `COBW-OPP-###`), not title-derived slugs
+- **at_her_cafe PR:** merge [PR #187](https://github.com/kafkatanaka/at_her_cafe/pull/187) before first production sync
 - **Export (COBW repo):** `node scripts/export-registry.mjs` → `public/cobw-registry.json`  
   Template: `vendor/cobw/for-at-her-cafe/`
 - **Consumer (default, both repos private):**  

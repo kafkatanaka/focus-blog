@@ -89,6 +89,15 @@ export function syncCobwRegistry(
     ideas[id] = next;
   }
 
+  const registryIds = new Set(registry.ideas.map((r) => r.cobw_id));
+  for (const id of Object.keys(ideas)) {
+    if (registryIds.has(id)) continue;
+    const row = ideas[id];
+    if (row.articleStatus === 'not_created' || row.articleStatus === 'failed') {
+      delete ideas[id];
+    }
+  }
+
   return {
     ...state,
     lastSyncedAt: syncedAt,
