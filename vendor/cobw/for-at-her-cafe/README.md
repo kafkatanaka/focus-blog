@@ -19,12 +19,13 @@ at_her_cafe/
 3. Run `npm run export-registry` and commit `public/cobw-registry.json`.
 4. Optional: add `.github/workflows/export-cobw-registry.yml` from this folder so every push to `data/cobw-ideas.yaml` refreshes the JSON.
 
-## Focus Dividend consumer
+## Focus Dividend consumer (both repos private)
 
-- Default registry URL:  
-  `https://raw.githubusercontent.com/kafkatanaka/at_her_cafe/main/public/cobw-registry.json`
+- Admin default source:  
+  `github:kafkatanaka/at_her_cafe@main:public/cobw-registry.json`  
+  (GitHub Contents API + PAT on `/admin` — not raw.githubusercontent.com)
+- Optional: workflow `push-registry-to-focus-blog.yml` mirrors JSON into focus-blog
 - Admin: `/admin/cobw` → **Sync from COBW**
-- If the remote file is missing, the admin UI falls back to `focus-blog/public/cobw-registry.json` (dev mirror only).
 
 ## Pull mirror into focus-blog (developers)
 

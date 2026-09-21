@@ -5,8 +5,9 @@
 - **Source of truth:** [kafkatanaka/at_her_cafe](https://github.com/kafkatanaka/at_her_cafe) — `data/cobw-ideas.yaml`
 - **Export (COBW repo):** `node scripts/export-registry.mjs` → `public/cobw-registry.json`  
   Template: `vendor/cobw/for-at-her-cafe/`
-- **Consumer URL (default):**  
-  `https://raw.githubusercontent.com/kafkatanaka/at_her_cafe/main/public/cobw-registry.json`
+- **Consumer (default, both repos private):**  
+  `github:kafkatanaka/at_her_cafe@main:public/cobw-registry.json`  
+  Loaded via **GitHub Contents API** + PAT saved on `/admin` (not raw.githubusercontent.com).
 - **Focus Dividend:** `/admin/cobw` → `syncCobwRegistry()` → `data/cobw-sync-state.json` (GitHub)
 - **Dev mirror:** `vendor/cobw/data/cobw-ideas.yaml` + `public/cobw-registry.json` in focus-blog (fallback only)
 - **Stable key:** `cobw_id` (unique per idea)
@@ -20,8 +21,8 @@ Focus Dividend never edits COBW ideas. Sync updates only `sourceTitle`, `sourceC
 | `/admin` | Generic Markdown upload |
 | `/admin/cobw` | Registry sync, draft generation, publish |
 
-1. Save GitHub token on `/admin`.
-2. Open `/admin/cobw` (default registry URL points at **at_her_cafe** export; falls back to `/cobw-registry.json` if missing).
+1. Save a **Personal Access Token** on `/admin` with `repo` scope and access to **both** `at_her_cafe` and `focus-blog` (fine-grained: Contents read on COBW, read/write on focus-blog).
+2. Open `/admin/cobw` (default source is the private COBW export via `github:…` API; falls back to `/cobw-registry.json` if the file is not in COBW yet).
 3. **Sync from COBW** — imports ~30 ideas without generating articles.
 4. **Generate article** — writes `src/content/blog/{slug}.md` with `source_type: cobw`, `series: cost-of-being-wrong`.
 5. **Publish** — sets `draft: false` and refreshes `youtube_url` from sync state.
@@ -82,6 +83,17 @@ GITHUB_TOKEN=ghp_... npm run cobw:pull-from-cobw
 
 Requires a token with read access to `at_her_cafe`. Updates `vendor/cobw/data/cobw-ideas.yaml` and `public/cobw-registry.json`.
 
+## Both repositories private
+
+| Mechanism | How it works |
+|-----------|----------------|
+| **Admin Sync** | Browser calls GitHub API with your PAT → reads `at_her_cafe/.../cobw-registry.json` → upserts `focus-blog/data/cobw-sync-state.json` |
+| **CLI pull** | `GITHUB_TOKEN=... npm run cobw:pull-from-cobw` |
+| **Optional CI** | `vendor/cobw/for-at-her-cafe/.github/workflows/push-registry-to-focus-blog.yml` copies JSON into focus-blog after export |
+| **Video webhook** | Cloudflare `GITHUB_TOKEN` updates focus-blog only (no COBW read) |
+
+Raw `https://raw.githubusercontent.com/...` URLs **do not work** for private repos without authentication. Do not rely on them unless COBW is made public.
+
 ## Cloud Agent / CI access
 
-If automated jobs return 404 for `at_her_cafe`, grant the token or environment access to that private repository, or publish `public/cobw-registry.json` and rely on the raw URL.
+Grant automation tokens read access to `at_her_cafe`, or enable the push-to-focus-blog workflow so the mirror in focus-blog stays updated.

@@ -30,10 +30,14 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
         <label for="registry-url" class="text-xs font-medium text-gray-700">Registry URL</label>
         <input
           id="registry-url"
-          type="url"
+          type="text"
           class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm"
-          placeholder="/cobw-registry.json"
+          placeholder="github:kafkatanaka/at_her_cafe@main:public/cobw-registry.json"
         />
+        <p class="mt-1 text-xs text-gray-500">
+          Private repos: use the <code class="text-[11px]">github:owner/repo@branch:path</code> form.
+          Your PAT must have read access to <strong>at_her_cafe</strong> and <strong>focus-blog</strong>.
+        </p>
       </div>
       <button type="button" id="btn-sync" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
         Sync from COBW
@@ -78,7 +82,8 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
     FALLBACK_REGISTRY_URL,
   } from '../../../lib/cobw/sync';
   import { buildCobwArticleMarkdown } from '../../../lib/cobw/article-draft';
-  import type { CobwRegistry, CobwSyncState } from '../../../lib/cobw/types';
+  import { fetchCobwRegistry } from '../../../lib/cobw/registry-fetch';
+  import type { CobwSyncState } from '../../../lib/cobw/types';
 
   const STATE_PATH = 'data/cobw-sync-state.json';
   const ARTICLE_DIR = 'src/content/blog';
@@ -258,19 +263,30 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
     stateSha = res.content?.sha;
   }
 
-  async function fetchRegistry(): Promise<CobwRegistry> {
-    const raw = ($('registry-url') as HTMLInputElement).value.trim() || DEFAULT_REGISTRY_URL;
-    const primary = raw.startsWith('http') ? raw : new URL(raw, window.location.origin).href;
-    let res = await fetch(primary);
-    if (!res.ok && primary !== FALLBACK_REGISTRY_URL) {
-      const fallback = new URL(FALLBACK_REGISTRY_URL, window.location.origin).href;
-      res = await fetch(fallback);
-      if (res.ok) {
-        setStatus(`COBW export unavailable (${primary}); used local mirror ${FALLBACK_REGISTRY_URL}.`, false);
-      }
+  async function fetchRegistry() {
+    const token = getToken();
+    if (!token) {
+      throw new Error('Save a GitHub token on /admin first (needs access to both private repos).');
     }
-    if (!res.ok) throw new Error(`Registry fetch failed: ${res.status}`);
-    return res.json() as Promise<CobwRegistry>;
+    const raw = ($('registry-url') as HTMLInputElement).value.trim() || DEFAULT_REGISTRY_URL;
+    try {
+      return await fetchCobwRegistry(raw, token, {
+        fallbackLocalPath: FALLBACK_REGISTRY_URL,
+        siteOrigin: window.location.origin,
+      });
+    } catch (err) {
+      const fallback = await fetchCobwRegistry(FALLBACK_REGISTRY_URL, token, {
+        siteOrigin: window.location.origin,
+      }).catch(() => null);
+      if (fallback) {
+        setStatus(
+          `COBW registry not found in at_her_cafe yet; used local mirror ${FALLBACK_REGISTRY_URL}.`,
+          false,
+        );
+        return fallback;
+      }
+      throw err;
+    }
   }
 
   function parseCobwFrontmatter(md: string) {
