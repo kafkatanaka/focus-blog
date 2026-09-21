@@ -7,7 +7,7 @@ import type {
   CobwVideoPublishedPayload,
 } from './types';
 
-import { COBW_REGISTRY_DEFAULT_URL, COBW_REGISTRY_LOCAL_PATH } from './constants';
+import { COBW_REGISTRY_DEFAULT_URL, COBW_REGISTRY_LOCAL_PATH } from './constants.ts';
 
 /** Remote COBW export; use local path only when developing offline. */
 export const DEFAULT_REGISTRY_URL = COBW_REGISTRY_DEFAULT_URL;
