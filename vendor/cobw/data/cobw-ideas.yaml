@@ -1,0 +1,361 @@
+# Canonical COBW ideas (dev mirror). ~30 topics; 4 with published YouTube.
+ideas:
+  - id: cobw_001
+    title: Why Smart People Keep Going Broke
+    status: active
+    category: money
+    premise: >
+      High income does not necessarily create financial resilience. Smart people
+      often optimize the wrong variables and mistake complexity for control.
+    youtube:
+      status: published
+      video_id: VWUmzV8CRtY
+      url: https://www.youtube.com/watch?v=VWUmzV8CRtY
+      published_at: 2026-08-15
+  - id: cobw_002
+    title: Why Getting a Raise Doesn't Make You Rich
+    status: active
+    category: money
+    premise: >
+      Lifestyle creep and fixed obligations absorb marginal income faster than
+      most people expect, so higher pay rarely changes the balance sheet.
+    youtube:
+      status: published
+      video_id: abc123COBW2
+      url: https://www.youtube.com/watch?v=abc123COBW2
+      published_at: 2026-07-01
+  - id: cobw_003
+    title: How a Six-Figure Salary Can Still Leave You Broke
+    status: active
+    category: money
+    premise: >
+      Fixed costs, debt service, and social spending scale with income in ways
+      that keep cash flow tight even at high nominal wages.
+    youtube:
+      status: published
+      video_id: abc123COBW3
+      url: https://www.youtube.com/watch?v=abc123COBW3
+      published_at: 2026-06-10
+  - id: cobw_004
+    title: Why Looking Wealthy Can Make You Poor
+    status: active
+    category: money
+    premise: >
+      Status spending and visible consumption trade long-term net worth for
+      short-term signals, often without a deliberate choice.
+    youtube:
+      status: published
+      video_id: abc123COBW4
+      url: https://www.youtube.com/watch?v=abc123COBW4
+      published_at: 2026-05-20
+  - id: cobw_005
+    title: The Hidden Tax of Financial Overthinking
+    status: active
+    category: money
+    premise: >
+      Analysis paralysis and constant optimization burn attention and delay
+      decisions that matter more than perfect information.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_006
+    title: Why Emergency Funds Feel Impossible Until They Don't
+    status: active
+    category: money
+    premise: >
+      Buffer savings fail when treated as a moral achievement instead of a
+      cash-flow design problem.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_007
+    title: When "Good Debt" Becomes a Story You Tell Yourself
+    status: active
+    category: money
+    premise: >
+      Leverage labels hide risk concentration and reduce the urgency to build
+      flexibility.
+    youtube:
+      status: in_progress
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_008
+    title: Why Budget Apps Fail Knowledge Workers
+    status: active
+    category: money
+    premise: >
+      Irregular income and cognitive load break category-based budgeting unless
+      the system matches how decisions are actually made.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_009
+    title: The Real Cost of Comparison Spending
+    status: active
+    category: money
+    premise: >
+      Reference groups shift silently when income rises, keeping satisfaction
+      flat while spending climbs.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_010
+    title: Why Financial Advice Feels Unrealistic
+    status: active
+    category: money
+    premise: >
+      Generic rules ignore constraints, values conflict, and the emotional
+      weight of money decisions.
+    youtube:
+      status: rendered
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_011
+    title: Focus Debt Is Real (And You Are Paying Interest)
+    status: active
+    category: focus
+    premise: >
+      Unfinished cognitive threads and context switching compound like
+      interest on attention.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_012
+    title: Why Multitasking Feels Productive and Isn't
+    status: active
+    category: focus
+    premise: >
+      Rapid task switching creates activity without progress on work that
+      requires depth.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_013
+    title: The Notification Trap
+    status: active
+    category: focus
+    premise: >
+      Interrupt-driven workflows train brains to expect novelty, making sustained
+      concentration feel unnatural.
+    youtube:
+      status: in_progress
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_014
+    title: Why Your Calendar Is Stealing Your Focus
+    status: active
+    category: focus
+    premise: >
+      Fragmented schedules leave no contiguous blocks for hard problems, so
+      shallow work expands to fill the gaps.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_015
+    title: Deep Work Requires Environmental Design, Not Willpower
+    status: active
+    category: focus
+    premise: >
+      Relying on discipline alone fails when the default environment rewards
+      distraction.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_016
+    title: Why Open Offices Destroy More Than Productivity
+    status: active
+    category: focus
+    premise: >
+      Constant visibility changes what people work on, not just how fast they
+      finish tasks.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_017
+    title: The Cost of Always Being Available
+    status: active
+    category: work
+    premise: >
+      Responsiveness signals reliability but erodes boundaries that protect
+      quality and recovery.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_018
+    title: Why Burnout Looks Like Laziness From the Outside
+    status: active
+    category: work
+    premise: >
+      Depletion reduces initiative before it reduces hours, so output drops
+      while effort feels unchanged.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_019
+    title: Meeting Culture Is a Hidden Payroll Tax
+    status: active
+    category: work
+    premise: >
+      Synchronous coordination scales poorly; organizations pay twice in
+      salaries and lost focus.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_020
+    title: Why Promotions Can Make Work Harder
+    status: active
+    category: work
+    premise: >
+      New scope adds coordination and emotional labor that raw skill does not
+      prepare you for.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_021
+    title: Remote Work Didn't Fail—Your Defaults Did
+    status: active
+    category: work
+    premise: >
+      Without intentional structure, home and office both amplify the same
+      attention leaks.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_022
+    title: The Myth of the 40-Hour Knowledge Job
+    status: active
+    category: work
+    premise: >
+      Creative and analytical work does not compress linearly; extra hours often
+      buy rework, not results.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_023
+    title: Why Identity-Based Habits Backfire
+    status: active
+    category: habits
+    premise: >
+      "I am the kind of person who…" collapses when life context shifts,
+      leaving no fallback behavior.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_024
+    title: The Weekend Binge-Restrict Cycle
+    status: active
+    category: habits
+    premise: >
+      All-or-nothing rules create predictable rebound behavior that feels like
+      personal failure.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_025
+    title: Why Habit Trackers Stop Working After Week Three
+    status: active
+    category: habits
+    premise: >
+      Measurement without friction redesign becomes admin work, not behavior
+      change.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_026
+    title: Environment Beats Motivation (Again)
+    status: active
+    category: habits
+    premise: >
+      Cue redesign is cheaper than repeated self-negotiation, but people keep
+      buying inspiration instead.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_027
+    title: The Cost of "Just One More Episode"
+    status: active
+    category: habits
+    premise: >
+      Variable rewards and easy continuation exploit the same delay-discounting
+      that breaks savings goals.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_028
+    title: Why Morning Routines Break on Travel Days
+    status: active
+    category: habits
+    premise: >
+      Rigid sequences fail without portable minimum viable habits.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_029
+    title: Decision Fatigue at the Grocery Store
+    status: active
+    category: habits
+    premise: >
+      Micro-decisions deplete the same pool you need for harder choices later
+      in the day.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null
+  - id: cobw_030
+    title: When Self-Improvement Becomes Procrastination
+    status: active
+    category: focus
+    premise: >
+      Optimizing the system substitutes for doing the uncomfortable task the
+      system was meant to support.
+    youtube:
+      status: not_started
+      video_id: null
+      url: null
+      published_at: null

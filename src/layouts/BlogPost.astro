@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AdSense from '../components/AdSense.astro';
 import RelatedReading from '../components/RelatedReading.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import type { RelatedPostItem } from '../lib/related-posts';
 
 interface Props {
@@ -18,11 +19,25 @@ interface Props {
   ogImage?: string;
   /** サムネイル画像のパス（例: /images/thumbnails/slug.webp）。指定時のみタイトル直下に表示 */
   thumbnailPath?: string;
+  youtubeVideoId?: string | null;
+  series?: string;
   /** 関連記事（slug + title + thumbnailPath）。未指定または空の場合は表示しない */
   relatedPosts?: RelatedPostItem[];
 }
 
-const { title, description, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath, relatedPosts = [] } = Astro.props;
+const {
+  title,
+  description,
+  category,
+  tags = [],
+  ads = true,
+  canonicalURL,
+  ogImage,
+  thumbnailPath,
+  youtubeVideoId,
+  series,
+  relatedPosts = [],
+} = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage}>
@@ -43,19 +58,29 @@ const { title, description, category, tags = [], ads = true, canonicalURL, ogIma
             onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
           />
         )}
-        {category && (
-        <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-          <a
-            href={`/${category}`}
-            class="rounded bg-gray-100 px-2 py-1 text-gray-700 transition-colors hover:bg-gray-200 capitalize"
-          >
-            {category}
-          </a>
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-gray-500">
+          {category && (
+            <a
+              href={`/${category}`}
+              class="rounded bg-gray-100 px-2 py-1 text-gray-700 transition-colors hover:bg-gray-200 capitalize"
+            >
+              {category}
+            </a>
+          )}
+          {series === 'cost-of-being-wrong' && (
+            <a
+              href="/series/cost-of-being-wrong"
+              class="rounded bg-gray-900 px-2 py-1 text-white transition-colors hover:bg-gray-800"
+            >
+              The Cost of Being Wrong
+            </a>
+          )}
         </div>
-        )}
       </header>
 
       {ads && <AdSense slot="4412571347" format="auto" />}
+
+      {youtubeVideoId && <YouTubeEmbed videoId={youtubeVideoId} title={title} />}
 
       <div class="prose prose-lg prose-gray max-w-none prose-headings:font-serif prose-p:leading-relaxed prose-a:text-gray-900 prose-a:underline hover:prose-a:no-underline">
         <slot />
