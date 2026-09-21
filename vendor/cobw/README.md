@@ -1,9 +1,18 @@
 # COBW Idea Registry (export source)
 
-This folder mirrors the **COBW** repository layout for local development and CI. In production, the Cost of Being Wrong repo owns `data/cobw-ideas.yaml` and runs the export script; Focus Dividend only consumes `public/cobw-registry.json` (or a remote URL).
+**Canonical repo:** [kafkatanaka/at_her_cafe](https://github.com/kafkatanaka/at_her_cafe)
+
+Focus Dividend is a **consumer** only. The COBW repo owns `data/cobw-ideas.yaml` and publishes `public/cobw-registry.json`.
+
+This folder holds a **dev mirror** until `at_her_cafe` export is live:
 
 ```text
-data/cobw-ideas.yaml   →  scripts/cobw/export-registry.mjs  →  public/cobw-registry.json
+at_her_cafe/data/cobw-ideas.yaml  →  export  →  public/cobw-registry.json
+                                                      ↓
+focus-blog /admin/cobw  ←  sync  ←  raw.githubusercontent.com/.../cobw-registry.json
 ```
 
-Do not copy `ideas.yaml` into Focus Dividend for manual edits. Change ideas in COBW, export, then sync from `/admin/cobw`.
+- Drop-in files for the COBW repo: `vendor/cobw/for-at-her-cafe/`
+- Refresh mirror from GitHub: `GITHUB_TOKEN=... npm run cobw:pull-from-cobw`
+
+Do not edit `vendor/cobw/data/cobw-ideas.yaml` for production changes—change ideas in **at_her_cafe**, export, then sync from `/admin/cobw`.

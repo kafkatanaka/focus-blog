@@ -12,6 +12,7 @@
     "export-titles": "node scripts/export-article-titles.mjs",
     "analyze-articles": "node scripts/analyze-articles.mjs",
     "cobw:export-registry": "node scripts/cobw/export-registry.mjs",
+    "cobw:pull-from-cobw": "node scripts/cobw/pull-from-at-her-cafe.mjs",
     "cobw:test": "node --experimental-strip-types scripts/cobw/test-sync.mjs"
   },
   "dependencies": {

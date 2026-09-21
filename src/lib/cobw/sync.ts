@@ -7,7 +7,11 @@ import type {
   CobwVideoPublishedPayload,
 } from './types';
 
-export const DEFAULT_REGISTRY_URL = '/cobw-registry.json';
+import { COBW_REGISTRY_DEFAULT_URL, COBW_REGISTRY_LOCAL_PATH } from './constants';
+
+/** Remote COBW export; use local path only when developing offline. */
+export const DEFAULT_REGISTRY_URL = COBW_REGISTRY_DEFAULT_URL;
+export const FALLBACK_REGISTRY_URL = COBW_REGISTRY_LOCAL_PATH;
 export const COBW_SYNC_STATE_PATH = 'data/cobw-sync-state.json';
 
 const SYNCABLE_FROM_REGISTRY = [

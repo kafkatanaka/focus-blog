@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { GITHUB_REPO } from '../../../lib/github-publish';
+import { COBW_GITHUB } from '../../../lib/cobw/constants';
 ---
 
 <BaseLayout title="COBW Articles" description="COBW Idea Registry → Focus Dividend article pipeline." noindex={true}>
@@ -9,7 +10,8 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
       <p class="text-sm font-medium uppercase tracking-wide text-gray-500">Internal · COBW</p>
       <h1 class="mt-1 text-3xl font-bold text-gray-900">COBW Articles</h1>
       <p class="mt-2 max-w-2xl text-gray-600">
-        Sync ideas from the COBW registry export, generate Focus Dividend drafts, and publish without duplicating YAML.
+        Sync ideas from the COBW registry export (<a href={COBW_GITHUB.url} class="underline" target="_blank" rel="noopener">{COBW_GITHUB.owner}/{COBW_GITHUB.repo}</a>),
+        generate Focus Dividend drafts, and publish without duplicating YAML.
         Generic uploads remain at <a href="/admin" class="underline">/admin</a>.
       </p>
     </header>
@@ -73,6 +75,7 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
     setArticleStatus,
     reconcileArticleMetadata,
     DEFAULT_REGISTRY_URL,
+    FALLBACK_REGISTRY_URL,
   } from '../../../lib/cobw/sync';
   import { buildCobwArticleMarkdown } from '../../../lib/cobw/article-draft';
   import type { CobwRegistry, CobwSyncState } from '../../../lib/cobw/types';
@@ -257,8 +260,15 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
 
   async function fetchRegistry(): Promise<CobwRegistry> {
     const raw = ($('registry-url') as HTMLInputElement).value.trim() || DEFAULT_REGISTRY_URL;
-    const url = raw.startsWith('http') ? raw : new URL(raw, window.location.origin).href;
-    const res = await fetch(url);
+    const primary = raw.startsWith('http') ? raw : new URL(raw, window.location.origin).href;
+    let res = await fetch(primary);
+    if (!res.ok && primary !== FALLBACK_REGISTRY_URL) {
+      const fallback = new URL(FALLBACK_REGISTRY_URL, window.location.origin).href;
+      res = await fetch(fallback);
+      if (res.ok) {
+        setStatus(`COBW export unavailable (${primary}); used local mirror ${FALLBACK_REGISTRY_URL}.`, false);
+      }
+    }
     if (!res.ok) throw new Error(`Registry fetch failed: ${res.status}`);
     return res.json() as Promise<CobwRegistry>;
   }

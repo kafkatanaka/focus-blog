@@ -2,9 +2,13 @@
 
 ## Architecture
 
-- **Source of truth:** COBW Idea Registry (`vendor/cobw/data/cobw-ideas.yaml` in the COBW repo; dev mirror in this repo).
-- **Export:** `npm run cobw:export-registry` → `public/cobw-registry.json`
-- **Consumer:** Focus Dividend `/admin/cobw` → `syncCobwRegistry()` → `data/cobw-sync-state.json` (GitHub)
+- **Source of truth:** [kafkatanaka/at_her_cafe](https://github.com/kafkatanaka/at_her_cafe) — `data/cobw-ideas.yaml`
+- **Export (COBW repo):** `node scripts/export-registry.mjs` → `public/cobw-registry.json`  
+  Template: `vendor/cobw/for-at-her-cafe/`
+- **Consumer URL (default):**  
+  `https://raw.githubusercontent.com/kafkatanaka/at_her_cafe/main/public/cobw-registry.json`
+- **Focus Dividend:** `/admin/cobw` → `syncCobwRegistry()` → `data/cobw-sync-state.json` (GitHub)
+- **Dev mirror:** `vendor/cobw/data/cobw-ideas.yaml` + `public/cobw-registry.json` in focus-blog (fallback only)
 - **Stable key:** `cobw_id` (unique per idea)
 
 Focus Dividend never edits COBW ideas. Sync updates only `sourceTitle`, `sourceCategory`, `sourcePremise`, and YouTube metadata.
@@ -17,7 +21,7 @@ Focus Dividend never edits COBW ideas. Sync updates only `sourceTitle`, `sourceC
 | `/admin/cobw` | Registry sync, draft generation, publish |
 
 1. Save GitHub token on `/admin`.
-2. Open `/admin/cobw`, set registry URL (default `/cobw-registry.json` or raw GitHub URL from COBW export).
+2. Open `/admin/cobw` (default registry URL points at **at_her_cafe** export; falls back to `/cobw-registry.json` if missing).
 3. **Sync from COBW** — imports ~30 ideas without generating articles.
 4. **Generate article** — writes `src/content/blog/{slug}.md` with `source_type: cobw`, `series: cost-of-being-wrong`.
 5. **Publish** — sets `draft: false` and refreshes `youtube_url` from sync state.
@@ -64,10 +68,20 @@ Idempotent: safe to retry. If no article exists yet, only sync state is updated.
 npm run cobw:test
 ```
 
-## COBW repo checklist
+## at_her_cafe setup
 
-When the COBW repository is available:
+1. Copy contents of `vendor/cobw/for-at-her-cafe/` into [at_her_cafe](https://github.com/kafkatanaka/at_her_cafe).
+2. Ensure every idea has stable `id: cobw_XXX` and optional `youtube:` block.
+3. Run export and commit `public/cobw-registry.json` (or enable the included GitHub Action).
 
-1. Copy `scripts/cobw/export-registry.mjs` and point it at `data/cobw-ideas.yaml`.
-2. Publish `public/cobw-registry.json` (or CI artifact).
-3. Set Focus Dividend registry URL to that endpoint.
+## Refresh focus-blog mirror (private repo)
+
+```bash
+GITHUB_TOKEN=ghp_... npm run cobw:pull-from-cobw
+```
+
+Requires a token with read access to `at_her_cafe`. Updates `vendor/cobw/data/cobw-ideas.yaml` and `public/cobw-registry.json`.
+
+## Cloud Agent / CI access
+
+If automated jobs return 404 for `at_her_cafe`, grant the token or environment access to that private repository, or publish `public/cobw-registry.json` and rely on the raw URL.
