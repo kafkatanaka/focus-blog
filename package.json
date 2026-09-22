@@ -10,18 +10,22 @@
     "preview": "astro preview",
     "astro": "astro",
     "export-titles": "node scripts/export-article-titles.mjs",
-    "analyze-articles": "node scripts/analyze-articles.mjs"
+    "analyze-articles": "node scripts/analyze-articles.mjs",
+    "cobw:export-registry": "node scripts/cobw/export-registry.mjs",
+    "cobw:pull-from-cobw": "node scripts/cobw/pull-from-at-her-cafe.mjs",
+    "cobw:test": "node --experimental-strip-types scripts/cobw/test-sync.mjs && node --experimental-strip-types scripts/cobw/test-youtube-link.mjs"
   },
   "dependencies": {
-    "astro": "^5.0.0",
     "@astrojs/mdx": "^4.0.0",
-    "@astrojs/sitemap": "^3.2.0",
     "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
     "@astrojs/tailwind": "^5.1.0",
-    "tailwindcss": "^3.4.0",
-    "@tailwindcss/typography": "^0.5.15"
+    "@tailwindcss/typography": "^0.5.15",
+    "astro": "^5.0.0",
+    "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
+    "js-yaml": "^4.3.2",
     "typescript": "^5.0.0"
   },
   "engines": {

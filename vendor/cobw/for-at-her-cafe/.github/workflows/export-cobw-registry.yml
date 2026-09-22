@@ -1,0 +1,26 @@
+name: Export COBW registry
+
+on:
+  push:
+    paths:
+      - 'data/cobw-ideas.yaml'
+      - 'scripts/export-registry.mjs'
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install js-yaml@4
+      - run: node scripts/export-registry.mjs
+      - name: Commit registry JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/cobw-registry.json
+          git diff --staged --quiet || git commit -m "chore: export cobw-registry.json"
+          git push

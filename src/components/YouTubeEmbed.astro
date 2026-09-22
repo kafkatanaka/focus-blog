@@ -1,0 +1,23 @@
+---
+interface Props {
+  videoId: string;
+  title?: string;
+}
+
+const { videoId, title = 'YouTube video' } = Astro.props;
+const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}`;
+---
+
+<section class="my-10 not-prose" aria-label="Watch the documentary">
+  <h2 class="mb-4 text-xl font-semibold text-gray-900">Watch the documentary</h2>
+  <div class="aspect-video w-full overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+    <iframe
+      src={embedUrl}
+      title={title}
+      class="h-full w-full border-0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>
+  </div>
+</section>

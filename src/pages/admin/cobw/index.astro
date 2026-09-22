@@ -1,0 +1,561 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { GITHUB_REPO } from '../../../lib/github-publish';
+import { COBW_GITHUB } from '../../../lib/cobw/constants';
+---
+
+<BaseLayout title="COBW Articles" description="COBW Idea Registry → Focus Dividend article pipeline." noindex={true}>
+  <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+    <header class="mb-6 border-b border-gray-200 pb-6">
+      <p class="text-sm font-medium uppercase tracking-wide text-gray-500">Internal · COBW</p>
+      <h1 class="mt-1 text-3xl font-bold text-gray-900">COBW Articles</h1>
+      <p class="mt-2 max-w-2xl text-gray-600">
+        Sync ideas from the COBW registry export (<a href={COBW_GITHUB.url} class="underline" target="_blank" rel="noopener">{COBW_GITHUB.owner}/{COBW_GITHUB.repo}</a>),
+        generate Focus Dividend drafts, and publish without duplicating YAML.
+        Articles and videos are independent—add a YouTube link whenever both exist.
+        Generic uploads remain at <a href="/admin" class="underline">/admin</a>.
+      </p>
+    </header>
+
+    <section class="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+      <h2 class="text-sm font-semibold text-gray-900">GitHub connection</h2>
+      <p class="mt-1 text-xs text-gray-600">
+        Uses the same token as <a href="/admin" class="underline">Content Admin</a> (localStorage).
+        Repo: <code>{GITHUB_REPO.owner}/{GITHUB_REPO.repo}</code>
+      </p>
+      <p id="github-status" class="mt-2 text-xs text-gray-500"></p>
+    </section>
+
+    <section class="mb-6 flex flex-wrap items-end gap-4 rounded-lg border border-gray-200 p-4">
+      <div class="min-w-[200px] flex-1">
+        <label for="registry-url" class="text-xs font-medium text-gray-700">Registry URL</label>
+        <input
+          id="registry-url"
+          type="text"
+          class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm"
+          placeholder="github:kafkatanaka/at_her_cafe@main:public/cobw-registry.json"
+        />
+        <p class="mt-1 text-xs text-gray-500">
+          Private repos: use the <code class="text-[11px]">github:owner/repo@branch:path</code> form.
+          Your PAT must have read access to <strong>at_her_cafe</strong> and <strong>focus-blog</strong>.
+        </p>
+      </div>
+      <button type="button" id="btn-sync" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+        Sync from COBW
+      </button>
+      <p id="sync-meta" class="w-full text-xs text-gray-500"></p>
+    </section>
+
+    <section id="stats" class="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"></section>
+
+    <div class="mb-4 flex flex-wrap gap-3">
+      <button type="button" id="btn-generate-selected" class="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800">
+        Generate selected
+      </button>
+      <button type="button" id="btn-publish-selected" class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        Publish selected drafts
+      </button>
+      <button type="button" id="btn-apply-youtube" class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        Apply saved YouTube links to articles
+      </button>
+      <button type="button" id="btn-save-state" class="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+        Save state to GitHub
+      </button>
+    </div>
+
+    <p id="action-status" class="mb-4 text-sm text-gray-600"></p>
+
+    <div id="idea-list" class="space-y-4"></div>
+  </main>
+</BaseLayout>
+
+<script>
+  import {
+    GITHUB_TOKEN_KEY,
+    GITHUB_REPO,
+    getRepoFile,
+    putRepoFile,
+  } from '../../../lib/github-publish';
+  import {
+    syncCobwRegistry,
+    listIdeasSorted,
+    syncStats,
+    setArticleStatus,
+    reconcileArticleMetadata,
+    setYoutubeOnIdea,
+    DEFAULT_REGISTRY_URL,
+    FALLBACK_REGISTRY_URL,
+  } from '../../../lib/cobw/sync';
+  import { buildCobwArticleMarkdown } from '../../../lib/cobw/article-draft';
+  import {
+    canonicalYoutubeUrl,
+    parseYoutubeVideoId,
+    patchArticleYoutubeFields,
+  } from '../../../lib/cobw/youtube-link';
+  import { fetchCobwRegistry } from '../../../lib/cobw/registry-fetch';
+  import type { CobwSyncState } from '../../../lib/cobw/types';
+
+  const STATE_PATH = 'data/cobw-sync-state.json';
+  const ARTICLE_DIR = 'src/content/blog';
+
+  const $ = (id: string) => document.getElementById(id);
+
+  let syncState: CobwSyncState = {
+    schemaVersion: 1,
+    registryUrl: DEFAULT_REGISTRY_URL,
+    lastSyncedAt: null,
+    ideas: {},
+  };
+  let stateSha: string | undefined;
+  const selected = new Set<string>();
+
+  function getToken() {
+    return localStorage.getItem(GITHUB_TOKEN_KEY) ?? '';
+  }
+
+  function setStatus(msg: string, isError = false) {
+    const el = $('action-status');
+    if (el) {
+      el.textContent = msg;
+      el.className = `mb-4 text-sm ${isError ? 'text-red-600' : 'text-gray-600'}`;
+    }
+  }
+
+  function articleStatusLabel(status: string) {
+    const map: Record<string, string> = {
+      not_created: 'Not created',
+      generating: 'Generating',
+      draft: 'Draft',
+      review: 'Review',
+      published: 'Published',
+      failed: 'Failed',
+    };
+    return map[status] ?? status;
+  }
+
+  function videoStatusLabel(status: string) {
+    const map: Record<string, string> = {
+      not_started: 'Not started',
+      in_progress: 'In progress',
+      rendered: 'Rendered',
+      published: 'Published',
+    };
+    return map[status] ?? status;
+  }
+
+  function dot(ok: boolean) {
+    return ok ? '●' : '○';
+  }
+
+  function renderStats() {
+    const s = syncStats(syncState);
+    const el = $('stats');
+    if (!el) return;
+    el.innerHTML = [
+      ['Ideas', s.total],
+      ['Videos published', s.videosPublished],
+      ['Articles published', s.articlesPublished],
+      ['Drafts', s.drafts],
+      ['Not created', s.notCreated],
+    ]
+      .map(
+        ([label, n]) => `
+      <div class="rounded-lg border border-gray-200 bg-white px-4 py-3">
+        <p class="text-xs uppercase text-gray-500">${label}</p>
+        <p class="text-2xl font-semibold text-gray-900">${n}</p>
+      </div>`,
+      )
+      .join('');
+  }
+
+  function renderList() {
+    const rows = listIdeasSorted(syncState);
+    const el = $('idea-list');
+    if (!el) return;
+    if (!rows.length) {
+      el.innerHTML = '<p class="text-gray-500">No ideas loaded. Sync from COBW to import.</p>';
+      return;
+    }
+
+    el.innerHTML = rows
+      .map((row) => {
+        const articleOk = row.articleStatus === 'published';
+        const videoOk = row.youtubeStatus === 'published';
+        const checked = selected.has(row.cobwId) ? 'checked' : '';
+        const actions: string[] = [];
+        if (row.articleUrl && row.articleStatus === 'published') {
+          actions.push(`<a class="text-sm text-blue-600 hover:underline" href="${row.articleUrl}" target="_blank" rel="noopener">View article</a>`);
+        } else if (row.articleStatus === 'draft' || row.articleStatus === 'review') {
+          actions.push(
+            `<button type="button" data-publish="${row.cobwId}" class="text-sm text-green-700 hover:underline">Publish</button>`,
+          );
+        } else if (row.articleStatus === 'not_created' || row.articleStatus === 'failed') {
+          actions.push(
+            `<button type="button" data-generate="${row.cobwId}" class="text-sm text-gray-900 hover:underline">Generate article</button>`,
+          );
+        }
+        const youtubeField = row.articleSlug
+          ? `
+              <div class="mt-4 rounded-md border border-dashed border-gray-200 bg-gray-50 p-3">
+                <p class="text-xs font-medium text-gray-700">YouTube link (optional)</p>
+                <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+                  <input
+                    type="url"
+                    data-youtube-input="${row.cobwId}"
+                    value="${(row.youtubeUrl ?? '').replace(/"/g, '&quot;')}"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    class="min-w-0 flex-1 rounded-md border border-gray-300 px-2 py-1.5 font-mono text-xs"
+                  />
+                  <button type="button" data-save-youtube="${row.cobwId}" class="rounded-md bg-gray-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-gray-800">
+                    Save link
+                  </button>
+                  <button type="button" data-clear-youtube="${row.cobwId}" class="rounded-md border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-white">
+                    Clear
+                  </button>
+                </div>
+                <p class="mt-1 text-[11px] text-gray-500">Updates article frontmatter (<code>youtube_url</code>) and this dashboard. Registry sync can still fill links later.</p>
+              </div>`
+          : '';
+        return `
+        <article class="rounded-lg border border-gray-200 p-4">
+          <div class="flex gap-3">
+            <input type="checkbox" data-select="${row.cobwId}" class="mt-1 rounded border-gray-300" ${checked} />
+            <div class="flex-1">
+              <h2 class="text-lg font-semibold text-gray-900">${row.sourceTitle}</h2>
+              <p class="text-xs uppercase text-gray-500">${row.sourceCategory}</p>
+              <div class="mt-3 grid gap-2 sm:grid-cols-2 text-sm">
+                <div>
+                  <p class="font-medium text-gray-700">ARTICLE</p>
+                  <p>${dot(articleOk)} ${articleStatusLabel(row.articleStatus)}</p>
+                  ${row.articleUrl ? `<p class="text-xs text-gray-500 truncate">${row.articleUrl}</p>` : ''}
+                </div>
+                <div>
+                  <p class="font-medium text-gray-700">VIDEO</p>
+                  <p>${dot(videoOk)} ${videoStatusLabel(row.youtubeStatus)}</p>
+                  ${row.youtubeUrl ? `<p class="text-xs text-gray-500 truncate">${row.youtubeUrl}</p>` : ''}
+                </div>
+              </div>
+              <div class="mt-3 flex flex-wrap gap-3">${actions.join('')}</div>
+              ${youtubeField}
+            </div>
+          </div>
+        </article>`;
+      })
+      .join('');
+
+    el.querySelectorAll('[data-select]').forEach((input) => {
+      input.addEventListener('change', () => {
+        const id = (input as HTMLInputElement).dataset.select!;
+        if ((input as HTMLInputElement).checked) selected.add(id);
+        else selected.delete(id);
+      });
+    });
+    el.querySelectorAll('[data-generate]').forEach((btn) => {
+      btn.addEventListener('click', () => generateOne(btn.getAttribute('data-generate')!));
+    });
+    el.querySelectorAll('[data-publish]').forEach((btn) => {
+      btn.addEventListener('click', () => publishOne(btn.getAttribute('data-publish')!));
+    });
+    el.querySelectorAll('[data-save-youtube]').forEach((btn) => {
+      btn.addEventListener('click', () => saveYoutubeLink(btn.getAttribute('data-save-youtube')!, false));
+    });
+    el.querySelectorAll('[data-clear-youtube]').forEach((btn) => {
+      btn.addEventListener('click', () => saveYoutubeLink(btn.getAttribute('data-clear-youtube')!, true));
+    });
+  }
+
+  function getYoutubeInput(cobwId: string) {
+    return document.querySelector(`[data-youtube-input="${cobwId}"]`) as HTMLInputElement | null;
+  }
+
+  async function saveYoutubeLink(cobwId: string, clear: boolean) {
+    const token = getToken();
+    if (!token) {
+      setStatus('GitHub token required', true);
+      return;
+    }
+    const idea = syncState.ideas[cobwId];
+    if (!idea?.articleSlug) {
+      setStatus('Create an article first before linking YouTube.', true);
+      return;
+    }
+    const raw = clear ? '' : (getYoutubeInput(cobwId)?.value ?? '').trim();
+    const videoId = raw ? parseYoutubeVideoId(raw) : null;
+    if (raw && !videoId) {
+      setStatus('Could not parse YouTube URL or video id.', true);
+      return;
+    }
+    const youtubeUrl = videoId ? canonicalYoutubeUrl(videoId) : null;
+    const path = `${ARTICLE_DIR}/${idea.articleSlug}.md`;
+    setStatus(clear ? `Clearing YouTube link on ${path}…` : `Saving YouTube link on ${path}…`);
+    try {
+      const file = await getRepoFile(path, token);
+      const content = patchArticleYoutubeFields(file.content, youtubeUrl, videoId);
+      await putRepoFile(
+        path,
+        content,
+        clear ? `COBW: clear YouTube link (${cobwId})` : `COBW: add YouTube link (${cobwId})`,
+        token,
+        file.sha,
+      );
+      syncState = setYoutubeOnIdea(syncState, cobwId, youtubeUrl, videoId);
+      await saveState(`COBW YouTube link: ${cobwId}`);
+      setStatus(clear ? 'YouTube link cleared.' : 'YouTube link saved to article and dashboard.');
+      updateMeta();
+    } catch (err) {
+      setStatus(err instanceof Error ? err.message : String(err), true);
+    }
+  }
+
+  async function applyYoutubeToAllArticles() {
+    const token = getToken();
+    if (!token) {
+      setStatus('GitHub token required', true);
+      return;
+    }
+    const rows = listIdeasSorted(syncState).filter((r) => r.articleSlug && r.youtubeUrl && r.youtubeVideoId);
+    if (!rows.length) {
+      setStatus('No rows with both an article and a YouTube URL in sync state.', false);
+      return;
+    }
+    setStatus(`Applying YouTube links to ${rows.length} article(s)…`);
+    let ok = 0;
+    for (const row of rows) {
+      try {
+        const path = `${ARTICLE_DIR}/${row.articleSlug}.md`;
+        const file = await getRepoFile(path, token);
+        const content = patchArticleYoutubeFields(file.content, row.youtubeUrl, row.youtubeVideoId);
+        await putRepoFile(path, content, `COBW: sync YouTube metadata (${row.cobwId})`, token, file.sha);
+        ok += 1;
+      } catch {
+        /* continue */
+      }
+    }
+    setStatus(`Updated YouTube frontmatter on ${ok}/${rows.length} article(s).`);
+  }
+
+  function updateMeta() {
+    const meta = $('sync-meta');
+    if (meta) {
+      const last = syncState.lastSyncedAt
+        ? new Date(syncState.lastSyncedAt).toLocaleString()
+        : 'Never';
+      meta.textContent = `Last synced: ${last} · Registry: ${syncState.registryUrl}`;
+    }
+    renderStats();
+    renderList();
+  }
+
+  async function loadState() {
+    const token = getToken();
+    if (!token) {
+      $('github-status')!.textContent = 'Save a GitHub token on /admin first.';
+      return;
+    }
+    try {
+      const file = await getRepoFile(STATE_PATH, token);
+      syncState = JSON.parse(file.content) as CobwSyncState;
+      stateSha = file.sha;
+      $('registry-url')!.value = syncState.registryUrl || DEFAULT_REGISTRY_URL;
+      $('github-status')!.textContent = 'GitHub token loaded.';
+      updateMeta();
+    } catch {
+      $('github-status')!.textContent = 'No sync state on GitHub yet — sync will create it.';
+    }
+  }
+
+  async function saveState(message = 'Update COBW sync state') {
+    const token = getToken();
+    if (!token) throw new Error('GitHub token required');
+    const content = JSON.stringify(syncState, null, 2) + '\n';
+    const res = await putRepoFile(STATE_PATH, content, message, token, stateSha);
+    stateSha = res.content?.sha;
+  }
+
+  async function fetchRegistry() {
+    const token = getToken();
+    if (!token) {
+      throw new Error('Save a GitHub token on /admin first (needs access to both private repos).');
+    }
+    const raw = ($('registry-url') as HTMLInputElement).value.trim() || DEFAULT_REGISTRY_URL;
+    try {
+      return await fetchCobwRegistry(raw, token, {
+        fallbackLocalPath: FALLBACK_REGISTRY_URL,
+        siteOrigin: window.location.origin,
+      });
+    } catch (err) {
+      const fallback = await fetchCobwRegistry(FALLBACK_REGISTRY_URL, token, {
+        siteOrigin: window.location.origin,
+      }).catch(() => null);
+      if (fallback) {
+        setStatus(
+          `COBW registry not found in at_her_cafe yet; used local mirror ${FALLBACK_REGISTRY_URL}.`,
+          false,
+        );
+        return fallback;
+      }
+      throw err;
+    }
+  }
+
+  function parseCobwFrontmatter(md: string) {
+    const m = md.match(/^---\n([\s\S]*?)\n---/);
+    if (!m) return null;
+    const block = m[1];
+    const cobw = block.match(/^cobw_id:\s*(\S+)/m)?.[1];
+    if (!cobw) return null;
+    const draft = /draft:\s*true/.test(block);
+    const title = block.match(/^title:\s*"(.*)"/m)?.[1] ?? '';
+    const youtubeUrl = block.match(/^youtube_url:\s*"(.*)"/m)?.[1] ?? null;
+    const youtubeVideoId = block.match(/^youtube_video_id:\s*"(.*)"/m)?.[1] ?? null;
+    return { cobwId: cobw, draft, title, youtubeUrl, youtubeVideoId };
+  }
+
+  async function reconcileFromRepo() {
+    const token = getToken();
+    if (!token) return;
+    const treeRes = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPO.owner}/${GITHUB_REPO.repo}/git/trees/${GITHUB_REPO.branch}?recursive=1`,
+      {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          Authorization: `Bearer ${token}`,
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      },
+    );
+    if (!treeRes.ok) return;
+    const tree = await treeRes.json();
+    const paths = (tree.tree as { path: string }[])
+      .map((t) => t.path)
+      .filter((p) => p.startsWith(`${ARTICLE_DIR}/`) && p.endsWith('.md'));
+    const metas = [];
+    for (const path of paths) {
+      try {
+        const file = await getRepoFile(path, token);
+        const parsed = parseCobwFrontmatter(file.content);
+        if (!parsed) continue;
+        const slug = path.replace(`${ARTICLE_DIR}/`, '').replace(/\.md$/, '');
+        metas.push({ ...parsed, slug });
+      } catch {
+        /* skip */
+      }
+    }
+    syncState = reconcileArticleMetadata(syncState, metas);
+  }
+
+  async function syncFromCobw() {
+    setStatus('Syncing registry…');
+    try {
+      const registry = await fetchRegistry();
+      const url = ($('registry-url') as HTMLInputElement).value.trim() || DEFAULT_REGISTRY_URL;
+      syncState = { ...syncState, registryUrl: url };
+      syncState = syncCobwRegistry(syncState, registry);
+      await reconcileFromRepo();
+      await saveState('Sync COBW registry');
+      setStatus(`Synced ${registry.ideas.length} ideas from registry.`);
+      updateMeta();
+    } catch (err) {
+      setStatus(err instanceof Error ? err.message : String(err), true);
+    }
+  }
+
+  async function generateOne(cobwId: string) {
+    const token = getToken();
+    if (!token) {
+      setStatus('GitHub token required', true);
+      return;
+    }
+    const idea = syncState.ideas[cobwId];
+    if (!idea) return;
+    if (idea.articleStatus === 'published' || idea.articleStatus === 'draft') {
+      setStatus('Article already exists for this idea.', true);
+      return;
+    }
+
+    setStatus(`Generating draft for ${cobwId}…`);
+    syncState = setArticleStatus(syncState, cobwId, { articleStatus: 'generating' });
+    try {
+      const { slug, markdown } = buildCobwArticleMarkdown(idea, { draft: true });
+      const path = `${ARTICLE_DIR}/${slug}.md`;
+      await putRepoFile(path, markdown, `COBW draft: ${idea.sourceTitle}`, token);
+      const site = 'https://focus-dividend.com';
+      syncState = setArticleStatus(syncState, cobwId, {
+        articleStatus: 'draft',
+        articleSlug: slug,
+        articleUrl: `${site}/${slug}`,
+        articleTitle: idea.sourceTitle,
+      });
+      await saveState(`COBW draft: ${cobwId}`);
+      setStatus(`Draft created → ${path}`);
+      updateMeta();
+    } catch (err) {
+      syncState = setArticleStatus(syncState, cobwId, { articleStatus: 'failed' });
+      setStatus(err instanceof Error ? err.message : String(err), true);
+      updateMeta();
+    }
+  }
+
+  async function publishOne(cobwId: string) {
+    const token = getToken();
+    if (!token) {
+      setStatus('GitHub token required', true);
+      return;
+    }
+    const idea = syncState.ideas[cobwId];
+    if (!idea?.articleSlug) {
+      setStatus('No article slug for this idea.', true);
+      return;
+    }
+    const path = `${ARTICLE_DIR}/${idea.articleSlug}.md`;
+    setStatus(`Publishing ${path}…`);
+    try {
+      const file = await getRepoFile(path, token);
+      let content = file.content.replace(/draft:\s*true/, 'draft: false');
+      if (idea.youtubeUrl) {
+        content = content.replace(/^youtube_url:.*$/m, `youtube_url: "${idea.youtubeUrl}"`);
+        content = content.replace(
+          /^youtube_video_id:.*$/m,
+          `youtube_video_id: "${idea.youtubeVideoId ?? ''}"`,
+        );
+      }
+      await putRepoFile(path, content, `Publish COBW article: ${idea.sourceTitle}`, token, file.sha);
+      syncState = setArticleStatus(syncState, cobwId, {
+        articleStatus: 'published',
+        articleUrl: `https://focus-dividend.com/${idea.articleSlug}`,
+      });
+      await saveState(`Publish COBW: ${cobwId}`);
+      setStatus(`Published ${idea.articleSlug}`);
+      updateMeta();
+    } catch (err) {
+      setStatus(err instanceof Error ? err.message : String(err), true);
+    }
+  }
+
+  $('btn-sync')?.addEventListener('click', syncFromCobw);
+  $('btn-save-state')?.addEventListener('click', async () => {
+    try {
+      await saveState();
+      setStatus('Sync state saved.');
+    } catch (err) {
+      setStatus(err instanceof Error ? err.message : String(err), true);
+    }
+  });
+  $('btn-generate-selected')?.addEventListener('click', async () => {
+    for (const id of [...selected]) {
+      await generateOne(id);
+    }
+  });
+  $('btn-apply-youtube')?.addEventListener('click', applyYoutubeToAllArticles);
+  $('btn-publish-selected')?.addEventListener('click', async () => {
+    for (const id of [...selected]) {
+      const row = syncState.ideas[id];
+      if (row?.articleStatus === 'draft' || row?.articleStatus === 'review') {
+        await publishOne(id);
+      }
+    }
+  });
+
+  ($('registry-url') as HTMLInputElement).value = DEFAULT_REGISTRY_URL;
+  loadState();
+</script>
