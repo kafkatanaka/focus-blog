@@ -151,6 +151,28 @@ export function applyVideoPublishedWebhook(
   return { ...state, ideas, lastSyncedAt: syncedAt };
 }
 
+export function setYoutubeOnIdea(
+  state: CobwSyncState,
+  cobwId: string,
+  youtubeUrl: string | null,
+  youtubeVideoId: string | null,
+): CobwSyncState {
+  const existing = state.ideas[cobwId];
+  if (!existing) throw new Error(`Unknown cobw_id: ${cobwId}`);
+  return {
+    ...state,
+    ideas: {
+      ...state.ideas,
+      [cobwId]: {
+        ...existing,
+        youtubeUrl,
+        youtubeVideoId,
+        youtubeStatus: youtubeUrl ? 'published' : 'not_started',
+      },
+    },
+  };
+}
+
 export function setArticleStatus(
   state: CobwSyncState,
   cobwId: string,

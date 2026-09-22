@@ -12,6 +12,7 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
       <p class="mt-2 max-w-2xl text-gray-600">
         Sync ideas from the COBW registry export (<a href={COBW_GITHUB.url} class="underline" target="_blank" rel="noopener">{COBW_GITHUB.owner}/{COBW_GITHUB.repo}</a>),
         generate Focus Dividend drafts, and publish without duplicating YAML.
+        Articles and videos are independent—add a YouTube link whenever both exist.
         Generic uploads remain at <a href="/admin" class="underline">/admin</a>.
       </p>
     </header>
@@ -54,6 +55,9 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
       <button type="button" id="btn-publish-selected" class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
         Publish selected drafts
       </button>
+      <button type="button" id="btn-apply-youtube" class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        Apply saved YouTube links to articles
+      </button>
       <button type="button" id="btn-save-state" class="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
         Save state to GitHub
       </button>
@@ -78,10 +82,16 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
     syncStats,
     setArticleStatus,
     reconcileArticleMetadata,
+    setYoutubeOnIdea,
     DEFAULT_REGISTRY_URL,
     FALLBACK_REGISTRY_URL,
   } from '../../../lib/cobw/sync';
   import { buildCobwArticleMarkdown } from '../../../lib/cobw/article-draft';
+  import {
+    canonicalYoutubeUrl,
+    parseYoutubeVideoId,
+    patchArticleYoutubeFields,
+  } from '../../../lib/cobw/youtube-link';
   import { fetchCobwRegistry } from '../../../lib/cobw/registry-fetch';
   import type { CobwSyncState } from '../../../lib/cobw/types';
 
@@ -184,6 +194,28 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
             `<button type="button" data-generate="${row.cobwId}" class="text-sm text-gray-900 hover:underline">Generate article</button>`,
           );
         }
+        const youtubeField = row.articleSlug
+          ? `
+              <div class="mt-4 rounded-md border border-dashed border-gray-200 bg-gray-50 p-3">
+                <p class="text-xs font-medium text-gray-700">YouTube link (optional)</p>
+                <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+                  <input
+                    type="url"
+                    data-youtube-input="${row.cobwId}"
+                    value="${(row.youtubeUrl ?? '').replace(/"/g, '&quot;')}"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    class="min-w-0 flex-1 rounded-md border border-gray-300 px-2 py-1.5 font-mono text-xs"
+                  />
+                  <button type="button" data-save-youtube="${row.cobwId}" class="rounded-md bg-gray-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-gray-800">
+                    Save link
+                  </button>
+                  <button type="button" data-clear-youtube="${row.cobwId}" class="rounded-md border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-white">
+                    Clear
+                  </button>
+                </div>
+                <p class="mt-1 text-[11px] text-gray-500">Updates article frontmatter (<code>youtube_url</code>) and this dashboard. Registry sync can still fill links later.</p>
+              </div>`
+          : '';
         return `
         <article class="rounded-lg border border-gray-200 p-4">
           <div class="flex gap-3">
@@ -204,6 +236,7 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
                 </div>
               </div>
               <div class="mt-3 flex flex-wrap gap-3">${actions.join('')}</div>
+              ${youtubeField}
             </div>
           </div>
         </article>`;
@@ -223,6 +256,82 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
     el.querySelectorAll('[data-publish]').forEach((btn) => {
       btn.addEventListener('click', () => publishOne(btn.getAttribute('data-publish')!));
     });
+    el.querySelectorAll('[data-save-youtube]').forEach((btn) => {
+      btn.addEventListener('click', () => saveYoutubeLink(btn.getAttribute('data-save-youtube')!, false));
+    });
+    el.querySelectorAll('[data-clear-youtube]').forEach((btn) => {
+      btn.addEventListener('click', () => saveYoutubeLink(btn.getAttribute('data-clear-youtube')!, true));
+    });
+  }
+
+  function getYoutubeInput(cobwId: string) {
+    return document.querySelector(`[data-youtube-input="${cobwId}"]`) as HTMLInputElement | null;
+  }
+
+  async function saveYoutubeLink(cobwId: string, clear: boolean) {
+    const token = getToken();
+    if (!token) {
+      setStatus('GitHub token required', true);
+      return;
+    }
+    const idea = syncState.ideas[cobwId];
+    if (!idea?.articleSlug) {
+      setStatus('Create an article first before linking YouTube.', true);
+      return;
+    }
+    const raw = clear ? '' : (getYoutubeInput(cobwId)?.value ?? '').trim();
+    const videoId = raw ? parseYoutubeVideoId(raw) : null;
+    if (raw && !videoId) {
+      setStatus('Could not parse YouTube URL or video id.', true);
+      return;
+    }
+    const youtubeUrl = videoId ? canonicalYoutubeUrl(videoId) : null;
+    const path = `${ARTICLE_DIR}/${idea.articleSlug}.md`;
+    setStatus(clear ? `Clearing YouTube link on ${path}…` : `Saving YouTube link on ${path}…`);
+    try {
+      const file = await getRepoFile(path, token);
+      const content = patchArticleYoutubeFields(file.content, youtubeUrl, videoId);
+      await putRepoFile(
+        path,
+        content,
+        clear ? `COBW: clear YouTube link (${cobwId})` : `COBW: add YouTube link (${cobwId})`,
+        token,
+        file.sha,
+      );
+      syncState = setYoutubeOnIdea(syncState, cobwId, youtubeUrl, videoId);
+      await saveState(`COBW YouTube link: ${cobwId}`);
+      setStatus(clear ? 'YouTube link cleared.' : 'YouTube link saved to article and dashboard.');
+      updateMeta();
+    } catch (err) {
+      setStatus(err instanceof Error ? err.message : String(err), true);
+    }
+  }
+
+  async function applyYoutubeToAllArticles() {
+    const token = getToken();
+    if (!token) {
+      setStatus('GitHub token required', true);
+      return;
+    }
+    const rows = listIdeasSorted(syncState).filter((r) => r.articleSlug && r.youtubeUrl && r.youtubeVideoId);
+    if (!rows.length) {
+      setStatus('No rows with both an article and a YouTube URL in sync state.', false);
+      return;
+    }
+    setStatus(`Applying YouTube links to ${rows.length} article(s)…`);
+    let ok = 0;
+    for (const row of rows) {
+      try {
+        const path = `${ARTICLE_DIR}/${row.articleSlug}.md`;
+        const file = await getRepoFile(path, token);
+        const content = patchArticleYoutubeFields(file.content, row.youtubeUrl, row.youtubeVideoId);
+        await putRepoFile(path, content, `COBW: sync YouTube metadata (${row.cobwId})`, token, file.sha);
+        ok += 1;
+      } catch {
+        /* continue */
+      }
+    }
+    setStatus(`Updated YouTube frontmatter on ${ok}/${rows.length} article(s).`);
   }
 
   function updateMeta() {
@@ -437,6 +546,7 @@ import { COBW_GITHUB } from '../../../lib/cobw/constants';
       await generateOne(id);
     }
   });
+  $('btn-apply-youtube')?.addEventListener('click', applyYoutubeToAllArticles);
   $('btn-publish-selected')?.addEventListener('click', async () => {
     for (const id of [...selected]) {
       const row = syncState.ideas[id];

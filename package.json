@@ -13,7 +13,7 @@
     "analyze-articles": "node scripts/analyze-articles.mjs",
     "cobw:export-registry": "node scripts/cobw/export-registry.mjs",
     "cobw:pull-from-cobw": "node scripts/cobw/pull-from-at-her-cafe.mjs",
-    "cobw:test": "node --experimental-strip-types scripts/cobw/test-sync.mjs"
+    "cobw:test": "node --experimental-strip-types scripts/cobw/test-sync.mjs && node --experimental-strip-types scripts/cobw/test-youtube-link.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",

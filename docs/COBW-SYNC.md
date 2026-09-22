@@ -29,12 +29,19 @@ Focus Dividend never edits COBW ideas. Sync updates only `sourceTitle`, `sourceC
 3. **Sync from COBW** — imports ~30 ideas without generating articles.
 4. **Generate article** — writes `src/content/blog/{slug}.md` with `source_type: cobw`, `series: cost-of-being-wrong`.
 5. **Publish** — sets `draft: false` and refreshes `youtube_url` from sync state.
+6. **YouTube link (optional)** — per-row field on `/admin/cobw` writes `youtube_url` / `youtube_video_id` to the article when both article and video exist (order does not matter).
+
+### Loose coupling (articles ↔ videos)
+
+- COBW articles use `source_type: cobw`, `cobw_id`, `series: cost-of-being-wrong` in frontmatter.
+- Publish articles first; add YouTube later via dashboard, registry **Sync**, or **Apply saved YouTube links to articles** (batch).
+- Future: YouTube channel crawl can suggest matches by title / description `cobw_id`—human confirm in the same UI.
 
 ## Article frontmatter
 
 ```yaml
 source_type: cobw
-cobw_id: cobw_001
+cobw_id: cobw_opp_001
 series: cost-of-being-wrong
 source_title: "..."
 seo_title: "..."
@@ -85,6 +92,16 @@ GITHUB_TOKEN=ghp_... npm run cobw:pull-from-cobw
 ```
 
 Requires a token with read access to `at_her_cafe`. Updates `vendor/cobw/data/cobw-ideas.yaml` and `public/cobw-registry.json`.
+
+## After at_her_cafe PR #187 merges
+
+1. Merge focus-blog COBW pipeline PR (#2) if not already on `main`.
+2. Create PAT with read on **at_her_cafe**, read/write on **focus-blog** → save on `/admin`.
+3. `/admin/cobw` → leave registry as  
+   `github:kafkatanaka/at_her_cafe@main:public/cobw-registry.json` → **Sync from COBW**  
+   Expect **30 ideas**, **4** with `youtube_status: published`. Dev mirror IDs (`cobw_001` …) drop from sync state automatically if no article was created.
+4. Generate **1 draft** → review → publish; then batch in small groups.
+5. (Optional) In at_her_cafe: set `FOCUS_BLOG_PAT` and enable `push-registry-to-focus-blog.yml` so focus-blog’s `public/cobw-registry.json` mirror updates on each export.
 
 ## Both repositories private
 
