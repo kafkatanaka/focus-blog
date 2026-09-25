@@ -15,6 +15,13 @@ const blogCollection = defineCollection({
     draft: z.boolean().default(false),
     /** サムネイル画像ファイル名（例: "my-post.webp"）。省略時は /images/thumbnails/{slug}.webp を使用 */
     thumbnail: z.string().optional(),
+    /** COBW handoff articles */
+    source_type: z.literal('cobw').optional(),
+    cobw_job_id: z.string().optional(),
+    youtube_url: z.string().nullable().optional(),
+    youtube_video_id: z.string().nullable().optional(),
+    source_title: z.string().optional(),
+    seo_title: z.string().optional(),
   }),
 });
 

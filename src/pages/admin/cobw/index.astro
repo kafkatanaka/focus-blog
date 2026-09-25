@@ -1,0 +1,412 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  CATEGORIES,
+  SYMPTOM_TAGS,
+  METHOD_TAGS,
+  ATTRIBUTE_TAGS,
+} from '../../../lib/article-rules';
+import { GITHUB_REPO } from '../../../lib/github-publish';
+---
+
+<BaseLayout
+  title="COBW Article Handoff"
+  description="Upload COBW article source Markdown, generate Focus Dividend drafts, and publish."
+  noindex={true}
+>
+  <main class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+    <header class="mb-6 border-b border-gray-200 pb-6">
+      <p class="text-sm font-medium uppercase tracking-wide text-gray-500">Internal · COBW</p>
+      <h1 class="mt-1 text-3xl font-bold text-gray-900">COBW Article Handoff</h1>
+      <p class="mt-2 max-w-2xl text-gray-600">
+        Upload a single <strong>Article Source</strong> <code>.md</code> from at_her_cafe (schema v1).
+        Snapshot is stored in this browser. Generate an evidence-first web article, edit the draft, then publish to
+        <code>{GITHUB_REPO.owner}/{GITHUB_REPO.repo}</code>.
+        Generic uploads: <a href="/admin" class="underline">/admin</a>.
+      </p>
+    </header>
+
+    <section class="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+      <h2 class="text-sm font-semibold text-gray-900">Credentials (localStorage)</h2>
+      <div class="mt-3 grid gap-4 lg:grid-cols-2">
+        <div>
+          <label for="github-token" class="text-xs font-medium text-gray-700">GitHub PAT (publish)</label>
+          <div class="mt-1 flex gap-2">
+            <input id="github-token" type="password" placeholder="ghp_…" class="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2 font-mono text-sm" />
+            <button type="button" id="btn-save-github" class="rounded-md bg-gray-900 px-3 py-2 text-sm text-white">Save</button>
+          </div>
+        </div>
+        <div>
+          <label for="openai-key" class="text-xs font-medium text-gray-700">OpenAI API key (generate)</label>
+          <div class="mt-1 flex gap-2">
+            <input id="openai-key" type="password" placeholder="sk-…" class="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2 font-mono text-sm" />
+            <button type="button" id="btn-save-openai" class="rounded-md bg-gray-900 px-3 py-2 text-sm text-white">Save</button>
+          </div>
+        </div>
+      </div>
+      <p id="cred-status" class="mt-2 text-xs text-gray-500"></p>
+    </section>
+
+    <section class="mb-6 rounded-lg border border-gray-200 p-4">
+      <h2 class="text-sm font-semibold text-gray-900">1. Upload article source</h2>
+      <input id="md-file" type="file" accept=".md,text/markdown" class="mt-3 block w-full text-sm" />
+      <p id="upload-error" class="mt-2 text-sm text-red-600"></p>
+      <div id="preview-card" class="mt-4 hidden rounded-md border border-gray-200 bg-white p-4 text-sm"></div>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <button type="button" id="btn-import" disabled class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40">
+          Save import snapshot
+        </button>
+      </div>
+    </section>
+
+    <dialog id="dup-dialog" class="rounded-lg border border-gray-300 p-6 shadow-lg backdrop:bg-black/30">
+      <p class="text-sm text-gray-800">This COBW episode already exists (<code id="dup-job-id"></code>).</p>
+      <p class="mt-2 text-xs text-gray-600">Update Source replaces the snapshot only. Existing generated body is not overwritten automatically.</p>
+      <div class="mt-4 flex gap-3">
+        <button type="button" id="btn-dup-update" class="rounded-md bg-amber-700 px-4 py-2 text-sm text-white">Update Source</button>
+        <button type="button" id="btn-dup-cancel" class="rounded-md border border-gray-300 px-4 py-2 text-sm">Cancel</button>
+      </div>
+    </dialog>
+
+    <section id="workflow" class="mb-6 hidden space-y-6">
+      <div class="rounded-lg border border-gray-200 p-4">
+        <h2 class="text-sm font-semibold text-gray-900">2. Generate article</h2>
+        <p class="mt-1 text-xs text-gray-600">Evidence &gt; narration. Unsupported claims are not stated as external facts.</p>
+        <button type="button" id="btn-generate" class="mt-3 rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800">
+          Generate article
+        </button>
+        <p id="generate-status" class="mt-2 text-sm text-gray-600"></p>
+      </div>
+
+      <div id="draft-panel" class="hidden rounded-lg border border-gray-200 p-4">
+        <h2 class="text-sm font-semibold text-gray-900">3. Draft</h2>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="draft-title" class="text-xs text-gray-500">Title</label>
+            <input id="draft-title" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label for="draft-seo" class="text-xs text-gray-500">SEO title</label>
+            <input id="draft-seo" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label for="draft-slug" class="text-xs text-gray-500">Slug</label>
+            <input id="draft-slug" type="text" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="draft-desc" class="text-xs text-gray-500">Description</label>
+            <textarea id="draft-desc" rows="2" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm"></textarea>
+          </div>
+          <div>
+            <label for="draft-category" class="text-xs text-gray-500">Category</label>
+            <select id="draft-category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label for="draft-tag-s" class="text-xs text-gray-500">Symptom</label>
+              <select id="draft-tag-s" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                {SYMPTOM_TAGS.map((t) => <option value={t}>{t}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="draft-tag-m" class="text-xs text-gray-500">Method</label>
+              <select id="draft-tag-m" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                {METHOD_TAGS.map((t) => <option value={t}>{t}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="draft-tag-a" class="text-xs text-gray-500">Attribute</label>
+              <select id="draft-tag-a" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-2 text-sm">
+                {ATTRIBUTE_TAGS.map((t) => <option value={t}>{t}</option>)}
+              </select>
+            </div>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="draft-body" class="text-xs text-gray-500">Body (Markdown)</label>
+            <textarea id="draft-body" rows="18" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm leading-relaxed"></textarea>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <button type="button" id="btn-save-draft" class="rounded-md border border-gray-300 px-4 py-2 text-sm">Save draft locally</button>
+          <button type="button" id="btn-regenerate" class="rounded-md border border-amber-600 px-4 py-2 text-sm text-amber-800">Regenerate (OpenAI)</button>
+          <button type="button" id="btn-publish" class="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white">Publish to GitHub</button>
+        </div>
+        <p id="publish-status" class="mt-2 text-sm"></p>
+      </div>
+    </section>
+
+    <section class="rounded-lg border border-gray-200 p-4">
+      <h2 class="text-sm font-semibold text-gray-900">Saved imports (this browser)</h2>
+      <ul id="import-list" class="mt-3 space-y-2 text-sm"></ul>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  import { GITHUB_TOKEN_KEY, putRepoFile } from '../../../lib/github-publish';
+  import {
+    parseCobwArticleSourceMarkdown,
+    cobwSourcePreview,
+    CobwArticleSourceParseError,
+    type CobwArticleSource,
+  } from '../../../lib/cobw-article-source';
+  import {
+    getCobwImportByJobId,
+    listCobwImports,
+    upsertCobwImportSource,
+    saveCobwDraft,
+    markCobwPublished,
+    type CobwGeneratedDraft,
+  } from '../../../lib/cobw-article-import';
+  import {
+    OPENAI_API_KEY_STORAGE,
+    generateCobwArticleFromSource,
+    buildCobwPublishedMarkdown,
+  } from '../../../lib/cobw-article-generator';
+
+  const ARTICLE_DIR = 'src/content/blog';
+  const $ = (id: string) => document.getElementById(id);
+
+  let pendingSource: CobwArticleSource | null = null;
+  let activeJobId: string | null = null;
+
+  function setCredStatus(msg: string) {
+    const el = $('cred-status');
+    if (el) el.textContent = msg;
+  }
+
+  function readDraftFromForm(): CobwGeneratedDraft | null {
+    if (!activeJobId) return null;
+    const title = ($('draft-title') as HTMLInputElement).value.trim();
+    const slug = ($('draft-slug') as HTMLInputElement).value.trim();
+    if (!title || !slug) return null;
+    return {
+      title,
+      seoTitle: ($('draft-seo') as HTMLInputElement).value.trim() || title,
+      description: ($('draft-desc') as HTMLTextAreaElement).value.trim(),
+      slug,
+      category: ($('draft-category') as HTMLSelectElement).value as CobwGeneratedDraft['category'],
+      tags: [
+        ($('draft-tag-s') as HTMLSelectElement).value,
+        ($('draft-tag-m') as HTMLSelectElement).value,
+        ($('draft-tag-a') as HTMLSelectElement).value,
+      ] as [string, string, string],
+      body: ($('draft-body') as HTMLTextAreaElement).value.trim(),
+      generatedAt: new Date().toISOString(),
+    };
+  }
+
+  function fillDraftForm(draft: CobwGeneratedDraft) {
+    ($('draft-title') as HTMLInputElement).value = draft.title;
+    ($('draft-seo') as HTMLInputElement).value = draft.seoTitle;
+    ($('draft-slug') as HTMLInputElement).value = draft.slug;
+    ($('draft-desc') as HTMLTextAreaElement).value = draft.description;
+    ($('draft-category') as HTMLSelectElement).value = draft.category;
+    ($('draft-tag-s') as HTMLSelectElement).value = draft.tags[0];
+    ($('draft-tag-m') as HTMLSelectElement).value = draft.tags[1];
+    ($('draft-tag-a') as HTMLSelectElement).value = draft.tags[2];
+    ($('draft-body') as HTMLTextAreaElement).value = draft.body;
+    $('draft-panel')?.classList.remove('hidden');
+  }
+
+  function renderPreview(source: CobwArticleSource) {
+    const p = cobwSourcePreview(source);
+    const card = $('preview-card');
+    if (!card) return;
+    card.classList.remove('hidden');
+    const warn = p.evidenceReviewRequired
+      ? '<p class="mt-2 rounded bg-amber-50 px-3 py-2 text-amber-900">⚠ Evidence review required — Facts to verify present.</p>'
+      : '';
+    card.innerHTML = `
+      <dl class="grid gap-2 sm:grid-cols-2">
+        <div><dt class="text-xs text-gray-500">Title</dt><dd class="font-medium">${p.title}</dd></div>
+        <div><dt class="text-xs text-gray-500">job_id</dt><dd class="font-mono text-xs">${p.jobId}</dd></div>
+        <div><dt class="text-xs text-gray-500">Narration words</dt><dd>${p.narrationWordCount}</dd></div>
+        <div><dt class="text-xs text-gray-500">Evidence items</dt><dd>${p.evidenceCount}</dd></div>
+        <div><dt class="text-xs text-gray-500">Facts to verify</dt><dd>${p.factsToVerifyCount} ${p.factsToVerifyCount ? '△' : '✓'}</dd></div>
+        <div><dt class="text-xs text-gray-500">YouTube</dt><dd>${p.youtubeOk ? '✓' : '△'} ${p.youtubeVideoId ?? ''}</dd></div>
+        <div class="sm:col-span-2"><dt class="text-xs text-gray-500">Closing phrase</dt><dd class="text-gray-700">${p.closingPhrase || '—'}</dd></div>
+      </dl>
+      ${warn}
+    `;
+    ($('btn-import') as HTMLButtonElement).disabled = false;
+  }
+
+  function renderImportList() {
+    const list = $('import-list');
+    if (!list) return;
+    const items = listCobwImports().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    if (!items.length) {
+      list.innerHTML = '<li class="text-gray-500">No imports yet.</li>';
+      return;
+    }
+    list.innerHTML = items
+      .map(
+        (i) => `
+      <li class="flex flex-wrap items-center justify-between gap-2 rounded border border-gray-100 px-3 py-2">
+        <span><strong>${i.sourceSnapshot.frontmatter.title}</strong>
+          <span class="ml-2 font-mono text-xs text-gray-500">${i.jobId}</span>
+          ${i.publishedSlug ? `<span class="ml-2 text-xs text-green-700">published: ${i.publishedSlug}</span>` : ''}
+        </span>
+        <button type="button" data-load="${i.jobId}" class="text-xs text-blue-600 hover:underline">Open</button>
+      </li>`,
+      )
+      .join('');
+    list.querySelectorAll('[data-load]').forEach((btn) => {
+      btn.addEventListener('click', () => loadImport((btn as HTMLButtonElement).dataset.load!));
+    });
+  }
+
+  function loadImport(jobId: string) {
+    const rec = getCobwImportByJobId(jobId);
+    if (!rec) return;
+    activeJobId = jobId;
+    pendingSource = rec.sourceSnapshot;
+    renderPreview(rec.sourceSnapshot);
+    $('workflow')?.classList.remove('hidden');
+    if (rec.draft) fillDraftForm(rec.draft);
+    else $('draft-panel')?.classList.add('hidden');
+  }
+
+  function commitImport(preserveDraft: boolean) {
+    if (!pendingSource) return;
+    const existing = getCobwImportByJobId(pendingSource.frontmatter.job_id);
+    upsertCobwImportSource(pendingSource, { preserveDraft });
+    activeJobId = pendingSource.frontmatter.job_id;
+    $('workflow')?.classList.remove('hidden');
+    if (!preserveDraft || !existing?.draft) {
+      $('draft-panel')?.classList.add('hidden');
+    } else if (existing.draft) {
+      fillDraftForm(existing.draft);
+    }
+    renderImportList();
+    ($('upload-error') as HTMLElement).textContent = '';
+  }
+
+  async function handleFile(file: File) {
+    ($('upload-error') as HTMLElement).textContent = '';
+    const text = await file.text();
+    try {
+      pendingSource = parseCobwArticleSourceMarkdown(text);
+      renderPreview(pendingSource);
+      const dup = getCobwImportByJobId(pendingSource.frontmatter.job_id);
+      if (dup) {
+        ($('dup-job-id') as HTMLElement).textContent = pendingSource.frontmatter.job_id;
+        ($('dup-dialog') as HTMLDialogElement).showModal();
+      }
+    } catch (err) {
+      pendingSource = null;
+      ($('btn-import') as HTMLButtonElement).disabled = true;
+      $('preview-card')?.classList.add('hidden');
+      const msg = err instanceof CobwArticleSourceParseError ? err.message : String(err);
+      ($('upload-error') as HTMLElement).textContent = msg;
+    }
+  }
+
+  async function runGenerate() {
+    const key = localStorage.getItem(OPENAI_API_KEY_STORAGE) ?? '';
+    if (!key) {
+      ($('generate-status') as HTMLElement).textContent = 'Save an OpenAI API key first.';
+      return;
+    }
+    const rec = activeJobId ? getCobwImportByJobId(activeJobId) : null;
+    const source = rec?.sourceSnapshot ?? pendingSource;
+    if (!source) return;
+
+    const btn = $('btn-generate') as HTMLButtonElement;
+    btn.disabled = true;
+    ($('generate-status') as HTMLElement).textContent = 'Generating…';
+    try {
+      const { draft } = await generateCobwArticleFromSource(source, key);
+      saveCobwDraft(source.frontmatter.job_id, draft);
+      activeJobId = source.frontmatter.job_id;
+      fillDraftForm(draft);
+      ($('generate-status') as HTMLElement).textContent = `Generated at ${new Date(draft.generatedAt).toLocaleString()}`;
+      renderImportList();
+    } catch (err) {
+      ($('generate-status') as HTMLElement).textContent = `Error: ${(err as Error).message}`;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function publishDraft() {
+    const token = localStorage.getItem(GITHUB_TOKEN_KEY) ?? '';
+    if (!token) {
+      ($('publish-status') as HTMLElement).textContent = 'Save a GitHub token first.';
+      return;
+    }
+    const draft = readDraftFromForm();
+    const rec = activeJobId ? getCobwImportByJobId(activeJobId) : null;
+    if (!draft || !rec) {
+      ($('publish-status') as HTMLElement).textContent = 'Draft incomplete.';
+      return;
+    }
+    saveCobwDraft(rec.jobId, draft);
+    const markdown = buildCobwPublishedMarkdown(draft, rec.sourceSnapshot, { draft: false });
+    const path = `${ARTICLE_DIR}/${draft.slug}.md`;
+    ($('publish-status') as HTMLElement).textContent = 'Publishing…';
+    try {
+      await putRepoFile(path, markdown, `Add COBW article: ${draft.title}`, token);
+      markCobwPublished(rec.jobId, draft.slug);
+      ($('publish-status') as HTMLElement).textContent = `Published → ${path}`;
+      ($('publish-status') as HTMLElement).className = 'mt-2 text-sm text-green-700';
+      renderImportList();
+    } catch (err) {
+      ($('publish-status') as HTMLElement).textContent = `Error: ${(err as Error).message}`;
+      ($('publish-status') as HTMLElement).className = 'mt-2 text-sm text-red-600';
+    }
+  }
+
+  $('md-file')?.addEventListener('change', () => {
+    const input = $('md-file') as HTMLInputElement;
+    const file = input.files?.[0];
+    if (file) handleFile(file);
+  });
+
+  $('btn-import')?.addEventListener('click', () => {
+    const dup = pendingSource && getCobwImportByJobId(pendingSource.frontmatter.job_id);
+    commitImport(Boolean(dup));
+  });
+
+  $('btn-dup-update')?.addEventListener('click', () => {
+    commitImport(true);
+    ($('dup-dialog') as HTMLDialogElement).close();
+  });
+  $('btn-dup-cancel')?.addEventListener('click', () => {
+    ($('dup-dialog') as HTMLDialogElement).close();
+  });
+
+  $('btn-generate')?.addEventListener('click', runGenerate);
+  $('btn-regenerate')?.addEventListener('click', runGenerate);
+
+  $('btn-save-draft')?.addEventListener('click', () => {
+    const draft = readDraftFromForm();
+    if (!draft || !activeJobId) return;
+    saveCobwDraft(activeJobId, draft);
+    ($('publish-status') as HTMLElement).textContent = 'Draft saved locally.';
+  });
+
+  $('btn-publish')?.addEventListener('click', publishDraft);
+
+  $('btn-save-github')?.addEventListener('click', () => {
+    const v = ($('github-token') as HTMLInputElement).value.trim();
+    if (v) localStorage.setItem(GITHUB_TOKEN_KEY, v);
+    setCredStatus('GitHub token saved.');
+  });
+  $('btn-save-openai')?.addEventListener('click', () => {
+    const v = ($('openai-key') as HTMLInputElement).value.trim();
+    if (v) localStorage.setItem(OPENAI_API_KEY_STORAGE, v);
+    setCredStatus('OpenAI key saved.');
+  });
+
+  const gh = localStorage.getItem(GITHUB_TOKEN_KEY);
+  const oa = localStorage.getItem(OPENAI_API_KEY_STORAGE);
+  if (gh) ($('github-token') as HTMLInputElement).value = gh;
+  if (oa) ($('openai-key') as HTMLInputElement).value = oa;
+  setCredStatus(gh || oa ? 'Credentials loaded from localStorage.' : 'Save GitHub and OpenAI keys to publish/generate.');
+
+  renderImportList();
+</script>
