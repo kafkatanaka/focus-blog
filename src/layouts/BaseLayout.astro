@@ -5,17 +5,32 @@ interface Props {
   canonicalURL?: URL;
   ogImage?: string;
   noindex?: boolean;
+  lang?: 'en' | 'ja';
+  hreflangAlternates?: { en?: string; ja?: string };
 }
 
-const { title, description, canonicalURL, ogImage, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  canonicalURL,
+  ogImage,
+  noindex = false,
+  lang = 'en',
+  hreflangAlternates,
+} = Astro.props;
 const site = Astro.site ?? new URL('https://focus-dividend.com');
 const url = canonicalURL ?? Astro.url;
 const fullURL = new URL(url.pathname, site);
-const image = ogImage; // optional: add public/og-default.png and use new URL('/og-default.png', site).href as default
+const image = ogImage;
+const homeHreflangEn = new URL('/', site).href;
+const homeHreflangJa = new URL('/jp', site).href;
+const showHomeHreflang =
+  !hreflangAlternates &&
+  (url.pathname === '/' || url.pathname === '/jp' || url.pathname === '/jp/');
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +38,19 @@ const image = ogImage; // optional: add public/og-default.png and use new URL('/
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={fullURL} />
+
+    {hreflangAlternates?.en && (
+      <link rel="alternate" hreflang="en" href={hreflangAlternates.en} />
+    )}
+    {hreflangAlternates?.ja && (
+      <link rel="alternate" hreflang="ja" href={hreflangAlternates.ja} />
+    )}
+    {showHomeHreflang && (
+      <>
+        <link rel="alternate" hreflang="en" href={homeHreflangEn} />
+        <link rel="alternate" hreflang="ja" href={homeHreflangJa} />
+      </>
+    )}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -36,7 +64,7 @@ const image = ogImage; // optional: add public/og-default.png and use new URL('/
         <meta property="og:image:height" content="630" />
       </>
     )}
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : 'en_US'} />
 
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-2329837198490466" />
@@ -58,7 +86,16 @@ const image = ogImage; // optional: add public/og-default.png and use new URL('/
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
-  <body class="bg-white text-gray-900 font-serif antialiased">
+  <body class:list={['bg-white text-gray-900 antialiased', lang === 'ja' ? 'locale-ja font-sans' : 'font-serif']}>
     <slot />
   </body>
 </html>
+
+<style is:global>
+  body.locale-ja .prose {
+    line-height: 1.85;
+  }
+  body.locale-ja .prose p {
+    line-height: 1.9;
+  }
+</style>

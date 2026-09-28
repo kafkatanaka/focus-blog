@@ -59,6 +59,7 @@ export function buildFrontmatter(input: {
   ads?: boolean;
   thumbnail?: string;
   updatedDate?: string;
+  locale?: 'ja';
 }): string {
   const lines = [
     '---',
@@ -91,6 +92,10 @@ export function buildFrontmatter(input: {
     lines.push(`thumbnail: ${input.thumbnail}`);
   }
 
+  if (input.locale === 'ja') {
+    lines.push('locale: ja');
+  }
+
   lines.push('---');
   return lines.join('\n');
 }
@@ -106,6 +111,7 @@ export function buildArticleMarkdown(input: {
   ads?: boolean;
   thumbnail?: string;
   updatedDate?: string;
+  locale?: 'ja';
   includeAffiliateDisclosure?: boolean;
 }): string {
   const frontmatter = buildFrontmatter(input);

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { CATEGORY_TITLES, CATEGORY_SUBTITLES_JA, CATEGORY_DESCRIPTIONS_JA } from '../../lib/categories';
+
+const site = Astro.site ?? new URL('https://focus-dividend.com');
+const ogImage = new URL('/images/thumbnails/framework.webp', site).href;
+---
+
+<BaseLayout
+  lang="ja"
+  title="Framework | 日本語版"
+  description={CATEGORY_DESCRIPTIONS_JA.framework}
+  ogImage={ogImage}
+>
+  <Header locale="ja" />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      {CATEGORY_TITLES.framework}
+    </h1>
+    <p class="mt-2 text-sm text-gray-500">{CATEGORY_SUBTITLES_JA.framework}</p>
+    <div class="mt-8 space-y-6 text-gray-700 leading-relaxed">
+      <p>
+        The Focus Dividend の Framework は、知識労働者が「注意・仕事・お金・習慣」を
+        一つの流れとして設計するための考え方です。英語版の詳細ガイドをベースに、
+        日本語版では記事を通じて同じ構造を深めていきます。
+      </p>
+      <p>
+        4つの柱 — Focus（集中と注意）、Work（持続可能な生産性）、Money（意図的なお金）、
+        Habits（行動設計） — は互いに補強し合います。どこから始めても構いません。
+      </p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><a href="/jp/focus" class="text-gray-900 underline hover:no-underline">Focus</a> — 集中・注意・情報との距離</li>
+        <li><a href="/jp/work" class="text-gray-900 underline hover:no-underline">Work</a> — 仕事・キャリア・働き方</li>
+        <li><a href="/jp/money" class="text-gray-900 underline hover:no-underline">Money</a> — お金・収入・選択</li>
+        <li><a href="/jp/habits" class="text-gray-900 underline hover:no-underline">Habits</a> — 習慣・行動・日々の設計</li>
+      </ul>
+      <p class="text-sm text-gray-500">
+        英語版のフル Framework ガイドは
+        <a href="/framework" class="underline hover:no-underline">/framework</a>
+        から読めます。
+      </p>
+    </div>
+  </main>
+  <Footer locale="ja" />
+</BaseLayout>

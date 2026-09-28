@@ -1,0 +1,77 @@
+---
+import type { Locale } from '../lib/locale';
+import { formatPublishedDate } from '../lib/locale';
+import { CATEGORY_TITLES } from '../lib/categories';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  thumbnailPath: string;
+  pubDate?: Date;
+  category?: string;
+  locale?: Locale;
+  tags?: string[];
+}
+
+const {
+  href,
+  title,
+  description,
+  thumbnailPath,
+  pubDate,
+  category,
+  locale = 'en',
+  tags = [],
+} = Astro.props;
+---
+
+<li>
+  <a href={href} class="group block">
+    <div class="flex gap-4 sm:gap-6">
+      <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
+        <img
+          src={thumbnailPath}
+          alt=""
+          class="w-full h-full object-cover"
+          width="96"
+          height="96"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+        />
+      </div>
+      <div class="min-w-0 flex-1">
+        {category && (
+          <p class="text-xs font-medium uppercase tracking-wide text-gray-500">
+            {CATEGORY_TITLES[category] ?? category}
+          </p>
+        )}
+        <h2 class="text-xl font-medium text-gray-900 group-hover:text-gray-700 line-clamp-3">
+          {title}
+        </h2>
+        <p class="mt-2 text-gray-600 line-clamp-2">{description}</p>
+        {pubDate && (
+          <time
+            class="mt-2 block text-sm text-gray-500"
+            datetime={pubDate.toISOString()}
+          >
+            {formatPublishedDate(pubDate, locale)}
+          </time>
+        )}
+        {tags.length > 0 && locale === 'en' && (
+          <div class="mt-2 flex flex-wrap gap-2 text-sm text-gray-500">
+            {tags.map((tag) => (
+              <a
+                href={`/tag/${encodeURIComponent(tag)}`}
+                class="rounded bg-gray-100 px-2 py-0.5 text-gray-700 hover:bg-gray-200"
+                onclick="event.stopPropagation()"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </a>
+</li>

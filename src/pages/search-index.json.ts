@@ -1,12 +1,15 @@
 import { getCollection } from 'astro:content';
+import { filterPostsByLocale } from '../lib/posts';
+import { getArticlePath } from '../lib/locale';
 
 export async function GET() {
-  const posts = await getCollection('blog');
+  const posts = filterPostsByLocale(await getCollection('blog'), 'en');
   const index = posts
     .filter((p) => !p.data.draft)
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
     .map((p) => ({
       slug: p.slug,
+      path: getArticlePath(p),
       title: p.data.title,
       description: p.data.description,
       tags: p.data.tags ?? [],

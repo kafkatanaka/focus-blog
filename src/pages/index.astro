@@ -2,11 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
+import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../lib/posts';
+import { getArticlePath } from '../lib/locale';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const posts = sortPostsByDate(
+  filterPostsByLocale(
+    (await getCollection('blog')).filter((p) => !p.data.draft),
+    'en'
+  )
+);
 ---
 
 <BaseLayout
@@ -24,45 +30,16 @@ const posts = (await getCollection('blog'))
       </p>
     </section>
     <ul class="space-y-8">
-      {posts.map((post) => {
-        const thumbPath = post.data.thumbnail
-          ? `/images/thumbnails/${post.data.thumbnail}`
-          : `/images/thumbnails/${post.slug}.webp`;
-        return (
-          <li>
-            <a href={`/${post.slug}`} class="group block">
-              <div class="flex gap-4 sm:gap-6">
-                <div class="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
-                  <img
-                    src={thumbPath}
-                    alt=""
-                    class="w-full h-full object-cover"
-                    width="96"
-                    height="96"
-                    loading="lazy"
-                    onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
-                  />
-                </div>
-                <div class="min-w-0 flex-1">
-                  <h2 class="text-xl font-medium text-gray-900 group-hover:text-gray-700">
-                    {post.data.title}
-                  </h2>
-                  <p class="mt-2 text-gray-600">{post.data.description}</p>
-                  {post.data.tags && post.data.tags.length > 0 && (
-                  <div class="mt-2 flex flex-wrap gap-2 text-sm text-gray-500">
-                    {post.data.tags.map((tag) => (
-                      <a href={`/tag/${encodeURIComponent(tag)}`} class="rounded bg-gray-100 px-2 py-0.5 text-gray-700 hover:bg-gray-200">
-                        {tag}
-                      </a>
-                    ))}
-                  </div>
-                  )}
-                </div>
-              </div>
-            </a>
-          </li>
-        );
-      })}
+      {posts.map((post) => (
+        <ArticleCard
+          href={getArticlePath(post)}
+          title={post.data.title}
+          description={post.data.description}
+          thumbnailPath={thumbnailPathFor(post)}
+          tags={post.data.tags}
+          locale="en"
+        />
+      ))}
     </ul>
   </main>
   <Footer />
