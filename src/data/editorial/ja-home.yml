@@ -1,0 +1,48 @@
+# Japanese editorial home — stable articleId references
+
+hero:
+  title: The Focus Dividend
+  subtitle: |
+    迷ったとき、考えるための場所。
+    仕事、お金、習慣、これからのこと。
+    答えを急ぐ前に、選択肢を整理する。
+
+situationPrompts:
+  - label: 転職するか迷っている
+    articleId: fd-ja-000004
+  - label: 選択肢が多すぎて決められない
+    articleId: fd-ja-000003
+  - label: お金の不安を整理したい
+    articleId: fd-ja-000002
+  - label: 集中できない
+    articleId: fd-ja-000002
+  - label: 続けたいのに続かない
+    articleId: fd-ja-000003
+
+featured:
+  - fd-ja-000004
+  - fd-ja-000002
+  - fd-ja-000003
+
+decisionGuides:
+  - fd-ja-000004
+
+comparisons:
+  - fd-ja-000001
+
+toolsSystems:
+  - fd-ja-000003
+
+editorsPicks:
+  - fd-ja-000005
+  - fd-ja-000002
+
+latest:
+  max: 6
+
+explore:
+  - category: framework
+  - category: work
+  - category: focus
+  - category: money
+  - category: habits

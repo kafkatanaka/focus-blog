@@ -2,29 +2,18 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import EditorialArticleCard from '../../components/EditorialArticleCard.astro';
+import EditorialHomeSection from '../../components/EditorialHomeSection.astro';
 import { getCollection } from 'astro:content';
+import { filterPostsByLocale } from '../../lib/posts';
 import {
-  JP_CATEGORIES,
-  CATEGORY_TITLES,
-  CATEGORY_SUBTITLES_JA,
-  CATEGORY_DESCRIPTIONS_JA,
-} from '../../lib/categories';
-import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../../lib/posts';
-import { getArticlePath } from '../../lib/locale';
+  buildEditorialHome,
+  loadEditorialHomeConfig,
+} from '../../lib/editorial-home';
 
-const allJa = sortPostsByDate(
-  filterPostsByLocale(
-    (await getCollection('blog')).filter((p) => !p.data.draft),
-    'ja'
-  )
-);
-
-const latest = allJa.slice(0, 8);
-
-function postsForCategory(category: string) {
-  return allJa.filter((p) => p.data.category === category).slice(0, 4);
-}
+const posts = filterPostsByLocale(await getCollection('blog'), 'ja');
+const config = loadEditorialHomeConfig('ja');
+const home = buildEditorialHome('ja', posts, config);
 ---
 
 <BaseLayout
@@ -33,67 +22,162 @@ function postsForCategory(category: string) {
   description="仕事、お金、習慣、そして「何に注意を向けるか」を考えるための読みもの。"
 >
   <Header locale="ja" />
-  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
-    <section class="mb-12">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        The Focus Dividend
+  <main class="mx-auto max-w-editorial px-4 py-10 sm:px-6 sm:py-14">
+    <section class="mb-12 border-b border-gray-200 pb-12 sm:mb-16 sm:pb-16">
+      <p class="text-sm font-medium text-gray-500">日本語版</p>
+      <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        {config.hero.title}
       </h1>
-      <p class="mt-2 text-sm font-medium text-gray-500">日本語版</p>
-      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
-        仕事、お金、習慣、そして<br class="sm:hidden" />
-        「何に注意を向けるか」を考えるための読みもの。
+      <p class="mt-4 max-w-2xl text-lg text-gray-600 leading-relaxed whitespace-pre-line">
+        {config.hero.subtitle}
       </p>
     </section>
 
-    {latest.length > 0 && (
-      <section class="mb-14">
-        <h2 class="text-xl font-semibold text-gray-900">Latest</h2>
-        <ul class="mt-6 space-y-8">
-          {latest.map((post) => (
-            <ArticleCard
-              href={getArticlePath(post)}
-              title={post.data.title}
-              description={post.data.description}
-              thumbnailPath={thumbnailPathFor(post)}
-              pubDate={post.data.pubDate}
-              category={post.data.category}
-              locale="ja"
-            />
+    {home.situationLinks.length > 0 && (
+      <section class="mb-14 sm:mb-16">
+        <h2 class="text-lg font-semibold text-gray-900 sm:text-xl">
+          今、何を整理したいですか？
+        </h2>
+        <ul class="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3" role="list">
+          {home.situationLinks.map((item) => (
+            <li class="sm:shrink-0">
+              <a
+                href={item.href}
+                class="flex w-full items-center justify-center rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-800 transition-colors hover:border-gray-400 hover:bg-gray-50 sm:inline-flex sm:w-auto sm:py-2.5"
+              >
+                {item.label}
+              </a>
+            </li>
           ))}
         </ul>
       </section>
     )}
 
-    {JP_CATEGORIES.map((category) => {
-      const sectionPosts = postsForCategory(category);
-      if (sectionPosts.length === 0) return null;
-      return (
-        <section class="mb-14">
-          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <h2 class="text-xl font-semibold text-gray-900">
-              <a href={`/jp/${category}`} class="hover:text-gray-700">
-                {CATEGORY_TITLES[category]}
-              </a>
-            </h2>
-            <p class="text-sm text-gray-500">{CATEGORY_SUBTITLES_JA[category]}</p>
-          </div>
-          <p class="mt-1 text-sm text-gray-600">{CATEGORY_DESCRIPTIONS_JA[category]}</p>
-          <ul class="mt-6 space-y-8">
-            {sectionPosts.map((post) => (
-              <ArticleCard
-                href={getArticlePath(post)}
-                title={post.data.title}
-                description={post.data.description}
-                thumbnailPath={thumbnailPathFor(post)}
-                pubDate={post.data.pubDate}
-                category={post.data.category}
-                locale="ja"
-              />
-            ))}
-          </ul>
-        </section>
-      );
-    })}
+    {home.featured.length > 0 && (
+      <EditorialHomeSection title="おすすめの読みもの" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {home.featured.map((item, i) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="ja"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+              pubDate={item.entry.data.pubDate}
+              variant={i === 0 ? 'feature' : 'default'}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.exploreCategories.length > 0 && (
+      <EditorialHomeSection title="テーマから探す" class="mb-14 sm:mb-16">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {home.exploreCategories.map((cat) => (
+            <a
+              href={cat.href}
+              class="rounded-lg border border-gray-200 bg-gray-50 px-3 py-4 text-center text-sm font-semibold text-gray-900 transition-colors hover:border-gray-300 hover:bg-white"
+            >
+              {cat.label}
+            </a>
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.decisionGuides.length > 0 && (
+      <EditorialHomeSection title="判断のガイド" class="mb-14 sm:mb-16">
+        <div class="grid gap-4">
+          {home.decisionGuides.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="ja"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.comparisons.length > 0 && (
+      <EditorialHomeSection title="比較する" class="mb-14 sm:mb-16">
+        <div class="grid gap-4">
+          {home.comparisons.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="ja"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.toolsSystems.length > 0 && (
+      <EditorialHomeSection title="整理のヒント" class="mb-14 sm:mb-16">
+        <div class="grid gap-4">
+          {home.toolsSystems.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="ja"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.editorsPicks.length > 0 && (
+      <EditorialHomeSection title="編集部のおすすめ" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {home.editorsPicks.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="ja"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.latest.length > 0 && (
+      <EditorialHomeSection title="新着" class="mb-14 sm:mb-16">
+        <div class="grid gap-4">
+          {home.latest.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="ja"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+              pubDate={item.entry.data.pubDate}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
   </main>
   <Footer locale="ja" />
 </BaseLayout>

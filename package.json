@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "tsx scripts/sync-content-ids.ts && tsx scripts/build-content-inventory.ts && tsx scripts/generate-sitemap.ts",
+    "prebuild": "tsx scripts/sync-content-ids.ts && tsx scripts/build-content-inventory.ts && tsx scripts/generate-sitemap.ts && tsx scripts/validate-editorial-home.ts",
+    "validate-editorial": "tsx scripts/validate-editorial-home.ts",
     "sync-content-ids": "tsx scripts/sync-content-ids.ts",
     "build-inventory": "tsx scripts/build-content-inventory.ts",
     "audit-content-graph": "tsx scripts/audit-content-graph.ts",

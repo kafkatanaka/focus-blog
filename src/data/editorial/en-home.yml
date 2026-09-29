@@ -1,0 +1,54 @@
+# English editorial home — references stable articleId only (see src/data/content-ids.yml)
+
+hero:
+  title: The Focus Dividend
+  subtitle: Clearer thinking for work, money, and everyday decisions.
+
+situationPrompts:
+  - label: Career decision
+    href: /work
+  - label: Money decision
+    href: /money
+  - label: Can't focus
+    href: /focus
+  - label: Overwhelmed
+    href: /framework
+  - label: Trying to build a habit
+    href: /habits
+
+featured:
+  - fd-en-000270
+  - fd-en-000188
+  - fd-en-000049
+
+decisionGuides:
+  - fd-en-000005
+  - fd-en-000058
+  - fd-en-000080
+
+comparisons:
+  - fd-en-000227
+  - fd-en-000207
+
+toolsSystems:
+  - fd-en-000289
+  - fd-en-000270
+
+editorsPicks:
+  - fd-en-000188
+  - fd-en-000049
+  - fd-en-000005
+
+latest:
+  max: 10
+
+explore:
+  - category: work
+  - category: money
+  - category: focus
+  - category: habits
+  - category: framework
+
+browseAll:
+  label: Browse all articles
+  href: /articles

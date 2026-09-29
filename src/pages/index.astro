@@ -2,45 +2,191 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ArticleCard from '../components/ArticleCard.astro';
+import EditorialArticleCard from '../components/EditorialArticleCard.astro';
+import EditorialHomeSection from '../components/EditorialHomeSection.astro';
 import { getCollection } from 'astro:content';
-import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../lib/posts';
-import { getArticlePath } from '../lib/locale';
+import { filterPostsByLocale } from '../lib/posts';
+import {
+  buildEditorialHome,
+  loadEditorialHomeConfig,
+} from '../lib/editorial-home';
 
-const posts = sortPostsByDate(
-  filterPostsByLocale(
-    (await getCollection('blog')).filter((p) => !p.data.draft),
-    'en'
-  )
-);
+const posts = filterPostsByLocale(await getCollection('blog'), 'en');
+const config = loadEditorialHomeConfig('en');
+const home = buildEditorialHome('en', posts, config);
 ---
 
 <BaseLayout
   title="The Focus Dividend"
-  description="Readings on focus, attention, and intentional living. Minimal design, maximum clarity."
+  description="Clearer thinking for work, money, and everyday decisions."
 >
   <Header />
-  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
-    <section class="mb-12">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        The Focus Dividend
+  <main class="mx-auto max-w-editorial px-4 py-10 sm:px-6 sm:py-14">
+    <section class="mb-12 border-b border-gray-200 pb-12 sm:mb-16 sm:pb-16">
+      <p class="text-sm font-semibold uppercase tracking-widest text-gray-500">Editorial</p>
+      <h1 class="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+        {config.hero.title}
       </h1>
-      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
-        Readings on focus, attention, and intentional living. Minimal design, maximum clarity.
+      <p class="mt-4 max-w-2xl text-lg text-gray-600 leading-relaxed whitespace-pre-line">
+        {config.hero.subtitle}
       </p>
     </section>
-    <ul class="space-y-8">
-      {posts.map((post) => (
-        <ArticleCard
-          href={getArticlePath(post)}
-          title={post.data.title}
-          description={post.data.description}
-          thumbnailPath={thumbnailPathFor(post)}
-          tags={post.data.tags}
-          locale="en"
-        />
-      ))}
-    </ul>
+
+    {home.situationLinks.length > 0 && (
+      <section class="mb-14 sm:mb-16">
+        <h2 class="text-lg font-semibold text-gray-900 sm:text-xl">
+          Start with what you're facing
+        </h2>
+        <ul class="mt-5 flex flex-wrap gap-2 sm:gap-3" role="list">
+          {home.situationLinks.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="inline-block rounded-full border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-800 transition-colors hover:border-gray-400 hover:bg-gray-50"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {home.featured.length > 0 && (
+      <EditorialHomeSection title="Featured guides" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {home.featured.map((item, i) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="en"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+              variant={i === 0 ? 'feature' : 'default'}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.exploreCategories.length > 0 && (
+      <EditorialHomeSection title="Explore" class="mb-14 sm:mb-16">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {home.exploreCategories.map((cat) => (
+            <a
+              href={cat.href}
+              class="rounded-lg border border-gray-200 bg-gray-50 px-4 py-5 text-center text-sm font-semibold text-gray-900 transition-colors hover:border-gray-300 hover:bg-white"
+            >
+              {cat.label}
+            </a>
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.decisionGuides.length > 0 && (
+      <EditorialHomeSection title="Decision guides" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {home.decisionGuides.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="en"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.comparisons.length > 0 && (
+      <EditorialHomeSection title="Compare" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {home.comparisons.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="en"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.toolsSystems.length > 0 && (
+      <EditorialHomeSection title="Tools & systems" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {home.toolsSystems.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="en"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.editorsPicks.length > 0 && (
+      <EditorialHomeSection title="Editor's picks" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {home.editorsPicks.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="en"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {home.latest.length > 0 && (
+      <EditorialHomeSection title="Latest" class="mb-14 sm:mb-16">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {home.latest.map((item) => (
+            <EditorialArticleCard
+              href={item.href}
+              title={item.entry.data.title}
+              description={item.entry.data.description}
+              thumbnailPath={item.thumbnailPath}
+              locale="en"
+              category={item.entry.data.category}
+              articleType={item.articleType}
+              pubDate={item.entry.data.pubDate}
+            />
+          ))}
+        </div>
+      </EditorialHomeSection>
+    )}
+
+    {config.browseAll && (
+      <p class="text-center">
+        <a
+          href={config.browseAll.href}
+          class="inline-flex items-center justify-center rounded-lg border border-gray-900 bg-gray-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+        >
+          {config.browseAll.label}
+        </a>
+      </p>
+    )}
   </main>
   <Footer />
 </BaseLayout>

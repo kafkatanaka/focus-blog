@@ -1,0 +1,76 @@
+---
+import type { Locale } from '../lib/locale';
+import { formatPublishedDate } from '../lib/locale';
+import { CATEGORY_TITLES } from '../lib/categories';
+import type { ArticleType } from '../data/media-taxonomy';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  thumbnailPath: string;
+  locale: Locale;
+  category?: string;
+  articleType?: ArticleType | null;
+  pubDate?: Date;
+  variant?: 'default' | 'feature';
+}
+
+const {
+  href,
+  title,
+  description,
+  thumbnailPath,
+  locale,
+  category,
+  articleType,
+  pubDate,
+  variant = 'default',
+} = Astro.props;
+
+const typeLabel = articleType ? articleType.toUpperCase() : null;
+const categoryLabel = category ? (CATEGORY_TITLES[category] ?? category) : null;
+const metaLine = [typeLabel, categoryLabel].filter(Boolean).join(' · ');
+---
+
+<article class:list={['group', variant === 'feature' && 'sm:col-span-2']}>
+  <a href={href} class="block h-full rounded-xl border border-gray-200 bg-white p-4 transition-shadow hover:border-gray-300 hover:shadow-md sm:p-5">
+    <div class:list={['flex gap-4', variant === 'feature' && 'sm:flex-row sm:gap-6']}>
+      <div
+        class:list={[
+          'shrink-0 overflow-hidden rounded-lg bg-gray-100',
+          variant === 'feature' ? 'h-28 w-28 sm:h-36 sm:w-44' : 'h-20 w-20 sm:h-24 sm:w-24',
+        ]}
+      >
+        <img
+          src={thumbnailPath}
+          alt=""
+          class="h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
+          width="176"
+          height="144"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
+        />
+      </div>
+      <div class="min-w-0 flex-1">
+        {metaLine && (
+          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">{metaLine}</p>
+        )}
+        <h3
+          class:list={[
+            'font-semibold text-gray-900 group-hover:text-gray-700 line-clamp-3',
+            variant === 'feature' ? 'mt-2 text-xl sm:text-2xl' : 'mt-1 text-lg',
+          ]}
+        >
+          {title}
+        </h3>
+        <p class="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed">{description}</p>
+        {pubDate && (
+          <time class="mt-2 block text-xs text-gray-500" datetime={pubDate.toISOString()}>
+            {formatPublishedDate(pubDate, locale)}
+          </time>
+        )}
+      </div>
+    </div>
+  </a>
+</article>
