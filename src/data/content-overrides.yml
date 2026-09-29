@@ -1,0 +1,14 @@
+# Per-article editorial metadata without bulk-editing hundreds of MD files.
+# Keys: slug (e.g. phone-free-focus-guide) or path (e.g. /phone-free-focus-guide)
+#
+# Priority: frontmatter explicit value > this file > derived defaults
+#
+# Example:
+# phone-free-focus-guide:
+#   articleType: guide
+#   cluster: focus-management
+#   hubId: phone-free-focus-guide
+#   isHub: true
+#   consolidationStatus: keep
+#   relatedArticleIds:
+#     - recover-focus-after-burnout-guide

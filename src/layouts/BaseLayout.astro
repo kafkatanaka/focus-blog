@@ -1,4 +1,6 @@
 ---
+import { canonicalUrl, normalizePath } from '../lib/site-url';
+
 interface Props {
   title: string;
   description: string;
@@ -8,9 +10,10 @@ interface Props {
 }
 
 const { title, description, canonicalURL, ogImage, noindex = false } = Astro.props;
-const site = Astro.site ?? new URL('https://focus-dividend.com');
-const url = canonicalURL ?? Astro.url;
-const fullURL = new URL(url.pathname, site);
+const pathForCanonical = canonicalURL
+  ? normalizePath(canonicalURL.pathname)
+  : normalizePath(Astro.url.pathname);
+const fullURL = canonicalUrl(pathForCanonical);
 const image = ogImage; // optional: add public/og-default.png and use new URL('/og-default.png', site).href as default
 ---
 
@@ -56,7 +59,7 @@ const image = ogImage; // optional: add public/og-default.png and use new URL('/
     </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
   </head>
   <body class="bg-white text-gray-900 font-serif antialiased">
     <slot />

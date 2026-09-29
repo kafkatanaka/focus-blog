@@ -3,6 +3,7 @@ import BlogPost from '../layouts/BlogPost.astro';
 import { getCollection } from 'astro:content';
 import { getRelatedPosts } from '../lib/related-posts';
 import { relatedMap } from '../data/related-map';
+import { canonicalUrlFromSlug } from '../lib/site-url';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -27,7 +28,7 @@ export async function getStaticPaths() {
 const { entry, relatedPosts } = Astro.props;
 const { Content } = await entry.render();
 const site = Astro.site ?? new URL('https://focus-dividend.com');
-const canonicalURL = new URL(`/${entry.slug}`, site);
+const canonicalURL = new URL(canonicalUrlFromSlug(entry.slug));
 
 const thumbnailPath = entry.data.thumbnail
   ? `/images/thumbnails/${entry.data.thumbnail}`
