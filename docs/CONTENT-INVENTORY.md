@@ -14,8 +14,18 @@ Editorial fields for legacy posts live in `src/data/content-overrides.yml` (not 
 
 Priority: **frontmatter** → **content-overrides.yml** → **inferred defaults**.
 
-## Canonical URLs
+Override keys: `en:slug`, `ja:slug`, slug, or full path (e.g. `/jp/work/foo`).
 
-Single helper: `src/lib/site-url.ts` — used by layouts, article pages, and `scripts/generate-sitemap.ts`.
+## Canonical URLs & routes
 
-Rules: `https://focus-dividend.com`, no trailing slash (`astro.config.mjs` `trailingSlash: 'never'`).
+- **Route SSOT**: `resolveArticlePath` / `getArticlePath` in `src/lib/locale.ts`
+- **Canonical strings**: `src/lib/site-url.ts` (`canonicalUrl`, `canonicalUrlForArticle`)
+- English articles: `/{slug}` — Japanese: `/jp/{category}/{slug}`
+- Locale code: `en` | `ja` (URL prefix `/jp/` does not change locale value)
+- `trailingSlash: 'never'` in `astro.config.mjs`
+
+Sitemap and inventory import the same metadata builders in `src/lib/content-metadata.ts`.
+
+## Inventory file counts
+
+`article-master-template.md` is excluded from inventory (authoring template only).

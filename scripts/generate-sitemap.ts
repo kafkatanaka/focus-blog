@@ -1,27 +1,25 @@
 /**
- * Generate public/sitemap.xml using the same canonical rules as site-url.ts + inventory flags.
+ * Generate public/sitemap.xml using inventory records + locale-aware routes.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BLOG_CATEGORIES } from '../src/data/media-taxonomy';
+import { CATEGORIES } from '../src/lib/categories';
+import { EN_NAV_CATEGORIES } from '../src/data/media-taxonomy';
 import {
   buildInventoryRecord,
   loadContentOverrides,
+  type InventoryRecord,
   type ParsedBlogFrontmatter,
 } from '../src/lib/content-metadata';
-import {
-  canonicalUrl,
-  categoryPath,
-  pillarGuidePath,
-  tagPath,
-} from '../src/lib/site-url';
+import { canonicalUrl, categoryPath, pillarGuidePath, tagPath } from '../src/lib/site-url';
 import { countWords, parseFrontmatter } from './lib/parse-frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const BLOG_DIR = path.join(ROOT, 'src', 'content', 'blog');
 const PUBLIC_DIR = path.join(ROOT, 'public');
+const SKIP_FILES = new Set(['article-master-template.md']);
 
 const PILLAR_GUIDES: { category: string; slug: string }[] = [
   { category: 'focus', slug: 'attention-management-guide' },
@@ -30,7 +28,7 @@ const PILLAR_GUIDES: { category: string; slug: string }[] = [
   { category: 'habits', slug: 'behavior-design-guide' },
 ];
 
-const STATIC_PATHS = [
+const EN_STATIC_PATHS = [
   '/',
   '/framework',
   '/articles',
@@ -39,65 +37,70 @@ const STATIC_PATHS = [
   '/contact',
 ];
 
-function loadPublishedByCategory(): Map<string, number> {
-  const overrides = loadContentOverrides(ROOT);
-  const counts = new Map<string, number>();
-  for (const cat of BLOG_CATEGORIES) counts.set(cat, 0);
+const JA_STATIC_PATHS = ['/jp', '/jp/framework'];
 
+function loadAllRecords(): InventoryRecord[] {
+  const overrides = loadContentOverrides(ROOT);
+  const records: InventoryRecord[] = [];
   for (const file of fs.readdirSync(BLOG_DIR)) {
-    if (!file.endsWith('.md')) continue;
+    if (!file.endsWith('.md') || SKIP_FILES.has(file)) continue;
     const slug = file.replace(/\.md$/, '');
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const { fm, body } = parseFrontmatter(content);
-    const record = buildInventoryRecord(
-      slug,
-      fm as ParsedBlogFrontmatter,
-      countWords(body),
-      overrides
+    records.push(
+      buildInventoryRecord(slug, fm as ParsedBlogFrontmatter, countWords(body), overrides)
     );
-    if (!record.inSitemap) continue;
-    if (record.category && counts.has(record.category)) {
-      counts.set(record.category, (counts.get(record.category) ?? 0) + 1);
-    }
   }
-  return counts;
+  return records;
+}
+
+function categoryHasIndexablePosts(
+  records: InventoryRecord[],
+  category: string,
+  locale: 'en' | 'ja'
+): boolean {
+  return records.some(
+    (r) =>
+      r.inSitemap && r.locale === locale && r.category === category && !r.draft
+  );
 }
 
 function main() {
-  const overrides = loadContentOverrides(ROOT);
-  const paths = new Set<string>(STATIC_PATHS);
+  const records = loadAllRecords();
+  const paths = new Set<string>(EN_STATIC_PATHS);
+  for (const p of JA_STATIC_PATHS) paths.add(p);
 
-  const categoryCounts = loadPublishedByCategory();
-  for (const cat of BLOG_CATEGORIES) {
-    if ((categoryCounts.get(cat) ?? 0) > 0) {
-      paths.add(categoryPath(cat));
+  for (const cat of EN_NAV_CATEGORIES) {
+    if (categoryHasIndexablePosts(records, cat, 'en')) {
+      paths.add(categoryPath(cat, 'en'));
     }
+  }
+
+  for (const cat of CATEGORIES) {
+    if (categoryHasIndexablePosts(records, cat, 'ja')) {
+      paths.add(categoryPath(cat, 'ja'));
+    }
+  }
+
+  if (categoryHasIndexablePosts(records, 'framework', 'ja')) {
+    paths.add('/jp/framework');
   }
 
   for (const { category, slug } of PILLAR_GUIDES) {
     paths.add(pillarGuidePath(category, slug));
   }
 
-  const tagSet = new Set<string>();
+  const enTagSet = new Set<string>();
 
-  for (const file of fs.readdirSync(BLOG_DIR)) {
-    if (!file.endsWith('.md')) continue;
-    const slug = file.replace(/\.md$/, '');
-    const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
-    const { fm, body } = parseFrontmatter(content);
-    const record = buildInventoryRecord(
-      slug,
-      fm as ParsedBlogFrontmatter,
-      countWords(body),
-      overrides
-    );
-    if (record.inSitemap) {
-      paths.add(record.url);
-      for (const tag of record.tags) tagSet.add(tag);
+  for (const record of records) {
+    if (!record.inSitemap) continue;
+    paths.add(record.url);
+    if (record.locale === 'en') {
+      for (const tag of record.tags) enTagSet.add(tag);
     }
   }
 
-  for (const tag of tagSet) {
+  for (const tag of enTagSet) {
     paths.add(tagPath(tag));
   }
 
@@ -117,7 +120,15 @@ ${sorted
 
   fs.mkdirSync(PUBLIC_DIR, { recursive: true });
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), xml);
-  console.log(`✅ sitemap.xml generated (${sorted.length} URLs)`);
+
+  const enArticleUrls = sorted.filter(
+    (p) => p.startsWith('/') && !p.startsWith('/jp') && p.split('/').filter(Boolean).length === 1
+  ).length;
+  const jaArticleUrls = sorted.filter((p) => p.startsWith('/jp/') && p.split('/').filter(Boolean).length === 3).length;
+
+  console.log(
+    `✅ sitemap.xml generated (${sorted.length} URLs, ~${enArticleUrls} EN article paths, ~${jaArticleUrls} JA article paths)`
+  );
 }
 
 main();

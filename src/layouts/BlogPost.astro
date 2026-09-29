@@ -5,6 +5,9 @@ import Footer from '../components/Footer.astro';
 import AdSense from '../components/AdSense.astro';
 import RelatedReading from '../components/RelatedReading.astro';
 import type { RelatedPostItem } from '../lib/related-posts';
+import type { CollectionEntry } from 'astro:content';
+import type { Locale, LocaleMetadata } from '../lib/locale';
+import { formatPublishedDate } from '../lib/locale';
 
 interface Props {
   title: string;
@@ -16,17 +19,48 @@ interface Props {
   ads?: boolean;
   canonicalURL?: URL;
   ogImage?: string;
-  /** サムネイル画像のパス（例: /images/thumbnails/slug.webp）。指定時のみタイトル直下に表示 */
   thumbnailPath?: string;
-  /** 関連記事（slug + title + thumbnailPath）。未指定または空の場合は表示しない */
   relatedPosts?: RelatedPostItem[];
+  relatedPostEntries?: Pick<CollectionEntry<'blog'>, 'slug' | 'data'>[];
+  locale?: Locale;
+  categoryHref?: string;
+  switchUrls?: { en: string; ja: string };
+  localeMetadata?: LocaleMetadata;
+  hreflangAlternates?: { en?: string; ja?: string };
 }
 
-const { title, description, category, tags = [], ads = true, canonicalURL, ogImage, thumbnailPath, relatedPosts = [] } = Astro.props;
+const {
+  title,
+  description,
+  category,
+  tags = [],
+  ads = true,
+  canonicalURL,
+  ogImage,
+  thumbnailPath,
+  relatedPosts = [],
+  relatedPostEntries,
+  pubDate,
+  locale = 'en',
+  categoryHref,
+  switchUrls,
+  localeMetadata,
+  hreflangAlternates,
+} = Astro.props;
+
+const resolvedCategoryHref =
+  categoryHref ?? (locale === 'ja' && category ? `/jp/${category}` : category ? `/${category}` : undefined);
 ---
 
-<BaseLayout title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage}>
-  <Header />
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalURL={canonicalURL}
+  ogImage={ogImage}
+  lang={locale}
+  hreflangAlternates={hreflangAlternates}
+>
+  <Header locale={locale} />
   <main class="mx-auto max-w-readable px-4 py-8 sm:px-6">
     <article>
       <header class="mb-8">
@@ -43,14 +77,21 @@ const { title, description, category, tags = [], ads = true, canonicalURL, ogIma
             onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
           />
         )}
-        {category && (
+        {(category || pubDate) && (
         <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
+          {pubDate && (
+            <time datetime={pubDate.toISOString()}>
+              {formatPublishedDate(pubDate, locale)}
+            </time>
+          )}
+          {category && resolvedCategoryHref && (
           <a
-            href={`/${category}`}
+            href={resolvedCategoryHref}
             class="rounded bg-gray-100 px-2 py-1 text-gray-700 transition-colors hover:bg-gray-200 capitalize"
           >
             {category}
           </a>
+          )}
         </div>
         )}
       </header>
@@ -99,8 +140,12 @@ const { title, description, category, tags = [], ads = true, canonicalURL, ogIma
         </footer>
       )}
 
-      <RelatedReading posts={relatedPosts} />
+      <RelatedReading
+        posts={relatedPosts}
+        postEntries={relatedPostEntries}
+        heading={locale === 'ja' ? '関連記事' : 'Related reading'}
+      />
     </article>
   </main>
-  <Footer />
+  <Footer locale={locale} switchUrls={switchUrls} metadata={localeMetadata} />
 </BaseLayout>

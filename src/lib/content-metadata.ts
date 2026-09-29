@@ -3,18 +3,21 @@ import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import {
   type ArticleType,
-  type BlogCategory,
-  type ClusterSlug,
   type ConsolidationStatus,
   isArticleType,
-  isBlogCategory,
+  isContentCategory,
   isClusterSlug,
 } from '../data/media-taxonomy';
-import { articlePath, canonicalUrlFromSlug, isReservedBlogSlug } from './site-url';
+import { getPostLocale, makeArticleId, type Locale } from './locale';
+import {
+  articlePathFromFrontmatter,
+  canonicalUrlForArticle,
+  isReservedEnglishBlogSlug,
+} from './site-url';
 
 export type ContentOverride = {
   articleType?: ArticleType;
-  cluster?: ClusterSlug | string;
+  cluster?: string;
   hubId?: string;
   isHub?: boolean;
   relatedArticleIds?: string[];
@@ -22,7 +25,7 @@ export type ContentOverride = {
   inSitemap?: boolean;
   consolidationStatus?: ConsolidationStatus;
   duplicateGroup?: string;
-  locale?: 'en' | 'jp';
+  locale?: Locale;
 };
 
 export type ParsedBlogFrontmatter = {
@@ -49,7 +52,7 @@ export type InventoryRecord = {
   articleId: string;
   url: string;
   slug: string;
-  locale: 'en' | 'jp';
+  locale: Locale;
   title: string;
   description: string;
   category: string | null;
@@ -90,18 +93,29 @@ export function resetOverridesCache(): void {
   overridesCache = null;
 }
 
-function overrideKeyCandidates(slug: string): string[] {
-  return [slug, `/${slug}`, articlePath(slug)];
+function overrideKeyCandidates(locale: Locale, slug: string, urlPath: string): string[] {
+  const id = makeArticleId(locale, slug);
+  return [id, slug, urlPath, `/${slug}`];
 }
 
+export function getOverrideForArticle(
+  locale: Locale,
+  slug: string,
+  urlPath: string,
+  overrides: Record<string, ContentOverride>
+): ContentOverride | undefined {
+  for (const key of overrideKeyCandidates(locale, slug, urlPath)) {
+    if (overrides[key]) return overrides[key];
+  }
+  return undefined;
+}
+
+/** @deprecated Use getOverrideForArticle */
 export function getOverrideForSlug(
   slug: string,
   overrides: Record<string, ContentOverride>
 ): ContentOverride | undefined {
-  for (const key of overrideKeyCandidates(slug)) {
-    if (overrides[key]) return overrides[key];
-  }
-  return undefined;
+  return getOverrideForArticle('en', slug, `/${slug}`, overrides);
 }
 
 function pickString(
@@ -120,10 +134,7 @@ function pickBool(fm: boolean | undefined, ov: boolean | undefined, inferred: bo
   return inferred;
 }
 
-function pickArticleType(
-  fm?: string,
-  ov?: string
-): ArticleType | null {
+function pickArticleType(fm?: string, ov?: string): ArticleType | null {
   const v = fm ?? ov;
   if (!v) return null;
   return isArticleType(v) ? v : null;
@@ -131,7 +142,18 @@ function pickArticleType(
 
 function pickConsolidation(fm?: string, ov?: string): ConsolidationStatus {
   const v = fm ?? ov;
-  if (v && ['keep', 'refresh', 'differentiate', 'merge_candidate', 'redirect_candidate', 'noindex_candidate', 'review'].includes(v)) {
+  if (
+    v &&
+    [
+      'keep',
+      'refresh',
+      'differentiate',
+      'merge_candidate',
+      'redirect_candidate',
+      'noindex_candidate',
+      'review',
+    ].includes(v)
+  ) {
     return v as ConsolidationStatus;
   }
   return DEFAULT_CONSOLIDATION;
@@ -152,29 +174,33 @@ export function buildInventoryRecord(
   wordCount: number,
   overrides: Record<string, ContentOverride>
 ): InventoryRecord {
-  const ov = getOverrideForSlug(slug, overrides) ?? {};
-  const locale = (fm.locale ?? ov.locale ?? 'en') as 'en' | 'jp';
+  const locale = getPostLocale(fm);
+  const urlPath = articlePathFromFrontmatter(slug, fm);
+  const ov = getOverrideForArticle(locale, slug, urlPath, overrides) ?? {};
   const category =
-    fm.category && isBlogCategory(fm.category) ? fm.category : fm.category ?? null;
+    fm.category && isContentCategory(fm.category) ? fm.category : fm.category ?? null;
   const draft = fm.draft;
   const indexable = pickBool(fm.indexable, ov.indexable, !draft);
+  const reservedEnglish =
+    locale === 'en' && isReservedEnglishBlogSlug(slug);
   const inSitemap = pickBool(
     fm.inSitemap,
     ov.inSitemap,
-    indexable && !draft && !isReservedBlogSlug(slug)
+    indexable && !draft && !reservedEnglish
   );
   const inferredType = inferArticleTypeFromTitle(fm.title);
   const articleType = pickArticleType(fm.articleType, ov.articleType) ?? inferredType;
   const clusterRaw = pickString(fm.cluster, ov.cluster);
-  const cluster = clusterRaw && (isClusterSlug(clusterRaw) || clusterRaw.length > 0) ? clusterRaw : null;
+  const cluster =
+    clusterRaw && (isClusterSlug(clusterRaw) || clusterRaw.length > 0) ? clusterRaw : null;
   const hubId = pickString(fm.hubId, ov.hubId);
   const isHub = pickBool(fm.isHub, ov.isHub, false);
   const relatedArticleIds = fm.relatedArticleIds ?? ov.relatedArticleIds ?? [];
   const duplicateGroup = pickString(fm.duplicateGroup, ov.duplicateGroup);
 
   return {
-    articleId: `${locale}-${slug}`,
-    url: articlePath(slug),
+    articleId: makeArticleId(locale, slug),
+    url: urlPath,
     slug,
     locale,
     title: fm.title,
@@ -184,7 +210,7 @@ export function buildInventoryRecord(
     publishedAt: fm.pubDate ?? null,
     updatedAt: fm.updatedDate ?? null,
     wordCount,
-    canonical: canonicalUrlFromSlug(slug),
+    canonical: canonicalUrlForArticle({ slug, locale, category }),
     articleType,
     cluster,
     hubId,

@@ -3,10 +3,11 @@ import BlogPost from '../layouts/BlogPost.astro';
 import { getCollection } from 'astro:content';
 import { getRelatedPosts } from '../lib/related-posts';
 import { relatedMap } from '../data/related-map';
-import { canonicalUrlFromSlug } from '../lib/site-url';
+import { getArticlePath, isJapanesePost } from '../lib/locale';
+import { filterPostsByLocale } from '../lib/posts';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection('blog', ({ data }) => !data.draft && !isJapanesePost(data));
   // Exclude category pages from slug routing
   const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles', 'framework'];
   return posts
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
       const relatedPosts = getRelatedPosts(
         entry.slug,
         entry.data.tags ?? [],
-        posts,
+        filterPostsByLocale(posts, 'en'),
         relatedMap
       );
       return {
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
 const { entry, relatedPosts } = Astro.props;
 const { Content } = await entry.render();
 const site = Astro.site ?? new URL('https://focus-dividend.com');
-const canonicalURL = new URL(canonicalUrlFromSlug(entry.slug));
+const canonicalURL = new URL(getArticlePath(entry), site);
 
 const thumbnailPath = entry.data.thumbnail
   ? `/images/thumbnails/${entry.data.thumbnail}`

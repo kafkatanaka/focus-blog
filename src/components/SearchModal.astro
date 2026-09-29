@@ -1,4 +1,32 @@
 ---
+import type { Locale } from '../lib/locale';
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = Astro.props.locale ?? 'en';
+const indexUrl = locale === 'ja' ? '/jp/search-index.json' : '/search-index.json';
+
+const copy =
+  locale === 'ja'
+    ? {
+        ariaLabel: '記事を検索',
+        placeholder: 'キーワードで記事を検索…',
+        empty: 'タイトル・説明・タグで検索できます。',
+        loading: '読み込み中…',
+        noResults: '該当する記事がありません。別のキーワードをお試しください。',
+        close: '検索を閉じる',
+      }
+    : {
+        ariaLabel: 'Search articles',
+        placeholder: 'Search articles by keyword...',
+        empty: 'Type to search articles by title, description, or tags.',
+        loading: 'Loading...',
+        noResults: 'No articles found. Try a different keyword.',
+        close: 'Close search',
+      };
+
 const modalId = 'search-modal';
 ---
 
@@ -8,7 +36,11 @@ const modalId = 'search-modal';
   aria-hidden="true"
   role="dialog"
   aria-modal="true"
-  aria-label="Search articles"
+  aria-label={copy.ariaLabel}
+  data-search-index-url={indexUrl}
+  data-copy-empty={copy.empty}
+  data-copy-loading={copy.loading}
+  data-copy-no-results={copy.noResults}
 >
   <div
     class="fixed inset-0 bg-black/40 transition-opacity"
@@ -39,7 +71,7 @@ const modalId = 'search-modal';
             type="search"
             data-search-input
             class="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-gray-900 placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400"
-            placeholder="Search articles by keyword..."
+            placeholder={copy.placeholder}
             autocomplete="off"
             enterkeyhint="search"
           />
@@ -47,7 +79,7 @@ const modalId = 'search-modal';
             type="button"
             data-search-close
             class="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-            aria-label="Close search"
+            aria-label={copy.close}
           >
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -56,13 +88,13 @@ const modalId = 'search-modal';
         </div>
         <div data-search-results class="mt-4 max-h-[60vh] overflow-y-auto">
           <div data-search-empty class="hidden py-8 text-center text-gray-500 text-sm">
-            Type to search articles by title, description, or tags.
+            {copy.empty}
           </div>
           <div data-search-loading class="hidden py-8 text-center text-gray-500 text-sm">
-            Loading...
+            {copy.loading}
           </div>
           <div data-search-no-results class="hidden py-8 text-center text-gray-500 text-sm">
-            No articles found. Try a different keyword.
+            {copy.noResults}
           </div>
           <ul data-search-list class="space-y-2"></ul>
         </div>
@@ -74,7 +106,6 @@ const modalId = 'search-modal';
 <script>
   const modal = document.getElementById('search-modal');
   const backdrop = modal?.querySelector('[data-search-backdrop]');
-  const panel = modal?.querySelector('[data-search-panel]');
   const input = modal?.querySelector('[data-search-input]') as HTMLInputElement | null;
   const closeBtn = modal?.querySelector('[data-search-close]');
   const listEl = modal?.querySelector('[data-search-list]');
@@ -82,8 +113,12 @@ const modalId = 'search-modal';
   const loadingState = modal?.querySelector('[data-search-loading]');
   const noResultsState = modal?.querySelector('[data-search-no-results]');
 
+  const indexUrl =
+    modal?.getAttribute('data-search-index-url') ?? '/search-index.json';
+
   type SearchEntry = {
     slug: string;
+    path: string;
     title: string;
     description: string;
     tags: string[];
@@ -114,7 +149,7 @@ const modalId = 'search-modal';
 
     if (!loaded) {
       showState(false, true, false, false);
-      fetch('/search-index.json')
+      fetch(indexUrl)
         .then((r) => r.json())
         .then((data: SearchEntry[]) => {
           index = data;
@@ -163,9 +198,10 @@ const modalId = 'search-modal';
 
     const thumbBase = '/images/thumbnails';
     matches.slice(0, 20).forEach((entry) => {
+      const href = entry.path || `/${entry.slug}`;
       const li = document.createElement('li');
       li.innerHTML = `
-        <a href="/${entry.slug}" class="flex gap-3 rounded-lg p-3 hover:bg-gray-50 group">
+        <a href="${href}" class="flex gap-3 rounded-lg p-3 hover:bg-gray-50 group">
           <div class="h-12 w-12 shrink-0 overflow-hidden rounded bg-gray-100">
             <img src="${thumbBase}/${entry.slug}.webp" alt="" class="h-full w-full object-cover" onerror="this.src='/images/thumbnails/placeholder.webp'" />
           </div>

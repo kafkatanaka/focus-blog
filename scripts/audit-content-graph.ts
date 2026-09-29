@@ -1,6 +1,5 @@
 /**
  * Audit internal content graph (warnings only — no auto-fix).
- * Run: npm run audit-content-graph
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,24 +7,26 @@ import { fileURLToPath } from 'node:url';
 import {
   buildInventoryRecord,
   loadContentOverrides,
+  type InventoryRecord,
   type ParsedBlogFrontmatter,
 } from '../src/lib/content-metadata';
-import { canonicalUrlFromSlug } from '../src/lib/site-url';
+import { makeArticleId } from '../src/lib/locale';
 import { countWords, parseFrontmatter } from './lib/parse-frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const BLOG_DIR = path.join(ROOT, 'src', 'content', 'blog');
 const OUT_DIR = path.join(ROOT, 'generated');
+const SKIP_FILES = new Set(['article-master-template.md']);
 
 type IssueLevel = 'error' | 'warning';
-type Issue = { level: IssueLevel; code: string; slug: string; message: string };
+type Issue = { level: IssueLevel; code: string; articleId: string; slug: string; message: string };
 
-function loadRecords() {
+function loadRecords(): InventoryRecord[] {
   const overrides = loadContentOverrides(ROOT);
-  const records = [];
+  const records: InventoryRecord[] = [];
   for (const file of fs.readdirSync(BLOG_DIR)) {
-    if (!file.endsWith('.md')) continue;
+    if (!file.endsWith('.md') || SKIP_FILES.has(file)) continue;
     const slug = file.replace(/\.md$/, '');
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const { fm, body } = parseFrontmatter(content);
@@ -36,103 +37,180 @@ function loadRecords() {
   return records;
 }
 
+function resolveRelatedId(
+  current: InventoryRecord,
+  relatedSlug: string,
+  bySlugLocale: Map<string, InventoryRecord[]>
+): InventoryRecord | undefined {
+  const sameLocale = bySlugLocale.get(relatedSlug)?.find((r) => r.locale === current.locale);
+  if (sameLocale) return sameLocale;
+  return bySlugLocale.get(relatedSlug)?.[0];
+}
+
 function main() {
   const records = loadRecords();
   const published = records.filter((r) => !r.draft && r.indexable);
-  const slugSet = new Set(records.map((r) => r.slug));
-  const publishedSlugSet = new Set(published.map((r) => r.slug));
+  const bySlugLocale = new Map<string, InventoryRecord[]>();
+  for (const r of records) {
+    const list = bySlugLocale.get(r.slug) ?? [];
+    list.push(r);
+    bySlugLocale.set(r.slug, list);
+  }
+
+  const publishedById = new Map(published.map((r) => [r.articleId, r]));
   const issues: Issue[] = [];
 
-  const hubSlugs = new Set(published.filter((r) => r.isHub).map((r) => r.slug));
-  const hubIdTargets = new Set(
-    published.map((r) => r.hubId).filter((id): id is string => Boolean(id))
-  );
+  const hubArticleIds = new Set(published.filter((r) => r.isHub).map((r) => r.articleId));
 
   for (const r of published) {
     if (!r.category) {
       issues.push({
         level: 'warning',
         code: 'missing_category',
+        articleId: r.articleId,
         slug: r.slug,
         message: 'Published article has no category',
       });
     }
 
-    if (r.hubId && !slugSet.has(r.hubId) && !hubSlugs.has(r.hubId)) {
+    if (r.canonical !== `https://focus-dividend.com${r.url}`) {
       issues.push({
-        level: 'warning',
-        code: 'broken_hub_id',
+        level: 'error',
+        code: 'canonical_mismatch',
+        articleId: r.articleId,
         slug: r.slug,
-        message: `hubId "${r.hubId}" does not match a known article slug`,
+        message: `canonical ${r.canonical} does not match url ${r.url}`,
       });
     }
 
+    if (r.locale === 'ja' && !r.url.startsWith('/jp/')) {
+      issues.push({
+        level: 'error',
+        code: 'ja_url_mismatch',
+        articleId: r.articleId,
+        slug: r.slug,
+        message: `Japanese article must use /jp/... path, got ${r.url}`,
+      });
+    }
+
+    if (r.locale === 'en' && r.url.startsWith('/jp/')) {
+      issues.push({
+        level: 'error',
+        code: 'en_url_mismatch',
+        articleId: r.articleId,
+        slug: r.slug,
+        message: `English article must not use /jp/ path`,
+      });
+    }
+
+    if (r.hubId) {
+      const hubMatches = bySlugLocale.get(r.hubId) ?? [];
+      const hubSameLocale = hubMatches.find((h) => h.locale === r.locale);
+      if (!hubSameLocale) {
+        issues.push({
+          level: 'warning',
+          code: 'broken_hub_id',
+          articleId: r.articleId,
+          slug: r.slug,
+          message: `hubId "${r.hubId}" has no published article in locale ${r.locale}`,
+        });
+      }
+      const hubOtherLocale = hubMatches.find((h) => h.locale !== r.locale);
+      if (hubOtherLocale && !hubSameLocale) {
+        issues.push({
+          level: 'warning',
+          code: 'cross_locale_hub',
+          articleId: r.articleId,
+          slug: r.slug,
+          message: `hubId "${r.hubId}" only exists in locale ${hubOtherLocale.locale}`,
+        });
+      }
+    }
+
     const seenRelated = new Set<string>();
-    for (const rel of r.relatedArticleIds) {
-      if (rel === r.slug) {
+    for (const relSlug of r.relatedArticleIds) {
+      if (relSlug === r.slug) {
         issues.push({
           level: 'warning',
           code: 'self_relation',
+          articleId: r.articleId,
           slug: r.slug,
           message: 'relatedArticleIds includes self',
         });
       }
-      if (seenRelated.has(rel)) {
+      if (seenRelated.has(relSlug)) {
         issues.push({
           level: 'warning',
           code: 'duplicate_relation',
+          articleId: r.articleId,
           slug: r.slug,
-          message: `duplicate relatedArticleId "${rel}"`,
+          message: `duplicate relatedArticleId "${relSlug}"`,
         });
       }
-      seenRelated.add(rel);
-      if (!slugSet.has(rel)) {
+      seenRelated.add(relSlug);
+
+      const targets = bySlugLocale.get(relSlug) ?? [];
+      if (targets.length === 0) {
         issues.push({
           level: 'warning',
           code: 'broken_related',
+          articleId: r.articleId,
           slug: r.slug,
-          message: `relatedArticleId "${rel}" not found`,
+          message: `relatedArticleId "${relSlug}" not found`,
         });
-      } else if (!publishedSlugSet.has(rel)) {
+        continue;
+      }
+
+      const sameLocale = targets.find((t) => t.locale === r.locale);
+      if (!sameLocale) {
+        issues.push({
+          level: 'warning',
+          code: 'cross_locale_relation',
+          articleId: r.articleId,
+          slug: r.slug,
+          message: `relatedArticleId "${relSlug}" has no ${r.locale} edition`,
+        });
+      } else if (!publishedById.has(sameLocale.articleId)) {
         issues.push({
           level: 'warning',
           code: 'unpublished_relation',
+          articleId: r.articleId,
           slug: r.slug,
-          message: `relatedArticleId "${rel}" is draft or missing`,
+          message: `relatedArticleId "${relSlug}" is draft or not indexable in ${r.locale}`,
+        });
+      } else if (targets.some((t) => t.locale !== r.locale)) {
+        issues.push({
+          level: 'warning',
+          code: 'cross_locale_relation',
+          articleId: r.articleId,
+          slug: r.slug,
+          message: `relatedArticleId "${relSlug}" also exists in another locale — verify intent`,
         });
       }
-    }
-
-    if (r.canonical !== canonicalUrlFromSlug(r.slug)) {
-      issues.push({
-        level: 'error',
-        code: 'canonical_mismatch',
-        slug: r.slug,
-        message: `canonical ${r.canonical} does not match slug rule`,
-      });
     }
 
     if (r.indexable && !r.inSitemap && !r.draft) {
       issues.push({
         level: 'warning',
         code: 'sitemap_mismatch',
+        articleId: r.articleId,
         slug: r.slug,
         message: 'indexable but inSitemap is false',
       });
     }
   }
 
-  // Orphans: published, indexable, no hub link and not a hub themselves
   for (const r of published) {
     const linkedToHub =
       r.isHub ||
-      (r.hubId && publishedSlugSet.has(r.hubId)) ||
-      hubIdTargets.has(r.slug);
+      (r.hubId && published.some((p) => p.slug === r.hubId && p.locale === r.locale)) ||
+      hubArticleIds.has(makeArticleId(r.locale, r.slug));
     const hasRelations = r.relatedArticleIds.length > 0;
     if (!linkedToHub && !hasRelations) {
       issues.push({
         level: 'warning',
         code: 'orphan_article',
+        articleId: r.articleId,
         slug: r.slug,
         message: 'No hubId, isHub, or relatedArticleIds (graph orphan during migration)',
       });

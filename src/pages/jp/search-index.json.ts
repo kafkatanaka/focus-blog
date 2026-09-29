@@ -1,9 +1,9 @@
 import { getCollection } from 'astro:content';
-import { filterPostsByLocale } from '../lib/posts';
-import { getArticlePath } from '../lib/locale';
+import { filterPostsByLocale } from '../../lib/posts';
+import { getArticlePath } from '../../lib/locale';
 
 export async function GET() {
-  const posts = filterPostsByLocale(await getCollection('blog'), 'en');
+  const posts = filterPostsByLocale(await getCollection('blog'), 'ja');
   const index = posts
     .filter((p) => !p.data.draft)
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())

@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import {
+  JP_CATEGORIES,
+  CATEGORY_TITLES,
+  CATEGORY_SUBTITLES_JA,
+  CATEGORY_DESCRIPTIONS_JA,
+} from '../../lib/categories';
+import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../../lib/posts';
+import { getArticlePath } from '../../lib/locale';
+
+const allJa = sortPostsByDate(
+  filterPostsByLocale(
+    (await getCollection('blog')).filter((p) => !p.data.draft),
+    'ja'
+  )
+);
+
+const latest = allJa.slice(0, 8);
+
+function postsForCategory(category: string) {
+  return allJa.filter((p) => p.data.category === category).slice(0, 4);
+}
+---
+
+<BaseLayout
+  lang="ja"
+  title="The Focus Dividend 日本語版"
+  description="仕事、お金、習慣、そして「何に注意を向けるか」を考えるための読みもの。"
+>
+  <Header locale="ja" />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <section class="mb-12">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        The Focus Dividend
+      </h1>
+      <p class="mt-2 text-sm font-medium text-gray-500">日本語版</p>
+      <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+        仕事、お金、習慣、そして<br class="sm:hidden" />
+        「何に注意を向けるか」を考えるための読みもの。
+      </p>
+    </section>
+
+    {latest.length > 0 && (
+      <section class="mb-14">
+        <h2 class="text-xl font-semibold text-gray-900">Latest</h2>
+        <ul class="mt-6 space-y-8">
+          {latest.map((post) => (
+            <ArticleCard
+              href={getArticlePath(post)}
+              title={post.data.title}
+              description={post.data.description}
+              thumbnailPath={thumbnailPathFor(post)}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              locale="ja"
+            />
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {JP_CATEGORIES.map((category) => {
+      const sectionPosts = postsForCategory(category);
+      if (sectionPosts.length === 0) return null;
+      return (
+        <section class="mb-14">
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 class="text-xl font-semibold text-gray-900">
+              <a href={`/jp/${category}`} class="hover:text-gray-700">
+                {CATEGORY_TITLES[category]}
+              </a>
+            </h2>
+            <p class="text-sm text-gray-500">{CATEGORY_SUBTITLES_JA[category]}</p>
+          </div>
+          <p class="mt-1 text-sm text-gray-600">{CATEGORY_DESCRIPTIONS_JA[category]}</p>
+          <ul class="mt-6 space-y-8">
+            {sectionPosts.map((post) => (
+              <ArticleCard
+                href={getArticlePath(post)}
+                title={post.data.title}
+                description={post.data.description}
+                thumbnailPath={thumbnailPathFor(post)}
+                pubDate={post.data.pubDate}
+                category={post.data.category}
+                locale="ja"
+              />
+            ))}
+          </ul>
+        </section>
+      );
+    })}
+  </main>
+  <Footer locale="ja" />
+</BaseLayout>

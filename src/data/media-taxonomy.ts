@@ -1,11 +1,19 @@
 /** Editorial taxonomy — validation & display (locale-specific labels come later). */
 
-export const PILLAR_SLUGS = ['framework', 'focus', 'work', 'money', 'habits'] as const;
-export type PillarSlug = (typeof PILLAR_SLUGS)[number];
+/** All blog `category` values (includes framework for Japanese posts). */
+export const CONTENT_CATEGORIES = ['framework', 'focus', 'work', 'money', 'habits'] as const;
+export type ContentCategory = (typeof CONTENT_CATEGORIES)[number];
 
-/** Blog frontmatter `category` values (framework is a separate page, not blog category). */
-export const BLOG_CATEGORIES = ['focus', 'work', 'money', 'habits'] as const;
-export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+/** English category listing pages under `/{category}` (framework is `/framework`, not a blog list). */
+export const EN_NAV_CATEGORIES = ['focus', 'work', 'money', 'habits'] as const;
+export type EnNavCategory = (typeof EN_NAV_CATEGORIES)[number];
+
+export const PILLAR_SLUGS = CONTENT_CATEGORIES;
+export type PillarSlug = ContentCategory;
+
+/** @deprecated Use EN_NAV_CATEGORIES for English blog-only filters */
+export const BLOG_CATEGORIES = EN_NAV_CATEGORIES;
+export type BlogCategory = EnNavCategory;
 
 export const ARTICLE_TYPES = [
   'guide',
@@ -49,8 +57,16 @@ export const CLUSTER_SLUGS = [
 ] as const;
 export type ClusterSlug = (typeof CLUSTER_SLUGS)[number];
 
+export function isContentCategory(value: string): value is ContentCategory {
+  return (CONTENT_CATEGORIES as readonly string[]).includes(value);
+}
+
+export function isEnNavCategory(value: string): value is EnNavCategory {
+  return (EN_NAV_CATEGORIES as readonly string[]).includes(value);
+}
+
 export function isBlogCategory(value: string): value is BlogCategory {
-  return (BLOG_CATEGORIES as readonly string[]).includes(value);
+  return isEnNavCategory(value);
 }
 
 export function isArticleType(value: string): value is ArticleType {

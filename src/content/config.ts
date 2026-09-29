@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { ARTICLE_TYPES, CONSOLIDATION_STATUSES } from '../data/media-taxonomy';
 
-const categoryEnum = z.enum(['focus', 'work', 'money', 'habits']);
+const categoryEnum = z.enum(['framework', 'focus', 'work', 'money', 'habits']);
 const articleTypeEnum = z.enum(ARTICLE_TYPES);
 const consolidationEnum = z.enum(CONSOLIDATION_STATUSES);
 
@@ -24,7 +24,6 @@ const blogCollection = defineCollection({
     inSitemap: z.boolean().optional(),
     consolidationStatus: consolidationEnum.optional(),
     duplicateGroup: z.string().optional(),
-    locale: z.enum(['en', 'jp']).optional(),
     ads: z.boolean().default(true),
     draft: z.boolean().default(false),
     /** サムネイル画像ファイル名（例: "my-post.webp"）。省略時は /images/thumbnails/{slug}.webp を使用 */
@@ -36,6 +35,16 @@ const blogCollection = defineCollection({
     youtube_video_id: z.string().nullable().optional(),
     source_title: z.string().optional(),
     seo_title: z.string().optional(),
+    /** ja = Japanese edition; omitted = English (legacy posts unchanged) */
+    locale: z.literal('ja').optional(),
+    translation_of: z.string().optional(),
+    english_url: z.string().optional(),
+    alternate_locales: z
+      .object({
+        en: z.string().optional(),
+        ja: z.string().optional(),
+      })
+      .optional(),
   }),
 });
 

@@ -1,8 +1,14 @@
 /** Canonical URL rules for focus-dividend.com (trailing slash: never). */
 
+import {
+  getPostLocale,
+  resolveArticlePath,
+  type Locale,
+} from './locale';
+
 export const SITE_ORIGIN = 'https://focus-dividend.com';
 
-const RESERVED_SLUGS = new Set([
+const RESERVED_ENGLISH_SLUGS = new Set([
   'focus',
   'work',
   'money',
@@ -23,12 +29,15 @@ export function normalizePath(path: string): string {
   return p;
 }
 
-/** Article URL path from blog slug (root-level `/{slug}`). */
+/** @deprecated Use resolveArticlePath / canonicalUrlForArticle — English-only shortcut */
 export function articlePath(slug: string): string {
   return normalizePath(`/${slug}`);
 }
 
-export function categoryPath(category: string): string {
+export function categoryPath(category: string, locale: Locale = 'en'): string {
+  if (locale === 'ja') {
+    return normalizePath(`/jp/${category}`);
+  }
   return normalizePath(`/${category}`);
 }
 
@@ -45,12 +54,31 @@ export function canonicalUrl(path: string): string {
   return `${SITE_ORIGIN}${normalizePath(path)}`;
 }
 
+export function canonicalUrlForArticle(params: {
+  slug: string;
+  locale: Locale;
+  category?: string | null;
+}): string {
+  return canonicalUrl(resolveArticlePath(params));
+}
+
 export function canonicalUrlFromSlug(slug: string): string {
-  return canonicalUrl(articlePath(slug));
+  return canonicalUrlForArticle({ slug, locale: 'en' });
 }
 
-export function isReservedBlogSlug(slug: string): boolean {
-  return RESERVED_SLUGS.has(slug);
+export function articlePathFromFrontmatter(
+  slug: string,
+  fm: { locale?: string; category?: string | null }
+): string {
+  return resolveArticlePath({
+    slug,
+    locale: getPostLocale(fm),
+    category: fm.category,
+  });
 }
 
-export { RESERVED_SLUGS };
+export function isReservedEnglishBlogSlug(slug: string): boolean {
+  return RESERVED_ENGLISH_SLUGS.has(slug);
+}
+
+export { RESERVED_ENGLISH_SLUGS as RESERVED_SLUGS };

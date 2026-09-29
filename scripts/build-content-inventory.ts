@@ -104,6 +104,7 @@ function main() {
 
   const tagMap = new Map<string, { tag: string; articleCount: number; indexableCount: number }>();
   for (const r of records) {
+    if (r.locale !== 'en') continue;
     for (const tag of r.tags) {
       const cur = tagMap.get(tag) ?? { tag, articleCount: 0, indexableCount: 0 };
       cur.articleCount += 1;
@@ -131,7 +132,15 @@ function main() {
     )
   );
 
-  console.log(`✅ content-inventory written (${records.length} articles) → ${jsonPath}`);
+  const publishedEn = records.filter((r) => !r.draft && r.locale === 'en').length;
+  const publishedJa = records.filter((r) => !r.draft && r.locale === 'ja').length;
+  const draftEn = records.filter((r) => r.draft && r.locale === 'en').length;
+  const draftJa = records.filter((r) => r.draft && r.locale === 'ja').length;
+
+  console.log(`✅ content-inventory written (${records.length} records) → ${jsonPath}`);
+  console.log(
+    `   physical MD: ${files.length} (+ ${SKIP_FILES.size} template excluded) | published EN: ${publishedEn} | published JA: ${publishedJa} | draft EN: ${draftEn} | draft JA: ${draftJa}`
+  );
 }
 
 main();
