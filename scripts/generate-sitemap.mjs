@@ -13,7 +13,8 @@ const BLOG_DIR = path.join(ROOT, "src", "content", "blog");
 const PUBLIC_DIR = path.join(ROOT, "public");
 
 const CATEGORIES = ["focus", "work", "money", "habits"];
-const NAV_CATEGORIES = ["framework", ...CATEGORIES];
+const JP_CATEGORIES = ["framework", ...CATEGORIES];
+const NAV_CATEGORIES = JP_CATEGORIES;
 
 function parseTags(content) {
   const tags = [];
@@ -71,7 +72,7 @@ if (fs.existsSync(BLOG_DIR)) {
     const ja = isJapaneseArticle(content);
     const category = parseCategory(content);
 
-    if (ja && category && CATEGORIES.includes(category)) {
+    if (ja && category && JP_CATEGORIES.includes(category)) {
       urls.push(`/jp/${category}/${slug}`);
     } else if (!ja && !reservedSlugs.includes(slug)) {
       urls.push(`/${slug}`);

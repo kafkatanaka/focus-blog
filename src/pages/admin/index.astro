@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
   CATEGORIES,
+  ARTICLE_CATEGORIES,
   SYMPTOM_TAGS,
   METHOD_TAGS,
   ATTRIBUTE_TAGS,
@@ -99,7 +100,7 @@ import { GITHUB_REPO } from '../../lib/github-publish';
             <div>
               <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
               <select id="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
-                {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+                {ARTICLE_CATEGORIES.map((c) => <option value={c}>{c}</option>)}
               </select>
             </div>
             <div>
@@ -221,7 +222,7 @@ import { GITHUB_REPO } from '../../lib/github-publish';
           <div>
             <label for="pool-category" class="text-xs text-gray-500">Category</label>
             <select id="pool-category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
-              {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+              {ARTICLE_CATEGORIES.map((c) => <option value={c}>{c}</option>)}
             </select>
           </div>
           <div>

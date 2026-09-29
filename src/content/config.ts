@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-const categoryEnum = z.enum(['focus', 'work', 'money', 'habits']);
+const categoryEnum = z.enum(['framework', 'focus', 'work', 'money', 'habits']);
 
 const blogCollection = defineCollection({
   type: 'content',

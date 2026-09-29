@@ -5,11 +5,13 @@ import { getRelatedPosts } from '../../../lib/related-posts';
 import { relatedMap } from '../../../data/related-map';
 import { isJapanesePost, getArticlePath, getLocaleSwitchUrl, buildHreflangAlternates, localeMetadataFromPost } from '../../../lib/locale';
 import { filterPostsByLocale } from '../../../lib/posts';
-import { CATEGORIES } from '../../../lib/categories';
+import { JP_CATEGORIES } from '../../../lib/categories';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => !data.draft && isJapanesePost(data));
-  const jaPosts = allPosts.filter((p) => p.data.category && CATEGORIES.includes(p.data.category as (typeof CATEGORIES)[number]));
+  const jaPosts = allPosts.filter(
+    (p) => p.data.category && JP_CATEGORIES.includes(p.data.category as (typeof JP_CATEGORIES)[number])
+  );
 
   return jaPosts.map((entry) => {
     const pool = filterPostsByLocale(allPosts, 'ja');
@@ -64,6 +66,7 @@ const ogImage = new URL(thumbnailPath, site).href;
   ogImage={ogImage}
   thumbnailPath={thumbnailPath}
   relatedPosts={relatedPosts}
+  relatedPostEntries={allJaPosts}
   locale="ja"
   switchUrls={switchUrls}
   localeMetadata={localeMetadata}

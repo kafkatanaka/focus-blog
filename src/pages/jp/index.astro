@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 import {
-  CATEGORIES,
+  JP_CATEGORIES,
   CATEGORY_TITLES,
   CATEGORY_SUBTITLES_JA,
   CATEGORY_DESCRIPTIONS_JA,
@@ -64,7 +64,7 @@ function postsForCategory(category: string) {
       </section>
     )}
 
-    {CATEGORIES.map((category) => {
+    {JP_CATEGORIES.map((category) => {
       const sectionPosts = postsForCategory(category);
       if (sectionPosts.length === 0) return null;
       return (

@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import AdSense from '../components/AdSense.astro';
 import RelatedReading from '../components/RelatedReading.astro';
 import type { RelatedPostItem } from '../lib/related-posts';
+import type { CollectionEntry } from 'astro:content';
 import type { Locale, LocaleMetadata } from '../lib/locale';
 import { formatPublishedDate } from '../lib/locale';
 
@@ -20,6 +21,7 @@ interface Props {
   ogImage?: string;
   thumbnailPath?: string;
   relatedPosts?: RelatedPostItem[];
+  relatedPostEntries?: Pick<CollectionEntry<'blog'>, 'slug' | 'data'>[];
   locale?: Locale;
   categoryHref?: string;
   switchUrls?: { en: string; ja: string };
@@ -37,6 +39,7 @@ const {
   ogImage,
   thumbnailPath,
   relatedPosts = [],
+  relatedPostEntries,
   pubDate,
   locale = 'en',
   categoryHref,
@@ -137,7 +140,11 @@ const resolvedCategoryHref =
         </footer>
       )}
 
-      <RelatedReading posts={relatedPosts} heading={locale === 'ja' ? '関連記事' : 'Related reading'} />
+      <RelatedReading
+        posts={relatedPosts}
+        postEntries={relatedPostEntries}
+        heading={locale === 'ja' ? '関連記事' : 'Related reading'}
+      />
     </article>
   </main>
   <Footer locale={locale} switchUrls={switchUrls} metadata={localeMetadata} />

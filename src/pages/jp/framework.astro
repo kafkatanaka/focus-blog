@@ -2,7 +2,20 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
 import { CATEGORY_TITLES, CATEGORY_SUBTITLES_JA, CATEGORY_DESCRIPTIONS_JA } from '../../lib/categories';
+import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../../lib/posts';
+import { getArticlePath } from '../../lib/locale';
+
+const frameworkPosts = sortPostsByDate(
+  filterPostsByLocale(
+    (await getCollection('blog')).filter(
+      (p) => !p.data.draft && p.data.category === 'framework'
+    ),
+    'ja'
+  )
+);
 
 const site = Astro.site ?? new URL('https://focus-dividend.com');
 const ogImage = new URL('/images/thumbnails/framework.webp', site).href;
@@ -42,6 +55,25 @@ const ogImage = new URL('/images/thumbnails/framework.webp', site).href;
         から読めます。
       </p>
     </div>
+
+    {frameworkPosts.length > 0 && (
+      <section class="mt-12 border-t border-gray-200 pt-10">
+        <h2 class="text-xl font-semibold text-gray-900">Framework の記事</h2>
+        <ul class="mt-6 space-y-8">
+          {frameworkPosts.map((post) => (
+            <ArticleCard
+              href={getArticlePath(post)}
+              title={post.data.title}
+              description={post.data.description}
+              thumbnailPath={thumbnailPathFor(post)}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              locale="ja"
+            />
+          ))}
+        </ul>
+      </section>
+    )}
   </main>
   <Footer locale="ja" />
 </BaseLayout>

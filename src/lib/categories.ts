@@ -1,5 +1,8 @@
 export const CATEGORIES = ['focus', 'work', 'money', 'habits'] as const;
 
+/** All category slugs that accept Japanese blog posts under /jp/{category}/{slug}. */
+export const JP_CATEGORIES = ['framework', 'focus', 'work', 'money', 'habits'] as const;
+
 /** Category + Framework nav slugs (shared EN/JA URL segments). */
 export const NAV_CATEGORY_SLUGS = ['framework', 'focus', 'work', 'money', 'habits'] as const;
 

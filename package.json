@@ -8,6 +8,7 @@
     "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "test:jp": "npx --yes tsx scripts/test-jp-related-links.ts",
     "astro": "astro",
     "export-titles": "node scripts/export-article-titles.mjs",
     "analyze-articles": "node scripts/analyze-articles.mjs"
