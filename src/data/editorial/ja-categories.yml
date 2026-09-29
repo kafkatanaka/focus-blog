@@ -1,0 +1,19 @@
+categories:
+  work:
+    tagline: キャリアの判断、成長、働き方のトレードオフについて。
+    startHere:
+      - fd-ja-000004
+      - fd-ja-000005
+    questions:
+      - label: 転職・キャリアの判断
+        anchor: decisions
+      - label: 仕事の意味や役割
+        anchor: guides
+  framework:
+    tagline: 考え方と意思決定の土台。
+    startHere:
+      - fd-ja-000002
+      - fd-ja-000003
+    questions:
+      - label: 選択肢が多すぎるとき
+        anchor: guides

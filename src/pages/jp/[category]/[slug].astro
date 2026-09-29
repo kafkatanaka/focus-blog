@@ -6,6 +6,11 @@ import { relatedMap } from '../../../data/related-map';
 import { isJapanesePost, getArticlePath, getLocaleSwitchUrl, buildHreflangAlternates, localeMetadataFromPost } from '../../../lib/locale';
 import { filterPostsByLocale } from '../../../lib/posts';
 import { JP_CATEGORIES } from '../../../lib/categories';
+import {
+  getArticlePresentation,
+  resolveReadingJourney,
+} from '../../../lib/article-presentation';
+import { buildArticleBreadcrumbs } from '../../../lib/breadcrumbs';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => !data.draft && isJapanesePost(data));
@@ -29,7 +34,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, relatedPosts, allJaPosts } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const site = Astro.site ?? new URL('https://focus-dividend.com');
 const articlePath = getArticlePath(entry);
 const canonicalURL = new URL(articlePath, site);
@@ -47,6 +52,14 @@ const hreflangAlternates =
     : entry.data.english_url
       ? buildHreflangAlternates({ en: entry.data.english_url, ja: articlePath }, site)
       : undefined;
+
+const presentation = getArticlePresentation(entry, allJaPosts);
+const journeySteps = resolveReadingJourney(
+  presentation.readingJourney,
+  'ja',
+  allJaPosts
+);
+const breadcrumbs = buildArticleBreadcrumbs(entry, 'ja');
 
 const thumbnailPath = entry.data.thumbnail
   ? `/images/thumbnails/${entry.data.thumbnail}`
@@ -68,9 +81,14 @@ const ogImage = new URL(thumbnailPath, site).href;
   relatedPosts={relatedPosts}
   relatedPostEntries={allJaPosts}
   locale="ja"
+  categoryHref={entry.data.category ? `/jp/${entry.data.category}` : undefined}
   switchUrls={switchUrls}
   localeMetadata={localeMetadata}
   hreflangAlternates={hreflangAlternates}
+  presentation={presentation}
+  breadcrumbs={breadcrumbs}
+  journeySteps={journeySteps}
+  headings={headings}
 >
   <Content />
 </BlogPost>

@@ -1,16 +1,37 @@
 # Per-article editorial metadata without bulk-editing hundreds of MD files.
-# Keys (first match wins): stable articleId (fd-en-000001), locale:slug, slug, or path
+# Keys: stable articleId (fd-en-000001), locale:slug, slug, or path
 #
-# hubId / relatedArticleIds: prefer stable IDs; slug fallback supported during migration
-#
-# Priority: frontmatter explicit value > this file > derived defaults
-#
-# Example:
-# phone-free-focus-guide:
-#   articleType: guide
-#   cluster: focus-management
-#   hubId: phone-free-focus-guide
-#   isHub: true
-#   consolidationStatus: keep
-#   relatedArticleIds:
-#     - recover-focus-after-burnout-guide
+# hubId / readingJourney.ref: prefer stable IDs; slug fallback during migration
+
+fd-ja-000004:
+  articleType: decide
+  cluster: career-change
+  isHub: true
+  keyTakeaway: 転職は一つの問題ではなく、仕事・会社・働き方のどこに不満があるかを分けて整理すると判断しやすくなります。
+  readingJourney:
+    - label: 前提を知る
+      ref: fd-ja-000005
+    - label: 選択肢を比べる
+      ref: fd-ja-000001
+    - label: 判断する
+      ref: fd-ja-000004
+
+fd-ja-000005:
+  articleType: explain
+  cluster: career-change
+  hubId: fd-ja-000004
+
+fd-ja-000001:
+  articleType: compare
+  cluster: career-change
+  hubId: fd-ja-000004
+
+fd-ja-000003:
+  articleType: guide
+  cluster: decision-making
+  hubId: fd-ja-000002
+
+fd-ja-000002:
+  articleType: explain
+  cluster: decision-making
+  isHub: true
