@@ -1,3 +1,4 @@
+/** @deprecated Use `tsx scripts/generate-sitemap.ts` (npm run build / prebuild). */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";

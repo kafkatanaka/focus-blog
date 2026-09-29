@@ -1,4 +1,6 @@
 ---
+import { canonicalUrl, normalizePath } from '../lib/site-url';
+
 interface Props {
   title: string;
   description: string;
@@ -19,14 +21,16 @@ const {
   hreflangAlternates,
 } = Astro.props;
 const site = Astro.site ?? new URL('https://focus-dividend.com');
-const url = canonicalURL ?? Astro.url;
-const fullURL = new URL(url.pathname, site);
+const pathForCanonical = canonicalURL
+  ? normalizePath(canonicalURL.pathname)
+  : normalizePath(Astro.url.pathname);
+const fullURL = canonicalUrl(pathForCanonical);
 const image = ogImage;
-const homeHreflangEn = new URL('/', site).href;
-const homeHreflangJa = new URL('/jp', site).href;
+const homeHreflangEn = canonicalUrl('/');
+const homeHreflangJa = canonicalUrl('/jp');
 const showHomeHreflang =
   !hreflangAlternates &&
-  (url.pathname === '/' || url.pathname === '/jp' || url.pathname === '/jp/');
+  (pathForCanonical === '/' || pathForCanonical === '/jp');
 ---
 
 <!DOCTYPE html>
@@ -84,7 +88,7 @@ const showHomeHreflang =
     </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
   </head>
   <body class:list={['bg-white text-gray-900 antialiased', lang === 'ja' ? 'locale-ja font-sans' : 'font-serif']}>
     <slot />

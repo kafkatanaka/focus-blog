@@ -27,14 +27,34 @@ export function localeBasePath(locale: Locale): string {
   return locale === 'ja' ? '/jp' : '';
 }
 
+/** Route resolver SSOT — used by pages, inventory, sitemap, and canonical helpers. */
+export function resolveArticlePath(params: {
+  slug: string;
+  locale: Locale;
+  category?: string | null;
+}): string {
+  if (params.locale === 'ja') {
+    if (!params.category) {
+      return `/jp/__missing_category__/${params.slug}`;
+    }
+    return `/jp/${params.category}/${params.slug}`;
+  }
+  return `/${params.slug}`;
+}
+
+/** Locale + slug alias key (overrides / registry aliases). Not a stable article ID. */
+export function makeArticleId(locale: Locale, slug: string): string {
+  return `${locale}:${slug}`;
+}
+
 export function getArticlePath(
   entry: Pick<CollectionEntry<'blog'>, 'slug' | 'data'>
 ): string {
-  if (isJapanesePost(entry.data)) {
-    const category = entry.data.category ?? 'work';
-    return `/jp/${category}/${entry.slug}`;
-  }
-  return `/${entry.slug}`;
+  return resolveArticlePath({
+    slug: entry.slug,
+    locale: getPostLocale(entry.data),
+    category: entry.data.category,
+  });
 }
 
 const CATEGORY_SLUGS = ['framework', 'focus', 'work', 'money', 'habits'] as const;
