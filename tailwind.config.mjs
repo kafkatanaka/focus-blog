@@ -18,6 +18,7 @@ export default {
       },
       maxWidth: {
         readable: '42.5rem', // 680px
+        editorial: '72rem', // 1152px — media home grid
       },
     },
   },
