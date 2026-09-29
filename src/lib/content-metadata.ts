@@ -8,6 +8,7 @@ import {
   isContentCategory,
   isClusterSlug,
 } from '../data/media-taxonomy';
+import { getStableArticleId, type ContentIdsRegistry } from './content-ids';
 import { getPostLocale, makeArticleId, type Locale } from './locale';
 import {
   articlePathFromFrontmatter,
@@ -93,18 +94,25 @@ export function resetOverridesCache(): void {
   overridesCache = null;
 }
 
-function overrideKeyCandidates(locale: Locale, slug: string, urlPath: string): string[] {
-  const id = makeArticleId(locale, slug);
-  return [id, slug, urlPath, `/${slug}`];
+function overrideKeyCandidates(
+  locale: Locale,
+  slug: string,
+  urlPath: string,
+  stableArticleId?: string
+): string[] {
+  const keys = [makeArticleId(locale, slug), slug, urlPath, `/${slug}`];
+  if (stableArticleId) keys.unshift(stableArticleId);
+  return keys;
 }
 
 export function getOverrideForArticle(
   locale: Locale,
   slug: string,
   urlPath: string,
-  overrides: Record<string, ContentOverride>
+  overrides: Record<string, ContentOverride>,
+  stableArticleId?: string
 ): ContentOverride | undefined {
-  for (const key of overrideKeyCandidates(locale, slug, urlPath)) {
+  for (const key of overrideKeyCandidates(locale, slug, urlPath, stableArticleId)) {
     if (overrides[key]) return overrides[key];
   }
   return undefined;
@@ -172,21 +180,28 @@ export function buildInventoryRecord(
   slug: string,
   fm: ParsedBlogFrontmatter,
   wordCount: number,
-  overrides: Record<string, ContentOverride>
+  overrides: Record<string, ContentOverride>,
+  idRegistry: ContentIdsRegistry
 ): InventoryRecord {
   const locale = getPostLocale(fm);
+  const stableArticleId = getStableArticleId(locale, slug, idRegistry);
+  if (!stableArticleId) {
+    throw new Error(`Missing stable article ID for ${locale}:${slug} — run npm run sync-content-ids`);
+  }
   const urlPath = articlePathFromFrontmatter(slug, fm);
-  const ov = getOverrideForArticle(locale, slug, urlPath, overrides) ?? {};
+  const ov =
+    getOverrideForArticle(locale, slug, urlPath, overrides, stableArticleId) ?? {};
   const category =
     fm.category && isContentCategory(fm.category) ? fm.category : fm.category ?? null;
   const draft = fm.draft;
   const indexable = pickBool(fm.indexable, ov.indexable, !draft);
   const reservedEnglish =
     locale === 'en' && isReservedEnglishBlogSlug(slug);
+  const jaMissingCategory = locale === 'ja' && !category;
   const inSitemap = pickBool(
     fm.inSitemap,
     ov.inSitemap,
-    indexable && !draft && !reservedEnglish
+    indexable && !draft && !reservedEnglish && !jaMissingCategory
   );
   const inferredType = inferArticleTypeFromTitle(fm.title);
   const articleType = pickArticleType(fm.articleType, ov.articleType) ?? inferredType;
@@ -199,7 +214,7 @@ export function buildInventoryRecord(
   const duplicateGroup = pickString(fm.duplicateGroup, ov.duplicateGroup);
 
   return {
-    articleId: makeArticleId(locale, slug),
+    articleId: stableArticleId,
     url: urlPath,
     slug,
     locale,

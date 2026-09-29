@@ -4,13 +4,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadContentIdsRegistry, resolveStableOrSlugRef } from '../src/lib/content-ids';
 import {
   buildInventoryRecord,
   loadContentOverrides,
   type InventoryRecord,
   type ParsedBlogFrontmatter,
 } from '../src/lib/content-metadata';
-import { makeArticleId } from '../src/lib/locale';
+import type { Locale } from '../src/lib/locale';
 import { countWords, parseFrontmatter } from './lib/parse-frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,6 +25,7 @@ type Issue = { level: IssueLevel; code: string; articleId: string; slug: string;
 
 function loadRecords(): InventoryRecord[] {
   const overrides = loadContentOverrides(ROOT);
+  const idRegistry = loadContentIdsRegistry(ROOT);
   const records: InventoryRecord[] = [];
   for (const file of fs.readdirSync(BLOG_DIR)) {
     if (!file.endsWith('.md') || SKIP_FILES.has(file)) continue;
@@ -31,45 +33,52 @@ function loadRecords(): InventoryRecord[] {
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const { fm, body } = parseFrontmatter(content);
     records.push(
-      buildInventoryRecord(slug, fm as ParsedBlogFrontmatter, countWords(body), overrides)
+      buildInventoryRecord(
+        slug,
+        fm as ParsedBlogFrontmatter,
+        countWords(body),
+        overrides,
+        idRegistry
+      )
     );
   }
   return records;
 }
 
-function resolveRelatedId(
-  current: InventoryRecord,
-  relatedSlug: string,
-  bySlugLocale: Map<string, InventoryRecord[]>
+function findRecordByRef(
+  ref: string,
+  locale: Locale,
+  records: InventoryRecord[],
+  registry: ReturnType<typeof loadContentIdsRegistry>
 ): InventoryRecord | undefined {
-  const sameLocale = bySlugLocale.get(relatedSlug)?.find((r) => r.locale === current.locale);
-  if (sameLocale) return sameLocale;
-  return bySlugLocale.get(relatedSlug)?.[0];
+  const resolved = resolveStableOrSlugRef(ref, locale, registry);
+  if (!resolved) return undefined;
+  if (resolved.stableId) {
+    return records.find((r) => r.articleId === resolved.stableId);
+  }
+  return records.find((r) => r.slug === resolved.slug && r.locale === resolved.locale);
 }
 
 function main() {
+  const registry = loadContentIdsRegistry(ROOT);
   const records = loadRecords();
   const published = records.filter((r) => !r.draft && r.indexable);
-  const bySlugLocale = new Map<string, InventoryRecord[]>();
-  for (const r of records) {
-    const list = bySlugLocale.get(r.slug) ?? [];
-    list.push(r);
-    bySlugLocale.set(r.slug, list);
-  }
-
   const publishedById = new Map(published.map((r) => [r.articleId, r]));
   const issues: Issue[] = [];
 
   const hubArticleIds = new Set(published.filter((r) => r.isHub).map((r) => r.articleId));
 
-  for (const r of published) {
+  for (const r of records) {
     if (!r.category) {
       issues.push({
-        level: 'warning',
+        level: r.locale === 'ja' ? 'error' : 'warning',
         code: 'missing_category',
         articleId: r.articleId,
         slug: r.slug,
-        message: 'Published article has no category',
+        message:
+          r.locale === 'ja'
+            ? 'Japanese article requires category for /jp/{category}/{slug}'
+            : 'Published article has no category',
       });
     }
 
@@ -80,6 +89,16 @@ function main() {
         articleId: r.articleId,
         slug: r.slug,
         message: `canonical ${r.canonical} does not match url ${r.url}`,
+      });
+    }
+
+    if (r.locale === 'ja' && r.url.includes('__missing_category__')) {
+      issues.push({
+        level: 'error',
+        code: 'ja_missing_category_url',
+        articleId: r.articleId,
+        slug: r.slug,
+        message: 'Japanese article URL cannot be built without category',
       });
     }
 
@@ -102,34 +121,41 @@ function main() {
         message: `English article must not use /jp/ path`,
       });
     }
+  }
 
+  for (const r of published) {
     if (r.hubId) {
-      const hubMatches = bySlugLocale.get(r.hubId) ?? [];
-      const hubSameLocale = hubMatches.find((h) => h.locale === r.locale);
-      if (!hubSameLocale) {
+      const hubRecord = findRecordByRef(r.hubId, r.locale, records, registry);
+      if (!hubRecord) {
         issues.push({
           level: 'warning',
           code: 'broken_hub_id',
           articleId: r.articleId,
           slug: r.slug,
-          message: `hubId "${r.hubId}" has no published article in locale ${r.locale}`,
+          message: `hubId "${r.hubId}" not found`,
         });
-      }
-      const hubOtherLocale = hubMatches.find((h) => h.locale !== r.locale);
-      if (hubOtherLocale && !hubSameLocale) {
+      } else if (hubRecord.locale !== r.locale) {
         issues.push({
           level: 'warning',
           code: 'cross_locale_hub',
           articleId: r.articleId,
           slug: r.slug,
-          message: `hubId "${r.hubId}" only exists in locale ${hubOtherLocale.locale}`,
+          message: `hubId "${r.hubId}" resolves to locale ${hubRecord.locale}, expected ${r.locale}`,
+        });
+      } else if (!publishedById.has(hubRecord.articleId)) {
+        issues.push({
+          level: 'warning',
+          code: 'unpublished_hub',
+          articleId: r.articleId,
+          slug: r.slug,
+          message: `hubId "${r.hubId}" is draft or not indexable`,
         });
       }
     }
 
     const seenRelated = new Set<string>();
-    for (const relSlug of r.relatedArticleIds) {
-      if (relSlug === r.slug) {
+    for (const relRef of r.relatedArticleIds) {
+      if (relRef === r.slug || relRef === r.articleId) {
         issues.push({
           level: 'warning',
           code: 'self_relation',
@@ -138,53 +164,43 @@ function main() {
           message: 'relatedArticleIds includes self',
         });
       }
-      if (seenRelated.has(relSlug)) {
+      if (seenRelated.has(relRef)) {
         issues.push({
           level: 'warning',
           code: 'duplicate_relation',
           articleId: r.articleId,
           slug: r.slug,
-          message: `duplicate relatedArticleId "${relSlug}"`,
+          message: `duplicate relatedArticleId "${relRef}"`,
         });
       }
-      seenRelated.add(relSlug);
+      seenRelated.add(relRef);
 
-      const targets = bySlugLocale.get(relSlug) ?? [];
-      if (targets.length === 0) {
+      const target = findRecordByRef(relRef, r.locale, records, registry);
+      if (!target) {
         issues.push({
           level: 'warning',
           code: 'broken_related',
           articleId: r.articleId,
           slug: r.slug,
-          message: `relatedArticleId "${relSlug}" not found`,
+          message: `relatedArticleId "${relRef}" not found`,
         });
         continue;
       }
-
-      const sameLocale = targets.find((t) => t.locale === r.locale);
-      if (!sameLocale) {
+      if (target.locale !== r.locale) {
         issues.push({
           level: 'warning',
           code: 'cross_locale_relation',
           articleId: r.articleId,
           slug: r.slug,
-          message: `relatedArticleId "${relSlug}" has no ${r.locale} edition`,
+          message: `relatedArticleId "${relRef}" resolves to locale ${target.locale}`,
         });
-      } else if (!publishedById.has(sameLocale.articleId)) {
+      } else if (!publishedById.has(target.articleId)) {
         issues.push({
           level: 'warning',
           code: 'unpublished_relation',
           articleId: r.articleId,
           slug: r.slug,
-          message: `relatedArticleId "${relSlug}" is draft or not indexable in ${r.locale}`,
-        });
-      } else if (targets.some((t) => t.locale !== r.locale)) {
-        issues.push({
-          level: 'warning',
-          code: 'cross_locale_relation',
-          articleId: r.articleId,
-          slug: r.slug,
-          message: `relatedArticleId "${relSlug}" also exists in another locale — verify intent`,
+          message: `relatedArticleId "${relRef}" is draft or not indexable`,
         });
       }
     }
@@ -203,8 +219,8 @@ function main() {
   for (const r of published) {
     const linkedToHub =
       r.isHub ||
-      (r.hubId && published.some((p) => p.slug === r.hubId && p.locale === r.locale)) ||
-      hubArticleIds.has(makeArticleId(r.locale, r.slug));
+      (r.hubId && findRecordByRef(r.hubId, r.locale, published, registry) !== undefined) ||
+      hubArticleIds.has(r.articleId);
     const hasRelations = r.relatedArticleIds.length > 0;
     if (!linkedToHub && !hasRelations) {
       issues.push({

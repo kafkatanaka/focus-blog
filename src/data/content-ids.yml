@@ -1,0 +1,1693 @@
+# Stable article IDs (slug-independent). Do not renumber.
+# Lookup: aliases["locale:slug"] or articles[fd-en-000001].slug
+version: 1
+articles:
+  fd-en-000001:
+    locale: en
+    slug: abstract-money-goals
+  fd-en-000002:
+    locale: en
+    slug: analog_vs_digital_task_management
+  fd-en-000003:
+    locale: en
+    slug: anxiety-masquerades-as-distraction
+  fd-en-000004:
+    locale: en
+    slug: asana-vs-monday-vs-clickup
+  fd-en-000005:
+    locale: en
+    slug: ask-for-raise-guide
+  fd-en-000006:
+    locale: en
+    slug: attention-cost-portfolio-checking
+  fd-en-000007:
+    locale: en
+    slug: attention-management-beats-time-management
+  fd-en-000008:
+    locale: en
+    slug: attention-myth-ruining-workdays
+  fd-en-000009:
+    locale: en
+    slug: authentic-networking-guide
+  fd-en-000010:
+    locale: en
+    slug: background_noise_focus_guide
+  fd-en-000011:
+    locale: en
+    slug: background-noise-focus
+  fd-en-000012:
+    locale: en
+    slug: behavior-change-books-comparison
+  fd-en-000013:
+    locale: en
+    slug: being-reliable-is-not-the-same-as-being-valuable
+  fd-en-000014:
+    locale: en
+    slug: best-behavior-change-books
+  fd-en-000015:
+    locale: en
+    slug: best-career-books-knowledge-workers
+  fd-en-000016:
+    locale: en
+    slug: best-evening-routine-ideas
+  fd-en-000017:
+    locale: en
+    slug: best-focus-apps-ranked
+  fd-en-000018:
+    locale: en
+    slug: best-focus-apps-ranked-expanded
+  fd-en-000019:
+    locale: en
+    slug: best-focus-attention-books-beginners
+  fd-en-000020:
+    locale: en
+    slug: best-investment-books-beginners
+  fd-en-000021:
+    locale: en
+    slug: best-money-management-books-couples
+  fd-en-000022:
+    locale: en
+    slug: best-money-management-books-couples-corrected
+  fd-en-000023:
+    locale: en
+    slug: best-productivity-books-careers
+  fd-en-000024:
+    locale: en
+    slug: best-productivity-planners-habit-building
+  fd-en-000025:
+    locale: en
+    slug: blue_light_glasses_comparison
+  fd-en-000026:
+    locale: en
+    slug: boredom-deep-thinking
+  fd-en-000027:
+    locale: en
+    slug: browser-tabs-focus-cost
+  fd-en-000028:
+    locale: en
+    slug: budgeting-apps-ranked-reviewed
+  fd-en-000029:
+    locale: en
+    slug: build-authority-guide
+  fd-en-000030:
+    locale: en
+    slug: build-career-resilience
+  fd-en-000031:
+    locale: en
+    slug: build-emergency-fund-that-works
+  fd-en-000032:
+    locale: en
+    slug: build-focus-stamina
+  fd-en-000033:
+    locale: en
+    slug: build-influence-without-authority
+  fd-en-000034:
+    locale: en
+    slug: build-personal-brand-without-feeling-fake
+  fd-en-000035:
+    locale: en
+    slug: build-portfolio-career
+  fd-en-000036:
+    locale: en
+    slug: build-portfolio-guide
+  fd-en-000037:
+    locale: en
+    slug: build-transferable-skills
+  fd-en-000038:
+    locale: en
+    slug: busy-versus-focused
+  fd-en-000039:
+    locale: en
+    slug: busy-vs-meaningful-careers
+  fd-en-000040:
+    locale: en
+    slug: caffeine_pills_vs_coffee
+  fd-en-000041:
+    locale: en
+    slug: caffeine-focus-science
+  fd-en-000042:
+    locale: en
+    slug: calendar-deep-work-guide
+  fd-en-000043:
+    locale: en
+    slug: career_leverage
+  fd-en-000044:
+    locale: en
+    slug: career-advice-after-30
+  fd-en-000045:
+    locale: en
+    slug: career-alignment
+  fd-en-000046:
+    locale: en
+    slug: career-anxiety-blog-post
+  fd-en-000047:
+    locale: en
+    slug: career-cost-go-to-person
+  fd-en-000048:
+    locale: en
+    slug: career-cost-not-taking-vacation
+  fd-en-000049:
+    locale: en
+    slug: career-development-plan-guide
+  fd-en-000050:
+    locale: en
+    slug: career-growth-is-leverage
+  fd-en-000051:
+    locale: en
+    slug: career-impact-being-underestimated
+  fd-en-000052:
+    locale: en
+    slug: career-impact-poor-communication
+  fd-en-000053:
+    locale: en
+    slug: career-paths-nobody-talks-about
+  fd-en-000054:
+    locale: en
+    slug: career-pivots-harder-with-age
+  fd-en-000055:
+    locale: en
+    slug: career-risk-being-too-useful
+  fd-en-000056:
+    locale: en
+    slug: career-setback-recovery-guide
+  fd-en-000057:
+    locale: en
+    slug: career-that-doesnt-break-you
+  fd-en-000058:
+    locale: en
+    slug: career-transition-guide
+  fd-en-000059:
+    locale: en
+    slug: clarity-beats-hustle
+  fd-en-000060:
+    locale: en
+    slug: coffee-shop-focus-guide
+  fd-en-000061:
+    locale: en
+    slug: cognitive-cost-saas-sprawl
+  fd-en-000062:
+    locale: en
+    slug: comparison-culture-ruins-financial-peace
+  fd-en-000063:
+    locale: en
+    slug: complete-guide-setting-up-nisa-2025
+  fd-en-000064:
+    locale: en
+    slug: consistency_without_tracking_guide
+  fd-en-000065:
+    locale: en
+    slug: consistency-emotional-difficulty
+  fd-en-000066:
+    locale: en
+    slug: context-collapse-focus
+  fd-en-000067:
+    locale: en
+    slug: context-switching-drains-energy
+  fd-en-000068:
+    locale: en
+    slug: couples_money_apps_comparison
+  fd-en-000069:
+    locale: en
+    slug: coworking-vs-home-office
+  fd-en-000070:
+    locale: en
+    slug: creative-work-focus
+  fd-en-000071:
+    locale: en
+    slug: credit-card-rewards-guide
+  fd-en-000072:
+    locale: en
+    slug: credit-card-strategies
+  fd-en-000073:
+    locale: en
+    slug: credit-scores-matter-more
+  fd-en-000074:
+    locale: en
+    slug: days-that-survive-distractions
+  fd-en-000075:
+    locale: en
+    slug: deadlines-improve-focus
+  fd-en-000076:
+    locale: en
+    slug: depression-habits-guide
+  fd-en-000077:
+    locale: en
+    slug: desk-setup-concentration
+  fd-en-000078:
+    locale: en
+    slug: difficult_team_members
+  fd-en-000079:
+    locale: en
+    slug: digital-minimalism-focus-guide
+  fd-en-000080:
+    locale: en
+    slug: discipline-versus-design
+  fd-en-000081:
+    locale: en
+    slug: distraction_blocking_guide
+  fd-en-000082:
+    locale: en
+    slug: distraction-blocking-software
+  fd-en-000083:
+    locale: en
+    slug: distraction-free-workspace-guide
+  fd-en-000084:
+    locale: en
+    slug: early-retirement-different-planning
+  fd-en-000085:
+    locale: en
+    slug: emotional-cost-of-falling-off
+  fd-en-000086:
+    locale: en
+    slug: emotional-side-of-money
+  fd-en-000087:
+    locale: en
+    slug: energy-in-habit-formation
+  fd-en-000088:
+    locale: en
+    slug: environment-shapes-thinking
+  fd-en-000089:
+    locale: en
+    slug: ergonomic_chairs_under_400
+  fd-en-000090:
+    locale: en
+    slug: evaluate-job-offers-beyond-salary
+  fd-en-000091:
+    locale: en
+    slug: evening-routine-guide
+  fd-en-000092:
+    locale: en
+    slug: exercise-habit-guide
+  fd-en-000093:
+    locale: en
+    slug: exercise-timing-mental-clarity
+  fd-en-000094:
+    locale: en
+    slug: expense-tracking-apps
+  fd-en-000095:
+    locale: en
+    slug: feeling-rich-being-secure
+  fd-en-000096:
+    locale: en
+    slug: feeling-rich-versus-being-secure
+  fd-en-000097:
+    locale: en
+    slug: financial-advice-feels-unrealistic
+  fd-en-000098:
+    locale: en
+    slug: financial-advisors-worth-it-sometimes
+  fd-en-000099:
+    locale: en
+    slug: financial-anxiety-shapes-decisions
+  fd-en-000100:
+    locale: en
+    slug: financial-confidence
+  fd-en-000101:
+    locale: en
+    slug: financial-education-not-taught-schools
+  fd-en-000102:
+    locale: en
+    slug: financial-emotional-anchors
+  fd-en-000103:
+    locale: en
+    slug: financial-goals-change-with-age
+  fd-en-000104:
+    locale: en
+    slug: financial-impact-life-changes
+  fd-en-000105:
+    locale: en
+    slug: financial-independence-looks-different
+  fd-en-000106:
+    locale: en
+    slug: financial-margin
+  fd-en-000107:
+    locale: en
+    slug: financial-overthinking-cost
+  fd-en-000108:
+    locale: en
+    slug: financial-recovery-guide
+  fd-en-000109:
+    locale: en
+    slug: financial-simplification
+  fd-en-000110:
+    locale: en
+    slug: financial-systems-reduce-willpower
+  fd-en-000111:
+    locale: en
+    slug: fire-not-realistic-most-people
+  fd-en-000112:
+    locale: en
+    slug: fitness-apps-comparison
+  fd-en-000113:
+    locale: en
+    slug: flow-states-rare
+  fd-en-000114:
+    locale: en
+    slug: focus_apps_comparison
+  fd-en-000115:
+    locale: en
+    slug: focus_morning_routine_guide
+  fd-en-000116:
+    locale: en
+    slug: focus-aging
+  fd-en-000117:
+    locale: en
+    slug: focus-article-important-work
+  fd-en-000118:
+    locale: en
+    slug: focus-availability-tradeoff
+  fd-en-000119:
+    locale: en
+    slug: focus-better-at-night
+  fd-en-000120:
+    locale: en
+    slug: focus-cost-of-constant-messages
+  fd-en-000121:
+    locale: en
+    slug: focus-cost-of-decision-fatigue
+  fd-en-000122:
+    locale: en
+    slug: focus-cost-of-email-checking
+  fd-en-000123:
+    locale: en
+    slug: focus-during-draining-meetings
+  fd-en-000124:
+    locale: en
+    slug: focus-finite-resource
+  fd-en-000125:
+    locale: en
+    slug: focus-friendly-workspace-budget
+  fd-en-000126:
+    locale: en
+    slug: focus-habits-guide
+  fd-en-000127:
+    locale: en
+    slug: focus-is-not-a-skill-its-a-system
+  fd-en-000128:
+    locale: en
+    slug: focus-mental-load-ignoring
+  fd-en-000129:
+    locale: en
+    slug: focus-not-willpower
+  fd-en-000130:
+    locale: en
+    slug: focus-problems-are-decision-problems
+  fd-en-000131:
+    locale: en
+    slug: focus-recovery-stress-guide
+  fd-en-000132:
+    locale: en
+    slug: focus-saying-no
+  fd-en-000133:
+    locale: en
+    slug: focus-silence-uncomfortable-powerful
+  fd-en-000134:
+    locale: en
+    slug: focus-starts-before-you-sit-down
+  fd-en-000135:
+    locale: en
+    slug: focus-tools-that-actually-matter
+  fd-en-000136:
+    locale: en
+    slug: focus-when-anxious-deadlines
+  fd-en-000137:
+    locale: en
+    slug: focus-with-chronic-pain
+  fd-en-000138:
+    locale: en
+    slug: focus-work-from-home-kids
+  fd-en-000139:
+    locale: en
+    slug: freedom-vs-security-tradeoff
+  fd-en-000140:
+    locale: en
+    slug: freelance_platforms_comparison
+  fd-en-000141:
+    locale: en
+    slug: freelance-contract-negotiation-guide
+  fd-en-000142:
+    locale: en
+    slug: frugality-not-same-as-cheap
+  fd-en-000143:
+    locale: en
+    slug: generalists-outperform-specialists
+  fd-en-000144:
+    locale: en
+    slug: grocery-savings-guide
+  fd-en-000145:
+    locale: en
+    slug: habit_restart_guide
+  fd-en-000146:
+    locale: en
+    slug: habit-loop-mistake
+  fd-en-000147:
+    locale: en
+    slug: habit-simplicity-matters
+  fd-en-000148:
+    locale: en
+    slug: habitica_streaks_cohorty_comparison
+  fd-en-000149:
+    locale: en
+    slug: habits-adhd
+  fd-en-000150:
+    locale: en
+    slug: habits-always-tired
+  fd-en-000151:
+    locale: en
+    slug: habits-break-when-busy
+  fd-en-000152:
+    locale: en
+    slug: habits-chronic-illness
+  fd-en-000153:
+    locale: en
+    slug: habits-during-depression
+  fd-en-000154:
+    locale: en
+    slug: habits-fail-after-success
+  fd-en-000155:
+    locale: en
+    slug: habits-in-retirement
+  fd-en-000156:
+    locale: en
+    slug: habits-mental-health
+  fd-en-000157:
+    locale: en
+    slug: habits-self-trust
+  fd-en-000158:
+    locale: en
+    slug: habits-survive-bad-days
+  fd-en-000159:
+    locale: en
+    slug: habits-survive-travel
+  fd-en-000160:
+    locale: en
+    slug: habits-unpredictable-schedules
+  fd-en-000161:
+    locale: en
+    slug: habits-with-kids
+  fd-en-000162:
+    locale: en
+    slug: habits-with-partner
+  fd-en-000163:
+    locale: en
+    slug: habits-without-tracking
+  fd-en-000164:
+    locale: en
+    slug: handle-being-passed-over-for-promotion
+  fd-en-000165:
+    locale: en
+    slug: hidden-benefits-of-mentorship
+  fd-en-000166:
+    locale: en
+    slug: hidden-career-cost-perfectionism
+  fd-en-000167:
+    locale: en
+    slug: hidden-cost-always-reachable
+  fd-en-000168:
+    locale: en
+    slug: hidden-cost-buy-now-pay-later
+  fd-en-000169:
+    locale: en
+    slug: hidden-cost-commuting-career-satisfaction
+  fd-en-000170:
+    locale: en
+    slug: hidden-cost-financial-multitasking
+  fd-en-000171:
+    locale: en
+    slug: hidden-cost-financial-overthinking
+  fd-en-000172:
+    locale: en
+    slug: hidden-cost-multitasking
+  fd-en-000173:
+    locale: en
+    slug: hidden-cost-optimizing
+  fd-en-000174:
+    locale: en
+    slug: hidden-friction-kills-habits
+  fd-en-000175:
+    locale: en
+    slug: hidden-psychology-impulse-buying
+  fd-en-000176:
+    locale: en
+    slug: hidden-skill-sustainable-careers
+  fd-en-000177:
+    locale: en
+    slug: hidden-stress-family-finances
+  fd-en-000178:
+    locale: en
+    slug: hidden-stress-managing-multiple-projects
+  fd-en-000179:
+    locale: en
+    slug: high-performer-money-anxiety
+  fd-en-000180:
+    locale: en
+    slug: how-distraction-becomes-your-default-mode
+  fd-en-000181:
+    locale: en
+    slug: how-environment-beats-self-control
+  fd-en-000182:
+    locale: en
+    slug: how-habits-fail-in-stress
+  fd-en-000183:
+    locale: en
+    slug: how-habits-really-form
+  fd-en-000184:
+    locale: en
+    slug: how-knowledge-workers-burn-out-quietly
+  fd-en-000185:
+    locale: en
+    slug: how-modern-work-rewards-visibility-over-impact
+  fd-en-000186:
+    locale: en
+    slug: how-to-automate-finances-completely
+  fd-en-000187:
+    locale: en
+    slug: how-to-build-emergency-fund-from-scratch
+  fd-en-000188:
+    locale: en
+    slug: how-to-build-financial-calm
+  fd-en-000189:
+    locale: en
+    slug: how-to-build-habits-unpredictable-schedules
+  fd-en-000190:
+    locale: en
+    slug: how-to-build-habits-with-adhd
+  fd-en-000191:
+    locale: en
+    slug: how-to-create-budget-youll-actually-follow
+  fd-en-000192:
+    locale: en
+    slug: how-to-create-keystone-habits
+  fd-en-000193:
+    locale: en
+    slug: how-to-negotiate-lower-interest-rates
+  fd-en-000194:
+    locale: en
+    slug: how-to-negotiate-remote-work
+  fd-en-000195:
+    locale: en
+    slug: how-to-start-investing-with-100
+  fd-en-000196:
+    locale: en
+    slug: how-to-start-side-hustle-no-upfront-cost
+  fd-en-000197:
+    locale: en
+    slug: how-to-track-spending-without-obsessing
+  fd-en-000198:
+    locale: en
+    slug: how-to-use-habit-stacking-effectively
+  fd-en-000199:
+    locale: en
+    slug: hunger-cognitive-performance
+  fd-en-000200:
+    locale: en
+    slug: identity-based-habits
+  fd-en-000201:
+    locale: en
+    slug: imposter-syndrome-high-achievers
+  fd-en-000202:
+    locale: en
+    slug: index-funds-guide
+  fd-en-000203:
+    locale: en
+    slug: index-funds-vs-stocks-cognitive-load
+  fd-en-000204:
+    locale: en
+    slug: industry-risk-rewards
+  fd-en-000205:
+    locale: en
+    slug: introvert-extrovert-habits
+  fd-en-000206:
+    locale: en
+    slug: introverted_social_habits_guide
+  fd-en-000207:
+    locale: en
+    slug: investment-platforms-beginners
+  fd-en-000208:
+    locale: en
+    slug: invisible-career-rules
+  fd-en-000209:
+    locale: en
+    slug: invisible-labor-managing-expectations
+  fd-en-000210:
+    locale: en
+    slug: irregular-expenses
+  fd-en-000211:
+    locale: en
+    slug: irregular-income-guide
+  fd-en-000212:
+    locale: en
+    slug: irregular-income-stress
+  fd-en-000213:
+    locale: en
+    slug: job-harder-than-it-should
+  fd-en-000214:
+    locale: en
+    slug: job-hopping-not-bad
+  fd-en-000215:
+    locale: en
+    slug: journal-apps-vs-paper
+  fd-en-000216:
+    locale: en
+    slug: journaling-habit-guide
+  fd-en-000217:
+    locale: en
+    slug: know-if-youre-growing
+  fd-en-000218:
+    locale: en
+    slug: layoffs-change-work-relationship
+  fd-en-000219:
+    locale: en
+    slug: lifestyle-inflation-happens-everyone
+  fd-en-000220:
+    locale: en
+    slug: light-affects-concentration
+  fd-en-000221:
+    locale: en
+    slug: linkedin_premium_vs_free
+  fd-en-000222:
+    locale: en
+    slug: linkedin-strategies-guide
+  fd-en-000223:
+    locale: en
+    slug: long-term-habits-boring
+  fd-en-000224:
+    locale: en
+    slug: maintain-focus-long-projects
+  fd-en-000225:
+    locale: en
+    slug: maker-manager-focus
+  fd-en-000226:
+    locale: en
+    slug: manage-upward-effectively
+  fd-en-000227:
+    locale: en
+    slug: meditation_apps_comparison
+  fd-en-000228:
+    locale: en
+    slug: meditation_starter_guide
+  fd-en-000229:
+    locale: en
+    slug: meditation-apps-comparison
+  fd-en-000230:
+    locale: en
+    slug: mental_health_habits_guide
+  fd-en-000231:
+    locale: en
+    slug: minimum-focus-meaningful-work
+  fd-en-000232:
+    locale: en
+    slug: money-attention-problems
+  fd-en-000233:
+    locale: en
+    slug: money-career-transitions
+  fd-en-000234:
+    locale: en
+    slug: money-decision-fatigue
+  fd-en-000235:
+    locale: en
+    slug: money-financial-discipline-exhausting
+  fd-en-000236:
+    locale: en
+    slug: money-goals-feel-abstract
+  fd-en-000237:
+    locale: en
+    slug: money-mental-load-managing
+  fd-en-000238:
+    locale: en
+    slug: money-mindset-actually-works
+  fd-en-000239:
+    locale: en
+    slug: money-problems-are-often-attention-problems
+  fd-en-000240:
+    locale: en
+    slug: money-shame-keeps-people-stuck
+  fd-en-000241:
+    locale: en
+    slug: money-stress-despite-earning
+  fd-en-000242:
+    locale: en
+    slug: money-stress-isnt-about-math
+  fd-en-000243:
+    locale: en
+    slug: money-stress-psychology
+  fd-en-000244:
+    locale: en
+    slug: money-talk-partner-guide
+  fd-en-000245:
+    locale: en
+    slug: morning_routine_apps
+  fd-en-000246:
+    locale: en
+    slug: morning-evening-focus
+  fd-en-000247:
+    locale: en
+    slug: morning-routine-apps-comparison
+  fd-en-000248:
+    locale: en
+    slug: morning-routine-guide
+  fd-en-000249:
+    locale: en
+    slug: morning-routines
+  fd-en-000250:
+    locale: en
+    slug: multi_project_management
+  fd-en-000251:
+    locale: en
+    slug: multiple-income-streams
+  fd-en-000252:
+    locale: en
+    slug: multiple-income-streams-guide
+  fd-en-000253:
+    locale: en
+    slug: music-concentration-guide
+  fd-en-000254:
+    locale: en
+    slug: navigate-office-politics
+  fd-en-000255:
+    locale: en
+    slug: negative-habits-power
+  fd-en-000256:
+    locale: en
+    slug: negotiate-bills-subscriptions
+  fd-en-000257:
+    locale: en
+    slug: negotiate-salary-without-feeling-pushy
+  fd-en-000258:
+    locale: en
+    slug: net-worth-isnt-everything
+  fd-en-000259:
+    locale: en
+    slug: networking-feels-inauthentic
+  fd-en-000260:
+    locale: en
+    slug: no-notifications-not-enough
+  fd-en-000261:
+    locale: en
+    slug: noise_colors_comparison
+  fd-en-000262:
+    locale: en
+    slug: noise-canceling-headphones-focus
+  fd-en-000263:
+    locale: en
+    slug: note-taking-apps-deep-work
+  fd-en-000264:
+    locale: en
+    slug: notification-design-hijacks-attention
+  fd-en-000265:
+    locale: en
+    slug: open-plan-offices-destroy-thinking
+  fd-en-000266:
+    locale: en
+    slug: overqualification-hurts-job-search
+  fd-en-000267:
+    locale: en
+    slug: passion-not-enough-career
+  fd-en-000268:
+    locale: en
+    slug: peak-focus-hours-change
+  fd-en-000269:
+    locale: en
+    slug: perfect-financial-plan-myth
+  fd-en-000270:
+    locale: en
+    slug: phone-free-focus-guide
+  fd-en-000271:
+    locale: en
+    slug: physical-clutter-mental-clarity
+  fd-en-000272:
+    locale: en
+    slug: pkm_guide
+  fd-en-000273:
+    locale: en
+    slug: pomodoro_apps_comparison
+  fd-en-000274:
+    locale: en
+    slug: pomodoro_technique_guide
+  fd-en-000275:
+    locale: en
+    slug: pomodoro-vs-deep-work
+  fd-en-000276:
+    locale: en
+    slug: prepare-for-performance-reviews
+  fd-en-000277:
+    locale: en
+    slug: productivity-tools-destroy-focus
+  fd-en-000278:
+    locale: en
+    slug: professional-development-courses-guide
+  fd-en-000279:
+    locale: en
+    slug: progress-versus-movement
+  fd-en-000280:
+    locale: en
+    slug: project_management_freelancers
+  fd-en-000281:
+    locale: en
+    slug: promotion-emptiness
+  fd-en-000282:
+    locale: en
+    slug: protect-attention-daily-design
+  fd-en-000283:
+    locale: en
+    slug: protect-focus-collaborative-environments
+  fd-en-000284:
+    locale: en
+    slug: protect-focus-life-transitions
+  fd-en-000285:
+    locale: en
+    slug: reading-habit-guide
+  fd-en-000286:
+    locale: en
+    slug: reading-habits-stick
+  fd-en-000287:
+    locale: en
+    slug: recognize-time-to-leave-job
+  fd-en-000288:
+    locale: en
+    slug: recover-financial-mistakes
+  fd-en-000289:
+    locale: en
+    slug: recover-focus-after-burnout-guide
+  fd-en-000290:
+    locale: en
+    slug: recover-focus-after-interruptions
+  fd-en-000291:
+    locale: en
+    slug: recover-from-bad-performance-review
+  fd-en-000292:
+    locale: en
+    slug: recover-from-career-burnout
+  fd-en-000293:
+    locale: en
+    slug: reduce-financial-stress
+  fd-en-000294:
+    locale: en
+    slug: reduce-habit-friction
+  fd-en-000295:
+    locale: en
+    slug: remote-job-boards-ranked
+  fd-en-000296:
+    locale: en
+    slug: remote-vs-office-habits
+  fd-en-000297:
+    locale: en
+    slug: remote-work-reality
+  fd-en-000298:
+    locale: en
+    slug: resist-habit-systems
+  fd-en-000299:
+    locale: en
+    slug: rest-and-focus
+  fd-en-000300:
+    locale: en
+    slug: restart-habit-without-guilt
+  fd-en-000301:
+    locale: en
+    slug: resume_builders_comparison
+  fd-en-000302:
+    locale: en
+    slug: resume-templates
+  fd-en-000303:
+    locale: en
+    slug: rituals-vs-habits
+  fd-en-000304:
+    locale: en
+    slug: running-apps-beginners-couch-to-5k
+  fd-en-000305:
+    locale: en
+    slug: sabbatical-depth
+  fd-en-000306:
+    locale: en
+    slug: sabbatical-strategies
+  fd-en-000307:
+    locale: en
+    slug: save-without-deprivation
+  fd-en-000308:
+    locale: en
+    slug: scarcity-thinking-affects-spending
+  fd-en-000309:
+    locale: en
+    slug: set-boundaries-demanding-bosses
+  fd-en-000310:
+    locale: en
+    slug: short-breaks-kill-focus
+  fd-en-000311:
+    locale: en
+    slug: side-hustles-dont-always-make-sense
+  fd-en-000312:
+    locale: en
+    slug: side-projects-career
+  fd-en-000313:
+    locale: en
+    slug: silence-to-think
+  fd-en-000314:
+    locale: en
+    slug: slack-vs-teams-vs-discord
+  fd-en-000315:
+    locale: en
+    slug: sleep-deprived-investors-financial-decisions
+  fd-en-000316:
+    locale: en
+    slug: sleep-focus-relationship
+  fd-en-000317:
+    locale: en
+    slug: sleep-quality-career-investments
+  fd-en-000318:
+    locale: en
+    slug: sleep-tracking-apps-comparison
+  fd-en-000319:
+    locale: en
+    slug: sleep-tracking-comparison
+  fd-en-000320:
+    locale: en
+    slug: small-habits-dont-work
+  fd-en-000321:
+    locale: en
+    slug: small-money-wins
+  fd-en-000322:
+    locale: en
+    slug: smart-money-calm-money
+  fd-en-000323:
+    locale: en
+    slug: smart-money-vs-calm-money
+  fd-en-000324:
+    locale: en
+    slug: smart-people-stuck
+  fd-en-000325:
+    locale: en
+    slug: smart-people-stuck-at-work
+  fd-en-000326:
+    locale: en
+    slug: social-media-focus-impact
+  fd-en-000327:
+    locale: en
+    slug: social-pressure-affects-concentration
+  fd-en-000328:
+    locale: en
+    slug: solo-project-management-tools-guide
+  fd-en-000329:
+    locale: en
+    slug: stability-vs-growth-tradeoff
+  fd-en-000330:
+    locale: en
+    slug: stack-habits-effectively
+  fd-en-000331:
+    locale: en
+    slug: standing_desk_comparison
+  fd-en-000332:
+    locale: en
+    slug: standing_desks_comparison
+  fd-en-000333:
+    locale: en
+    slug: stop-measuring-worth-by-output
+  fd-en-000334:
+    locale: en
+    slug: stress-focus-impact
+  fd-en-000335:
+    locale: en
+    slug: technical-interview-prep-guide
+  fd-en-000336:
+    locale: en
+    slug: temperature-affects-cognitive-performance
+  fd-en-000337:
+    locale: en
+    slug: the-career-advice-that-stops-working-after-30
+  fd-en-000338:
+    locale: en
+    slug: the-career-cost-of-always-saying-yes
+  fd-en-000339:
+    locale: en
+    slug: the-difference-between-progress-and-movement
+  fd-en-000340:
+    locale: en
+    slug: the-emotional-side-of-money-nobody-talks-about
+  fd-en-000341:
+    locale: en
+    slug: the-hidden-role-of-boredom-in-habit-formation
+  fd-en-000342:
+    locale: en
+    slug: the-hidden-skill-behind-sustainable-careers
+  fd-en-000343:
+    locale: en
+    slug: the-real-reason-deep-work-feels-impossible
+  fd-en-000344:
+    locale: en
+    slug: the-science-behind-the-21-day-myth
+  fd-en-000345:
+    locale: en
+    slug: time-blocking-apps-comparison
+  fd-en-000346:
+    locale: en
+    slug: time-tracking-freelancers
+  fd-en-000347:
+    locale: en
+    slug: time-tradeoff-work
+  fd-en-000348:
+    locale: en
+    slug: trade-off-time-energy-work
+  fd-en-000349:
+    locale: en
+    slug: train-brain-concentration-guide
+  fd-en-000350:
+    locale: en
+    slug: transition-careers-without-starting-over
+  fd-en-000351:
+    locale: en
+    slug: uncertainty-money-decisions
+  fd-en-000352:
+    locale: en
+    slug: video-call-fatigue
+  fd-en-000353:
+    locale: en
+    slug: video-call-focus-guide
+  fd-en-000354:
+    locale: en
+    slug: visibility-over-impact
+  fd-en-000355:
+    locale: en
+    slug: walking-meetings
+  fd-en-000356:
+    locale: en
+    slug: water-tracking-apps-comparison
+  fd-en-000357:
+    locale: en
+    slug: water-tracking-apps-comparison_
+  fd-en-000358:
+    locale: en
+    slug: wealth-average-income
+  fd-en-000359:
+    locale: en
+    slug: wfh-tools-article
+  fd-en-000360:
+    locale: en
+    slug: what-deep-work-actually-requires
+  fd-en-000361:
+    locale: en
+    slug: what-financial-stability-feels-like
+  fd-en-000362:
+    locale: en
+    slug: what-focus-feels-like
+  fd-en-000363:
+    locale: en
+    slug: what-sustainable-career-looks-like
+  fd-en-000364:
+    locale: en
+    slug: what-sustainable-habits-look-like
+  fd-en-000365:
+    locale: en
+    slug: why-accountability-partners-sometimes-make-it-worse
+  fd-en-000366:
+    locale: en
+    slug: why-background-noise-works-for-some-not-others
+  fd-en-000367:
+    locale: en
+    slug: why-brain-resists-long-tasks
+  fd-en-000368:
+    locale: en
+    slug: why-budgeting-fails
+  fd-en-000369:
+    locale: en
+    slug: why-busyness-is-career-trap
+  fd-en-000370:
+    locale: en
+    slug: why-certifications-dont-help-career
+  fd-en-000371:
+    locale: en
+    slug: why-company-culture-matters-more-than-salary
+  fd-en-000372:
+    locale: en
+    slug: why-comparing-finances-is-damaging
+  fd-en-000373:
+    locale: en
+    slug: why-experience-doesnt-equal-expertise
+  fd-en-000374:
+    locale: en
+    slug: why-feedback-hurts-even-when-helpful
+  fd-en-000375:
+    locale: en
+    slug: why-financial-advice-feels-unrealistic
+  fd-en-000376:
+    locale: en
+    slug: why-focus-feels-harder
+  fd-en-000377:
+    locale: en
+    slug: why-focus-harder-afternoon
+  fd-en-000378:
+    locale: en
+    slug: why-good-habits-feel-harder-than-bad-ones
+  fd-en-000379:
+    locale: en
+    slug: why-habit-advice-doesnt-fit
+  fd-en-000380:
+    locale: en
+    slug: why-habit-challenges-fail
+  fd-en-000381:
+    locale: en
+    slug: why-habit-change-feels-personal
+  fd-en-000382:
+    locale: en
+    slug: why-habit-replacement-works
+  fd-en-000383:
+    locale: en
+    slug: why-habit-streaks-are-overrated
+  fd-en-000384:
+    locale: en
+    slug: why-hard-work-doesnt-guarantee-career-growth
+  fd-en-000385:
+    locale: en
+    slug: why-hard-work-doesnt-guarantee-growth
+  fd-en-000386:
+    locale: en
+    slug: why-identity-based-habits-feel-different
+  fd-en-000387:
+    locale: en
+    slug: why-implementation-intentions-work
+  fd-en-000388:
+    locale: en
+    slug: why-keystone-habits-matter-most
+  fd-en-000389:
+    locale: en
+    slug: why-learning-doesnt-help-career
+  fd-en-000390:
+    locale: en
+    slug: why-money-stress-persists
+  fd-en-000391:
+    locale: en
+    slug: why-more-income-doesnt-create-safety
+  fd-en-000392:
+    locale: en
+    slug: why-morning-routines-work-for-some-not-everyone
+  fd-en-000393:
+    locale: en
+    slug: why-motivation-fails-before-focus
+  fd-en-000394:
+    locale: en
+    slug: why-motivation-is-terrible-foundation
+  fd-en-000395:
+    locale: en
+    slug: why-paper-and-pen-beat-productivity-apps
+  fd-en-000396:
+    locale: en
+    slug: why-perfectionism-destroys-habit-consistency
+  fd-en-000397:
+    locale: en
+    slug: why-promotions-often-go-to-the-wrong-people
+  fd-en-000398:
+    locale: en
+    slug: why-rewards-dont-always-reinforce-habits
+  fd-en-000399:
+    locale: en
+    slug: why-saving-feels-harder
+  fd-en-000400:
+    locale: en
+    slug: why-single-tasking-is-so-hard-to-learn
+  fd-en-000401:
+    locale: en
+    slug: why-smart-people-feel-stuck
+  fd-en-000402:
+    locale: en
+    slug: why-social-accountability-helps-some-people
+  fd-en-000403:
+    locale: en
+    slug: why-some-habits-need-daily-practice-others-dont
+  fd-en-000404:
+    locale: en
+    slug: why-some-music-helps-focus-and-some-destroys-it
+  fd-en-000405:
+    locale: en
+    slug: why-tracking-habits-backfires
+  fd-en-000406:
+    locale: en
+    slug: why-try-harder-never-improves-focus
+  fd-en-000407:
+    locale: en
+    slug: why-you-cant-focus
+  fd-en-000408:
+    locale: en
+    slug: why-you-quit-habits-right-before-they-work
+  fd-en-000409:
+    locale: en
+    slug: why-your-attention-feels-broken
+  fd-en-000410:
+    locale: en
+    slug: why-your-job-feels-harder-than-it-should
+  fd-en-000411:
+    locale: en
+    slug: windfalls-bonuses
+  fd-en-000412:
+    locale: en
+    slug: work-boundaries-guide
+  fd-en-000413:
+    locale: en
+    slug: work-expands-mental-space
+  fd-en-000414:
+    locale: en
+    slug: work-life-balance-unreachable
+  fd-en-000415:
+    locale: en
+    slug: work-managing-energy-not-time
+  fd-en-000416:
+    locale: en
+    slug: work-remote-changes-motivation
+  fd-en-000417:
+    locale: en
+    slug: work-with-difficult-colleagues
+  fd-ja-000001:
+    locale: ja
+    slug: career-coach-vs-recruitment-agent
+  fd-ja-000002:
+    locale: ja
+    slug: focus-dividend-framework-ja
+  fd-ja-000003:
+    locale: ja
+    slug: organize-options-when-you-cannot-decide
+  fd-ja-000004:
+    locale: ja
+    slug: should-i-change-jobs
+  fd-ja-000005:
+    locale: ja
+    slug: what-is-career-counseling
+aliases:
+  en:abstract-money-goals: fd-en-000001
+  en:analog_vs_digital_task_management: fd-en-000002
+  en:anxiety-masquerades-as-distraction: fd-en-000003
+  en:asana-vs-monday-vs-clickup: fd-en-000004
+  en:ask-for-raise-guide: fd-en-000005
+  en:attention-cost-portfolio-checking: fd-en-000006
+  en:attention-management-beats-time-management: fd-en-000007
+  en:attention-myth-ruining-workdays: fd-en-000008
+  en:authentic-networking-guide: fd-en-000009
+  en:background_noise_focus_guide: fd-en-000010
+  en:background-noise-focus: fd-en-000011
+  en:behavior-change-books-comparison: fd-en-000012
+  en:being-reliable-is-not-the-same-as-being-valuable: fd-en-000013
+  en:best-behavior-change-books: fd-en-000014
+  en:best-career-books-knowledge-workers: fd-en-000015
+  en:best-evening-routine-ideas: fd-en-000016
+  en:best-focus-apps-ranked: fd-en-000017
+  en:best-focus-apps-ranked-expanded: fd-en-000018
+  en:best-focus-attention-books-beginners: fd-en-000019
+  en:best-investment-books-beginners: fd-en-000020
+  en:best-money-management-books-couples: fd-en-000021
+  en:best-money-management-books-couples-corrected: fd-en-000022
+  en:best-productivity-books-careers: fd-en-000023
+  en:best-productivity-planners-habit-building: fd-en-000024
+  en:blue_light_glasses_comparison: fd-en-000025
+  en:boredom-deep-thinking: fd-en-000026
+  en:browser-tabs-focus-cost: fd-en-000027
+  en:budgeting-apps-ranked-reviewed: fd-en-000028
+  en:build-authority-guide: fd-en-000029
+  en:build-career-resilience: fd-en-000030
+  en:build-emergency-fund-that-works: fd-en-000031
+  en:build-focus-stamina: fd-en-000032
+  en:build-influence-without-authority: fd-en-000033
+  en:build-personal-brand-without-feeling-fake: fd-en-000034
+  en:build-portfolio-career: fd-en-000035
+  en:build-portfolio-guide: fd-en-000036
+  en:build-transferable-skills: fd-en-000037
+  en:busy-versus-focused: fd-en-000038
+  en:busy-vs-meaningful-careers: fd-en-000039
+  en:caffeine_pills_vs_coffee: fd-en-000040
+  en:caffeine-focus-science: fd-en-000041
+  en:calendar-deep-work-guide: fd-en-000042
+  en:career_leverage: fd-en-000043
+  en:career-advice-after-30: fd-en-000044
+  en:career-alignment: fd-en-000045
+  en:career-anxiety-blog-post: fd-en-000046
+  en:career-cost-go-to-person: fd-en-000047
+  en:career-cost-not-taking-vacation: fd-en-000048
+  en:career-development-plan-guide: fd-en-000049
+  en:career-growth-is-leverage: fd-en-000050
+  en:career-impact-being-underestimated: fd-en-000051
+  en:career-impact-poor-communication: fd-en-000052
+  en:career-paths-nobody-talks-about: fd-en-000053
+  en:career-pivots-harder-with-age: fd-en-000054
+  en:career-risk-being-too-useful: fd-en-000055
+  en:career-setback-recovery-guide: fd-en-000056
+  en:career-that-doesnt-break-you: fd-en-000057
+  en:career-transition-guide: fd-en-000058
+  en:clarity-beats-hustle: fd-en-000059
+  en:coffee-shop-focus-guide: fd-en-000060
+  en:cognitive-cost-saas-sprawl: fd-en-000061
+  en:comparison-culture-ruins-financial-peace: fd-en-000062
+  en:complete-guide-setting-up-nisa-2025: fd-en-000063
+  en:consistency_without_tracking_guide: fd-en-000064
+  en:consistency-emotional-difficulty: fd-en-000065
+  en:context-collapse-focus: fd-en-000066
+  en:context-switching-drains-energy: fd-en-000067
+  en:couples_money_apps_comparison: fd-en-000068
+  en:coworking-vs-home-office: fd-en-000069
+  en:creative-work-focus: fd-en-000070
+  en:credit-card-rewards-guide: fd-en-000071
+  en:credit-card-strategies: fd-en-000072
+  en:credit-scores-matter-more: fd-en-000073
+  en:days-that-survive-distractions: fd-en-000074
+  en:deadlines-improve-focus: fd-en-000075
+  en:depression-habits-guide: fd-en-000076
+  en:desk-setup-concentration: fd-en-000077
+  en:difficult_team_members: fd-en-000078
+  en:digital-minimalism-focus-guide: fd-en-000079
+  en:discipline-versus-design: fd-en-000080
+  en:distraction_blocking_guide: fd-en-000081
+  en:distraction-blocking-software: fd-en-000082
+  en:distraction-free-workspace-guide: fd-en-000083
+  en:early-retirement-different-planning: fd-en-000084
+  en:emotional-cost-of-falling-off: fd-en-000085
+  en:emotional-side-of-money: fd-en-000086
+  en:energy-in-habit-formation: fd-en-000087
+  en:environment-shapes-thinking: fd-en-000088
+  en:ergonomic_chairs_under_400: fd-en-000089
+  en:evaluate-job-offers-beyond-salary: fd-en-000090
+  en:evening-routine-guide: fd-en-000091
+  en:exercise-habit-guide: fd-en-000092
+  en:exercise-timing-mental-clarity: fd-en-000093
+  en:expense-tracking-apps: fd-en-000094
+  en:feeling-rich-being-secure: fd-en-000095
+  en:feeling-rich-versus-being-secure: fd-en-000096
+  en:financial-advice-feels-unrealistic: fd-en-000097
+  en:financial-advisors-worth-it-sometimes: fd-en-000098
+  en:financial-anxiety-shapes-decisions: fd-en-000099
+  en:financial-confidence: fd-en-000100
+  en:financial-education-not-taught-schools: fd-en-000101
+  en:financial-emotional-anchors: fd-en-000102
+  en:financial-goals-change-with-age: fd-en-000103
+  en:financial-impact-life-changes: fd-en-000104
+  en:financial-independence-looks-different: fd-en-000105
+  en:financial-margin: fd-en-000106
+  en:financial-overthinking-cost: fd-en-000107
+  en:financial-recovery-guide: fd-en-000108
+  en:financial-simplification: fd-en-000109
+  en:financial-systems-reduce-willpower: fd-en-000110
+  en:fire-not-realistic-most-people: fd-en-000111
+  en:fitness-apps-comparison: fd-en-000112
+  en:flow-states-rare: fd-en-000113
+  en:focus_apps_comparison: fd-en-000114
+  en:focus_morning_routine_guide: fd-en-000115
+  en:focus-aging: fd-en-000116
+  en:focus-article-important-work: fd-en-000117
+  en:focus-availability-tradeoff: fd-en-000118
+  en:focus-better-at-night: fd-en-000119
+  en:focus-cost-of-constant-messages: fd-en-000120
+  en:focus-cost-of-decision-fatigue: fd-en-000121
+  en:focus-cost-of-email-checking: fd-en-000122
+  en:focus-during-draining-meetings: fd-en-000123
+  en:focus-finite-resource: fd-en-000124
+  en:focus-friendly-workspace-budget: fd-en-000125
+  en:focus-habits-guide: fd-en-000126
+  en:focus-is-not-a-skill-its-a-system: fd-en-000127
+  en:focus-mental-load-ignoring: fd-en-000128
+  en:focus-not-willpower: fd-en-000129
+  en:focus-problems-are-decision-problems: fd-en-000130
+  en:focus-recovery-stress-guide: fd-en-000131
+  en:focus-saying-no: fd-en-000132
+  en:focus-silence-uncomfortable-powerful: fd-en-000133
+  en:focus-starts-before-you-sit-down: fd-en-000134
+  en:focus-tools-that-actually-matter: fd-en-000135
+  en:focus-when-anxious-deadlines: fd-en-000136
+  en:focus-with-chronic-pain: fd-en-000137
+  en:focus-work-from-home-kids: fd-en-000138
+  en:freedom-vs-security-tradeoff: fd-en-000139
+  en:freelance_platforms_comparison: fd-en-000140
+  en:freelance-contract-negotiation-guide: fd-en-000141
+  en:frugality-not-same-as-cheap: fd-en-000142
+  en:generalists-outperform-specialists: fd-en-000143
+  en:grocery-savings-guide: fd-en-000144
+  en:habit_restart_guide: fd-en-000145
+  en:habit-loop-mistake: fd-en-000146
+  en:habit-simplicity-matters: fd-en-000147
+  en:habitica_streaks_cohorty_comparison: fd-en-000148
+  en:habits-adhd: fd-en-000149
+  en:habits-always-tired: fd-en-000150
+  en:habits-break-when-busy: fd-en-000151
+  en:habits-chronic-illness: fd-en-000152
+  en:habits-during-depression: fd-en-000153
+  en:habits-fail-after-success: fd-en-000154
+  en:habits-in-retirement: fd-en-000155
+  en:habits-mental-health: fd-en-000156
+  en:habits-self-trust: fd-en-000157
+  en:habits-survive-bad-days: fd-en-000158
+  en:habits-survive-travel: fd-en-000159
+  en:habits-unpredictable-schedules: fd-en-000160
+  en:habits-with-kids: fd-en-000161
+  en:habits-with-partner: fd-en-000162
+  en:habits-without-tracking: fd-en-000163
+  en:handle-being-passed-over-for-promotion: fd-en-000164
+  en:hidden-benefits-of-mentorship: fd-en-000165
+  en:hidden-career-cost-perfectionism: fd-en-000166
+  en:hidden-cost-always-reachable: fd-en-000167
+  en:hidden-cost-buy-now-pay-later: fd-en-000168
+  en:hidden-cost-commuting-career-satisfaction: fd-en-000169
+  en:hidden-cost-financial-multitasking: fd-en-000170
+  en:hidden-cost-financial-overthinking: fd-en-000171
+  en:hidden-cost-multitasking: fd-en-000172
+  en:hidden-cost-optimizing: fd-en-000173
+  en:hidden-friction-kills-habits: fd-en-000174
+  en:hidden-psychology-impulse-buying: fd-en-000175
+  en:hidden-skill-sustainable-careers: fd-en-000176
+  en:hidden-stress-family-finances: fd-en-000177
+  en:hidden-stress-managing-multiple-projects: fd-en-000178
+  en:high-performer-money-anxiety: fd-en-000179
+  en:how-distraction-becomes-your-default-mode: fd-en-000180
+  en:how-environment-beats-self-control: fd-en-000181
+  en:how-habits-fail-in-stress: fd-en-000182
+  en:how-habits-really-form: fd-en-000183
+  en:how-knowledge-workers-burn-out-quietly: fd-en-000184
+  en:how-modern-work-rewards-visibility-over-impact: fd-en-000185
+  en:how-to-automate-finances-completely: fd-en-000186
+  en:how-to-build-emergency-fund-from-scratch: fd-en-000187
+  en:how-to-build-financial-calm: fd-en-000188
+  en:how-to-build-habits-unpredictable-schedules: fd-en-000189
+  en:how-to-build-habits-with-adhd: fd-en-000190
+  en:how-to-create-budget-youll-actually-follow: fd-en-000191
+  en:how-to-create-keystone-habits: fd-en-000192
+  en:how-to-negotiate-lower-interest-rates: fd-en-000193
+  en:how-to-negotiate-remote-work: fd-en-000194
+  en:how-to-start-investing-with-100: fd-en-000195
+  en:how-to-start-side-hustle-no-upfront-cost: fd-en-000196
+  en:how-to-track-spending-without-obsessing: fd-en-000197
+  en:how-to-use-habit-stacking-effectively: fd-en-000198
+  en:hunger-cognitive-performance: fd-en-000199
+  en:identity-based-habits: fd-en-000200
+  en:imposter-syndrome-high-achievers: fd-en-000201
+  en:index-funds-guide: fd-en-000202
+  en:index-funds-vs-stocks-cognitive-load: fd-en-000203
+  en:industry-risk-rewards: fd-en-000204
+  en:introvert-extrovert-habits: fd-en-000205
+  en:introverted_social_habits_guide: fd-en-000206
+  en:investment-platforms-beginners: fd-en-000207
+  en:invisible-career-rules: fd-en-000208
+  en:invisible-labor-managing-expectations: fd-en-000209
+  en:irregular-expenses: fd-en-000210
+  en:irregular-income-guide: fd-en-000211
+  en:irregular-income-stress: fd-en-000212
+  en:job-harder-than-it-should: fd-en-000213
+  en:job-hopping-not-bad: fd-en-000214
+  en:journal-apps-vs-paper: fd-en-000215
+  en:journaling-habit-guide: fd-en-000216
+  en:know-if-youre-growing: fd-en-000217
+  en:layoffs-change-work-relationship: fd-en-000218
+  en:lifestyle-inflation-happens-everyone: fd-en-000219
+  en:light-affects-concentration: fd-en-000220
+  en:linkedin_premium_vs_free: fd-en-000221
+  en:linkedin-strategies-guide: fd-en-000222
+  en:long-term-habits-boring: fd-en-000223
+  en:maintain-focus-long-projects: fd-en-000224
+  en:maker-manager-focus: fd-en-000225
+  en:manage-upward-effectively: fd-en-000226
+  en:meditation_apps_comparison: fd-en-000227
+  en:meditation_starter_guide: fd-en-000228
+  en:meditation-apps-comparison: fd-en-000229
+  en:mental_health_habits_guide: fd-en-000230
+  en:minimum-focus-meaningful-work: fd-en-000231
+  en:money-attention-problems: fd-en-000232
+  en:money-career-transitions: fd-en-000233
+  en:money-decision-fatigue: fd-en-000234
+  en:money-financial-discipline-exhausting: fd-en-000235
+  en:money-goals-feel-abstract: fd-en-000236
+  en:money-mental-load-managing: fd-en-000237
+  en:money-mindset-actually-works: fd-en-000238
+  en:money-problems-are-often-attention-problems: fd-en-000239
+  en:money-shame-keeps-people-stuck: fd-en-000240
+  en:money-stress-despite-earning: fd-en-000241
+  en:money-stress-isnt-about-math: fd-en-000242
+  en:money-stress-psychology: fd-en-000243
+  en:money-talk-partner-guide: fd-en-000244
+  en:morning_routine_apps: fd-en-000245
+  en:morning-evening-focus: fd-en-000246
+  en:morning-routine-apps-comparison: fd-en-000247
+  en:morning-routine-guide: fd-en-000248
+  en:morning-routines: fd-en-000249
+  en:multi_project_management: fd-en-000250
+  en:multiple-income-streams: fd-en-000251
+  en:multiple-income-streams-guide: fd-en-000252
+  en:music-concentration-guide: fd-en-000253
+  en:navigate-office-politics: fd-en-000254
+  en:negative-habits-power: fd-en-000255
+  en:negotiate-bills-subscriptions: fd-en-000256
+  en:negotiate-salary-without-feeling-pushy: fd-en-000257
+  en:net-worth-isnt-everything: fd-en-000258
+  en:networking-feels-inauthentic: fd-en-000259
+  en:no-notifications-not-enough: fd-en-000260
+  en:noise_colors_comparison: fd-en-000261
+  en:noise-canceling-headphones-focus: fd-en-000262
+  en:note-taking-apps-deep-work: fd-en-000263
+  en:notification-design-hijacks-attention: fd-en-000264
+  en:open-plan-offices-destroy-thinking: fd-en-000265
+  en:overqualification-hurts-job-search: fd-en-000266
+  en:passion-not-enough-career: fd-en-000267
+  en:peak-focus-hours-change: fd-en-000268
+  en:perfect-financial-plan-myth: fd-en-000269
+  en:phone-free-focus-guide: fd-en-000270
+  en:physical-clutter-mental-clarity: fd-en-000271
+  en:pkm_guide: fd-en-000272
+  en:pomodoro_apps_comparison: fd-en-000273
+  en:pomodoro_technique_guide: fd-en-000274
+  en:pomodoro-vs-deep-work: fd-en-000275
+  en:prepare-for-performance-reviews: fd-en-000276
+  en:productivity-tools-destroy-focus: fd-en-000277
+  en:professional-development-courses-guide: fd-en-000278
+  en:progress-versus-movement: fd-en-000279
+  en:project_management_freelancers: fd-en-000280
+  en:promotion-emptiness: fd-en-000281
+  en:protect-attention-daily-design: fd-en-000282
+  en:protect-focus-collaborative-environments: fd-en-000283
+  en:protect-focus-life-transitions: fd-en-000284
+  en:reading-habit-guide: fd-en-000285
+  en:reading-habits-stick: fd-en-000286
+  en:recognize-time-to-leave-job: fd-en-000287
+  en:recover-financial-mistakes: fd-en-000288
+  en:recover-focus-after-burnout-guide: fd-en-000289
+  en:recover-focus-after-interruptions: fd-en-000290
+  en:recover-from-bad-performance-review: fd-en-000291
+  en:recover-from-career-burnout: fd-en-000292
+  en:reduce-financial-stress: fd-en-000293
+  en:reduce-habit-friction: fd-en-000294
+  en:remote-job-boards-ranked: fd-en-000295
+  en:remote-vs-office-habits: fd-en-000296
+  en:remote-work-reality: fd-en-000297
+  en:resist-habit-systems: fd-en-000298
+  en:rest-and-focus: fd-en-000299
+  en:restart-habit-without-guilt: fd-en-000300
+  en:resume_builders_comparison: fd-en-000301
+  en:resume-templates: fd-en-000302
+  en:rituals-vs-habits: fd-en-000303
+  en:running-apps-beginners-couch-to-5k: fd-en-000304
+  en:sabbatical-depth: fd-en-000305
+  en:sabbatical-strategies: fd-en-000306
+  en:save-without-deprivation: fd-en-000307
+  en:scarcity-thinking-affects-spending: fd-en-000308
+  en:set-boundaries-demanding-bosses: fd-en-000309
+  en:short-breaks-kill-focus: fd-en-000310
+  en:side-hustles-dont-always-make-sense: fd-en-000311
+  en:side-projects-career: fd-en-000312
+  en:silence-to-think: fd-en-000313
+  en:slack-vs-teams-vs-discord: fd-en-000314
+  en:sleep-deprived-investors-financial-decisions: fd-en-000315
+  en:sleep-focus-relationship: fd-en-000316
+  en:sleep-quality-career-investments: fd-en-000317
+  en:sleep-tracking-apps-comparison: fd-en-000318
+  en:sleep-tracking-comparison: fd-en-000319
+  en:small-habits-dont-work: fd-en-000320
+  en:small-money-wins: fd-en-000321
+  en:smart-money-calm-money: fd-en-000322
+  en:smart-money-vs-calm-money: fd-en-000323
+  en:smart-people-stuck: fd-en-000324
+  en:smart-people-stuck-at-work: fd-en-000325
+  en:social-media-focus-impact: fd-en-000326
+  en:social-pressure-affects-concentration: fd-en-000327
+  en:solo-project-management-tools-guide: fd-en-000328
+  en:stability-vs-growth-tradeoff: fd-en-000329
+  en:stack-habits-effectively: fd-en-000330
+  en:standing_desk_comparison: fd-en-000331
+  en:standing_desks_comparison: fd-en-000332
+  en:stop-measuring-worth-by-output: fd-en-000333
+  en:stress-focus-impact: fd-en-000334
+  en:technical-interview-prep-guide: fd-en-000335
+  en:temperature-affects-cognitive-performance: fd-en-000336
+  en:the-career-advice-that-stops-working-after-30: fd-en-000337
+  en:the-career-cost-of-always-saying-yes: fd-en-000338
+  en:the-difference-between-progress-and-movement: fd-en-000339
+  en:the-emotional-side-of-money-nobody-talks-about: fd-en-000340
+  en:the-hidden-role-of-boredom-in-habit-formation: fd-en-000341
+  en:the-hidden-skill-behind-sustainable-careers: fd-en-000342
+  en:the-real-reason-deep-work-feels-impossible: fd-en-000343
+  en:the-science-behind-the-21-day-myth: fd-en-000344
+  en:time-blocking-apps-comparison: fd-en-000345
+  en:time-tracking-freelancers: fd-en-000346
+  en:time-tradeoff-work: fd-en-000347
+  en:trade-off-time-energy-work: fd-en-000348
+  en:train-brain-concentration-guide: fd-en-000349
+  en:transition-careers-without-starting-over: fd-en-000350
+  en:uncertainty-money-decisions: fd-en-000351
+  en:video-call-fatigue: fd-en-000352
+  en:video-call-focus-guide: fd-en-000353
+  en:visibility-over-impact: fd-en-000354
+  en:walking-meetings: fd-en-000355
+  en:water-tracking-apps-comparison: fd-en-000356
+  en:water-tracking-apps-comparison_: fd-en-000357
+  en:wealth-average-income: fd-en-000358
+  en:wfh-tools-article: fd-en-000359
+  en:what-deep-work-actually-requires: fd-en-000360
+  en:what-financial-stability-feels-like: fd-en-000361
+  en:what-focus-feels-like: fd-en-000362
+  en:what-sustainable-career-looks-like: fd-en-000363
+  en:what-sustainable-habits-look-like: fd-en-000364
+  en:why-accountability-partners-sometimes-make-it-worse: fd-en-000365
+  en:why-background-noise-works-for-some-not-others: fd-en-000366
+  en:why-brain-resists-long-tasks: fd-en-000367
+  en:why-budgeting-fails: fd-en-000368
+  en:why-busyness-is-career-trap: fd-en-000369
+  en:why-certifications-dont-help-career: fd-en-000370
+  en:why-company-culture-matters-more-than-salary: fd-en-000371
+  en:why-comparing-finances-is-damaging: fd-en-000372
+  en:why-experience-doesnt-equal-expertise: fd-en-000373
+  en:why-feedback-hurts-even-when-helpful: fd-en-000374
+  en:why-financial-advice-feels-unrealistic: fd-en-000375
+  en:why-focus-feels-harder: fd-en-000376
+  en:why-focus-harder-afternoon: fd-en-000377
+  en:why-good-habits-feel-harder-than-bad-ones: fd-en-000378
+  en:why-habit-advice-doesnt-fit: fd-en-000379
+  en:why-habit-challenges-fail: fd-en-000380
+  en:why-habit-change-feels-personal: fd-en-000381
+  en:why-habit-replacement-works: fd-en-000382
+  en:why-habit-streaks-are-overrated: fd-en-000383
+  en:why-hard-work-doesnt-guarantee-career-growth: fd-en-000384
+  en:why-hard-work-doesnt-guarantee-growth: fd-en-000385
+  en:why-identity-based-habits-feel-different: fd-en-000386
+  en:why-implementation-intentions-work: fd-en-000387
+  en:why-keystone-habits-matter-most: fd-en-000388
+  en:why-learning-doesnt-help-career: fd-en-000389
+  en:why-money-stress-persists: fd-en-000390
+  en:why-more-income-doesnt-create-safety: fd-en-000391
+  en:why-morning-routines-work-for-some-not-everyone: fd-en-000392
+  en:why-motivation-fails-before-focus: fd-en-000393
+  en:why-motivation-is-terrible-foundation: fd-en-000394
+  en:why-paper-and-pen-beat-productivity-apps: fd-en-000395
+  en:why-perfectionism-destroys-habit-consistency: fd-en-000396
+  en:why-promotions-often-go-to-the-wrong-people: fd-en-000397
+  en:why-rewards-dont-always-reinforce-habits: fd-en-000398
+  en:why-saving-feels-harder: fd-en-000399
+  en:why-single-tasking-is-so-hard-to-learn: fd-en-000400
+  en:why-smart-people-feel-stuck: fd-en-000401
+  en:why-social-accountability-helps-some-people: fd-en-000402
+  en:why-some-habits-need-daily-practice-others-dont: fd-en-000403
+  en:why-some-music-helps-focus-and-some-destroys-it: fd-en-000404
+  en:why-tracking-habits-backfires: fd-en-000405
+  en:why-try-harder-never-improves-focus: fd-en-000406
+  en:why-you-cant-focus: fd-en-000407
+  en:why-you-quit-habits-right-before-they-work: fd-en-000408
+  en:why-your-attention-feels-broken: fd-en-000409
+  en:why-your-job-feels-harder-than-it-should: fd-en-000410
+  en:windfalls-bonuses: fd-en-000411
+  en:work-boundaries-guide: fd-en-000412
+  en:work-expands-mental-space: fd-en-000413
+  en:work-life-balance-unreachable: fd-en-000414
+  en:work-managing-energy-not-time: fd-en-000415
+  en:work-remote-changes-motivation: fd-en-000416
+  en:work-with-difficult-colleagues: fd-en-000417
+  ja:career-coach-vs-recruitment-agent: fd-ja-000001
+  ja:focus-dividend-framework-ja: fd-ja-000002
+  ja:organize-options-when-you-cannot-decide: fd-ja-000003
+  ja:should-i-change-jobs: fd-ja-000004
+  ja:what-is-career-counseling: fd-ja-000005

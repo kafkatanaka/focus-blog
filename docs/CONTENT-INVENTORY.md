@@ -14,7 +14,11 @@ Editorial fields for legacy posts live in `src/data/content-overrides.yml` (not 
 
 Priority: **frontmatter** → **content-overrides.yml** → **inferred defaults**.
 
-Override keys: `en:slug`, `ja:slug`, slug, or full path (e.g. `/jp/work/foo`).
+Stable IDs live in `src/data/content-ids.yml` (`fd-en-000001`, `fd-ja-000001`, …). Inventory `articleId` is the stable ID; `slug` and `url` reflect the current file.
+
+New posts: `npm run sync-content-ids` (also runs in `prebuild`).
+
+Override keys: stable `articleId`, `en:slug`, `ja:slug`, slug, or full path (e.g. `/jp/work/foo`).
 
 ## Canonical URLs & routes
 

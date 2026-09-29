@@ -5,6 +5,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadContentIdsRegistry, syncContentIdsRegistry } from '../src/lib/content-ids';
+import { getPostLocale } from '../src/lib/locale';
 import {
   buildInventoryRecord,
   loadContentOverrides,
@@ -29,10 +31,18 @@ function toCsvValue(value: unknown): string {
 }
 
 function main() {
-  const overrides = loadContentOverrides(ROOT);
-  const records: InventoryRecord[] = [];
-
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md') && !SKIP_FILES.has(f));
+  const articleKeys = files.map((file) => {
+    const slug = file.replace(/\.md$/, '');
+    const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
+    const { fm } = parseFrontmatter(content);
+    return { locale: getPostLocale(fm), slug };
+  });
+  syncContentIdsRegistry(ROOT, articleKeys);
+
+  const overrides = loadContentOverrides(ROOT);
+  const idRegistry = loadContentIdsRegistry(ROOT);
+  const records: InventoryRecord[] = [];
 
   for (const file of files) {
     const slug = file.replace(/\.md$/, '');
@@ -40,7 +50,7 @@ function main() {
     const { fm, body } = parseFrontmatter(content);
     const wordCount = countWords(body);
     records.push(
-      buildInventoryRecord(slug, fm as ParsedBlogFrontmatter, wordCount, overrides)
+      buildInventoryRecord(slug, fm as ParsedBlogFrontmatter, wordCount, overrides, idRegistry)
     );
   }
 

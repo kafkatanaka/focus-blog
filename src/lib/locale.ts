@@ -34,12 +34,15 @@ export function resolveArticlePath(params: {
   category?: string | null;
 }): string {
   if (params.locale === 'ja') {
-    const category = params.category ?? 'work';
-    return `/jp/${category}/${params.slug}`;
+    if (!params.category) {
+      return `/jp/__missing_category__/${params.slug}`;
+    }
+    return `/jp/${params.category}/${params.slug}`;
   }
   return `/${params.slug}`;
 }
 
+/** Locale + slug alias key (overrides / registry aliases). Not a stable article ID. */
 export function makeArticleId(locale: Locale, slug: string): string {
   return `${locale}:${slug}`;
 }

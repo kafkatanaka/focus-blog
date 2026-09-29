@@ -1,5 +1,7 @@
 # Per-article editorial metadata without bulk-editing hundreds of MD files.
-# Keys: slug (e.g. phone-free-focus-guide) or path (e.g. /phone-free-focus-guide)
+# Keys (first match wins): stable articleId (fd-en-000001), locale:slug, slug, or path
+#
+# hubId / relatedArticleIds: prefer stable IDs; slug fallback supported during migration
 #
 # Priority: frontmatter explicit value > this file > derived defaults
 #

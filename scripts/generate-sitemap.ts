@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CATEGORIES } from '../src/lib/categories';
 import { EN_NAV_CATEGORIES } from '../src/data/media-taxonomy';
+import { loadContentIdsRegistry } from '../src/lib/content-ids';
 import {
   buildInventoryRecord,
   loadContentOverrides,
@@ -41,6 +42,7 @@ const JA_STATIC_PATHS = ['/jp', '/jp/framework'];
 
 function loadAllRecords(): InventoryRecord[] {
   const overrides = loadContentOverrides(ROOT);
+  const idRegistry = loadContentIdsRegistry(ROOT);
   const records: InventoryRecord[] = [];
   for (const file of fs.readdirSync(BLOG_DIR)) {
     if (!file.endsWith('.md') || SKIP_FILES.has(file)) continue;
@@ -48,7 +50,13 @@ function loadAllRecords(): InventoryRecord[] {
     const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
     const { fm, body } = parseFrontmatter(content);
     records.push(
-      buildInventoryRecord(slug, fm as ParsedBlogFrontmatter, countWords(body), overrides)
+      buildInventoryRecord(
+        slug,
+        fm as ParsedBlogFrontmatter,
+        countWords(body),
+        overrides,
+        idRegistry
+      )
     );
   }
   return records;
