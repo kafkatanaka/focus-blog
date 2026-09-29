@@ -1,22 +1,49 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLocaleFromPath, type Locale, type LocaleMetadata } from '../lib/locale';
+import { NAV_CATEGORY_SLUGS, CATEGORY_TITLES } from '../lib/categories';
+
+interface Props {
+  locale?: Locale;
+  switchUrls?: { en: string; ja: string };
+  metadata?: LocaleMetadata;
+}
+
+const locale = Astro.props.locale ?? getLocaleFromPath(Astro.url.pathname);
+const base = locale === 'ja' ? '/jp' : '';
 const currentYear = new Date().getFullYear();
+const privacyHref = locale === 'ja' ? '/privacy-policy' : '/privacy-policy';
+const contactHref = '/contact';
 ---
 
 <footer class="mt-auto border-t border-gray-200 bg-white">
   <div class="mx-auto max-w-readable px-4 py-8 sm:px-6">
-    <p class="text-center text-sm text-gray-500">
+    <p class="text-center text-sm font-medium text-gray-900">The Focus Dividend</p>
+    <nav class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-gray-500" aria-label="Footer categories">
+      {NAV_CATEGORY_SLUGS.map((slug) => (
+        <a href={`${base}/${slug}`} class="hover:text-gray-700">
+          {CATEGORY_TITLES[slug]}
+        </a>
+      ))}
+    </nav>
+
+    <LanguageSwitcher locale={locale} switchUrls={Astro.props.switchUrls} metadata={Astro.props.metadata} />
+
+    <p class="mt-6 text-center text-sm text-gray-500">
       © {currentYear} The Focus Dividend. All rights reserved.
     </p>
     <p class="mt-2 text-center text-xs text-gray-400">
-      <a href="/privacy-policy" class="hover:text-gray-600">Privacy Policy</a>
+      <a href={privacyHref} class="hover:text-gray-600">{locale === 'ja' ? 'Privacy' : 'Privacy Policy'}</a>
       <span class="mx-2">·</span>
-      <a href="/contact" class="hover:text-gray-600">Contact</a>
-      <span class="mx-2">·</span>
-      <a href="/affiliate-disclosure" class="hover:text-gray-600">Affiliate Disclosure</a>
-      <span class="mx-2">·</span>
-      <a href="/framework" class="hover:text-gray-600">Framework</a>
-      <span class="mx-2">·</span>
-      <a href="/rss.xml" class="hover:text-gray-600">RSS</a>
+      <a href={contactHref} class="hover:text-gray-600">{locale === 'ja' ? 'Contact' : 'Contact'}</a>
+      {locale === 'en' && (
+        <>
+          <span class="mx-2">·</span>
+          <a href="/affiliate-disclosure" class="hover:text-gray-600">Affiliate Disclosure</a>
+          <span class="mx-2">·</span>
+          <a href="/rss.xml" class="hover:text-gray-600">RSS</a>
+        </>
+      )}
     </p>
   </div>
 </footer>

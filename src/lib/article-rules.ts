@@ -1,7 +1,9 @@
 /** Article conventions derived from analysis of 416 published posts (Sep 2026). */
 
 export const CATEGORIES = ['focus', 'work', 'money', 'habits'] as const;
-export type ArticleCategory = (typeof CATEGORIES)[number];
+/** Categories available in Admin upload (includes Framework for JA articles). */
+export const ARTICLE_CATEGORIES = ['framework', ...CATEGORIES] as const;
+export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number];
 
 export const SYMPTOM_TAGS = [
   'burnout',
@@ -59,6 +61,7 @@ export function buildFrontmatter(input: {
   ads?: boolean;
   thumbnail?: string;
   updatedDate?: string;
+  locale?: 'ja';
 }): string {
   const lines = [
     '---',
@@ -91,6 +94,10 @@ export function buildFrontmatter(input: {
     lines.push(`thumbnail: ${input.thumbnail}`);
   }
 
+  if (input.locale === 'ja') {
+    lines.push('locale: ja');
+  }
+
   lines.push('---');
   return lines.join('\n');
 }
@@ -106,6 +113,7 @@ export function buildArticleMarkdown(input: {
   ads?: boolean;
   thumbnail?: string;
   updatedDate?: string;
+  locale?: 'ja';
   includeAffiliateDisclosure?: boolean;
 }): string {
   const frontmatter = buildFrontmatter(input);

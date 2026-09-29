@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// プロジェクトルートを scripts/ から確定（CI / ローカル同一）
 const ROOT = path.resolve(__dirname, "..");
 
 const SITE = "https://focus-dividend.com";
@@ -14,6 +13,8 @@ const BLOG_DIR = path.join(ROOT, "src", "content", "blog");
 const PUBLIC_DIR = path.join(ROOT, "public");
 
 const CATEGORIES = ["focus", "work", "money", "habits"];
+const JP_CATEGORIES = ["framework", ...CATEGORIES];
+const NAV_CATEGORIES = JP_CATEGORIES;
 
 function parseTags(content) {
   const tags = [];
@@ -27,22 +28,39 @@ function parseTags(content) {
   return tags;
 }
 
-// 固定ページ（trailingSlash: 'never' に合わせる）
+function parseFrontmatterField(content, field) {
+  const re = new RegExp(`^${field}:\\s*(.+)$`, "m");
+  const m = content.match(re);
+  if (!m) return null;
+  return m[1].trim().replace(/^["']|["']$/g, "");
+}
+
+function isJapaneseArticle(content) {
+  return parseFrontmatterField(content, "locale") === "ja";
+}
+
+function parseCategory(content) {
+  return parseFrontmatterField(content, "category");
+}
+
 const urls = ["/", "/framework", "/articles", "/affiliate-disclosure", "/privacy-policy", "/contact"];
+
+urls.push("/jp");
+for (const cat of NAV_CATEGORIES) {
+  urls.push(`/jp/${cat}`);
+}
 
 for (const cat of CATEGORIES) {
   urls.push(`/${cat}`);
 }
 
-// Pillar pages (Phase 0)
 urls.push("/focus/attention-management-guide");
 urls.push("/work/sustainable-productivity-guide");
 urls.push("/money/intentional-money-guide");
 urls.push("/habits/behavior-design-guide");
 
-// ブログ記事 + タグ収集
 const tagSet = new Set();
-const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles', 'framework'];
+const reservedSlugs = ["focus", "work", "money", "habits", "about", "articles", "framework"];
 if (fs.existsSync(BLOG_DIR)) {
   const files = fs.readdirSync(BLOG_DIR);
   for (const file of files) {
@@ -51,11 +69,18 @@ if (fs.existsSync(BLOG_DIR)) {
     const content = fs.readFileSync(fullPath, "utf-8");
     if (content.includes("draft: true")) continue;
     const slug = file.replace(/\.md$/, "");
-    // Exclude reserved slugs
-    if (!reservedSlugs.includes(slug)) {
+    const ja = isJapaneseArticle(content);
+    const category = parseCategory(content);
+
+    if (ja && category && JP_CATEGORIES.includes(category)) {
+      urls.push(`/jp/${category}/${slug}`);
+    } else if (!ja && !reservedSlugs.includes(slug)) {
       urls.push(`/${slug}`);
     }
-    for (const tag of parseTags(content)) tagSet.add(tag);
+
+    if (!ja) {
+      for (const tag of parseTags(content)) tagSet.add(tag);
+    }
   }
 } else {
   console.warn("⚠️ BLOG_DIR not found:", BLOG_DIR);

@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-const categoryEnum = z.enum(['focus', 'work', 'money', 'habits']);
+const categoryEnum = z.enum(['framework', 'focus', 'work', 'money', 'habits']);
 
 const blogCollection = defineCollection({
   type: 'content',
@@ -22,6 +22,16 @@ const blogCollection = defineCollection({
     youtube_video_id: z.string().nullable().optional(),
     source_title: z.string().optional(),
     seo_title: z.string().optional(),
+    /** ja = Japanese edition; omitted = English (legacy posts unchanged) */
+    locale: z.literal('ja').optional(),
+    translation_of: z.string().optional(),
+    english_url: z.string().optional(),
+    alternate_locales: z
+      .object({
+        en: z.string().optional(),
+        ja: z.string().optional(),
+      })
+      .optional(),
   }),
 });
 

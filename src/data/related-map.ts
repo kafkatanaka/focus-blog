@@ -4,6 +4,7 @@
  * ここに無い記事は tag ベースの自動関連が使われます。
  */
 export const relatedMap: Record<string, string[]> = {
+  "should-i-change-jobs": ["focus-dividend-framework-ja"],
   // Phase 2 + Phase 3: 新記事どうし・既存記事との関連を固定
   "sleep-deprived-investors-financial-decisions": [
     "sleep-quality-career-investments",

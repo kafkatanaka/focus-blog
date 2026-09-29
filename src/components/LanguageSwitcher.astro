@@ -1,0 +1,41 @@
+---
+import { getLocaleFromPath, getLocaleSwitchUrl, type Locale, type LocaleMetadata } from '../lib/locale';
+
+interface Props {
+  locale?: Locale;
+  switchUrls?: { en: string; ja: string };
+  metadata?: LocaleMetadata;
+}
+
+const pathname = Astro.url.pathname;
+const locale = Astro.props.locale ?? getLocaleFromPath(pathname);
+const switchUrls = Astro.props.switchUrls ?? getLocaleSwitchUrl(pathname, Astro.props.metadata);
+---
+
+<div class="mt-6">
+  <p class="text-xs font-medium uppercase tracking-wide text-gray-500">Language</p>
+  <ul class="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm">
+    <li>
+      {locale === 'en' ? (
+        <span class="font-medium text-gray-900" aria-current="true">
+          English <span aria-hidden="true">✓</span>
+        </span>
+      ) : (
+        <a href={switchUrls.en} class="text-gray-600 hover:text-gray-900" hreflang="en">
+          English
+        </a>
+      )}
+    </li>
+    <li>
+      {locale === 'ja' ? (
+        <span class="font-medium text-gray-900" aria-current="true">
+          日本語 <span aria-hidden="true">✓</span>
+        </span>
+      ) : (
+        <a href={switchUrls.ja} class="text-gray-600 hover:text-gray-900" hreflang="ja">
+          日本語
+        </a>
+      )}
+    </li>
+  </ul>
+</div>

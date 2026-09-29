@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
   CATEGORIES,
+  ARTICLE_CATEGORIES,
   SYMPTOM_TAGS,
   METHOD_TAGS,
   ATTRIBUTE_TAGS,
@@ -99,13 +100,22 @@ import { GITHUB_REPO } from '../../lib/github-publish';
             <div>
               <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
               <select id="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
-                {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+                {ARTICLE_CATEGORIES.map((c) => <option value={c}>{c}</option>)}
               </select>
             </div>
             <div>
               <label for="pubDate" class="block text-sm font-medium text-gray-700">pubDate (UTC)</label>
               <input id="pubDate" type="date" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
             </div>
+          </div>
+
+          <div>
+            <label for="locale" class="block text-sm font-medium text-gray-700">Locale</label>
+            <select id="locale" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+              <option value="">English (default)</option>
+              <option value="ja">日本語 (locale: ja)</option>
+            </select>
+            <p class="mt-1 text-xs text-gray-500">Japanese posts appear under /jp/&#123;category&#125;/&#123;slug&#125; only.</p>
           </div>
 
           <fieldset>
@@ -212,7 +222,7 @@ import { GITHUB_REPO } from '../../lib/github-publish';
           <div>
             <label for="pool-category" class="text-xs text-gray-500">Category</label>
             <select id="pool-category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
-              {CATEGORIES.map((c) => <option value={c}>{c}</option>)}
+              {ARTICLE_CATEGORIES.map((c) => <option value={c}>{c}</option>)}
             </select>
           </div>
           <div>
@@ -284,7 +294,7 @@ import { GITHUB_REPO } from '../../lib/github-publish';
   let poolSha = undefined;
 
   const fields = [
-    'archetype', 'title', 'slug', 'description', 'category', 'pubDate',
+    'archetype', 'title', 'slug', 'description', 'category', 'pubDate', 'locale',
     'tag-symptom', 'tag-method', 'tag-attribute', 'draft', 'ads', 'affiliate', 'body',
   ];
 
@@ -359,6 +369,7 @@ import { GITHUB_REPO } from '../../lib/github-publish';
     const body = $('body').value.trim();
     const pubDate = firstOfMonthIso($('pubDate').value);
     const affiliate = $('affiliate').checked;
+    const locale = $('locale').value;
 
     const fm = [
       '---',
@@ -370,11 +381,13 @@ import { GITHUB_REPO } from '../../lib/github-publish';
       ...tags.map((t) => `  - ${t}`),
       draft ? 'draft: true' : 'draft: false',
       ads ? 'ads: true' : 'ads: false',
-      '---',
-    ].join('\n');
+    ];
+    if (locale === 'ja') fm.push('locale: ja');
+    fm.push('---');
+    const fmBlock = fm.join('\n');
 
     const disclosure = affiliate ? `${AFFILIATE}\n\n` : '';
-    return `${fm}\n\n${disclosure}${body}\n`;
+    return `${fmBlock}\n\n${disclosure}${body}\n`;
   }
 
   function validate() {
