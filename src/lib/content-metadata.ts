@@ -16,11 +16,18 @@ import {
   isReservedEnglishBlogSlug,
 } from './site-url';
 
+export type ReadingJourneyOverride = {
+  label: string;
+  ref: string;
+};
+
 export type ContentOverride = {
   articleType?: ArticleType;
   cluster?: string;
   hubId?: string;
   isHub?: boolean;
+  keyTakeaway?: string;
+  readingJourney?: ReadingJourneyOverride[];
   relatedArticleIds?: string[];
   indexable?: boolean;
   inSitemap?: boolean;

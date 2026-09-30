@@ -24,6 +24,15 @@ const blogCollection = defineCollection({
     inSitemap: z.boolean().optional(),
     consolidationStatus: consolidationEnum.optional(),
     duplicateGroup: z.string().optional(),
+    keyTakeaway: z.string().optional(),
+    readingJourney: z
+      .array(
+        z.object({
+          label: z.string(),
+          ref: z.string(),
+        })
+      )
+      .optional(),
     ads: z.boolean().default(true),
     draft: z.boolean().default(false),
     /** サムネイル画像ファイル名（例: "my-post.webp"）。省略時は /images/thumbnails/{slug}.webp を使用 */

@@ -2,11 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import CategoryEditorialMain from '../../components/CategoryEditorialMain.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES, CATEGORY_TITLES, CATEGORY_DESCRIPTIONS_JA, CATEGORY_SUBTITLES_JA } from '../../lib/categories';
-import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../../lib/posts';
-import { getArticlePath } from '../../lib/locale';
+import { CATEGORIES, CATEGORY_TITLES, CATEGORY_DESCRIPTIONS_JA } from '../../lib/categories';
+import { filterPostsByLocale, sortPostsByDate } from '../../lib/posts';
 
 export async function getStaticPaths() {
   return CATEGORIES.map((category) => ({
@@ -27,6 +26,11 @@ const allPosts = sortPostsByDate(
     'ja'
   )
 );
+
+const pool = filterPostsByLocale(
+  (await getCollection('blog')).filter((p) => !p.data.draft),
+  'ja'
+);
 ---
 
 <BaseLayout
@@ -35,29 +39,14 @@ const allPosts = sortPostsByDate(
   description={CATEGORY_DESCRIPTIONS_JA[category]}
 >
   <Header locale="ja" />
-  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-      {CATEGORY_TITLES[category]}
-    </h1>
-    <p class="mt-2 text-sm text-gray-500">{CATEGORY_SUBTITLES_JA[category]}</p>
-    <p class="mt-2 text-gray-600">{CATEGORY_DESCRIPTIONS_JA[category]}</p>
-    {allPosts.length > 0 ? (
-      <ul class="mt-10 space-y-8">
-        {allPosts.map((post) => (
-          <ArticleCard
-            href={getArticlePath(post)}
-            title={post.data.title}
-            description={post.data.description}
-            thumbnailPath={thumbnailPathFor(post)}
-            pubDate={post.data.pubDate}
-            category={post.data.category}
-            locale="ja"
-          />
-        ))}
-      </ul>
-    ) : (
-      <p class="mt-10 text-gray-500 text-sm">このカテゴリの記事はまだありません。</p>
-    )}
+  <main class="mx-auto max-w-editorial px-4 py-12 sm:px-6">
+    <CategoryEditorialMain
+      locale="ja"
+      category={category}
+      posts={allPosts}
+      allPosts={pool}
+      homeHref="/jp"
+    />
   </main>
   <Footer locale="ja" />
 </BaseLayout>

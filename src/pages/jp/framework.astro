@@ -2,11 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import CategoryEditorialMain from '../../components/CategoryEditorialMain.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORY_TITLES, CATEGORY_SUBTITLES_JA, CATEGORY_DESCRIPTIONS_JA } from '../../lib/categories';
-import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../../lib/posts';
-import { getArticlePath } from '../../lib/locale';
+import { filterPostsByLocale, sortPostsByDate } from '../../lib/posts';
 
 const frameworkPosts = sortPostsByDate(
   filterPostsByLocale(
@@ -15,6 +14,10 @@ const frameworkPosts = sortPostsByDate(
     ),
     'ja'
   )
+);
+const pool = filterPostsByLocale(
+  (await getCollection('blog')).filter((p) => !p.data.draft),
+  'ja'
 );
 
 const site = Astro.site ?? new URL('https://focus-dividend.com');
@@ -56,24 +59,15 @@ const ogImage = new URL('/images/thumbnails/framework.webp', site).href;
       </p>
     </div>
 
-    {frameworkPosts.length > 0 && (
-      <section class="mt-12 border-t border-gray-200 pt-10">
-        <h2 class="text-xl font-semibold text-gray-900">Framework の記事</h2>
-        <ul class="mt-6 space-y-8">
-          {frameworkPosts.map((post) => (
-            <ArticleCard
-              href={getArticlePath(post)}
-              title={post.data.title}
-              description={post.data.description}
-              thumbnailPath={thumbnailPathFor(post)}
-              pubDate={post.data.pubDate}
-              category={post.data.category}
-              locale="ja"
-            />
-          ))}
-        </ul>
-      </section>
-    )}
+    <div class="mt-12">
+      <CategoryEditorialMain
+        locale="ja"
+        category="framework"
+        posts={frameworkPosts}
+        allPosts={pool}
+        homeHref="/jp"
+      />
+    </div>
   </main>
   <Footer locale="ja" />
 </BaseLayout>

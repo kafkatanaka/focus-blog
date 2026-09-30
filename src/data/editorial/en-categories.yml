@@ -1,0 +1,40 @@
+categories:
+  work:
+    tagline: Career decisions, growth, and the hidden trade-offs of modern work.
+    startHere:
+      - fd-en-000058
+      - fd-en-000049
+    questions:
+      - label: Changing careers
+        anchor: decisions
+      - label: Growing in your current role
+        anchor: guides
+      - label: Salary & negotiation
+        anchor: guides
+      - label: Burnout & sustainability
+        anchor: guides
+  money:
+    tagline: Financial calm, better trade-offs, and decisions that respect your attention.
+    startHere:
+      - fd-en-000188
+    questions:
+      - label: Reducing money anxiety
+        anchor: guides
+      - label: Investing choices
+        anchor: comparisons
+  focus:
+    tagline: Protect attention, reduce noise, and make focus sustainable.
+    startHere:
+      - fd-en-000270
+    questions:
+      - label: Can't focus right now
+        anchor: guides
+      - label: Tools & systems
+        anchor: tools
+  habits:
+    tagline: Design behavior that lasts without burning out on willpower.
+    startHere:
+      - fd-en-000080
+    questions:
+      - label: Building habits that stick
+        anchor: guides

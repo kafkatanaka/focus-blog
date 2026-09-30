@@ -2,11 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CategoryEditorialMain from '../components/CategoryEditorialMain.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORIES, CATEGORY_TITLES, CATEGORY_DESCRIPTIONS } from '../lib/categories';
-import { filterPostsByLocale, sortPostsByDate, thumbnailPathFor } from '../lib/posts';
-import { getArticlePath } from '../lib/locale';
-import ArticleCard from '../components/ArticleCard.astro';
+import { filterPostsByLocale, sortPostsByDate } from '../lib/posts';
 
 export async function getStaticPaths() {
   return CATEGORIES.map((category) => ({
@@ -27,6 +26,11 @@ const allPosts = sortPostsByDate(
     'en'
   )
 );
+
+const pool = filterPostsByLocale(
+  (await getCollection('blog')).filter((p) => !p.data.draft),
+  'en'
+);
 ---
 
 <BaseLayout
@@ -34,30 +38,14 @@ const allPosts = sortPostsByDate(
   description={CATEGORY_DESCRIPTIONS[category]}
 >
   <Header />
-  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-      {CATEGORY_TITLES[category]}
-    </h1>
-    <p class="mt-2 text-gray-600">
-      {CATEGORY_DESCRIPTIONS[category]}
-    </p>
-    <ul class="mt-10 space-y-8">
-      {allPosts.length > 0 ? (
-        allPosts.map((post) => (
-          <ArticleCard
-            href={getArticlePath(post)}
-            title={post.data.title}
-            description={post.data.description}
-            thumbnailPath={thumbnailPathFor(post)}
-            locale="en"
-          />
-        ))
-      ) : (
-        <li class="text-gray-500 py-8">
-          No posts in this category yet. Check back soon.
-        </li>
-      )}
-    </ul>
+  <main class="mx-auto max-w-editorial px-4 py-12 sm:px-6">
+    <CategoryEditorialMain
+      locale="en"
+      category={category}
+      posts={allPosts}
+      allPosts={pool}
+      homeHref="/"
+    />
   </main>
   <Footer />
 </BaseLayout>

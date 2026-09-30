@@ -1,0 +1,26 @@
+---
+import type { ResolvedJourneyLink } from '../lib/article-presentation';
+
+interface Props {
+  steps: ResolvedJourneyLink[];
+  heading: string;
+}
+
+const { steps, heading } = Astro.props;
+---
+
+{steps.length > 0 && (
+  <aside class="mt-12 border-t border-gray-200 pt-8" aria-label={heading}>
+    <h2 class="text-lg font-semibold text-gray-900">{heading}</h2>
+    <ol class="mt-4 space-y-4">
+      {steps.map((step) => (
+        <li>
+          <p class="text-sm font-medium text-gray-500">{step.label}</p>
+          <a href={step.href} class="mt-1 block text-base font-medium text-gray-900 hover:text-gray-700">
+            → {step.title}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </aside>
+)}

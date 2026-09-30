@@ -1,0 +1,25 @@
+---
+import type { Crumb } from '../lib/breadcrumbs';
+
+interface Props {
+  items: Crumb[];
+  locale?: 'en' | 'ja';
+}
+
+const { items, locale = 'en' } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6 text-sm text-gray-500">
+  <ol class="flex flex-wrap items-center gap-1">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-1">
+        {i > 0 && <span aria-hidden="true" class="text-gray-300">/</span>}
+        {item.href ? (
+          <a href={item.href} class="hover:text-gray-800">{item.label}</a>
+        ) : (
+          <span class="text-gray-700 font-medium" aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

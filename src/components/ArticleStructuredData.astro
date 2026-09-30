@@ -1,0 +1,38 @@
+---
+import { canonicalUrl } from '../lib/site-url';
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  pubDate?: Date;
+  updatedDate?: Date;
+  breadcrumbs: { name: string; url: string }[];
+}
+
+const { title, description, url, pubDate, updatedDate, breadcrumbs } = Astro.props;
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  mainEntityOfPage: url,
+  ...(pubDate && { datePublished: pubDate.toISOString() }),
+  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(article)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />

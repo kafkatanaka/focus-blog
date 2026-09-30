@@ -4,10 +4,18 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AdSense from '../components/AdSense.astro';
 import RelatedReading from '../components/RelatedReading.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+import ReadingJourney from '../components/ReadingJourney.astro';
+import ArticleStructuredData from '../components/ArticleStructuredData.astro';
 import type { RelatedPostItem } from '../lib/related-posts';
 import type { CollectionEntry } from 'astro:content';
 import type { Locale, LocaleMetadata } from '../lib/locale';
 import { formatPublishedDate } from '../lib/locale';
+import type { ArticlePresentation, ResolvedJourneyLink } from '../lib/article-presentation';
+import { articleTypeLabel } from '../lib/article-presentation';
+import type { Crumb } from '../lib/breadcrumbs';
+import { canonicalUrl } from '../lib/site-url';
+import { CATEGORY_TITLES } from '../lib/categories';
 
 interface Props {
   title: string;
@@ -27,6 +35,10 @@ interface Props {
   switchUrls?: { en: string; ja: string };
   localeMetadata?: LocaleMetadata;
   hreflangAlternates?: { en?: string; ja?: string };
+  presentation?: ArticlePresentation;
+  breadcrumbs?: Crumb[];
+  journeySteps?: ResolvedJourneyLink[];
+  headings?: { depth: number; slug: string; text: string }[];
 }
 
 const {
@@ -41,15 +53,47 @@ const {
   relatedPosts = [],
   relatedPostEntries,
   pubDate,
+  updatedDate,
   locale = 'en',
   categoryHref,
   switchUrls,
   localeMetadata,
   hreflangAlternates,
+  presentation,
+  breadcrumbs = [],
+  journeySteps = [],
+  headings = [],
 } = Astro.props;
 
 const resolvedCategoryHref =
   categoryHref ?? (locale === 'ja' && category ? `/jp/${category}` : category ? `/${category}` : undefined);
+
+const typeLabel = presentation ? articleTypeLabel(presentation.articleType, locale) : null;
+const categoryLabel = category ? (CATEGORY_TITLES[category] ?? category) : null;
+const metaLine = [typeLabel, categoryLabel].filter(Boolean).join(' · ');
+
+const showUpdated =
+  updatedDate &&
+  pubDate &&
+  updatedDate.getTime() - pubDate.getTime() > 24 * 60 * 60 * 1000;
+
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+const showToc = tocHeadings.length >= 4;
+
+const canonicalHref = canonicalURL
+  ? canonicalUrl(canonicalURL.pathname)
+  : undefined;
+
+const schemaBreadcrumbs = breadcrumbs
+  .filter((c) => c.href)
+  .map((c) => ({ name: c.label, url: canonicalUrl(c.href!) }));
+if (schemaBreadcrumbs.length > 0) {
+  schemaBreadcrumbs.push({ name: title, url: canonicalHref ?? '' });
+}
+
+const journeyHeading =
+  locale === 'ja' ? '次に考えること' : 'What to read next';
+const hubPartLabel = locale === 'ja' ? 'このテーマの入口' : 'Part of';
 ---
 
 <BaseLayout
@@ -60,16 +104,55 @@ const resolvedCategoryHref =
   lang={locale}
   hreflangAlternates={hreflangAlternates}
 >
+  {canonicalHref && schemaBreadcrumbs.length > 0 && (
+    <ArticleStructuredData
+      title={title}
+      description={description}
+      url={canonicalHref}
+      pubDate={pubDate}
+      updatedDate={showUpdated ? updatedDate : undefined}
+      breadcrumbs={schemaBreadcrumbs}
+    />
+  )}
   <Header locale={locale} />
   <main class="mx-auto max-w-readable px-4 py-8 sm:px-6">
     <article>
+      {breadcrumbs.length > 0 && <BreadcrumbNav items={breadcrumbs} locale={locale} />}
+
       <header class="mb-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{title}</h1>
+        {metaLine && (
+          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">{metaLine}</p>
+        )}
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{title}</h1>
+        <p class="mt-4 text-lg text-gray-600 leading-relaxed">{description}</p>
+        {(pubDate || showUpdated) && (
+          <div class="mt-4 flex flex-wrap gap-4 text-sm text-gray-500">
+            {pubDate && (
+              <time datetime={pubDate.toISOString()}>
+                {formatPublishedDate(pubDate, locale)}
+              </time>
+            )}
+            {showUpdated && updatedDate && (
+              <time datetime={updatedDate.toISOString()}>
+                {locale === 'ja' ? '更新: ' : 'Updated: '}
+                {formatPublishedDate(updatedDate, locale)}
+              </time>
+            )}
+          </div>
+        )}
+        {presentation?.hubLink && !presentation.isHub && (
+          <p class="mt-4 text-sm text-gray-600">
+            {hubPartLabel}:
+            <a href={presentation.hubLink.href} class="ml-1 font-medium text-gray-900 underline hover:no-underline">
+              {presentation.hubLink.title}
+            </a>
+          </p>
+        )}
         {thumbnailPath && (
           <img
             src={thumbnailPath}
             alt=""
-            class="mt-4 w-full rounded-lg object-cover aspect-[1200/630] max-h-[320px]"
+            class="mt-6 w-full rounded-lg object-cover aspect-[1200/630] max-h-[320px]"
             width="1200"
             height="630"
             loading="eager"
@@ -77,24 +160,40 @@ const resolvedCategoryHref =
             onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
           />
         )}
-        {(category || pubDate) && (
-        <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-          {pubDate && (
-            <time datetime={pubDate.toISOString()}>
-              {formatPublishedDate(pubDate, locale)}
-            </time>
-          )}
-          {category && resolvedCategoryHref && (
-          <a
-            href={resolvedCategoryHref}
-            class="rounded bg-gray-100 px-2 py-1 text-gray-700 transition-colors hover:bg-gray-200 capitalize"
-          >
-            {category}
-          </a>
-          )}
-        </div>
-        )}
       </header>
+
+      {presentation?.isHub && presentation.keyTakeaway && (
+        <div class="mb-8 rounded-lg border border-gray-200 bg-gray-50 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
+            {locale === 'ja' ? '要点' : 'Quick answer'}
+          </p>
+          <p class="mt-2 text-gray-800 leading-relaxed">{presentation.keyTakeaway}</p>
+        </div>
+      )}
+
+      {!presentation?.isHub && presentation?.keyTakeaway && (
+        <div class="mb-8 border-l-4 border-gray-900 pl-4">
+          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
+            {locale === 'ja' ? 'キーポイント' : 'Key takeaway'}
+          </p>
+          <p class="mt-2 text-gray-800 leading-relaxed">{presentation.keyTakeaway}</p>
+        </div>
+      )}
+
+      {showToc && (
+        <nav class="mb-8 rounded-lg border border-gray-200 p-4" aria-label="Table of contents">
+          <p class="text-sm font-semibold text-gray-900">
+            {locale === 'ja' ? '目次' : 'Contents'}
+          </p>
+          <ul class="mt-2 space-y-1 text-sm">
+            {tocHeadings.map((h) => (
+              <li class={h.depth === 3 ? 'ml-4' : ''}>
+                <a href={`#${h.slug}`} class="text-gray-700 hover:text-gray-900">{h.text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
       {ads && <AdSense slot="4412571347" format="auto" />}
 
@@ -103,7 +202,6 @@ const resolvedCategoryHref =
       </div>
 
       <style is:global>
-        /* 書籍カバー画像（rehype で .book-cover を付与）: モバイルは80%、デスクトップは程よい大きさ */
         .prose img.book-cover {
           display: block;
           width: 80%;
@@ -125,7 +223,7 @@ const resolvedCategoryHref =
 
       {ads && <AdSense slot="4412571347" format="auto" />}
 
-      {tags.length > 0 && (
+      {tags.length > 0 && locale === 'en' && (
         <footer class="mt-12 border-t border-gray-200 pt-8">
           <div class="flex flex-wrap gap-2">
             {tags.map((tag) => (
@@ -140,11 +238,15 @@ const resolvedCategoryHref =
         </footer>
       )}
 
-      <RelatedReading
-        posts={relatedPosts}
-        postEntries={relatedPostEntries}
-        heading={locale === 'ja' ? '関連記事' : 'Related reading'}
-      />
+      {journeySteps.length > 0 ? (
+        <ReadingJourney steps={journeySteps} heading={journeyHeading} />
+      ) : (
+        <RelatedReading
+          posts={relatedPosts}
+          postEntries={relatedPostEntries}
+          heading={locale === 'ja' ? '関連記事' : 'Related reading'}
+        />
+      )}
     </article>
   </main>
   <Footer locale={locale} switchUrls={switchUrls} metadata={localeMetadata} />

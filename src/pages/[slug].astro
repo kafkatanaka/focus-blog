@@ -5,10 +5,14 @@ import { getRelatedPosts } from '../lib/related-posts';
 import { relatedMap } from '../data/related-map';
 import { getArticlePath, isJapanesePost } from '../lib/locale';
 import { filterPostsByLocale } from '../lib/posts';
+import {
+  getArticlePresentation,
+  resolveReadingJourney,
+} from '../lib/article-presentation';
+import { buildArticleBreadcrumbs } from '../lib/breadcrumbs';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft && !isJapanesePost(data));
-  // Exclude category pages from slug routing
   const reservedSlugs = ['focus', 'work', 'money', 'habits', 'about', 'articles', 'framework'];
   return posts
     .filter((entry) => !reservedSlugs.includes(entry.slug))
@@ -21,15 +25,22 @@ export async function getStaticPaths() {
       );
       return {
         params: { slug: entry.slug },
-        props: { entry, relatedPosts },
+        props: { entry, relatedPosts, allEnPosts: posts },
       };
     });
 }
 
-const { entry, relatedPosts } = Astro.props;
-const { Content } = await entry.render();
+const { entry, relatedPosts, allEnPosts } = Astro.props;
+const { Content, headings } = await entry.render();
 const site = Astro.site ?? new URL('https://focus-dividend.com');
 const canonicalURL = new URL(getArticlePath(entry), site);
+const presentation = getArticlePresentation(entry, allEnPosts);
+const journeySteps = resolveReadingJourney(
+  presentation.readingJourney,
+  'en',
+  allEnPosts
+);
+const breadcrumbs = buildArticleBreadcrumbs(entry, 'en');
 
 const thumbnailPath = entry.data.thumbnail
   ? `/images/thumbnails/${entry.data.thumbnail}`
@@ -49,6 +60,10 @@ const ogImage = new URL(thumbnailPath, site).href;
   ogImage={ogImage}
   thumbnailPath={thumbnailPath}
   relatedPosts={relatedPosts}
+  presentation={presentation}
+  breadcrumbs={breadcrumbs}
+  journeySteps={journeySteps}
+  headings={headings}
 >
   <Content />
 </BlogPost>

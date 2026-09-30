@@ -1,0 +1,235 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import EditorialArticleCard from './EditorialArticleCard.astro';
+import { CATEGORY_TITLES, CATEGORY_DESCRIPTIONS, CATEGORY_DESCRIPTIONS_JA } from '../lib/categories';
+import { getCategoryEditorial } from '../lib/category-editorial';
+import { resolveEditorialArticleId } from '../lib/editorial-home';
+import { getArticlePresentation } from '../lib/article-presentation';
+import { getArticlePath, type Locale } from '../lib/locale';
+import { thumbnailPathFor } from '../lib/posts';
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  locale: Locale;
+  category: string;
+  posts: CollectionEntry<'blog'>[];
+  allPosts: CollectionEntry<'blog'>[];
+  homeHref: string;
+}
+
+const { locale, category, posts, allPosts, homeHref } = Astro.props;
+const editorial = getCategoryEditorial(locale, category);
+const title = CATEGORY_TITLES[category] ?? category;
+const description =
+  editorial?.tagline ??
+  (locale === 'ja' ? CATEGORY_DESCRIPTIONS_JA[category] : CATEGORY_DESCRIPTIONS[category]) ??
+  '';
+
+const startHere = (editorial?.startHere ?? [])
+  .map((id) => {
+    try {
+      return resolveEditorialArticleId(id, locale, allPosts, `category ${category} startHere`);
+    } catch {
+      return null;
+    }
+  })
+  .filter(Boolean);
+
+const guides = posts
+  .filter((p) => getArticlePresentation(p, allPosts).articleType === 'guide')
+  .slice(0, 6);
+const decisions = posts
+  .filter((p) => getArticlePresentation(p, allPosts).articleType === 'decide')
+  .slice(0, 6);
+const comparisons = posts
+  .filter((p) => getArticlePresentation(p, allPosts).articleType === 'compare')
+  .slice(0, 6);
+const tools = posts
+  .filter((p) =>
+    ['guide', 'tool'].includes(getArticlePresentation(p, allPosts).articleType ?? '')
+  )
+  .slice(0, 4);
+const latest = posts.slice(0, 6);
+
+const sectionTitle = (en: string, ja: string) => (locale === 'ja' ? ja : en);
+const categoryHref = locale === 'ja' ? `/jp/${category}` : `/${category}`;
+---
+
+<header class="mb-10 border-b border-gray-200 pb-10">
+  <p class="text-sm font-semibold uppercase tracking-wide text-gray-500">
+    <a href={homeHref} class="hover:text-gray-700">{locale === 'ja' ? 'ホーム' : 'Home'}</a>
+    <span class="mx-2 text-gray-300">/</span>
+    <span>{title}</span>
+  </p>
+  <h1 class="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{title}</h1>
+  <p class="mt-3 max-w-2xl text-lg text-gray-600 leading-relaxed">{description}</p>
+</header>
+
+{startHere.length > 0 && (
+  <section class="mb-12">
+    <h2 class="text-lg font-semibold text-gray-900">{sectionTitle('Start here', 'まずここから')}</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {startHere.map((item) => (
+        <EditorialArticleCard
+          href={item!.href}
+          title={item!.entry.data.title}
+          description={item!.entry.data.description}
+          thumbnailPath={item!.thumbnailPath}
+          locale={locale}
+          category={item!.entry.data.category}
+          articleType={item!.articleType}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+{editorial?.questions && editorial.questions.length > 0 && (
+  <section class="mb-12">
+    <h2 class="text-lg font-semibold text-gray-900">
+      {sectionTitle('What are you trying to figure out?', '何を整理したいですか？')}
+    </h2>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {editorial.questions.map((q) => (
+        <li>
+          <a
+            href={q.anchor ? `${categoryHref}#${q.anchor}` : categoryHref}
+            class="inline-block rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50"
+          >
+            {q.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+{guides.length > 0 && (
+  <section id="guides" class="mb-12 scroll-mt-24">
+    <h2 class="text-lg font-semibold text-gray-900">{sectionTitle('Guides', 'ガイド')}</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {guides.map((post) => {
+        const meta = getArticlePresentation(post, allPosts);
+        return (
+          <EditorialArticleCard
+            href={getArticlePath(post)}
+            title={post.data.title}
+            description={post.data.description}
+            thumbnailPath={thumbnailPathFor(post)}
+            locale={locale}
+            category={post.data.category}
+            articleType={meta.articleType}
+          />
+        );
+      })}
+    </div>
+  </section>
+)}
+
+{decisions.length > 0 && (
+  <section id="decisions" class="mb-12 scroll-mt-24">
+    <h2 class="text-lg font-semibold text-gray-900">{sectionTitle('Decisions', '判断')}</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {decisions.map((post) => {
+        const meta = getArticlePresentation(post, allPosts);
+        return (
+          <EditorialArticleCard
+            href={getArticlePath(post)}
+            title={post.data.title}
+            description={post.data.description}
+            thumbnailPath={thumbnailPathFor(post)}
+            locale={locale}
+            category={post.data.category}
+            articleType={meta.articleType}
+          />
+        );
+      })}
+    </div>
+  </section>
+)}
+
+{comparisons.length > 0 && (
+  <section id="comparisons" class="mb-12 scroll-mt-24">
+    <h2 class="text-lg font-semibold text-gray-900">{sectionTitle('Comparisons', '比較')}</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {comparisons.map((post) => {
+        const meta = getArticlePresentation(post, allPosts);
+        return (
+          <EditorialArticleCard
+            href={getArticlePath(post)}
+            title={post.data.title}
+            description={post.data.description}
+            thumbnailPath={thumbnailPathFor(post)}
+            locale={locale}
+            category={post.data.category}
+            articleType={meta.articleType}
+          />
+        );
+      })}
+    </div>
+  </section>
+)}
+
+{locale === 'en' && tools.length > 0 && (
+  <section id="tools" class="mb-12 scroll-mt-24">
+    <h2 class="text-lg font-semibold text-gray-900">Tools & systems</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {tools.map((post) => {
+        const meta = getArticlePresentation(post, allPosts);
+        return (
+          <EditorialArticleCard
+            href={getArticlePath(post)}
+            title={post.data.title}
+            description={post.data.description}
+            thumbnailPath={thumbnailPathFor(post)}
+            locale={locale}
+            category={post.data.category}
+            articleType={meta.articleType}
+          />
+        );
+      })}
+    </div>
+  </section>
+)}
+
+{latest.length > 0 && (
+  <section class="mb-12">
+    <h2 class="text-lg font-semibold text-gray-900">
+      {sectionTitle(`Latest in ${title}`, `${title}の新着`)}
+    </h2>
+    <ul class="mt-6 space-y-8">
+      {latest.map((post) => (
+        <ArticleCard
+          href={getArticlePath(post)}
+          title={post.data.title}
+          description={post.data.description}
+          thumbnailPath={thumbnailPathFor(post)}
+          locale={locale}
+        />
+      ))}
+    </ul>
+  </section>
+)}
+
+<section class="border-t border-gray-200 pt-10">
+  <h2 class="text-lg font-semibold text-gray-900">
+    {sectionTitle(`All ${title} articles`, `${title}の記事一覧`)}
+  </h2>
+  <ul class="mt-6 space-y-8">
+    {posts.length > 0 ? (
+      posts.map((post) => (
+        <ArticleCard
+          href={getArticlePath(post)}
+          title={post.data.title}
+          description={post.data.description}
+          thumbnailPath={thumbnailPathFor(post)}
+          locale={locale}
+        />
+      ))
+    ) : (
+      <li class="text-gray-500 py-8">
+        {locale === 'ja' ? 'このカテゴリの記事はまだありません。' : 'No posts in this category yet.'}
+      </li>
+    )}
+  </ul>
+</section>
