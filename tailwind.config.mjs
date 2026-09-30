@@ -7,12 +7,11 @@ export default {
     extend: {
       fontFamily: {
         serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        /** UI fallbacks only; JA/EN body copy uses font-serif (Noto Serif JP on /jp). */
         sans: [
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
-          '"Hiragino Sans"',
-          '"Yu Gothic"',
           'sans-serif',
         ],
       },

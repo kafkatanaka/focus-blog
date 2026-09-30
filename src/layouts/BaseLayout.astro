@@ -89,17 +89,35 @@ const showHomeHreflang =
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap.xml" />
+    {lang === 'ja' && (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </>
+    )}
   </head>
-  <body class:list={['bg-white text-gray-900 antialiased', lang === 'ja' ? 'locale-ja font-sans' : 'font-serif']}>
+  <body class:list={['bg-white text-gray-900 font-serif antialiased', lang === 'ja' && 'locale-ja']}>
     <slot />
   </body>
 </html>
 
 <style is:global>
+  /* Match EN editorial serif tone; Noto Serif JP replaces prior sans/JP UI stack */
+  body.locale-ja {
+    font-family: 'Noto Serif JP', Georgia, Cambria, 'Times New Roman', Times, serif;
+  }
   body.locale-ja .prose {
     line-height: 1.85;
+    font-family: inherit;
   }
   body.locale-ja .prose p {
     line-height: 1.9;
+  }
+  body.locale-ja .prose :where(h1, h2, h3, h4, strong) {
+    font-family: inherit;
   }
 </style>
