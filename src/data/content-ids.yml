@@ -1268,6 +1268,12 @@ articles:
   fd-ja-000005:
     locale: ja
     slug: what-is-career-counseling
+  fd-ja-000006:
+    locale: ja
+    slug: before-looking-at-job-sites
+  fd-ja-000007:
+    locale: ja
+    slug: stay-or-change-jobs
 aliases:
   en:abstract-money-goals: fd-en-000001
   en:analog_vs_digital_task_management: fd-en-000002
@@ -1691,3 +1697,5 @@ aliases:
   ja:organize-options-when-you-cannot-decide: fd-ja-000003
   ja:should-i-change-jobs: fd-ja-000004
   ja:what-is-career-counseling: fd-ja-000005
+  ja:before-looking-at-job-sites: fd-ja-000006
+  ja:stay-or-change-jobs: fd-ja-000007
