@@ -1274,6 +1274,15 @@ articles:
   fd-ja-000007:
     locale: ja
     slug: stay-or-change-jobs
+  fd-ja-000008:
+    locale: ja
+    slug: like-the-work-but-want-to-leave-the-company
+  fd-ja-000009:
+    locale: ja
+    slug: quit-your-job-or-just-rest
+  fd-ja-000010:
+    locale: ja
+    slug: salary-or-work-style
 aliases:
   en:abstract-money-goals: fd-en-000001
   en:analog_vs_digital_task_management: fd-en-000002
@@ -1699,3 +1708,6 @@ aliases:
   ja:what-is-career-counseling: fd-ja-000005
   ja:before-looking-at-job-sites: fd-ja-000006
   ja:stay-or-change-jobs: fd-ja-000007
+  ja:like-the-work-but-want-to-leave-the-company: fd-ja-000008
+  ja:quit-your-job-or-just-rest: fd-ja-000009
+  ja:salary-or-work-style: fd-ja-000010
