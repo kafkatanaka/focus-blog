@@ -1283,6 +1283,15 @@ articles:
   fd-ja-000010:
     locale: ja
     slug: salary-or-work-style
+  fd-ja-000011:
+    locale: ja
+    slug: understand-money-anxiety
+  fd-ja-000012:
+    locale: ja
+    slug: what-can-you-ask-a-financial-planner
+  fd-ja-000013:
+    locale: ja
+    slug: what-to-do-when-overthinking-a-decision
 aliases:
   en:abstract-money-goals: fd-en-000001
   en:analog_vs_digital_task_management: fd-en-000002
@@ -1711,3 +1720,6 @@ aliases:
   ja:like-the-work-but-want-to-leave-the-company: fd-ja-000008
   ja:quit-your-job-or-just-rest: fd-ja-000009
   ja:salary-or-work-style: fd-ja-000010
+  ja:understand-money-anxiety: fd-ja-000011
+  ja:what-can-you-ask-a-financial-planner: fd-ja-000012
+  ja:what-to-do-when-overthinking-a-decision: fd-ja-000013
