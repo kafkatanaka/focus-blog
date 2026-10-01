@@ -5,9 +5,13 @@ import { NAV_CATEGORY_SLUGS, CATEGORY_TITLES } from '../lib/categories';
 
 interface Props {
   locale?: Locale;
+  /** Match `<main>` column width on the page. */
+  contentWidth?: 'editorial' | 'readable';
 }
 
 const locale = Astro.props.locale ?? getLocaleFromPath(Astro.url.pathname);
+const maxWidthClass =
+  Astro.props.contentWidth === 'readable' ? 'max-w-readable' : 'max-w-editorial';
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const base = locale === 'ja' ? '/jp' : '';
 const homeHref = base || '/';
@@ -21,7 +25,7 @@ const NAV_TABS = NAV_CATEGORY_SLUGS.map((slug) => ({
 
 <div class="sticky top-0 z-40 bg-white border-b border-gray-200">
   <header class="bg-white">
-    <nav class="mx-auto flex max-w-readable items-center justify-between px-4 py-4 sm:px-6" aria-label="Main navigation">
+    <nav class:list={['mx-auto flex items-center justify-between px-4 py-4 sm:px-6', maxWidthClass]} aria-label="Main navigation">
       <a href={homeHref} class="text-xl font-bold text-gray-900 hover:text-gray-700">
         The Focus Dividend
       </a>
@@ -39,7 +43,7 @@ const NAV_TABS = NAV_CATEGORY_SLUGS.map((slug) => ({
   </header>
 
   <nav class="border-t border-gray-100 bg-gray-50/80" aria-label="Category navigation">
-    <div class="overflow-x-auto scrollbar-none scroll-smooth mx-auto max-w-readable" tabindex="0">
+    <div class:list={['overflow-x-auto scrollbar-none scroll-smooth mx-auto', maxWidthClass]} tabindex="0">
       <ul class="flex min-w-0 items-center gap-1 px-4 py-2 sm:px-6 sm:gap-2 w-max max-w-none">
         {NAV_TABS.map((tab) => {
           const isFramework = tab.slug === 'framework';

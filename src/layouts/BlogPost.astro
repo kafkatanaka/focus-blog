@@ -114,7 +114,7 @@ const hubPartLabel = locale === 'ja' ? 'このテーマの入口' : 'Part of';
       breadcrumbs={schemaBreadcrumbs}
     />
   )}
-  <Header locale={locale} />
+  <Header locale={locale} contentWidth="readable" />
   <main class="mx-auto max-w-readable px-4 py-8 sm:px-6">
     <article>
       {breadcrumbs.length > 0 && <BreadcrumbNav items={breadcrumbs} locale={locale} />}
