@@ -1298,6 +1298,9 @@ articles:
   fd-ja-000015:
     locale: ja
     slug: why-habits-do-not-stick
+  fd-ja-000016:
+    locale: ja
+    slug: should-you-use-a-recruitment-agent
 aliases:
   en:abstract-money-goals: fd-en-000001
   en:analog_vs_digital_task_management: fd-en-000002
@@ -1731,3 +1734,4 @@ aliases:
   ja:what-to-do-when-overthinking-a-decision: fd-ja-000013
   ja:how-beginners-choose-a-brokerage: fd-ja-000014
   ja:why-habits-do-not-stick: fd-ja-000015
+  ja:should-you-use-a-recruitment-agent: fd-ja-000016
