@@ -1292,6 +1292,12 @@ articles:
   fd-ja-000013:
     locale: ja
     slug: what-to-do-when-overthinking-a-decision
+  fd-ja-000014:
+    locale: ja
+    slug: how-beginners-choose-a-brokerage
+  fd-ja-000015:
+    locale: ja
+    slug: why-habits-do-not-stick
 aliases:
   en:abstract-money-goals: fd-en-000001
   en:analog_vs_digital_task_management: fd-en-000002
@@ -1723,3 +1729,5 @@ aliases:
   ja:understand-money-anxiety: fd-ja-000011
   ja:what-can-you-ask-a-financial-planner: fd-ja-000012
   ja:what-to-do-when-overthinking-a-decision: fd-ja-000013
+  ja:how-beginners-choose-a-brokerage: fd-ja-000014
+  ja:why-habits-do-not-stick: fd-ja-000015
