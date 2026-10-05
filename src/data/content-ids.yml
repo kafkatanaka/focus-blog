@@ -1301,6 +1301,15 @@ articles:
   fd-ja-000016:
     locale: ja
     slug: should-you-use-a-recruitment-agent
+  fd-ja-000017:
+    locale: ja
+    slug: before-you-start-investing
+  fd-ja-000018:
+    locale: ja
+    slug: increase-income-or-cut-expenses
+  fd-ja-000019:
+    locale: ja
+    slug: three-numbers-to-review-your-budget
 aliases:
   en:abstract-money-goals: fd-en-000001
   en:analog_vs_digital_task_management: fd-en-000002
@@ -1735,3 +1744,6 @@ aliases:
   ja:how-beginners-choose-a-brokerage: fd-ja-000014
   ja:why-habits-do-not-stick: fd-ja-000015
   ja:should-you-use-a-recruitment-agent: fd-ja-000016
+  ja:before-you-start-investing: fd-ja-000017
+  ja:increase-income-or-cut-expenses: fd-ja-000018
+  ja:three-numbers-to-review-your-budget: fd-ja-000019
