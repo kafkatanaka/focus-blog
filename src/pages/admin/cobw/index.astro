@@ -50,6 +50,10 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
     <section class="mb-6 rounded-lg border border-gray-200 p-4">
       <h2 class="text-sm font-semibold text-gray-900">1. Upload article source</h2>
       <input id="md-file" type="file" accept=".md,text/markdown" class="mt-3 block w-full text-sm" />
+      <p class="mt-2 text-xs text-gray-500">
+        After upload, the preview below lists each evidence claim with <code>status</code> and
+        <code>treat_as</code> (no browser console needed).
+      </p>
       <p id="upload-error" class="mt-2 text-sm text-red-600"></p>
       <div id="preview-card" class="mt-4 hidden rounded-md border border-gray-200 bg-white p-4 text-sm"></div>
       <div class="mt-4 flex flex-wrap gap-3">
@@ -150,6 +154,7 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
     parseCobwArticleSourceMarkdown,
     cobwSourcePreview,
     CobwArticleSourceParseError,
+    normalizeCobwEvidenceStatusForGeneration,
     type CobwArticleSource,
   } from '../../../lib/cobw-article-source';
   import {
@@ -171,6 +176,35 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
 
   let pendingSource: CobwArticleSource | null = null;
   let activeJobId: string | null = null;
+
+  function escapeHtml(s: string) {
+    return s
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function evidencePreviewHtml(source: CobwArticleSource): string {
+    if (!source.evidence.length) {
+      return '<p class="mt-3 text-xs text-gray-500">No evidence claims parsed.</p>';
+    }
+    const rows = source.evidence
+      .map((item, index) => {
+        const treatAs = normalizeCobwEvidenceStatusForGeneration(item.status);
+        const claim = item.claim.length > 280 ? `${item.claim.slice(0, 280)}…` : item.claim;
+        return `<li class="rounded-md border border-gray-200 bg-gray-50 p-3">
+          <p class="text-xs font-medium text-gray-900">${index + 1}. ${escapeHtml(item.title)}</p>
+          <p class="mt-1 font-mono text-xs text-gray-700">status: ${escapeHtml(item.status)} · treat_as: <strong>${escapeHtml(treatAs)}</strong></p>
+          <p class="mt-2 text-xs text-gray-600">${escapeHtml(claim)}</p>
+        </li>`;
+      })
+      .join('');
+    return `<div class="mt-4 border-t border-gray-200 pt-4">
+      <h3 class="text-xs font-semibold uppercase tracking-wide text-gray-500">Evidence parse detail</h3>
+      <ul class="mt-2 space-y-2">${rows}</ul>
+    </div>`;
+  }
 
   function setCredStatus(msg: string) {
     const el = $('cred-status');
@@ -221,14 +255,15 @@ import { GITHUB_REPO } from '../../../lib/github-publish';
       : '';
     card.innerHTML = `
       <dl class="grid gap-2 sm:grid-cols-2">
-        <div><dt class="text-xs text-gray-500">Title</dt><dd class="font-medium">${p.title}</dd></div>
-        <div><dt class="text-xs text-gray-500">job_id</dt><dd class="font-mono text-xs">${p.jobId}</dd></div>
+        <div><dt class="text-xs text-gray-500">Title</dt><dd class="font-medium">${escapeHtml(p.title)}</dd></div>
+        <div><dt class="text-xs text-gray-500">job_id</dt><dd class="font-mono text-xs">${escapeHtml(p.jobId)}</dd></div>
         <div><dt class="text-xs text-gray-500">Narration words</dt><dd>${p.narrationWordCount}</dd></div>
         <div><dt class="text-xs text-gray-500">Evidence items</dt><dd>${p.evidenceCount}</dd></div>
         <div><dt class="text-xs text-gray-500">Facts to verify</dt><dd>${p.factsToVerifyCount} ${p.factsToVerifyCount ? '△' : '✓'}</dd></div>
         <div><dt class="text-xs text-gray-500">YouTube</dt><dd>${p.youtubeOk ? '✓' : '△'} ${p.youtubeVideoId ?? ''}</dd></div>
-        <div class="sm:col-span-2"><dt class="text-xs text-gray-500">Closing phrase</dt><dd class="text-gray-700">${p.closingPhrase || '—'}</dd></div>
+        <div class="sm:col-span-2"><dt class="text-xs text-gray-500">Closing phrase</dt><dd class="text-gray-700">${escapeHtml(p.closingPhrase || '—')}</dd></div>
       </dl>
+      ${evidencePreviewHtml(source)}
       ${warn}
     `;
     ($('btn-import') as HTMLButtonElement).disabled = false;

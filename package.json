@@ -14,6 +14,7 @@
     "preview": "astro preview",
     "test:jp": "npx --yes tsx scripts/test-jp-related-links.ts",
     "test:cobw-article-source": "npx --yes tsx scripts/test-cobw-article-source-parse.ts",
+    "verify:cobw-article-source": "npx --yes tsx scripts/verify-cobw-article-source.ts",
     "astro": "astro",
     "export-titles": "node scripts/export-article-titles.mjs",
     "analyze-articles": "node scripts/analyze-articles.mjs"
