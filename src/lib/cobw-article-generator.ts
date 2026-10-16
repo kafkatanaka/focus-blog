@@ -5,7 +5,10 @@ import {
   type ArticleCategory,
 } from './article-rules';
 import type { CobwArticleSource } from './cobw-article-source';
-import { extractYoutubeVideoId } from './cobw-article-source';
+import {
+  extractYoutubeVideoId,
+  normalizeCobwEvidenceStatusForGeneration,
+} from './cobw-article-source';
 import type { CobwGeneratedDraft } from './cobw-article-import';
 
 export const OPENAI_API_KEY_STORAGE = 'focus-blog-openai-api-key';
@@ -25,7 +28,10 @@ function editorialBlock(source: CobwArticleSource): string {
 function evidenceBlock(source: CobwArticleSource): string {
   if (!source.evidence.length) return '(no evidence items)';
   return source.evidence
-    .map((e) => `- [${e.status}] **${e.title}**: ${e.claim}\n${e.notes}`)
+    .map((e) => {
+      const generationStatus = normalizeCobwEvidenceStatusForGeneration(e.status);
+      return `- [${e.status}; treat_as=${generationStatus}] **${e.title}**: ${e.claim}`;
+    })
     .join('\n\n');
 }
 
@@ -35,14 +41,14 @@ export function buildCobwWriterSystemPrompt(): string {
 Write a standalone web article derived from a COBW (Cost of Being Wrong) episode export. The article must NOT read like a transcript or scene-by-scene retelling of the video narration.
 
 Priority of truth (highest first):
-1. Evidence section (only treat "supported" claims as external facts)
+1. Evidence section (treat claims marked treat_as=supported as external facts — includes COBW verified and qualified)
 2. Final Narration (tone and angle, not structure to copy)
 3. Editorial Summary fields
 
 Rules:
 - Target 1,200–1,800 words in the body (no YAML frontmatter in your JSON).
 - Do NOT mirror the narration's scene structure or paragraph order.
-- Do NOT present "unsupported" evidence claims as verified external facts.
+- Do NOT present treat_as=unsupported (or pending/unknown) evidence claims as verified external facts.
 - Include a "## Sources" section listing evidence-backed links where available.
 - Body must NOT start with # H1 (title comes from metadata).
 - Open with 2–4 short hook paragraphs, then insert the exact line ${COBW_VIDEO_PLACEHOLDER} on its own line, then continue the article.

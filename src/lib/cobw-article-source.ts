@@ -139,54 +139,123 @@ function parseKeyValueBlock(text: string): Record<string, string> {
   return out;
 }
 
+function parseCobwExportClaimChunk(chunk: string, title: string): CobwEvidenceItem {
+  const body = chunk.trim();
+  const status = body.match(/^Status:\s*(\S+)/m)?.[1] ?? 'unknown';
+  const claimFromBlock = body.match(/^Claim:\s*\n+([\s\S]*?)\n+Sources:/m)?.[1]?.trim();
+  const claim =
+    claimFromBlock ||
+    body
+      .replace(/^Status:.*$/m, '')
+      .replace(/^Sources:[\s\S]*$/m, '')
+      .trim()
+      .split('\n')[0]
+      ?.trim() ||
+    title;
+
+  return {
+    id: `evidence-${title}`,
+    title,
+    status: String(status),
+    claim: String(claim),
+    notes: body,
+    raw: body,
+  };
+}
+
+function parseH3EvidenceChunk(chunk: string): CobwEvidenceItem {
+  const trimmed = chunk.trim();
+  const lines = trimmed.split('\n');
+  const heading = lines[0].match(/^###\s+(.+)$/);
+  const title = heading ? heading[1].trim() : `Evidence`;
+  const bodyLines = heading ? lines.slice(1) : lines;
+  const body = bodyLines.join('\n').trim();
+  const kv = parseKeyValueBlock(body);
+
+  const status =
+    kv.Status ??
+    kv.status ??
+    (body.match(/\bStatus:\s*(\S+)/i)?.[1] ?? 'unknown');
+
+  const claim =
+    kv.Claim ??
+    kv.claim ??
+    body.replace(/^Status:.*$/gim, '').trim().split('\n')[0]?.trim() ??
+    title;
+
+  return {
+    id: `evidence-${title}`,
+    title,
+    status: String(status),
+    claim: String(claim),
+    notes: body,
+    raw: trimmed,
+  };
+}
+
 function parseEvidenceSection(sectionBody: string): CobwEvidenceItem[] {
+  const normalized = sectionBody.trim();
+  if (!normalized || normalized.includes('_No evidence claims recorded._')) {
+    return [];
+  }
+
   const items: CobwEvidenceItem[] = [];
-  const chunks = sectionBody.split(/\n(?=###\s+)/);
+  const chunks = normalized.split(/\n(?=## Claim \d+\s*$|###\s+)/m);
 
   for (const chunk of chunks) {
     const trimmed = chunk.trim();
     if (!trimmed) continue;
 
-    const lines = trimmed.split('\n');
-    const heading = lines[0].match(/^###\s+(.+)$/);
-    const title = heading ? heading[1].trim() : `Evidence ${items.length + 1}`;
-    const bodyLines = heading ? lines.slice(1) : lines;
-    const body = bodyLines.join('\n').trim();
-    const kv = parseKeyValueBlock(body);
+    const claimHeading = trimmed.match(/^## (Claim \d+)\s*$/m);
+    if (claimHeading) {
+      const body = trimmed.replace(/^## Claim \d+\s*\n?/m, '');
+      items.push(parseCobwExportClaimChunk(body, claimHeading[1]));
+      continue;
+    }
 
-    const status =
-      kv.Status ??
-      kv.status ??
-      (body.match(/\bStatus:\s*(\S+)/i)?.[1] ?? 'unknown');
+    if (trimmed.startsWith('###')) {
+      items.push(parseH3EvidenceChunk(trimmed));
+      continue;
+    }
 
-    const claim =
-      kv.Claim ??
-      kv.claim ??
-      body.replace(/^Status:.*$/gim, '').trim().split('\n')[0]?.trim() ??
-      title;
-
-    items.push({
-      id: `evidence-${items.length + 1}`,
-      title,
-      status: String(status),
-      claim: String(claim),
-      notes: body,
-      raw: trimmed,
-    });
+    if (!items.length) {
+      items.push(parseH3EvidenceChunk(trimmed));
+    }
   }
 
-  if (!items.length && sectionBody.trim()) {
+  if (!items.length && normalized) {
     items.push({
       id: 'evidence-1',
       title: 'Evidence',
       status: 'unknown',
-      claim: sectionBody.trim().slice(0, 200),
-      notes: sectionBody.trim(),
-      raw: sectionBody.trim(),
+      claim: normalized.slice(0, 200),
+      notes: normalized,
+      raw: normalized,
     });
   }
 
-  return items;
+  return items.map((item, index) => ({
+    ...item,
+    id: `evidence-${index + 1}`,
+  }));
+}
+
+/** Map COBW export statuses to article-generation buckets. */
+export function normalizeCobwEvidenceStatusForGeneration(
+  status: string,
+): 'supported' | 'unsupported' | 'other' {
+  const normalized = status.trim().toLowerCase();
+  if (
+    normalized === 'verified' ||
+    normalized === 'qualified' ||
+    normalized === 'supported'
+  ) {
+    return 'supported';
+  }
+  if (normalized === 'unsupported' || normalized === 'conflicting') {
+    return 'unsupported';
+  }
+  return 'other';
 }
 
 function parseFactsList(sectionBody: string): CobwFactToVerify[] {
