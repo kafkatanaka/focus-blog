@@ -1,7 +1,7 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { getLocaleFromPath, type Locale, type LocaleMetadata } from '../lib/locale';
-import { NAV_CATEGORY_SLUGS, CATEGORY_TITLES } from '../lib/categories';
+import { NAV_CATEGORY_SLUGS, categoryLabel } from '../lib/categories';
 
 interface Props {
   locale?: Locale;
@@ -22,7 +22,7 @@ const contactHref = '/contact';
     <nav class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-gray-500" aria-label="Footer categories">
       {NAV_CATEGORY_SLUGS.map((slug) => (
         <a href={`${base}/${slug}`} class="hover:text-gray-700">
-          {CATEGORY_TITLES[slug]}
+          {categoryLabel(slug, locale)}
         </a>
       ))}
     </nav>
@@ -33,9 +33,15 @@ const contactHref = '/contact';
       © {currentYear} The Focus Dividend. All rights reserved.
     </p>
     <p class="mt-2 text-center text-xs text-gray-400">
-      <a href={privacyHref} class="hover:text-gray-600">{locale === 'ja' ? 'Privacy' : 'Privacy Policy'}</a>
+      <a href={privacyHref} class="hover:text-gray-600">{locale === 'ja' ? 'プライバシーポリシー' : 'Privacy Policy'}</a>
       <span class="mx-2">·</span>
-      <a href={contactHref} class="hover:text-gray-600">{locale === 'ja' ? 'Contact' : 'Contact'}</a>
+      <a href={contactHref} class="hover:text-gray-600">{locale === 'ja' ? 'お問い合わせ' : 'Contact'}</a>
+      {locale === 'ja' && (
+        <>
+          <span class="mx-2">·</span>
+          <a href="/jp/affiliate-disclosure" class="hover:text-gray-600">広告掲載・編集方針</a>
+        </>
+      )}
       {locale === 'en' && (
         <>
           <span class="mx-2">·</span>

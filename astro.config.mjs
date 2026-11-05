@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
 import { rehypeBookCoverClass } from './src/lib/rehype-book-cover-class.ts';
+import { rehypeEditorial } from './src/lib/rehype-editorial.ts';
 
 export default defineConfig({
   site: 'https://focus-dividend.com',
@@ -14,7 +15,7 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-light',
     },
-    rehypePlugins: [rehypeBookCoverClass],
+    rehypePlugins: [rehypeBookCoverClass, rehypeEditorial],
   },
   vite: {
     build: {

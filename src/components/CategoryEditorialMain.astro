@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import EditorialArticleCard from './EditorialArticleCard.astro';
-import { CATEGORY_TITLES, CATEGORY_DESCRIPTIONS, CATEGORY_DESCRIPTIONS_JA } from '../lib/categories';
+import { categoryLabel, CATEGORY_DESCRIPTIONS, CATEGORY_DESCRIPTIONS_JA } from '../lib/categories';
 import { getCategoryEditorial } from '../lib/category-editorial';
 import { resolveEditorialArticleId } from '../lib/editorial-home';
 import { getArticlePresentation } from '../lib/article-presentation';
@@ -19,7 +19,7 @@ interface Props {
 
 const { locale, category, posts, allPosts, homeHref } = Astro.props;
 const editorial = getCategoryEditorial(locale, category);
-const title = CATEGORY_TITLES[category] ?? category;
+const title = categoryLabel(category, locale);
 const description =
   editorial?.tagline ??
   (locale === 'ja' ? CATEGORY_DESCRIPTIONS_JA[category] : CATEGORY_DESCRIPTIONS[category]) ??

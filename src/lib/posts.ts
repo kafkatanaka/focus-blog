@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import type { CollectionEntry } from 'astro:content';
 import { isJapanesePost, type Locale } from './locale';
 
@@ -16,7 +17,8 @@ export function sortPostsByDate(posts: CollectionEntry<'blog'>[]): CollectionEnt
 }
 
 export function thumbnailPathFor(entry: CollectionEntry<'blog'>): string {
-  return entry.data.thumbnail
+  const candidate = entry.data.thumbnail
     ? `/images/thumbnails/${entry.data.thumbnail}`
     : `/images/thumbnails/${entry.slug}.webp`;
+  return existsSync(`public${candidate}`) ? candidate : '/images/thumbnails/placeholder.webp';
 }

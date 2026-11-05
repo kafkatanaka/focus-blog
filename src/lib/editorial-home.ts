@@ -1,3 +1,4 @@
+import { CATEGORY_TITLES_JA } from './categories';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -164,13 +165,7 @@ const CATEGORY_LABELS_EN: Record<string, string> = {
   habits: 'Habits',
 };
 
-const CATEGORY_LABELS_JA: Record<string, string> = {
-  framework: 'Framework',
-  focus: 'Focus',
-  work: 'Work',
-  money: 'Money',
-  habits: 'Habits',
-};
+const CATEGORY_LABELS_JA: Record<string, string> = CATEGORY_TITLES_JA;
 
 export function buildEditorialHome(
   locale: Locale,

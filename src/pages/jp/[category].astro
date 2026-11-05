@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CategoryEditorialMain from '../../components/CategoryEditorialMain.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES, CATEGORY_TITLES, CATEGORY_DESCRIPTIONS_JA } from '../../lib/categories';
+import { CATEGORIES, CATEGORY_SEO_JA } from '../../lib/categories';
 import { filterPostsByLocale, sortPostsByDate } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -35,8 +35,8 @@ const pool = filterPostsByLocale(
 
 <BaseLayout
   lang="ja"
-  title={`${CATEGORY_TITLES[category]} | 日本語版`}
-  description={CATEGORY_DESCRIPTIONS_JA[category]}
+  title={CATEGORY_SEO_JA[category].title}
+  description={CATEGORY_SEO_JA[category].description}
 >
   <Header locale="ja" />
   <main class="mx-auto max-w-editorial px-4 py-12 sm:px-6">
