@@ -1,4 +1,5 @@
 ---
+import { existsSync } from 'node:fs';
 import BlogPost from '../layouts/BlogPost.astro';
 import { getCollection } from 'astro:content';
 import { getRelatedPosts } from '../lib/related-posts';
@@ -9,6 +10,8 @@ import {
   getArticlePresentation,
   resolveReadingJourney,
 } from '../lib/article-presentation';
+import { readingMinutes } from '../lib/reading-time';
+import { getActiveCtaSlots } from '../data/affiliate-offers';
 import { buildArticleBreadcrumbs } from '../lib/breadcrumbs';
 
 export async function getStaticPaths() {
@@ -42,10 +45,16 @@ const journeySteps = resolveReadingJourney(
 );
 const breadcrumbs = buildArticleBreadcrumbs(entry, 'en');
 
-const thumbnailPath = entry.data.thumbnail
+const thumbnailCandidate = entry.data.thumbnail
   ? `/images/thumbnails/${entry.data.thumbnail}`
   : `/images/thumbnails/${entry.slug}.webp`;
+// Fall back to the placeholder at build time so og:image / twitter:image never 404.
+const thumbnailPath = existsSync(`public${thumbnailCandidate}`)
+  ? thumbnailCandidate
+  : '/images/thumbnails/placeholder.webp';
 const ogImage = new URL(thumbnailPath, site).href;
+const minutes = readingMinutes(entry.body, 'en');
+const hasPromotion = getActiveCtaSlots(entry.body).length > 0;
 ---
 
 <BlogPost
@@ -64,6 +73,9 @@ const ogImage = new URL(thumbnailPath, site).href;
   breadcrumbs={breadcrumbs}
   journeySteps={journeySteps}
   headings={headings}
+  seoTitle={entry.data.seo_title}
+  readingMinutes={minutes}
+  hasPromotion={hasPromotion}
 >
   <Content />
 </BlogPost>

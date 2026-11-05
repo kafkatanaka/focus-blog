@@ -1,0 +1,350 @@
+/*
+ * Editorial reading styles shared by EN and JA articles.
+ * Colors mirror tailwind.config.mjs (accent / paper / ink).
+ */
+:root {
+  --fd-ink: #1b1f23;
+  --fd-text: #2b3035;
+  --fd-muted: #5f666d;
+  --fd-line: #e6e2da;
+  --fd-paper: #faf8f4;
+  --fd-paper-dark: #f2eee6;
+  --fd-accent: #1f6a56;
+  --fd-accent-dark: #175544;
+  --fd-accent-soft: #eef6f3;
+  --fd-marker: rgba(255, 214, 102, 0.55);
+  --fd-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+}
+
+::selection {
+  background: #d5ebe3;
+}
+
+/* ---------- Japanese typography ---------- */
+body.locale-ja {
+  font-family: 'Noto Serif JP', Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-feature-settings: 'palt' 0;
+  letter-spacing: 0.02em;
+}
+body.locale-ja :where(h1, h2, h3, h4, nav, button, .fd-ui) {
+  font-family: var(--fd-sans);
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Article body ---------- */
+.fd-article {
+  color: var(--fd-text);
+}
+.fd-article :where(p, li):not(.cta-box *) {
+  line-height: 1.9;
+}
+body.locale-ja .fd-article :where(p, li):not(.cta-box *) {
+  line-height: 2;
+  font-size: 1.0625rem;
+}
+.fd-article a:not(.link-card a):not(.cta-box a) {
+  color: var(--fd-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.fd-article a:not(.link-card a):not(.cta-box a):hover {
+  color: var(--fd-accent-dark);
+  text-decoration-thickness: 2px;
+}
+
+/* H2: rule + accent tick, generous space so long reads breathe */
+.fd-article h2 {
+  position: relative;
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--fd-line);
+  font-size: 1.5rem;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--fd-ink);
+}
+.fd-article h2::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  background: var(--fd-accent);
+}
+.fd-article h3 {
+  margin-top: 2.25rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--fd-accent);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--fd-ink);
+}
+
+/* Marker-style emphasis (common in JA reading media) */
+body.locale-ja .fd-article strong {
+  color: var(--fd-ink);
+  background: linear-gradient(transparent 62%, var(--fd-marker) 62%);
+  padding: 0 1px;
+}
+
+.fd-article ul > li::marker {
+  color: var(--fd-accent);
+}
+.fd-article ol > li::marker {
+  color: var(--fd-accent);
+  font-weight: 700;
+}
+
+.fd-article blockquote {
+  border-left: 3px solid var(--fd-line);
+  background: var(--fd-paper);
+  padding: 0.75rem 1.25rem;
+  font-style: normal;
+  color: var(--fd-muted);
+}
+.fd-article blockquote p::before,
+.fd-article blockquote p::after {
+  content: none;
+}
+
+/* Tables: scroll on phones instead of breaking the page */
+.fd-article table {
+  display: block;
+  overflow-x: auto;
+  font-size: 0.925rem;
+  border-collapse: collapse;
+}
+.fd-article thead th {
+  background: var(--fd-paper-dark);
+  color: var(--fd-ink);
+  padding: 0.6rem 0.75rem;
+}
+.fd-article tbody td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--fd-line);
+  vertical-align: top;
+}
+
+/* First H2 section of JA articles is the summary ("30秒で分かる要約" 等) */
+body.locale-ja .fd-article > h2:first-child {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+body.locale-ja .fd-article > h2:first-child::before {
+  display: none;
+}
+
+/* ---------- Internal link card ---------- */
+.fd-article p.link-card {
+  margin: 1.5rem 0;
+}
+.fd-article p.link-card a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 2.5rem 0.9rem 1rem;
+  border: 1px solid var(--fd-line);
+  border-radius: 0.6rem;
+  background: #fff;
+  text-decoration: none;
+  position: relative;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.fd-article p.link-card a::after {
+  content: '→';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fd-accent);
+  font-family: var(--fd-sans);
+}
+.fd-article p.link-card a:hover {
+  border-color: var(--fd-accent);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.link-card__label {
+  font-family: var(--fd-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--fd-accent);
+}
+.link-card__title {
+  font-family: var(--fd-sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--fd-ink);
+}
+
+/* ---------- Affiliate CTA box ---------- */
+.cta-box {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--fd-line);
+  border-top: 4px solid var(--fd-accent);
+  border-radius: 0.75rem;
+  background: var(--fd-paper);
+  font-family: var(--fd-sans);
+}
+.cta-box__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fd-ink);
+}
+.cta-box__pr {
+  flex: none;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid #9aa1a8;
+  border-radius: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #5f666d;
+  letter-spacing: 0.05em;
+}
+.cta-box__lead {
+  margin: 0.75rem 0 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--fd-text);
+}
+.cta-box__offers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.cta-box__offer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem;
+  border: 1px solid var(--fd-line);
+  border-radius: 0.6rem;
+  background: #fff;
+}
+.cta-box__offer-body {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+.cta-box__name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--fd-ink);
+}
+.cta-box__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+.cta-box__badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--fd-accent-soft);
+  color: var(--fd-accent-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.cta-box__note {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--fd-muted);
+}
+.cta-box__button {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  background: var(--fd-accent);
+  color: #fff !important;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background 0.15s;
+}
+.cta-box__button:hover {
+  background: var(--fd-accent-dark);
+}
+@media (max-width: 480px) {
+  .cta-box {
+    padding: 1.15rem;
+  }
+  .cta-box__button {
+    width: 100%;
+  }
+}
+.cta-box__footnote {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--fd-muted);
+}
+.cta-box__pixel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+.cta-placeholder {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 2px dashed #c9c3b8;
+  border-radius: 0.5rem;
+  color: #8a8379;
+  font: 0.8rem/1.6 var(--fd-sans);
+}
+
+/* ---------- Book covers (EN reviews) ---------- */
+.fd-article img.book-cover {
+  display: block;
+  width: 80%;
+  max-width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.375rem;
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+}
+@media (min-width: 640px) {
+  .fd-article img.book-cover {
+    max-width: 320px;
+    width: auto;
+  }
+}
+
+/* ---------- Reading progress bar ---------- */
+.fd-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 60;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: var(--fd-accent);
+  pointer-events: none;
+}
+
+html {
+  scroll-padding-top: 7.5rem;
+}

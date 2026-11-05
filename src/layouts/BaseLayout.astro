@@ -1,5 +1,6 @@
 ---
 import { canonicalUrl, normalizePath } from '../lib/site-url';
+import '../styles/editorial.css';
 
 interface Props {
   title: string;
@@ -9,6 +10,11 @@ interface Props {
   noindex?: boolean;
   lang?: 'en' | 'ja';
   hreflangAlternates?: { en?: string; ja?: string };
+  /** 'article' for posts (adds article:* OG tags). */
+  ogType?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  section?: string;
 }
 
 const {
@@ -19,13 +25,24 @@ const {
   noindex = false,
   lang = 'en',
   hreflangAlternates,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  section,
 } = Astro.props;
 const site = Astro.site ?? new URL('https://focus-dividend.com');
 const pathForCanonical = canonicalURL
   ? normalizePath(canonicalURL.pathname)
   : normalizePath(Astro.url.pathname);
 const fullURL = canonicalUrl(pathForCanonical);
-const image = ogImage;
+const SITE_NAME = 'The Focus Dividend';
+const image = ogImage ?? new URL('/images/thumbnails/placeholder.webp', site).href;
+// Avoid "Title | The Focus Dividend | The Focus Dividend" and keep JA titles tight.
+const fullTitle = !title
+  ? SITE_NAME
+  : title.includes(SITE_NAME)
+    ? title
+    : `${title} | ${SITE_NAME}`;
 const homeHreflangEn = canonicalUrl('/');
 const homeHreflangJa = canonicalUrl('/jp');
 const showHomeHreflang =
@@ -38,9 +55,13 @@ const showHomeHreflang =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | The Focus Dividend</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    )}
     <link rel="canonical" href={fullURL} />
 
     {hreflangAlternates?.en && (
@@ -57,17 +78,25 @@ const showHomeHreflang =
     )}
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={fullURL} />
-    {image && (
-      <>
-        <meta property="og:image" content={image} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-      </>
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {ogType === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime.toISOString()} />
     )}
+    {ogType === 'article' && modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime.toISOString()} />
+    )}
+    {ogType === 'article' && section && <meta property="article:section" content={section} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
     <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : 'en_US'} />
 
     <!-- Google AdSense -->
@@ -89,12 +118,13 @@ const showHomeHreflang =
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
     {lang === 'ja' && (
       <>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
       </>
@@ -102,22 +132,18 @@ const showHomeHreflang =
   </head>
   <body class:list={['bg-white text-gray-900 font-serif antialiased', lang === 'ja' && 'locale-ja']}>
     <slot />
+    <script is:inline>
+      // Affiliate click tracking (GA4 event: affiliate_click)
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest && e.target.closest('a[data-aff-slot]');
+        if (!a || typeof window.gtag !== 'function') return;
+        window.gtag('event', 'affiliate_click', {
+          slot: a.getAttribute('data-aff-slot'),
+          offer: a.getAttribute('data-aff-name'),
+          page_path: location.pathname,
+          transport_type: 'beacon',
+        });
+      });
+    </script>
   </body>
 </html>
-
-<style is:global>
-  /* Match EN editorial serif tone; Noto Serif JP replaces prior sans/JP UI stack */
-  body.locale-ja {
-    font-family: 'Noto Serif JP', Georgia, Cambria, 'Times New Roman', Times, serif;
-  }
-  body.locale-ja .prose {
-    line-height: 1.85;
-    font-family: inherit;
-  }
-  body.locale-ja .prose p {
-    line-height: 1.9;
-  }
-  body.locale-ja .prose :where(h1, h2, h3, h4, strong) {
-    font-family: inherit;
-  }
-</style>

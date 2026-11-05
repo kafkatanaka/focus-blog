@@ -1,19 +1,24 @@
 ---
+import { existsSync } from 'node:fs';
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  /** MDX pages using `layout:` receive their frontmatter here. */
+  frontmatter?: { title?: string; description?: string };
 }
 
-const { title, description } = Astro.props;
+const title = Astro.props.title ?? Astro.props.frontmatter?.title ?? 'The Focus Dividend';
+const description = Astro.props.description ?? Astro.props.frontmatter?.description ?? '';
 const site = Astro.site ?? new URL('https://focus-dividend.com');
 // 記事と同じ命名規則: パスの最後のセグメントをスラッグとして {slug}.webp を参照
 const pathSegments = Astro.url.pathname.replace(/\/$/, '').split('/').filter(Boolean);
 const slug = pathSegments[pathSegments.length - 1] ?? 'framework';
-const ogImage = new URL(`/images/thumbnails/${slug}.webp`, site).href;
+const thumb = existsSync(`public/images/thumbnails/${slug}.webp`) ? `/images/thumbnails/${slug}.webp` : '/images/thumbnails/placeholder.webp';
+const ogImage = new URL(thumb, site).href;
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage}>

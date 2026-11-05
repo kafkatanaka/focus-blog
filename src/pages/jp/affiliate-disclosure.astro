@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  lang="ja"
+  title="広告掲載・編集方針について"
+  description="The Focus Dividend 日本語版の広告（アフィリエイトプログラム）の利用、PR表記、記事の作成方針についての説明です。"
+>
+  <Header locale="ja" contentWidth="readable" />
+  <main class="mx-auto max-w-readable px-4 py-12 sm:px-6">
+    <article class="fd-article prose prose-lg max-w-none">
+      <h1 class="text-3xl font-bold tracking-tight text-ink">広告掲載・編集方針について</h1>
+      <p>
+        The Focus Dividend 日本語版（以下、当サイト）は、仕事・お金・習慣の判断材料を整理する読みものメディアです。
+        運営費をまかなうため、記事内で広告を掲載しています。
+      </p>
+
+      <h2>アフィリエイトプログラムの利用</h2>
+      <p>
+        当サイトは、アフィリエイトサービスプロバイダ（ASP）を通じた成果報酬型広告を利用しています。
+        読者の方が記事内のリンクからサービスに申し込んだ場合などに、当サイトが提携先から報酬を受け取ることがあります。
+        報酬が読者の方の支払い額に上乗せされることはありません。
+      </p>
+      <p>
+        また、Google AdSense による広告を掲載しています。Cookie の取り扱いは
+        <a href="/privacy-policy">プライバシーポリシー</a>をご確認ください。
+      </p>
+
+      <h2>PR表記について</h2>
+      <p>
+        広告リンクを含む記事には、記事の冒頭に「PR」と「本記事にはプロモーション（広告）が含まれます」を表示し、
+        広告枠には「PR」ラベルを付けています（景品表示法の指定告示〔いわゆるステマ規制〕への対応）。
+      </p>
+
+      <h2>記事の作成方針</h2>
+      <ul>
+        <li>報酬の有無や金額によって、記事の結論や評価を変えません。</li>
+        <li>制度・費用などの事実は、公的機関の資料や各社公式サイトで確認し、確認時期を記載します。</li>
+        <li>向いている人だけでなく、向いていない人や代替手段（公的な無料窓口など）も併せて紹介します。</li>
+        <li>「必ず」「No.1」など、根拠を示せない表現は使いません。</li>
+      </ul>
+
+      <h2>お問い合わせ</h2>
+      <p>記事内容の誤りや広告に関するご指摘は、<a href="/contact">お問い合わせ</a>からご連絡ください。</p>
+    </article>
+  </main>
+  <Footer locale="ja" />
+</BaseLayout>

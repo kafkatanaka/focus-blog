@@ -152,3 +152,21 @@ node scripts/generate-sitemap.mjs
    - **Environment variables:** `NODE_VERSION` = `18`
 5. **Save and Deploy**
 6. デプロイ完了後、上記「DNS / Cloudflare 設定」のとおり `focus.matomeyo.me` をカスタムドメインとして追加・CNAME を設定
+
+---
+
+## アフィリエイト CTA（日本語版）
+
+日本語記事の `<!-- CTA_SLOT: job_search -->` などのマーカーは、ビルド時に `src/middleware.ts` が広告ボックスに置き換えます。
+
+1. ASP で提携した広告リンクを `src/data/affiliate-offers.ts` の該当スロットの `offers` に追加する（`url` が空のものは表示されない）
+2. offer が 1 件もないスロットは本番では何も出力しない。`npm run dev` では点線のプレースホルダーが表示される
+3. 表示される offer を含む記事には、冒頭に「PR／本記事にはプロモーションが含まれます」が自動で付く（ステマ規制対応）
+4. リンクは `rel="sponsored nofollow noopener"`。クリックは GA4 の `affiliate_click` イベント（`slot` / `offer`）で計測される
+
+スロット: `job_search` / `career_consulting` / `financial_planning` / `brokerage` / `reskilling`
+
+## SEO メモ
+
+- 検索結果用タイトルは frontmatter の `seo_title`（H1 は `title` のまま）。`<title>` は `{seo_title ?? title} | The Focus Dividend`
+- サムネイル画像が無い記事は `og:image` を `placeholder.webp` にフォールバック（記事上部のヒーロー画像は非表示）

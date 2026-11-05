@@ -8,31 +8,59 @@ interface Props {
   pubDate?: Date;
   updatedDate?: Date;
   breadcrumbs: { name: string; url: string }[];
+  image?: string;
+  locale?: 'en' | 'ja';
+  section?: string;
 }
 
-const { title, description, url, pubDate, updatedDate, breadcrumbs } = Astro.props;
+const { title, description, url, pubDate, updatedDate, breadcrumbs, image, locale = 'en', section } =
+  Astro.props;
+
+const homeUrl = canonicalUrl(locale === 'ja' ? '/jp' : '/');
+const publisher = {
+  '@type': 'Organization',
+  name: 'The Focus Dividend',
+  url: canonicalUrl('/'),
+  logo: {
+    '@type': 'ImageObject',
+    url: canonicalUrl('/favicon.svg'),
+  },
+};
 
 const article = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
-  headline: title,
+  headline: title.length > 110 ? title.slice(0, 109) + '…' : title,
   description,
-  mainEntityOfPage: url,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  url,
+  inLanguage: locale === 'ja' ? 'ja-JP' : 'en-US',
+  ...(image && { image: [image] }),
+  ...(section && { articleSection: section }),
   ...(pubDate && { datePublished: pubDate.toISOString() }),
-  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  dateModified: (updatedDate ?? pubDate)?.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: locale === 'ja' ? 'The Focus Dividend 編集部' : 'The Focus Dividend Editors',
+    url: homeUrl,
+  },
+  publisher,
 };
 
-const breadcrumb = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: breadcrumbs.map((item, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: item.name,
-    item: item.url,
-  })),
-};
+const breadcrumb =
+  breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((item, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      }
+    : null;
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(article)} />
-<script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+{breadcrumb && <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />}

@@ -15,7 +15,7 @@ import type { ArticlePresentation, ResolvedJourneyLink } from '../lib/article-pr
 import { articleTypeLabel } from '../lib/article-presentation';
 import type { Crumb } from '../lib/breadcrumbs';
 import { canonicalUrl } from '../lib/site-url';
-import { CATEGORY_TITLES } from '../lib/categories';
+import { categoryLabel as catLabel } from '../lib/categories';
 
 interface Props {
   title: string;
@@ -39,6 +39,11 @@ interface Props {
   breadcrumbs?: Crumb[];
   journeySteps?: ResolvedJourneyLink[];
   headings?: { depth: number; slug: string; text: string }[];
+  /** Search-facing <title> (frontmatter seo_title). Falls back to title. */
+  seoTitle?: string;
+  readingMinutes?: number;
+  /** Article contains PR / affiliate links → show 景表法 (ステマ規制) notice. */
+  hasPromotion?: boolean;
 }
 
 const {
@@ -63,14 +68,17 @@ const {
   breadcrumbs = [],
   journeySteps = [],
   headings = [],
+  seoTitle,
+  readingMinutes,
+  hasPromotion = false,
 } = Astro.props;
+const ja = locale === 'ja';
 
 const resolvedCategoryHref =
   categoryHref ?? (locale === 'ja' && category ? `/jp/${category}` : category ? `/${category}` : undefined);
 
 const typeLabel = presentation ? articleTypeLabel(presentation.articleType, locale) : null;
-const categoryLabel = category ? (CATEGORY_TITLES[category] ?? category) : null;
-const metaLine = [typeLabel, categoryLabel].filter(Boolean).join(' · ');
+const categoryLabel = category ? catLabel(category, locale) : null;
 
 const showUpdated =
   updatedDate &&
@@ -79,6 +87,8 @@ const showUpdated =
 
 const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 const showToc = tocHeadings.length >= 4;
+let h2Index = 0;
+const tocItems = tocHeadings.map((h) => ({ ...h, num: h.depth === 2 ? ++h2Index : null }));
 
 const canonicalHref = canonicalURL
   ? canonicalUrl(canonicalURL.pathname)
@@ -91,20 +101,24 @@ if (schemaBreadcrumbs.length > 0) {
   schemaBreadcrumbs.push({ name: title, url: canonicalHref ?? '' });
 }
 
-const journeyHeading =
-  locale === 'ja' ? '次に考えること' : 'What to read next';
-const hubPartLabel = locale === 'ja' ? 'このテーマの入口' : 'Part of';
+const journeyHeading = ja ? '次に読む' : 'What to read next';
+const hubPartLabel = ja ? 'このテーマの入口' : 'Part of';
+const disclosureHref = ja ? '/jp/affiliate-disclosure' : '/affiliate-disclosure';
 ---
 
 <BaseLayout
-  title={title}
+  title={seoTitle ?? title}
   description={description}
   canonicalURL={canonicalURL}
   ogImage={ogImage}
   lang={locale}
   hreflangAlternates={hreflangAlternates}
+  ogType="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate ?? pubDate}
+  section={categoryLabel ?? undefined}
 >
-  {canonicalHref && schemaBreadcrumbs.length > 0 && (
+  {canonicalHref && (
     <ArticleStructuredData
       title={title}
       description={description}
@@ -112,116 +126,122 @@ const hubPartLabel = locale === 'ja' ? 'このテーマの入口' : 'Part of';
       pubDate={pubDate}
       updatedDate={showUpdated ? updatedDate : undefined}
       breadcrumbs={schemaBreadcrumbs}
+      image={ogImage}
+      locale={locale}
+      section={categoryLabel ?? undefined}
     />
   )}
+  <div class="fd-progress" aria-hidden="true"></div>
   <Header locale={locale} contentWidth="readable" />
-  <main class="mx-auto max-w-readable px-4 py-8 sm:px-6">
+  <main class="mx-auto max-w-readable px-4 pb-16 pt-6 sm:px-6 sm:pt-8">
     <article>
       {breadcrumbs.length > 0 && <BreadcrumbNav items={breadcrumbs} locale={locale} />}
 
       <header class="mb-8">
-        {metaLine && (
-          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">{metaLine}</p>
-        )}
-        <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{title}</h1>
-        <p class="mt-4 text-lg text-gray-600 leading-relaxed">{description}</p>
-        {(pubDate || showUpdated) && (
-          <div class="mt-4 flex flex-wrap gap-4 text-sm text-gray-500">
-            {pubDate && (
-              <time datetime={pubDate.toISOString()}>
-                {formatPublishedDate(pubDate, locale)}
-              </time>
+        {(categoryLabel || typeLabel) && (
+          <p class="fd-ui flex flex-wrap items-center gap-2 text-xs font-bold">
+            {categoryLabel && resolvedCategoryHref && (
+              <a href={resolvedCategoryHref} class="rounded-full bg-accent-50 px-3 py-1 text-accent-700 hover:bg-accent-100">
+                {categoryLabel}
+              </a>
             )}
-            {showUpdated && updatedDate && (
-              <time datetime={updatedDate.toISOString()}>
-                {locale === 'ja' ? '更新: ' : 'Updated: '}
-                {formatPublishedDate(updatedDate, locale)}
-              </time>
-            )}
-          </div>
+            {typeLabel && <span class="tracking-wide text-gray-500">{typeLabel}</span>}
+          </p>
         )}
+        <h1 class="mt-4 text-[1.7rem] font-bold leading-snug tracking-tight text-ink sm:text-[2.15rem] sm:leading-tight">
+          {title}
+        </h1>
+        <p class="mt-4 text-base leading-relaxed text-gray-600 sm:text-[1.075rem]">{description}</p>
+
+        <div class="fd-ui mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 border-y border-gray-200 py-3 text-[0.8rem] text-gray-500">
+          <span class="font-semibold text-gray-700">{ja ? 'The Focus Dividend 編集部' : 'The Focus Dividend Editors'}</span>
+          {pubDate && (
+            <time datetime={pubDate.toISOString()}>
+              {ja ? '公開 ' : 'Published '}{formatPublishedDate(pubDate, locale)}
+            </time>
+          )}
+          {showUpdated && updatedDate && (
+            <time datetime={updatedDate.toISOString()}>
+              {ja ? '更新 ' : 'Updated '}{formatPublishedDate(updatedDate, locale)}
+            </time>
+          )}
+          {readingMinutes && (
+            <span>{ja ? `約${readingMinutes}分で読めます` : `${readingMinutes} min read`}</span>
+          )}
+        </div>
+
+        {hasPromotion && (
+          <p class="fd-ui mt-3 text-xs leading-relaxed text-gray-500">
+            <span class="mr-1.5 rounded border border-gray-400 px-1.5 py-px font-bold text-gray-600">PR</span>
+            {ja ? (
+              <>本記事にはプロモーション（広告）が含まれます。紹介内容は編集部の基準で作成しています。<a href={disclosureHref} class="underline hover:no-underline">広告掲載について</a></>
+            ) : (
+              <>This article contains affiliate links. <a href={disclosureHref} class="underline hover:no-underline">Disclosure</a></>
+            )}
+          </p>
+        )}
+
         {presentation?.hubLink && !presentation.isHub && (
-          <p class="mt-4 text-sm text-gray-600">
+          <p class="fd-ui mt-4 text-sm text-gray-600">
             {hubPartLabel}:
-            <a href={presentation.hubLink.href} class="ml-1 font-medium text-gray-900 underline hover:no-underline">
+            <a href={presentation.hubLink.href} class="ml-1 font-semibold text-accent-700 underline hover:no-underline">
               {presentation.hubLink.title}
             </a>
           </p>
         )}
-        {thumbnailPath && (
+        {thumbnailPath && !thumbnailPath.endsWith('/placeholder.webp') && (
           <img
             src={thumbnailPath}
-            alt=""
-            class="mt-6 w-full rounded-lg object-cover aspect-[1200/630] max-h-[320px]"
+            alt={title}
+            class="mt-6 aspect-[1200/630] max-h-[300px] w-full rounded-lg object-cover"
             width="1200"
             height="630"
             loading="eager"
             fetchpriority="high"
+            decoding="async"
             onerror="this.onerror=null;this.src='/images/thumbnails/placeholder.webp'"
           />
         )}
       </header>
 
-      {presentation?.isHub && presentation.keyTakeaway && (
-        <div class="mb-8 rounded-lg border border-gray-200 bg-gray-50 p-5">
-          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
-            {locale === 'ja' ? '要点' : 'Quick answer'}
+      {presentation?.keyTakeaway && (
+        <div class="mb-8 rounded-lg border border-accent-100 bg-accent-50/60 p-5">
+          <p class="fd-ui text-xs font-bold tracking-wide text-accent-700">
+            {presentation.isHub ? (ja ? '要点' : 'Quick answer') : (ja ? 'この記事のポイント' : 'Key takeaway')}
           </p>
-          <p class="mt-2 text-gray-800 leading-relaxed">{presentation.keyTakeaway}</p>
-        </div>
-      )}
-
-      {!presentation?.isHub && presentation?.keyTakeaway && (
-        <div class="mb-8 border-l-4 border-gray-900 pl-4">
-          <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
-            {locale === 'ja' ? 'キーポイント' : 'Key takeaway'}
-          </p>
-          <p class="mt-2 text-gray-800 leading-relaxed">{presentation.keyTakeaway}</p>
+          <p class="mt-2 leading-relaxed text-gray-800">{presentation.keyTakeaway}</p>
         </div>
       )}
 
       {showToc && (
-        <nav class="mb-8 rounded-lg border border-gray-200 p-4" aria-label="Table of contents">
-          <p class="text-sm font-semibold text-gray-900">
-            {locale === 'ja' ? '目次' : 'Contents'}
-          </p>
-          <ul class="mt-2 space-y-1 text-sm">
-            {tocHeadings.map((h) => (
-              <li class={h.depth === 3 ? 'ml-4' : ''}>
-                <a href={`#${h.slug}`} class="text-gray-700 hover:text-gray-900">{h.text}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <details class="fd-ui group mb-10 rounded-lg border border-[#e6e2da] bg-paper" open>
+          <summary class="flex cursor-pointer list-none items-center justify-between px-5 py-3.5 text-sm font-bold text-ink">
+            <span>{ja ? '目次' : 'Contents'}</span>
+            <span class="text-xs font-semibold text-gray-500 group-open:hidden">{ja ? '開く' : 'Show'}</span>
+            <span class="hidden text-xs font-semibold text-gray-500 group-open:inline">{ja ? '閉じる' : 'Hide'}</span>
+          </summary>
+          <nav aria-label="Table of contents" class="border-t border-[#e6e2da] px-5 pb-4 pt-3">
+            <ol class="space-y-1.5 text-sm">
+              {tocItems.map((h) => (
+                <li class={h.depth === 3 ? 'pl-7' : 'flex gap-2'}>
+                  {h.num && <span class="w-5 shrink-0 text-right font-bold text-accent-600">{h.num}</span>}
+                  <a href={`#${h.slug}`} class={h.depth === 3 ? 'text-gray-500 hover:text-accent-700' : 'text-gray-800 hover:text-accent-700'}>
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </details>
       )}
 
       {ads && <AdSense slot="4412571347" format="auto" />}
 
-      <div class="prose prose-lg prose-gray max-w-none prose-headings:font-serif prose-p:leading-relaxed prose-a:text-gray-900 prose-a:underline hover:prose-a:no-underline">
+      <div class="fd-article prose prose-lg prose-gray max-w-none prose-headings:font-serif">
         <slot />
       </div>
 
-      <style is:global>
-        .prose img.book-cover {
-          display: block;
-          width: 80%;
-          max-width: 80%;
-          height: auto;
-          margin-left: auto;
-          margin-right: auto;
-          border-radius: 0.375rem;
-          aspect-ratio: 2 / 3;
-          object-fit: contain;
-        }
-        @media (min-width: 640px) {
-          .prose img.book-cover {
-            max-width: 320px;
-            width: auto;
-          }
-        }
-      </style>
-
-      {ads && <AdSense slot="4412571347" format="auto" />}
+      {ads && <div class="mt-10"><AdSense slot="4412571347" format="auto" /></div>}
 
       {tags.length > 0 && locale === 'en' && (
         <footer class="mt-12 border-t border-gray-200 pt-8">
@@ -229,7 +249,7 @@ const hubPartLabel = locale === 'ja' ? 'このテーマの入口' : 'Part of';
             {tags.map((tag) => (
               <a
                 href={`/tag/${encodeURIComponent(tag)}`}
-                class="rounded bg-gray-100 px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-gray-200"
+                class="fd-ui rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-accent-50 hover:text-accent-700"
               >
                 #{tag}
               </a>
@@ -238,16 +258,44 @@ const hubPartLabel = locale === 'ja' ? 'このテーマの入口' : 'Part of';
         </footer>
       )}
 
+      <section class="fd-ui mt-12 rounded-lg bg-paper p-5 text-sm leading-relaxed text-gray-600" aria-label={ja ? '編集方針' : 'Editorial policy'}>
+        <p class="font-bold text-ink">{ja ? 'The Focus Dividend 編集部' : 'About The Focus Dividend'}</p>
+        <p class="mt-1.5">
+          {ja
+            ? '仕事・お金・習慣の「迷い」を、答えを押し付けずに整理する読みものを届けています。制度や費用に関する記述は、公的機関や各社公式サイトの一次情報で確認しています。'
+            : 'We write about attention, work, money and habits for people who want to decide with a clearer head. Claims about services are checked against official sources.'}
+        </p>
+        <p class="mt-2 text-xs">
+          <a href={disclosureHref} class="underline hover:no-underline">{ja ? '広告掲載・編集方針について' : 'Affiliate disclosure'}</a>
+        </p>
+      </section>
+
       {journeySteps.length > 0 ? (
         <ReadingJourney steps={journeySteps} heading={journeyHeading} />
       ) : (
         <RelatedReading
           posts={relatedPosts}
           postEntries={relatedPostEntries}
-          heading={locale === 'ja' ? '関連記事' : 'Related reading'}
+          heading={ja ? '関連記事' : 'Related reading'}
         />
       )}
     </article>
   </main>
   <Footer locale={locale} switchUrls={switchUrls} metadata={localeMetadata} />
+  <script is:inline>
+    (function () {
+      var bar = document.querySelector('.fd-progress');
+      if (!bar) return;
+      var ticking = false;
+      function update() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, h.scrollTop / max) : 0) + ')';
+        ticking = false;
+      }
+      addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+    })();
+  </script>
 </BaseLayout>
